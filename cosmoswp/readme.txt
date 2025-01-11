@@ -3,9 +3,9 @@
 Contributors: cosmoswp
 Tags: blog, e-commerce, portfolio, grid-layout, one-column, two-columns, three-columns, four-columns, left-sidebar, right-sidebar, custom-background, custom-colors, custom-header, custom-logo, custom-menu, editor-style, featured-images, flexible-header, footer-widgets, full-width-template, microformats, post-formats, rtl-language-support, sticky-post, theme-options, threaded-comments, translation-ready, block-styles, wide-blocks
 Requires at least: 6.0
-Tested up to: 6.5
+Tested up to: 6.7
 Requires PHP: 5.6
-Stable tag: 1.3.8
+Stable tag: 1.3.9
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,7 +21,7 @@ CosmosWP theme is translation ready.
 
 == License ==
 
-CosmosWP WordPress Theme, Copyright 2019-2021 AcmeIT
+CosmosWP WordPress Theme, Copyright 2019-2025 AcmeIT
 CosmosWP is distributed under the terms of the GNU General Public License v2
 The exceptions to license are as follows:
 
@@ -64,6 +64,11 @@ https://fontawesome.com/icons
 
 
 == Changelog ==
+
+= 1.3.9 - 2025-01-11 =
+* Added: Improved compatibility with the latest WordPress version.
+* Added: Introduced new license management directly from our site, premium.acmeit.org.
+* Updated: Active subscribers now have access to all CosmosWP Pro templates.
 
 = 1.3.8 - 2024-04-04 =
 * Added:    WordPress 6.5 compatibility

@@ -9,7 +9,7 @@
  */
 
 /*Define Constants for this theme*/
-define( 'COSMOSWP_VERSION', '1.3.8' );
+define( 'COSMOSWP_VERSION', '1.3.9' );
 define( 'COSMOSWP_THEME_NAME', 'cosmoswp' );
 define( 'COSMOSWP_PATH', get_template_directory() );
 define( 'COSMOSWP_URL', get_template_directory_uri() );
