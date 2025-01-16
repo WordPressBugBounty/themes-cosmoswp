@@ -56,7 +56,7 @@ class CosmosWP_Custom_Control_Cssbox extends WP_Customize_Control {
 
 	public function render_content() {
 		if ( is_array( $this->value() ) && ! empty( $this->value() ) ) {
-			$values = json_encode( $this->value() );
+			$values = wp_json_encode( $this->value() );
 		} else {
 			$values = $this->value();
 		}
@@ -116,7 +116,7 @@ class CosmosWP_Custom_Control_Cssbox extends WP_Customize_Control {
 				<span class="description customize-control-description">
 					<?php echo wp_kses_post( $this->description ); ?>
 				</span>
-				 <?php
+				<?php
 			}
 
 			?>
@@ -140,7 +140,7 @@ class CosmosWP_Custom_Control_Cssbox extends WP_Customize_Control {
 							</button>
 						</li>
 						<?php
-						$i ++;
+						++$i;
 					}
 					?>
 				</ul>
@@ -196,7 +196,7 @@ class CosmosWP_Custom_Control_Cssbox extends WP_Customize_Control {
 						}
 
 						echo '</ul>';
-						$i ++;
+						++$i;
 					}
 					?>
 				</div>

@@ -20,7 +20,6 @@ class CosmosWP_Starter_Content {
 	public function __construct() {
 		// Register starter content.
 		add_action( 'after_setup_theme', array( $this, 'register_starter_content' ) );
-		add_filter( 'get_theme_starter_content', array( $this, 'add_meta_to_starter_content' ) );
 	}
 
 	/**
@@ -50,15 +49,35 @@ class CosmosWP_Starter_Content {
 	public function register_starter_content() {
 		// Define navigation menu items.
 		$nav_items_header = array(
-			'home'  => array(
+			'home'     => array(
 				'type'      => 'post_type',
 				'object'    => 'page',
 				'object_id' => '{{home}}',
 			),
-			'about' => array(
+			'about'    => array(
 				'type'  => 'custom',
-				'title' => 'About Us',
+				'title' => esc_html__( 'About us', 'cosmoswp' ),
 				'url'   => '#about',
+			),
+			'services' => array(
+				'type'  => 'custom',
+				'title' => esc_html__( 'Services', 'cosmoswp' ),
+				'url'   => '#services',
+			),
+			'team'     => array(
+				'type'  => 'custom',
+				'title' => esc_html__( 'Team', 'cosmoswp' ),
+				'url'   => '#team',
+			),
+			'blog'     => array(
+				'type'  => 'custom',
+				'title' => esc_html__( 'Blog', 'cosmoswp' ),
+				'url'   => '#blog',
+			),
+			'contact'  => array(
+				'type'  => 'custom',
+				'title' => esc_html__( 'Contact', 'cosmoswp' ),
+				'url'   => '#contact',
 			),
 		);
 
@@ -128,7 +147,7 @@ class CosmosWP_Starter_Content {
 						'mobile'  => 'cwp-left',
 					)
 				),
-				'site-identity-styling'             => json_encode(
+				'site-identity-styling'             => wp_json_encode(
 					array(
 						'site-title-color'         => '#fff',
 						'site-tagline-color'       => '#fff',
@@ -136,7 +155,7 @@ class CosmosWP_Starter_Content {
 						'hover-site-tagline-color' => '#ee396a',
 					)
 				),
-				'primary-menu-styling'              => json_encode(
+				'primary-menu-styling'              => wp_json_encode(
 					array(
 						'normal-text-color'    => '#fff',
 						'normal-bg-color'      => '',
@@ -206,7 +225,7 @@ class CosmosWP_Starter_Content {
 						),
 					)
 				),
-				'main-content-general-padding'      => json_encode(
+				'main-content-general-padding'      => wp_json_encode(
 					array(
 						'desktop' => array(
 							'top'         => '',
@@ -231,6 +250,7 @@ class CosmosWP_Starter_Content {
 						),
 					)
 				),
+				'cosmoswp-banner-options-page'      => 'hide',
 
 			),
 
@@ -259,28 +279,6 @@ class CosmosWP_Starter_Content {
 
 		// Add starter content support.
 		add_theme_support( 'starter-content', apply_filters( 'cosmoswp_starter_content', $starter_content ) );
-	}
-
-	/**
-	 * Adds meta to starter content.
-	 *
-	 * @param array $starter_content The starter content array.
-	 *
-	 * @return array Modified starter content.
-	 */
-	public function add_meta_to_starter_content( $starter_content ) {
-		// Check if posts are defined in the starter content.
-		if ( isset( $starter_content['posts'] ) && is_array( $starter_content['posts'] ) ) {
-			// Add meta for the home page.
-			if ( isset( $starter_content['posts']['home'] ) ) {
-				$starter_content['posts']['home']['meta_input'] = array(
-					'cosmoswp_banner_options_layout' => 'hide',
-					'cosmoswp_sidebar_options'       => 'ful-ct',
-				);
-			}
-		}
-
-		return $starter_content;
 	}
 }
 

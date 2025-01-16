@@ -58,7 +58,6 @@ if ( ! class_exists( 'CosmosWP_Dynamic_CSS' ) ) :
 			add_action( 'customize_save_after', array( $this, 'save_dynamic_css' ), 9999 );
 
 			add_action( 'wp_enqueue_scripts', array( $this, 'dynamic_css_enqueue' ), 9999 );
-
 		}
 
 		/**
@@ -103,7 +102,6 @@ if ( ! class_exists( 'CosmosWP_Dynamic_CSS' ) ) :
 
 			// Return minified CSS
 			return $css;
-
 		}
 
 		/**
@@ -180,34 +178,32 @@ if ( ! class_exists( 'CosmosWP_Dynamic_CSS' ) ) :
 		 * @return void
 		 */
 		public static function dynamic_css() {
+			$is_fresh_site = get_option( 'fresh_site' );
 
 			global $wp_customize;
-			if ( isset( $wp_customize ) ) {
+			if ( isset( $wp_customize ) || $is_fresh_site ) {
 				$output = cosmoswp_dynamic_css()->get_dynamic_css( array(), true );
 				// Render CSS in the head
 				if ( ! empty( $output ) ) {
 					echo "<!-- CosmosWP Dynamic CSS -->\n<style type=\"text/css\" id='cosmoswp-head-dynamic-css'>\n" . wp_strip_all_tags( $output ) . "\n</style>";
 				}
-			} else {
-				if ( 'file' == cosmoswp_get_theme_options( 'dynamic-css-options' ) ) {
+			} elseif ( 'file' == cosmoswp_get_theme_options( 'dynamic-css-options' ) ) {
 
-					$upload_dir = wp_upload_dir();
-					if ( ! file_exists( $upload_dir['basedir'] . '/cosmoswp/dynamic-style.css' ) ) {
-						$output = cosmoswp_dynamic_css()->get_dynamic_css();
-						// Render CSS in the head
-						if ( ! empty( $output ) ) {
-							echo "<!-- CosmosWP Dynamic CSS -->\n<style type=\"text/css\" id='cosmoswp-head-dynamic-css'>\n" . wp_strip_all_tags( $output ) . "\n</style>";
-						}
-					}
-				} else {
+				$upload_dir = wp_upload_dir();
+				if ( ! file_exists( $upload_dir['basedir'] . '/cosmoswp/dynamic-style.css' ) ) {
 					$output = cosmoswp_dynamic_css()->get_dynamic_css();
 					// Render CSS in the head
 					if ( ! empty( $output ) ) {
 						echo "<!-- CosmosWP Dynamic CSS -->\n<style type=\"text/css\" id='cosmoswp-head-dynamic-css'>\n" . wp_strip_all_tags( $output ) . "\n</style>";
 					}
 				}
+			} else {
+				$output = cosmoswp_dynamic_css()->get_dynamic_css();
+				// Render CSS in the head
+				if ( ! empty( $output ) ) {
+					echo "<!-- CosmosWP Dynamic CSS -->\n<style type=\"text/css\" id='cosmoswp-head-dynamic-css'>\n" . wp_strip_all_tags( $output ) . "\n</style>";
+				}
 			}
-
 		}
 
 		/**
@@ -240,7 +236,6 @@ if ( ! class_exists( 'CosmosWP_Dynamic_CSS' ) ) :
 			$wp_filesystem->mkdir( $dir );
 			$wp_filesystem->put_contents( $dir . 'dynamic-style.css', $output, 0644 );
 			$out = ob_get_clean();
-
 		}
 
 		/**
@@ -268,7 +263,6 @@ if ( ! class_exists( 'CosmosWP_Dynamic_CSS' ) ) :
 				wp_enqueue_style( 'cosmoswp-dynamic', trailingslashit( $upload_dir['baseurl'] ) . 'cosmoswp/dynamic-style.css', false, null );
 			}
 		}
-
 	}
 endif;
 

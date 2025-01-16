@@ -5,6 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * WooCommerce Header Cart Header Customizer Options
+ *
  * @package CosmosWP
  */
 
@@ -18,7 +19,6 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Wishlist_Header' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.2
-		 *
 		 */
 		public $element = 'cosmoswp_woo_wishlist_header';
 
@@ -40,7 +40,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Wishlist_Header' ) ) :
 
 			// Only run these methods if they haven't been ran previously
 			if ( null === $instance ) {
-				$instance = new CosmosWP_WooCommerce_Wishlist_Header;
+				$instance = new CosmosWP_WooCommerce_Wishlist_Header();
 			}
 
 			// Always return the instance
@@ -85,7 +85,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Wishlist_Header' ) ) :
 				'cwp-woo-wishlist-icon-align'   => 'cwp-flex-align-right',
 
 				'cwp-woo-wishlist-icon-size'    => '18',
-				'cwp-woo-wishlist-icon-padding' => json_encode(
+				'cwp-woo-wishlist-icon-padding' => wp_json_encode(
 					array(
 						'desktop' => array(
 							'top'         => '',
@@ -110,7 +110,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Wishlist_Header' ) ) :
 						),
 					)
 				),
-				'cwp-woo-wishlist-icon-margin'  => json_encode(
+				'cwp-woo-wishlist-icon-margin'  => wp_json_encode(
 					array(
 						'desktop' => array(
 							'top'         => '',
@@ -135,7 +135,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Wishlist_Header' ) ) :
 						),
 					)
 				),
-				'cwp-woo-wishlist-icon-styling' => json_encode(
+				'cwp-woo-wishlist-icon-styling' => wp_json_encode(
 					array(
 						'normal-text-color'       => '#333',
 						'normal-bg-color'         => '',
@@ -246,7 +246,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Wishlist_Header' ) ) :
 				array(
 					'title' => esc_html__( 'WooCommerce Wishlist', 'cosmoswp' ),
 					'panel' => cosmoswp_header_builder()->panel,
-				//'active_callback_'   => 'cosmoswp_header_layout_if_horizontal'
+				// 'active_callback_'   => 'cosmoswp_header_layout_if_horizontal'
 				)
 			);
 
@@ -270,7 +270,8 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Wishlist_Header' ) ) :
 				)
 			);
 
-			/*Icon
+			/*
+			Icon
 			TODO active callback*/
 			$wp_customize->add_setting(
 				'cwp-woo-wishlist-icon',
@@ -325,18 +326,18 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Wishlist_Header' ) ) :
 				)
 			);
 			$wp_customize->add_control(
-                'cwp-woo-wishlist-icon-size',
-                array(
-                    'label'       => esc_html__( 'Icon Size (px)', 'cosmoswp' ),
-                    'section'     => $this->element,
-                    'settings'    => 'cwp-woo-wishlist-icon-size',
-                    'type'    => 'number',
-                    'input_attrs' => array(
-                        'min'  => 8,
-                        'max'  => 400,
-                        'step' => 1,
-                    ),
-                )
+				'cwp-woo-wishlist-icon-size',
+				array(
+					'label'       => esc_html__( 'Icon Size (px)', 'cosmoswp' ),
+					'section'     => $this->element,
+					'settings'    => 'cwp-woo-wishlist-icon-size',
+					'type'        => 'number',
+					'input_attrs' => array(
+						'min'  => 8,
+						'max'  => 400,
+						'step' => 1,
+					),
+				)
 			);
 
 			/*Margin*/
@@ -608,7 +609,6 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Wishlist_Header' ) ) :
 				return array_merge( $output, $cosmoswp_header_settings );
 			}
 			return $output;
-
 		}
 
 		/**
@@ -663,49 +663,49 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Wishlist_Header' ) ) :
 			if ( strpos( $dds_padding_desktop, 'px' ) !== false ) {
 				$cwp_woo_icon_desktop_css .= 'padding:' . $dds_padding_desktop . ';';
 			}
-			//tablet padding
+			// tablet padding
 			$dds_padding_tablet = cosmoswp_cssbox_values_inline( $dds_padding, 'tablet' );
 			if ( strpos( $dds_padding_tablet, 'px' ) !== false ) {
 				$cwp_woo_icon_tablet_css .= 'padding:' . $dds_padding_tablet . ';';
 			}
-			//mobile padding
+			// mobile padding
 			$dds_padding_mobile = cosmoswp_cssbox_values_inline( $dds_padding, 'mobile' );
 			if ( strpos( $dds_padding_mobile, 'px' ) !== false ) {
 				$cwp_woo_icon_css .= 'padding:' . $dds_padding_mobile . ';';
 			}
-			//txt color
+			// txt color
 			$dds_txt_color = cosmoswp_ifset( $styling['normal-text-color'] );
 			if ( $dds_txt_color ) {
 				$cwp_woo_icon_css .= 'color:' . $dds_txt_color . ';';
 			}
-			//bg color
+			// bg color
 			$dds_bg_color = cosmoswp_ifset( $styling['normal-bg-color'] );
 			if ( $dds_bg_color ) {
 				$cwp_woo_icon_css .= 'background:' . $dds_bg_color . ';';
 			} else {
 				$cwp_woo_icon_css .= 'background:transparent;';
 			}
-			//border style
+			// border style
 			$dds_border_style = cosmoswp_ifset( $styling['normal-border-style'] );
 			if ( $dds_border_style ) {
 				$cwp_woo_icon_css .= 'border-style:' . $dds_border_style . ';';
 			}
-			//border color
+			// border color
 			$dds_border_color = cosmoswp_ifset( $styling['normal-border-color'] );
 			if ( $dds_border_color ) {
 				$cwp_woo_icon_css .= 'border-color:' . $dds_border_color . ';';
 			}
-			//border width
+			// border width
 			$dds_border_width = cosmoswp_cssbox_values_inline( cosmoswp_ifset( $styling['normal-border-width'] ), 'desktop' );
 			if ( strpos( $dds_border_width, 'px' ) !== false ) {
 				$cwp_woo_icon_css .= 'border-width:' . $dds_border_width . ';';
 			}
-			//border radius
+			// border radius
 			$dds_border_radius = cosmoswp_cssbox_values_inline( cosmoswp_ifset( $styling['normal-border-radius'] ), 'desktop' );
 			if ( strpos( $dds_border_radius, 'px' ) !== false ) {
 				$cwp_woo_icon_css .= 'border-radius:' . $dds_border_radius . ';';
 			}
-			//bx shadow
+			// bx shadow
 			$dds_shadow_css = cosmoswp_boxshadow_values_inline( cosmoswp_ifset( $styling['normal-box-shadow-css'] ), 'desktop' );
 			if ( strpos( $dds_shadow_css, 'px' ) !== false ) {
 				$dds_shadow_color  = cosmoswp_ifset( $styling['normal-box-shadow-color'] );
@@ -722,38 +722,39 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Wishlist_Header' ) ) :
 	}';
 				$local_dynamic_css['all'] .= $dds_search_dynamic_css;
 			}
-			/*hover css*/
-			//txt color
+			/*
+			hover css*/
+			// txt color
 			$dds_hover_txt_color = cosmoswp_ifset( $styling['hover-text-color'] );
 			if ( $dds_hover_txt_color ) {
 				$cwp_woo_icon_hover_css .= 'color:' . $dds_hover_txt_color . ';';
 			}
-			//bg color
+			// bg color
 			$dds_hover_bg_color = cosmoswp_ifset( $styling['hover-bg-color'] );
 			if ( $dds_hover_bg_color ) {
 				$cwp_woo_icon_hover_css .= 'background-color:' . $dds_hover_bg_color . ';';
 			}
-			//border style
+			// border style
 			$dds_hover_border_style = cosmoswp_ifset( $styling['hover-border-style'] );
 			if ( $dds_hover_border_style ) {
 				$cwp_woo_icon_hover_css .= 'border-style:' . $dds_hover_border_style . ';';
 			}
-			//border color
+			// border color
 			$dds_hover_border_color = cosmoswp_ifset( $styling['hover-border-color'] );
 			if ( $dds_hover_border_color ) {
 				$cwp_woo_icon_hover_css .= 'border-color:' . $dds_hover_border_color . ';';
 			}
-			//border width
+			// border width
 			$dds_hover_border_width = cosmoswp_cssbox_values_inline( cosmoswp_ifset( $styling['hover-border-width'] ), 'desktop' );
 			if ( strpos( $dds_hover_border_width, 'px' ) !== false ) {
 				$cwp_woo_icon_hover_css .= 'border-width:' . $dds_hover_border_width . ';';
 			}
-			//border radius
+			// border radius
 			$dds_hover_border_radius = cosmoswp_cssbox_values_inline( cosmoswp_ifset( $styling['hover-border-radius'] ), 'desktop' );
 			if ( strpos( $dds_hover_border_radius, 'px' ) !== false ) {
 				$cwp_woo_icon_hover_css .= 'border-radius:' . $dds_hover_border_radius . ';';
 			}
-			//bx shadow
+			// bx shadow
 			$dds_hover_shadow_css = cosmoswp_boxshadow_values_inline( cosmoswp_ifset( $styling['hover-box-shadow-css'] ), 'desktop' );
 			if ( strpos( $dds_hover_shadow_css, 'px' ) !== false ) {
 				$dds_hover_shadow_color  = cosmoswp_ifset( $styling['hover-box-shadow-color'] );
@@ -802,7 +803,6 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Wishlist_Header' ) ) :
 			}
 			return $template;
 		}
-
 	}
 endif;
 
@@ -817,10 +817,10 @@ endif;
  */
 if ( ! function_exists( 'CosmosWP_WooCommerce_Wishlist_Header' ) ) {
 
-    function CosmosWP_WooCommerce_Wishlist_Header() {
-        return CosmosWP_WooCommerce_Wishlist_Header::instance();
-    }
-    if( class_exists( 'YITH_WCWL' ) && cosmoswp_is_woocommerce_active()){
-        CosmosWP_WooCommerce_Wishlist_Header()->run();
-    }
+	function CosmosWP_WooCommerce_Wishlist_Header() {
+		return CosmosWP_WooCommerce_Wishlist_Header::instance();
+	}
+	if ( class_exists( 'YITH_WCWL' ) && cosmoswp_is_woocommerce_active() ) {
+		CosmosWP_WooCommerce_Wishlist_Header()->run();
+	}
 }

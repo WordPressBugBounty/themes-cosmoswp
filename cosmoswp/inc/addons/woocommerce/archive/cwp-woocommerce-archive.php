@@ -70,7 +70,6 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Archive' ) ) :
 			add_action( 'customize_register', array( $this, 'customize_register' ), 100 );
 
 			add_action( 'cosmoswp_action_woocommerce_archive', array( $this, 'display_woo_archive' ), 110 );
-
 		}
 
 		/**
@@ -102,14 +101,14 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Archive' ) ) :
 				'cwc-archive-excerpt-length'     => 9,
 				'cwc-archive-elements-align'     => 'cwp-text-center',
 				'cwc-archive-elements'           => array( 'image', 'cat', 'title', 'price', 'rating', 'cart' ),
-				'cwc-archive-list-media-width'   => json_encode(
+				'cwc-archive-list-media-width'   => wp_json_encode(
 					array(
 						'desktop' => '40',
 						'tablet'  => '40',
 						'mobile'  => '40',
 					)
 				),
-				'cwc-archive-responsive-col'     => json_encode(
+				'cwc-archive-responsive-col'     => wp_json_encode(
 					array(
 						'tab-col'    => 3,
 						'mobile-col' => 1,
@@ -171,7 +170,6 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Archive' ) ) :
 
 			/* Woo Elements */
 			require COSMOSWP_PATH . '/inc/addons/woocommerce/archive/main-content.php';
-
 		}
 
 		/**

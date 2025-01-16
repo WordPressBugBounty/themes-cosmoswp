@@ -5,6 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Page Builder and Customizer Options
+ *
  * @package CosmosWP
  */
 if ( ! class_exists( 'CosmosWP_Page_Builder' ) ) :
@@ -17,7 +18,6 @@ if ( ! class_exists( 'CosmosWP_Page_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $panel = 'cosmoswp-page';
 
@@ -27,7 +27,6 @@ if ( ! class_exists( 'CosmosWP_Page_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $section = 'cosmoswp-page';
 
@@ -49,7 +48,7 @@ if ( ! class_exists( 'CosmosWP_Page_Builder' ) ) :
 
 			// Only run these methods if they haven't been ran previously
 			if ( null === $instance ) {
-				$instance = new CosmosWP_Page_Builder;
+				$instance = new CosmosWP_Page_Builder();
 			}
 
 			// Always return the instance
@@ -104,7 +103,7 @@ if ( ! class_exists( 'CosmosWP_Page_Builder' ) ) :
 				'page-img-size'                       => 'full',
 
 				/*margin and padding*/
-				'page-main-content-margin'            => json_encode(
+				'page-main-content-margin'            => wp_json_encode(
 					array(
 						'desktop' => array(
 							'top'         => '',
@@ -129,7 +128,7 @@ if ( ! class_exists( 'CosmosWP_Page_Builder' ) ) :
 						),
 					)
 				),
-				'page-main-content-padding'           => json_encode(
+				'page-main-content-padding'           => wp_json_encode(
 					array(
 						'desktop' => array(
 							'top'         => '80',
@@ -157,7 +156,6 @@ if ( ! class_exists( 'CosmosWP_Page_Builder' ) ) :
 			);
 
 			return array_merge( $default_options, $page_defaults );
-
 		}
 
 		/**
@@ -198,7 +196,6 @@ if ( ! class_exists( 'CosmosWP_Page_Builder' ) ) :
 
 			/* Page Elements */
 			require cosmoswp_file_directory( 'inc/customizer/page-options/main-content.php' );
-
 		}
 
 		/**
@@ -296,13 +293,13 @@ if ( ! class_exists( 'CosmosWP_Page_Builder' ) ) :
 			if ( strpos( $main_content_padding_desktop, 'px' ) !== false ) {
 				$page_main_content_desktop_css .= 'padding:' . $main_content_padding_desktop . ';';
 			}
-			//tablet padding
+			// tablet padding
 			$main_content_padding_tablet = cosmoswp_cssbox_values_inline( $main_content_padding, 'tablet' );
 			if ( strpos( $main_content_padding_tablet, 'px' ) !== false ) {
 				$page_main_content_tablet_css .= 'padding:' . $main_content_padding_tablet . ';';
 			}
 
-			//mobile padding
+			// mobile padding
 			$main_content_padding_mobile = cosmoswp_cssbox_values_inline( $main_content_padding, 'mobile' );
 			if ( strpos( $main_content_padding_mobile, 'px' ) !== false ) {
 				$page_main_content_css .= 'padding:' . $main_content_padding_mobile . ';';
@@ -334,11 +331,10 @@ if ( ! class_exists( 'CosmosWP_Page_Builder' ) ) :
 			} else {
 				return $dynamic_css;
 			}
-
 		}
 
 		/**
-		 *cosmoswp_customize_partial_post_main_content,
+		 * cosmoswp_customize_partial_post_main_content,
 		 *
 		 * @since    1.0.0
 		 * @access   public
@@ -352,7 +348,6 @@ if ( ! class_exists( 'CosmosWP_Page_Builder' ) ) :
 			$value = ob_get_clean();
 			return $value;
 		}
-
 	}
 
 endif;

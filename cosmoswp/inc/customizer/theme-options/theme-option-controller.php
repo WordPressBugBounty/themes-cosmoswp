@@ -17,7 +17,6 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $panel = 'cosmoswp_theme_options';
 
@@ -27,7 +26,6 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $breadcrumb_options = 'cosmoswp_breadcrumb_options';
 
@@ -37,7 +35,6 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $scroll_top = 'cosmoswp_scroll_top';
 
@@ -48,7 +45,6 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $search_options = 'cosmoswp_search';
 
@@ -58,7 +54,6 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $sidebar_setting = 'cosmoswp_sidebar_setting';
 
@@ -68,7 +63,6 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $button_design = 'cosmoswp_button_design_option';
 
@@ -78,7 +72,6 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $appearance_color = 'cosmoswp_appearance_color';
 
@@ -88,7 +81,6 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $site_layout = 'cosmoswp-site-layout-options';
 
@@ -98,7 +90,6 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $sticky_sidebar = 'cosmoswp_design_sidebar_sticky_option';
 
@@ -120,7 +111,7 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 
 			// Only run these methods if they haven't been ran previously
 			if ( null === $instance ) {
-				$instance = new CosmosWP_Theme_Options_Controller;
+				$instance = new CosmosWP_Theme_Options_Controller();
 			}
 
 			// Always return the instance
@@ -143,7 +134,6 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 			add_filter( 'cosmoswp_action_after_footer', array( $this, 'scroll_top_data' ), 100 );
 			add_filter( 'cosmoswp_enqueue_google_fonts', array( $this, 'enqueue_google_fonts' ), 1 );
 			add_filter( 'body_class', array( $this, 'add_search_template_class' ) );
-
 		}
 
 
@@ -203,7 +193,7 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 			$theme_option_defaults = array(
 
 				/*button design section */
-				'site-button-styling'                      => json_encode(
+				'site-button-styling'                      => wp_json_encode(
 					array(
 						'normal-text-color'       => '#fff',
 						'normal-bg-color'         => '#275cf6',
@@ -272,7 +262,7 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 					)
 				),
 
-				'site-button-margin'                       => json_encode(
+				'site-button-margin'                       => wp_json_encode(
 					array(
 						'desktop' => array(
 							'top'         => '',
@@ -297,7 +287,7 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 						),
 					)
 				),
-				'site-button-padding'                      => json_encode(
+				'site-button-padding'                      => wp_json_encode(
 					array(
 						'desktop' => array(
 							'top'         => '8',
@@ -326,7 +316,7 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 				'site-button-typography'                   => '',
 
 				/* global sidebar*/
-				'global-sidebar-padding'                   => json_encode(
+				'global-sidebar-padding'                   => wp_json_encode(
 					array(
 						'desktop' => array(
 							'top'         => '',
@@ -351,7 +341,7 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 						),
 					)
 				),
-				'global-sidebar-background-options'        => json_encode(
+				'global-sidebar-background-options'        => wp_json_encode(
 					array(
 						'background-color' => '',
 					)
@@ -361,7 +351,7 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 				/* widget styling*/
 				'global-widget-content-align'              => 'cwp-text-left',
 				'global-widget-content-color'              => '',
-				'global-widget-content-margin'             => json_encode(
+				'global-widget-content-margin'             => wp_json_encode(
 					array(
 						'desktop' => array(
 							'top'         => '',
@@ -387,7 +377,7 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 					)
 				),
 
-				'global-widget-content-padding'            => json_encode(
+				'global-widget-content-padding'            => wp_json_encode(
 					array(
 						'desktop' => array(
 							'top'         => '',
@@ -413,7 +403,7 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 					)
 				),
 
-				'global-widget-content-border-styling'     => json_encode(
+				'global-widget-content-border-styling'     => wp_json_encode(
 					array(
 						'border-style' => 'none',
 						'border-color' => '',
@@ -430,7 +420,7 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 				),
 
 				'global-widget-content-typography-options' => 'inherit',
-				'global-widget-content-typography'         => json_encode(
+				'global-widget-content-typography'         => wp_json_encode(
 					array(
 						'font-type'       => 'google',
 						'system-font'     => 'verdana',
@@ -461,7 +451,7 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 				/*global widget title*/
 				'global-widget-title-align'                => 'cwp-text-left',
 				'global-widget-title-color'                => '',
-				'global-widget-title-margin'               => json_encode(
+				'global-widget-title-margin'               => wp_json_encode(
 					array(
 						'desktop' => array(
 							'top'         => '',
@@ -486,7 +476,7 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 						),
 					)
 				),
-				'global-widget-title-padding'              => json_encode(
+				'global-widget-title-padding'              => wp_json_encode(
 					array(
 						'desktop' => array(
 							'top'         => '',
@@ -511,7 +501,7 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 						),
 					)
 				),
-				'global-widget-title-border-styling'       => json_encode(
+				'global-widget-title-border-styling'       => wp_json_encode(
 					array(
 						'border-style' => 'solid',
 						'border-color' => '#275cf6',
@@ -527,7 +517,7 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 					)
 				),
 				'global-widget-title-typography-options'   => 'custom',
-				'global-widget-title-typography'           => json_encode(
+				'global-widget-title-typography'           => wp_json_encode(
 					array(
 						'font-type'       => 'google',
 						'system-font'     => 'verdana',
@@ -560,7 +550,7 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 				'breadcrumb-before-banner-title'           => false,
 				'breadcrumb-after-banner-title'            => false,
 				'breadcrumb-before-content'                => true,
-				'breadcrumb-color-options'                 => json_encode(
+				'breadcrumb-color-options'                 => wp_json_encode(
 					array(
 						'link-color'       => '#275cf6',
 						'link-hover-color' => '#1949d4',
@@ -572,14 +562,14 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 				'enable-scroll-top-button'                 => true,
 				'remove-scroll-top-button-mobile'          => false,
 				'scroll-icon-position-options'             => 'cwp-position-right',
-				'scroll-top-button-height'                 => json_encode(
+				'scroll-top-button-height'                 => wp_json_encode(
 					array(
 						'desktop' => '',
 						'tablet'  => '',
 						'mobile'  => '',
 					)
 				),
-				'scroll-top-button-width'                  => json_encode(
+				'scroll-top-button-width'                  => wp_json_encode(
 					array(
 						'desktop' => '',
 						'tablet'  => '',
@@ -590,14 +580,14 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 				'scroll-top-text'                          => esc_html__( 'Top', 'cosmoswp' ),
 				'scroll-top-icon-position'                 => 'before',
 				'scroll-top-icon'                          => 'fas fa-angle-up', /*done in frontend*/
-				'scroll-top-icon-size-responsive'          => json_encode(
+				'scroll-top-icon-size-responsive'          => wp_json_encode(
 					array(
 						'desktop' => '',
 						'tablet'  => '',
 						'mobile'  => '',
 					)
 				),
-				'scroll-top-icon-styling'                  => json_encode(
+				'scroll-top-icon-styling'                  => wp_json_encode(
 					array(
 						'normal-text-color'       => '#fff',
 						'normal-bg-color'         => '#275cf6',
@@ -665,7 +655,7 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 						),
 					)
 				),
-				'scroll-top-icon-padding'                  => json_encode(
+				'scroll-top-icon-padding'                  => wp_json_encode(
 					array(
 						'desktop' => array(
 							'top'         => '',
@@ -690,7 +680,7 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 						),
 					)
 				),
-				'scroll-top-icon-margin'                   => json_encode(
+				'scroll-top-icon-margin'                   => wp_json_encode(
 					array(
 						'desktop' => array(
 							'top'         => '',
@@ -716,7 +706,7 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 					)
 				),
 				'scroll-top-icon-typography-options'       => 'inherit',
-				'scroll-top-icon-typography'               => json_encode(
+				'scroll-top-icon-typography'               => wp_json_encode(
 					array(
 						'font-type'       => 'google',
 						'system-font'     => 'verdana',
@@ -796,6 +786,7 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 
 		/**
 		 * Callback functions for cosmoswp_action_after_footer,
+		 *
 		 * @since    1.0.0
 		 * @access   public
 		 *

@@ -5,6 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * EDD Single Customizer Options
+ *
  * @package CosmosWP
  */
 
@@ -18,7 +19,6 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $panel = 'cosmoswp-edd-single';
 
@@ -28,7 +28,6 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $section = 'cosmoswp-edd-single';
 
@@ -50,7 +49,7 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 
 			// Only run these methods if they haven't been ran previously
 			if ( null === $instance ) {
-				$instance = new CosmosWP_Edd_Single;
+				$instance = new CosmosWP_Edd_Single();
 			}
 
 			// Always return the instance
@@ -70,8 +69,8 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 			add_filter( 'cosmoswp_default_theme_options', array( $this, 'defaults' ) );
 			add_action( 'customize_register', array( $this, 'customize_register' ), 100 );
 
-            /*add class in single download class*/
-            add_filter( 'post_class', array( $this, 'single_download_class' ), 10, 3 );
+			/*add class in single download class*/
+			add_filter( 'post_class', array( $this, 'single_download_class' ), 10, 3 );
 
 			add_action( 'cosmoswp_action_edd_single', array( $this, 'display_edd_single' ), 100 );
 			add_action( 'cosmoswp_action_after_edd_single', array( $this, 'display_edd_related' ), 100, 1 );
@@ -101,7 +100,7 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 				'edd-single-related-col'    => 4,
 				'edd-single-elements'       => array( 'title', 'content' ),
 				'edd-single-side-elements'  => array( 'price', 'cart', 'author', 'cats', 'tags' ),
-				'edd-single-content-width'  => json_encode(
+				'edd-single-content-width'  => wp_json_encode(
 					array(
 						'desktop' => '40',
 						'tablet'  => '40',
@@ -112,7 +111,6 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 			);
 
 			return array_merge( $default_options, $defaults );
-
 		}
 
 		/**
@@ -153,42 +151,43 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 
 			/* EDD Single Elements */
 			require COSMOSWP_PATH . '/inc/addons/edd/single/main-content.php';
-
 		}
 
-        /**
-         * Edd Post Class filter.
-         *
-         * @since 3.6.2
-         * @param array      $classes Array of CSS classes.
-         * @param string      $class Array of CSS classes.
-         * @param string      $postID Array of CSS classes.
-         */
-        function single_download_class(  $classes, $class, $postID ) {
+		/**
+		 * Edd Post Class filter.
+		 *
+		 * @since 3.6.2
+		 * @param array  $classes Array of CSS classes.
+		 * @param string $class Array of CSS classes.
+		 * @param string $postID Array of CSS classes.
+		 */
+		function single_download_class( $classes, $class, $postID ) {
 
-            if ( ! is_singular('download') ) return $classes;
-            $edd_single_media_width = cosmoswp_get_theme_options('edd-single-content-width');
-            $edd_single_media_width = json_decode($edd_single_media_width, true);
-            if (isset($edd_single_media_width['mobile'])) {
-                if($edd_single_media_width['mobile'] === 100){
-                    // Add new class
-                    $classes[] = 'cwp-single-img-full-m';
-                }
-            }
-            if (isset($edd_single_media_width['tablet'])) {
-                if($edd_single_media_width['tablet'] === 100){
-                    // Add new class
-                    $classes[] = 'cwp-single-img-full-t';
-                }
-            }
-            if (isset($edd_single_media_width['desktop'])) {
-                if($edd_single_media_width['desktop'] === 100){
-                    // Add new class
-                    $classes[] = 'cwp-single-img-full-d';
-                }
-            }
-            return $classes;
-        }
+			if ( ! is_singular( 'download' ) ) {
+				return $classes;
+			}
+			$edd_single_media_width = cosmoswp_get_theme_options( 'edd-single-content-width' );
+			$edd_single_media_width = json_decode( $edd_single_media_width, true );
+			if ( isset( $edd_single_media_width['mobile'] ) ) {
+				if ( $edd_single_media_width['mobile'] === 100 ) {
+					// Add new class
+					$classes[] = 'cwp-single-img-full-m';
+				}
+			}
+			if ( isset( $edd_single_media_width['tablet'] ) ) {
+				if ( $edd_single_media_width['tablet'] === 100 ) {
+					// Add new class
+					$classes[] = 'cwp-single-img-full-t';
+				}
+			}
+			if ( isset( $edd_single_media_width['desktop'] ) ) {
+				if ( $edd_single_media_width['desktop'] === 100 ) {
+					// Add new class
+					$classes[] = 'cwp-single-img-full-d';
+				}
+			}
+			return $classes;
+		}
 
 		/**
 		 * Callback Function for cosmoswp_action_eddcommerce_single
@@ -308,7 +307,7 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 					} else {
 						$grid = 'grid-lg-3 grid-12';
 					}
-					
+
 					?>
 					<div id="download-<?php the_ID(); ?>" <?php post_class( $grid ); ?>>
 						<?php
@@ -357,7 +356,7 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 								?>
 								<div class="entry-excerpt">
 									<?php
-                                    global $post;
+									global $post;
 									$length = cosmoswp_get_theme_options( 'edd-archive-content-length' );
 									if ( ! $length ) {
 										echo wp_kses_post( strip_shortcodes( $post->post_excerpt ) );
@@ -415,43 +414,43 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 			$edd_main_content_tablet_css  = '';
 			$edd_main_content_desktop_css = '';
 
-            $edd_single_summary_content_css = '';
-            $edd_single_summary_content_tablet_css = '';
-            $edd_single_summary_content_desktop_css = '';
+			$edd_single_summary_content_css         = '';
+			$edd_single_summary_content_tablet_css  = '';
+			$edd_single_summary_content_desktop_css = '';
 
 			$edd_single_media_width = cosmoswp_get_theme_options( 'edd-single-content-width' );
 			$edd_single_media_width = json_decode( $edd_single_media_width, true );
 
 			if ( isset( $edd_single_media_width['mobile'] ) ) {
-				$edd_main_content_css   .= 'width:' . $edd_single_media_width['mobile'] . '%;';
-				$edd_dynamic_css['all'] .= '
+				$edd_main_content_css           .= 'width:' . $edd_single_media_width['mobile'] . '%;';
+				$edd_dynamic_css['all']         .= '
                 .cosmoswp-edd-single-grid-row .cwp-edd-download-gallery-content{
                     ' . $edd_main_content_css . '
                 }';
-                $edd_single_summary_content_css .= $edd_single_media_width['mobile'] === 100 ? 'width:100%;' :  'width:calc(100% - ' . $edd_single_media_width['mobile'] . '%);';
-                $edd_dynamic_css['all'] .= '.cosmoswp-edd-single-sidebar{
+				$edd_single_summary_content_css .= $edd_single_media_width['mobile'] === 100 ? 'width:100%;' : 'width:calc(100% - ' . $edd_single_media_width['mobile'] . '%);';
+				$edd_dynamic_css['all']         .= '.cosmoswp-edd-single-sidebar{
                 ' . $edd_single_summary_content_css . '
                 }';
 			}
 			if ( isset( $edd_single_media_width['tablet'] ) ) {
-				$edd_main_content_tablet_css .= 'width:' . $edd_single_media_width['tablet'] . '%;';
-				$edd_dynamic_css['tablet']   .= '
+				$edd_main_content_tablet_css           .= 'width:' . $edd_single_media_width['tablet'] . '%;';
+				$edd_dynamic_css['tablet']             .= '
                 .cosmoswp-edd-single-grid-row .cwp-edd-download-gallery-content{
                     ' . $edd_main_content_tablet_css . '
                 }';
-                $edd_single_summary_content_tablet_css .= $edd_single_media_width['tablet'] === 100 ? 'width:100%;' :  'width:calc(100% - ' . $edd_single_media_width['tablet'] . '% - 40px);';
-                $edd_dynamic_css['tablet'] .= '.cosmoswp-edd-single-sidebar{
+				$edd_single_summary_content_tablet_css .= $edd_single_media_width['tablet'] === 100 ? 'width:100%;' : 'width:calc(100% - ' . $edd_single_media_width['tablet'] . '% - 40px);';
+				$edd_dynamic_css['tablet']             .= '.cosmoswp-edd-single-sidebar{
                 ' . $edd_single_summary_content_tablet_css . '
                 }';
 			}
 			if ( isset( $edd_single_media_width['desktop'] ) ) {
-				$edd_main_content_desktop_css .= 'width:' . $edd_single_media_width['desktop'] . '%;';
-				$edd_dynamic_css['desktop']   .= '
+				$edd_main_content_desktop_css           .= 'width:' . $edd_single_media_width['desktop'] . '%;';
+				$edd_dynamic_css['desktop']             .= '
                 .cosmoswp-edd-single-grid-row .cwp-edd-download-gallery-content{
                     ' . $edd_main_content_desktop_css . '
                 }';
-                $edd_single_summary_content_desktop_css .= $edd_single_media_width['desktop'] === 100 ? 'width:100%;' :  'width:calc(100% - ' . $edd_single_media_width['desktop'] . '% - 40px);';
-                $edd_dynamic_css['desktop'] .= '.cosmoswp-edd-single-sidebar{
+				$edd_single_summary_content_desktop_css .= $edd_single_media_width['desktop'] === 100 ? 'width:100%;' : 'width:calc(100% - ' . $edd_single_media_width['desktop'] . '% - 40px);';
+				$edd_dynamic_css['desktop']             .= '.cosmoswp-edd-single-sidebar{
                 ' . $edd_single_summary_content_desktop_css . '
                 }';
 			}
@@ -463,7 +462,6 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 			} else {
 				return $edd_dynamic_css;
 			}
-
 		}
 	}
 endif;

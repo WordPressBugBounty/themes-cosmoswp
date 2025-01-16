@@ -14,11 +14,9 @@ if ( ! function_exists( 'cosmoswp_customizer_builder_sanitize_field_recursive' )
 	function cosmoswp_customizer_builder_sanitize_field_recursive( $value ) {
 		if ( ! is_array( $value ) ) {
 			$value = wp_kses_post( $value );
-		} else {
-			if ( is_array( $value ) ) {
-				foreach ( $value as $k => $v ) {
-					$value[ $k ] = cosmoswp_customizer_builder_sanitize_field_recursive( $v );
-				}
+		} elseif ( is_array( $value ) ) {
+			foreach ( $value as $k => $v ) {
+				$value[ $k ] = cosmoswp_customizer_builder_sanitize_field_recursive( $v );
 			}
 		}
 		return $value;
@@ -33,7 +31,7 @@ if ( ! function_exists( 'cosmoswp_customizer_builder_sanitize_field' ) ) {
 			$input = json_decode( urldecode_deep( $input ), true );
 		}
 		$output = cosmoswp_customizer_builder_sanitize_field_recursive( $input );
-		$output = json_encode( $output );
+		$output = wp_json_encode( $output );
 		return $output;
 	}
 }
@@ -84,7 +82,6 @@ class CosmosWP_Customizer_Builder {
 			add_action( 'customize_controls_enqueue_scripts', array( $this, 'enqueue' ) );
 			add_action( 'customize_controls_print_footer_scripts', array( $this, 'builder_template' ) );
 		}
-
 	}
 
 	/**
@@ -179,7 +176,7 @@ class CosmosWP_Customizer_Builder {
 						<div class="cosmoswp-row-inner">
 							<div class="builder-grid-row">
 								<?php
-								for ( $i = 1; $i <= 12; $i ++ ) {
+								for ( $i = 1; $i <= 12; $i++ ) {
 									echo '<div></div>';
 								}
 								?>
@@ -195,7 +192,7 @@ class CosmosWP_Customizer_Builder {
 						<div class="cosmoswp-row-inner">
 							<div class="builder-grid-row">
 								<?php
-								for ( $i = 1; $i <= 12; $i ++ ) {
+								for ( $i = 1; $i <= 12; $i++ ) {
 									echo '<div></div>';
 								}
 								?>
@@ -211,7 +208,7 @@ class CosmosWP_Customizer_Builder {
 						<div class="cosmoswp-row-inner">
 							<div class="builder-grid-row">
 								<?php
-								for ( $i = 1; $i <= 12; $i ++ ) {
+								for ( $i = 1; $i <= 12; $i++ ) {
 									echo '<div></div>';
 								}
 								?>
@@ -245,24 +242,24 @@ class CosmosWP_Customizer_Builder {
 
 		<script type="text/html" id="tmpl-cosmoswp-cb-item">
 			<div class="grid-stack-item item-from-list for-s-{{ data.section }}"
-				 title="{{ data.name }}"
-				 data-id="{{ data.id }}"
-				 data-section="{{ data.section }}"
-				 data-control="{{ data.control }}"
-				 data-gs-x="{{ data.x }}"
-				 data-gs-y="{{ data.y }}"
-				 data-gs-width="{{ data.width }}"
-				 data-df-width="{{ data.width }}"
-				 data-gs-height="1"
+				title="{{ data.name }}"
+				data-id="{{ data.id }}"
+				data-section="{{ data.section }}"
+				data-control="{{ data.control }}"
+				data-gs-x="{{ data.x }}"
+				data-gs-y="{{ data.y }}"
+				data-gs-width="{{ data.width }}"
+				data-df-width="{{ data.width }}"
+				data-gs-height="1"
 			>
 				<div class="item-tooltip" data-section="{{ data.section }}">{{ data.name }}</div>
 				<div class="grid-stack-item-content">
 					<i class="
 					<# if ( data.icon ) { #>
-						   {{ data.icon }}
+							{{ data.icon }}
 					<# }
 					else { #>
-						  dashicons dashicons-info
+							dashicons dashicons-info
 					<# }#>
 					"></i>
 					<div class="cwp-customizzer-builder-item-desc">

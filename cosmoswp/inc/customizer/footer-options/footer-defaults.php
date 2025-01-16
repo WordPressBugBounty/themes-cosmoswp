@@ -7,7 +7,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since    1.0.0
  * @access   public
- *
  */
 $footer_defaults = array(
 
@@ -36,7 +35,7 @@ $footer_defaults = array(
 	),
 	'footer-general-layout'                           => 'inherit',
 	'footer-display-style'                            => 'cwp-normal-footer',
-	'footer-general-padding'                          => json_encode(
+	'footer-general-padding'                          => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -61,7 +60,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-general-margin'                           => json_encode(
+	'footer-general-margin'                           => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -86,7 +85,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-general-background-options'               => json_encode(
+	'footer-general-background-options'               => wp_json_encode(
 		array(
 			'background-color'         => '#444',
 			'background-image'         => '',
@@ -99,7 +98,7 @@ $footer_defaults = array(
 
 		)
 	),
-	'footer-general-border-styling'                   => json_encode(
+	'footer-general-border-styling'                   => wp_json_encode(
 		array(
 			'border-style'     => 'none',
 			'border-color'     => '',
@@ -140,7 +139,7 @@ $footer_defaults = array(
 	/*footer top*/
 	'footer-top-height-option'                        => 'auto',
 	'footer-top-height'                               => '',
-	'footer-top-padding'                              => json_encode(
+	'footer-top-padding'                              => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '25',
@@ -165,7 +164,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-top-margin'                               => json_encode(
+	'footer-top-margin'                               => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -191,7 +190,7 @@ $footer_defaults = array(
 		)
 	),
 	'footer-top-bg-options'                           => 'none',
-	'footer-top-background-options'                   => json_encode(
+	'footer-top-background-options'                   => wp_json_encode(
 		array(
 			'background-color'         => '#f5f5f5',
 			'background-image'         => '',
@@ -203,7 +202,7 @@ $footer_defaults = array(
 			'background-overlay-color' => '',
 		)
 	),
-	'footer-top-border-styling'                       => json_encode(
+	'footer-top-border-styling'                       => wp_json_encode(
 		array(
 			'border-style'     => 'none',
 			'border-color'     => '',
@@ -239,7 +238,7 @@ $footer_defaults = array(
 	),
 	'footer-top-widget-title-align'                   => 'cwp-text-left',
 	'footer-top-widget-title-color'                   => '#fff',
-	'footer-top-widget-title-margin'                  => json_encode(
+	'footer-top-widget-title-margin'                  => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -264,7 +263,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-top-widget-title-padding'                 => json_encode(
+	'footer-top-widget-title-padding'                 => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -289,7 +288,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-top-widget-title-border-styling'          => json_encode(
+	'footer-top-widget-title-border-styling'          => wp_json_encode(
 		array(
 			'border-style' => 'none',
 			'border-color' => '',
@@ -305,7 +304,7 @@ $footer_defaults = array(
 		)
 	),
 	'footer-top-widget-title-typography-options'      => 'inherit',
-	'footer-top-widget-title-typography'              => json_encode(
+	'footer-top-widget-title-typography'              => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
@@ -333,7 +332,7 @@ $footer_defaults = array(
 		)
 	),
 	'footer-top-widget-content-align'                 => 'cwp-text-left',
-	'footer-top-widget-content-border-styling'        => json_encode(
+	'footer-top-widget-content-border-styling'        => wp_json_encode(
 		array(
 			'border-style' => 'none',
 			'border-color' => '',
@@ -349,7 +348,7 @@ $footer_defaults = array(
 		)
 	),
 	'footer-top-widget-content-typography-options'    => 'inherit',
-	'footer-top-widget-content-typography'            => json_encode(
+	'footer-top-widget-content-typography'            => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
@@ -376,7 +375,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-top-widget-content-color-options'         => json_encode(
+	'footer-top-widget-content-color-options'         => wp_json_encode(
 		array(
 
 			'text-color'       => '#333333',
@@ -384,7 +383,7 @@ $footer_defaults = array(
 			'link-hover-color' => '#1949d4',
 		)
 	),
-	'footer-main-widget-content-color-options'        => json_encode(
+	'footer-main-widget-content-color-options'        => wp_json_encode(
 		array(
 
 			'title-color'      => '#202020',
@@ -392,7 +391,7 @@ $footer_defaults = array(
 			'link-hover-color' => '#1949d4',
 		)
 	),
-	'footer-bottom-widget-content-color-options'      => json_encode(
+	'footer-bottom-widget-content-color-options'      => wp_json_encode(
 		array(
 
 			'text-color'       => '#202020',
@@ -404,7 +403,7 @@ $footer_defaults = array(
 	/*footer Main*/
 	'footer-main-height-option'                       => 'auto',
 	'footer-main-height'                              => '',
-	'footer-main-padding'                             => json_encode(
+	'footer-main-padding'                             => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '25',
@@ -429,7 +428,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-main-margin'                              => json_encode(
+	'footer-main-margin'                              => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -455,7 +454,7 @@ $footer_defaults = array(
 		)
 	),
 	'footer-main-bg-options'                          => 'none',
-	'footer-main-background-options'                  => json_encode(
+	'footer-main-background-options'                  => wp_json_encode(
 		array(
 			'background-color'         => '#444',
 			'background-image'         => '',
@@ -467,7 +466,7 @@ $footer_defaults = array(
 			'background-overlay-color' => '',
 		)
 	),
-	'footer-main-border-styling'                      => json_encode(
+	'footer-main-border-styling'                      => wp_json_encode(
 		array(
 			'border-style'     => 'none',
 			'border-color'     => '',
@@ -503,7 +502,7 @@ $footer_defaults = array(
 	),
 	'footer-main-widget-title-align'                  => 'cwp-text-left',
 	'footer-main-widget-title-color'                  => '#fff',
-	'footer-main-widget-title-margin'                 => json_encode(
+	'footer-main-widget-title-margin'                 => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -528,7 +527,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-main-widget-title-padding'                => json_encode(
+	'footer-main-widget-title-padding'                => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -553,7 +552,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-main-widget-title-border-styling'         => json_encode(
+	'footer-main-widget-title-border-styling'         => wp_json_encode(
 		array(
 			'border-style' => 'none',
 			'border-color' => '',
@@ -569,7 +568,7 @@ $footer_defaults = array(
 		)
 	),
 	'footer-main-widget-title-typography-options'     => 'inherit',
-	'footer-main-widget-title-typography'             => json_encode(
+	'footer-main-widget-title-typography'             => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
@@ -597,7 +596,7 @@ $footer_defaults = array(
 		)
 	),
 	'footer-main-widget-content-align'                => 'cwp-text-left',
-	'footer-main-widget-content-border-styling'       => json_encode(
+	'footer-main-widget-content-border-styling'       => wp_json_encode(
 		array(
 			'border-style' => 'none',
 			'border-color' => '',
@@ -613,7 +612,7 @@ $footer_defaults = array(
 		)
 	),
 	'footer-main-widget-content-typography-options'   => 'inherit',
-	'footer-main-widget-content-typography'           => json_encode(
+	'footer-main-widget-content-typography'           => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
@@ -643,7 +642,7 @@ $footer_defaults = array(
 	/*footer Bottom*/
 	'footer-bottom-height-option'                     => 'auto',
 	'footer-bottom-height'                            => '',
-	'footer-bottom-padding'                           => json_encode(
+	'footer-bottom-padding'                           => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -668,7 +667,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-bottom-margin'                            => json_encode(
+	'footer-bottom-margin'                            => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -694,7 +693,7 @@ $footer_defaults = array(
 		)
 	),
 	'footer-bottom-bg-options'                        => 'none',
-	'footer-bottom-background-options'                => json_encode(
+	'footer-bottom-background-options'                => wp_json_encode(
 		array(
 			'background-color'         => '#101010',
 			'background-image'         => '',
@@ -706,7 +705,7 @@ $footer_defaults = array(
 			'background-overlay-color' => '',
 		)
 	),
-	'footer-bottom-border-styling'                    => json_encode(
+	'footer-bottom-border-styling'                    => wp_json_encode(
 		array(
 			'border-style'     => 'none',
 			'border-color'     => '',
@@ -742,7 +741,7 @@ $footer_defaults = array(
 	),
 	'footer-bottom-widget-title-align'                => 'cwp-text-left',
 	'footer-bottom-widget-title-color'                => '#fff',
-	'footer-bottom-widget-title-margin'               => json_encode(
+	'footer-bottom-widget-title-margin'               => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -767,7 +766,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-bottom-widget-title-padding'              => json_encode(
+	'footer-bottom-widget-title-padding'              => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -792,7 +791,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-bottom-widget-title-border-styling'       => json_encode(
+	'footer-bottom-widget-title-border-styling'       => wp_json_encode(
 		array(
 			'border-style' => 'none',
 			'border-color' => '',
@@ -808,7 +807,7 @@ $footer_defaults = array(
 		)
 	),
 	'footer-bottom-widget-title-typography-options'   => 'inherit',
-	'footer-bottom-widget-title-typography'           => json_encode(
+	'footer-bottom-widget-title-typography'           => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
@@ -836,7 +835,7 @@ $footer_defaults = array(
 		)
 	),
 	'footer-bottom-widget-content-align'              => 'cwp-text-left',
-	'footer-bottom-widget-content-border-styling'     => json_encode(
+	'footer-bottom-widget-content-border-styling'     => wp_json_encode(
 		array(
 			'border-style' => 'none',
 			'border-color' => '',
@@ -852,7 +851,7 @@ $footer_defaults = array(
 		)
 	),
 	'footer-bottom-widget-content-typography-options' => 'inherit',
-	'footer-bottom-widget-content-typography'         => json_encode(
+	'footer-bottom-widget-content-typography'         => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
@@ -884,7 +883,7 @@ $footer_defaults = array(
 	'footer-menu-title'                               => 'Menu Title',
 	'footer-menu-custom-menu'                         => '',
 	'footer-menu-display-position'                    => '',
-	'footer-menu-padding'                             => json_encode(
+	'footer-menu-padding'                             => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -909,7 +908,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-menu-margin'                              => json_encode(
+	'footer-menu-margin'                              => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -934,7 +933,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-menu-title-align'                         => json_encode(
+	'footer-menu-title-align'                         => wp_json_encode(
 		array(
 			'desktop' => '',
 			'tablet'  => '',
@@ -942,7 +941,7 @@ $footer_defaults = array(
 		)
 	),
 	'footer-menu-title-color'                         => '#fff',
-	'footer-menu-title-margin'                        => json_encode(
+	'footer-menu-title-margin'                        => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -967,7 +966,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-menu-title-padding'                       => json_encode(
+	'footer-menu-title-padding'                       => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -992,7 +991,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-menu-title-border-styling'                => json_encode(
+	'footer-menu-title-border-styling'                => wp_json_encode(
 		array(
 			'border-style' => 'none',
 			'border-color' => '',
@@ -1008,7 +1007,7 @@ $footer_defaults = array(
 		)
 	),
 	'footer-menu-title-typography-options'            => 'inherit',
-	'footer-menu-title-typography'                    => json_encode(
+	'footer-menu-title-typography'                    => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
@@ -1035,14 +1034,14 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-menu-align'                               => json_encode(
+	'footer-menu-align'                               => wp_json_encode(
 		array(
 			'desktop' => '',
 			'tablet'  => '',
 			'mobile'  => 'cwp-flex-align-left',
 		)
 	),
-	'footer-menu-item-padding'                        => json_encode(
+	'footer-menu-item-padding'                        => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '0',
@@ -1067,7 +1066,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-menu-item-margin'                         => json_encode(
+	'footer-menu-item-margin'                         => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1092,7 +1091,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-menu-styling'                             => json_encode(
+	'footer-menu-styling'                             => wp_json_encode(
 		array(
 			'normal-text-color'    => '#fff',
 			'normal-bg-color'      => '',
@@ -1163,7 +1162,7 @@ $footer_defaults = array(
 		)
 	),
 	'footer-menu-typography-options'                  => 'inherit',
-	'footer-menu-typography'                          => json_encode(
+	'footer-menu-typography'                          => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
@@ -1191,9 +1190,10 @@ $footer_defaults = array(
 		)
 	),
 
-	/*footer social
+	/*
+	footer social
 	Icon fixed on get*/
-	'footer_social'                                   => json_encode(
+	'footer_social'                                   => wp_json_encode(
 		array(
 			array(
 				'enabled'          => '1',
@@ -1227,49 +1227,49 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-social-icon-align'                        => json_encode(
+	'footer-social-icon-align'                        => wp_json_encode(
 		array(
 			'desktop' => 'cwp-flex-align-right',
 			'tablet'  => 'cwp-flex-align-right',
 			'mobile'  => 'cwp-flex-align-left',
 		)
 	),
-	'footer-social-icon-size'                         => json_encode(
+	'footer-social-icon-size'                         => wp_json_encode(
 		array(
 			'desktop' => '',
 			'tablet'  => '',
 			'mobile'  => '14',
 		)
 	),
-	'footer-social-icon-radius'                       => json_encode(
+	'footer-social-icon-radius'                       => wp_json_encode(
 		array(
 			'desktop' => '',
 			'tablet'  => '',
 			'mobile'  => '50',
 		)
 	),
-	'footer-social-icon-width'                        => json_encode(
+	'footer-social-icon-width'                        => wp_json_encode(
 		array(
 			'desktop' => '',
 			'tablet'  => '',
 			'mobile'  => '30',
 		)
 	),
-	'footer-social-icon-height'                       => json_encode(
+	'footer-social-icon-height'                       => wp_json_encode(
 		array(
 			'desktop' => '',
 			'tablet'  => '',
 			'mobile'  => '30',
 		)
 	),
-	'footer-social-icon-line-height'                  => json_encode(
+	'footer-social-icon-line-height'                  => wp_json_encode(
 		array(
 			'desktop' => '',
 			'tablet'  => '',
 			'mobile'  => '30',
 		)
 	),
-	'individual-footer-social-icon-padding'           => json_encode(
+	'individual-footer-social-icon-padding'           => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1294,7 +1294,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'individual-footer-social-icon-margin'            => json_encode(
+	'individual-footer-social-icon-margin'            => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1319,7 +1319,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-social-icon-section-padding'              => json_encode(
+	'footer-social-icon-section-padding'              => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1344,7 +1344,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-social-icon-section-margin'               => json_encode(
+	'footer-social-icon-section-margin'               => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1372,7 +1372,7 @@ $footer_defaults = array(
 
 	/*copyright*/
 	'footer-copyright-text-color'                     => '#fff',
-	'footer-copyright-align'                          => json_encode(
+	'footer-copyright-align'                          => wp_json_encode(
 		array(
 			'desktop' => '',
 			'tablet'  => '',
@@ -1380,7 +1380,7 @@ $footer_defaults = array(
 		)
 	),
 	'footer_copyright'                                => esc_html__( 'Copyright &copy; {current_year} {site_title} - Powered by {theme_author}', 'cosmoswp' ),
-	'footer-copyright-padding'                        => json_encode(
+	'footer-copyright-padding'                        => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1405,7 +1405,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-copyright-margin'                         => json_encode(
+	'footer-copyright-margin'                         => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1431,7 +1431,7 @@ $footer_defaults = array(
 		)
 	),
 	'footer-copyright-typography-options'             => 'inherit',
-	'footer-copyright-typography'                     => json_encode(
+	'footer-copyright-typography'                     => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
@@ -1460,7 +1460,7 @@ $footer_defaults = array(
 	),
 	/*HTML*/
 	'footer-html-container'                           => '',
-	'footer-html-padding'                             => json_encode(
+	'footer-html-padding'                             => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1485,7 +1485,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-html-margin'                              => json_encode(
+	'footer-html-margin'                              => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1512,7 +1512,7 @@ $footer_defaults = array(
 	),
 	'footer-html-text-color'                          => '#fff',
 	'footer-html-typography-options'                  => 'inherit',
-	'footer-html-typography'                          => json_encode(
+	'footer-html-typography'                          => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
@@ -1532,7 +1532,7 @@ $footer_defaults = array(
 	'footer-sidebar-7-widget-setting-option'          => 'inherit',
 	'footer-sidebar-8-widget-setting-option'          => 'inherit',
 	'footer-sidebar-1-content-align'                  => 'cwp-text-left',
-	'footer-sidebar-1-margin'                         => json_encode(
+	'footer-sidebar-1-margin'                         => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1557,7 +1557,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-sidebar-1-padding'                        => json_encode(
+	'footer-sidebar-1-padding'                        => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1583,7 +1583,7 @@ $footer_defaults = array(
 		)
 	),
 	'footer-sidebar-2-content-align'                  => 'cwp-text-left',
-	'footer-sidebar-2-margin'                         => json_encode(
+	'footer-sidebar-2-margin'                         => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1608,7 +1608,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-sidebar-2-padding'                        => json_encode(
+	'footer-sidebar-2-padding'                        => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1634,7 +1634,7 @@ $footer_defaults = array(
 		)
 	),
 	'footer-sidebar-3-content-align'                  => 'cwp-text-left',
-	'footer-sidebar-3-margin'                         => json_encode(
+	'footer-sidebar-3-margin'                         => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1659,7 +1659,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-sidebar-3-padding'                        => json_encode(
+	'footer-sidebar-3-padding'                        => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1685,7 +1685,7 @@ $footer_defaults = array(
 		)
 	),
 	'footer-sidebar-4-content-align'                  => 'cwp-text-left',
-	'footer-sidebar-4-margin'                         => json_encode(
+	'footer-sidebar-4-margin'                         => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1710,7 +1710,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-sidebar-4-padding'                        => json_encode(
+	'footer-sidebar-4-padding'                        => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1736,7 +1736,7 @@ $footer_defaults = array(
 		)
 	),
 	'footer-sidebar-5-content-align'                  => 'cwp-text-left',
-	'footer-sidebar-5-margin'                         => json_encode(
+	'footer-sidebar-5-margin'                         => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1761,7 +1761,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-sidebar-5-padding'                        => json_encode(
+	'footer-sidebar-5-padding'                        => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1787,7 +1787,7 @@ $footer_defaults = array(
 		)
 	),
 	'footer-sidebar-6-content-align'                  => 'cwp-text-left',
-	'footer-sidebar-6-margin'                         => json_encode(
+	'footer-sidebar-6-margin'                         => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1812,7 +1812,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-sidebar-6-padding'                        => json_encode(
+	'footer-sidebar-6-padding'                        => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1838,7 +1838,7 @@ $footer_defaults = array(
 		)
 	),
 	'footer-sidebar-7-content-align'                  => 'cwp-text-left',
-	'footer-sidebar-7-margin'                         => json_encode(
+	'footer-sidebar-7-margin'                         => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1863,7 +1863,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-sidebar-7-padding'                        => json_encode(
+	'footer-sidebar-7-padding'                        => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1889,7 +1889,7 @@ $footer_defaults = array(
 		)
 	),
 	'footer-sidebar-8-content-align'                  => 'cwp-text-left',
-	'footer-sidebar-8-margin'                         => json_encode(
+	'footer-sidebar-8-margin'                         => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1914,7 +1914,7 @@ $footer_defaults = array(
 			),
 		)
 	),
-	'footer-sidebar-8-padding'                        => json_encode(
+	'footer-sidebar-8-padding'                        => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',

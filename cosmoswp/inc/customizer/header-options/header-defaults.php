@@ -67,7 +67,7 @@ $header_defaults = array(
 	'header-general-width'                      => 'inherit',
 	'vertical-header-position'                  => 'cwp-vertical-header-left',
 	'vertical-header-width'                     => '280',
-	'header-general-padding'                    => json_encode(
+	'header-general-padding'                    => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -92,7 +92,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'header-general-margin'                     => json_encode(
+	'header-general-margin'                     => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -117,7 +117,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'header-general-border-styling'             => json_encode(
+	'header-general-border-styling'             => wp_json_encode(
 		array(
 			'border-style'     => 'none',
 			'border-color'     => '',
@@ -151,7 +151,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'header-general-background-options'         => json_encode(
+	'header-general-background-options'         => wp_json_encode(
 		array(
 			'background-color'      => '#f5f5f5',
 			'background-image'      => '',
@@ -164,7 +164,7 @@ $header_defaults = array(
 
 
 	/*Header Top*/
-	'top-header-padding'                        => json_encode(
+	'top-header-padding'                        => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '10',
@@ -189,7 +189,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'top-header-margin'                         => json_encode(
+	'top-header-margin'                         => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -217,7 +217,7 @@ $header_defaults = array(
 
 	'header-top-height-option'                  => 'auto',
 	'top-header-height'                         => '0',
-	'header-top-border-styling'                 => json_encode(
+	'header-top-border-styling'                 => wp_json_encode(
 		array(
 			'border-style'     => 'none',
 			'border-color'     => '',
@@ -251,7 +251,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'header-top-background-options'             => json_encode(
+	'header-top-background-options'             => wp_json_encode(
 		array(
 			'background-color'      => '#444',
 			'background-image'      => '',
@@ -267,7 +267,7 @@ $header_defaults = array(
 	'header-main-height-option'                 => 'auto',
 	'header-main-enable-box-width'              => false,
 	'header-main-height'                        => '0',
-	'header-main-padding'                       => json_encode(
+	'header-main-padding'                       => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '10',
@@ -292,7 +292,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'header-main-margin'                        => json_encode(
+	'header-main-margin'                        => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -318,7 +318,7 @@ $header_defaults = array(
 		)
 	),
 	'header-main-bg-options'                    => 'none',
-	'header-main-background-options'            => json_encode(
+	'header-main-background-options'            => wp_json_encode(
 		array(
 			'background-color'      => '#fff',
 			'background-image'      => '',
@@ -328,7 +328,7 @@ $header_defaults = array(
 			'background-attachment' => 'scroll',
 		)
 	),
-	'header-main-border-styling'                => json_encode(
+	'header-main-border-styling'                => wp_json_encode(
 		array(
 			'border-style'     => 'none',
 			'border-color'     => '',
@@ -364,7 +364,7 @@ $header_defaults = array(
 	),
 
 	/*Header bottom*/
-	'header-bottom-margin'                      => json_encode(
+	'header-bottom-margin'                      => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -389,7 +389,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'header-bottom-padding'                     => json_encode(
+	'header-bottom-padding'                     => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '10',
@@ -416,7 +416,7 @@ $header_defaults = array(
 	),
 	'header-bottom-height-option'               => 'auto',
 	'header-bottom-height'                      => '0',
-	'header-bottom-border-styling'              => json_encode(
+	'header-bottom-border-styling'              => wp_json_encode(
 		array(
 			'border-style'     => 'none',
 			'border-color'     => '',
@@ -451,7 +451,7 @@ $header_defaults = array(
 		)
 	),
 	'header-bottom-bg-options'                  => 'none',
-	'header-bottom-background-options'          => json_encode(
+	'header-bottom-background-options'          => wp_json_encode(
 		array(
 			'background-color'      => '#f5f5f5',
 			'background-image'      => '',
@@ -462,9 +462,10 @@ $header_defaults = array(
 		)
 	),
 
-	/*Header social icon
+	/*
+	Header social icon
 	Icon fixed on get*/
-	'header-social-icon-data'                   => json_encode(
+	'header-social-icon-data'                   => wp_json_encode(
 		array(
 			array(
 				'enabled'          => '1',
@@ -498,14 +499,14 @@ $header_defaults = array(
 			),
 		)
 	),
-	'header-social-icon-align'                  => json_encode(
+	'header-social-icon-align'                  => wp_json_encode(
 		array(
 			'desktop' => '',
 			'tablet'  => '',
 			'mobile'  => 'cwp-text-right',
 		)
 	),
-	'single-header-social-icon-padding'         => json_encode(
+	'single-header-social-icon-padding'         => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -530,7 +531,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'single-header-social-icon-margin'          => json_encode(
+	'single-header-social-icon-margin'          => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -555,7 +556,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'header-social-icon-padding'                => json_encode(
+	'header-social-icon-padding'                => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -580,7 +581,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'header-social-icon-margin'                 => json_encode(
+	'header-social-icon-margin'                 => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -605,35 +606,35 @@ $header_defaults = array(
 			),
 		)
 	),
-	'header-social-icon-radius'                 => json_encode(
+	'header-social-icon-radius'                 => wp_json_encode(
 		array(
 			'desktop' => '',
 			'tablet'  => '',
 			'mobile'  => '',
 		)
 	),
-	'header-social-icon-width'                  => json_encode(
+	'header-social-icon-width'                  => wp_json_encode(
 		array(
 			'desktop' => '30',
 			'tablet'  => '30',
 			'mobile'  => '30',
 		)
 	),
-	'header-social-icon-height'                 => json_encode(
+	'header-social-icon-height'                 => wp_json_encode(
 		array(
 			'desktop' => '30',
 			'tablet'  => '30',
 			'mobile'  => '30',
 		)
 	),
-	'header-social-icon-line-height'            => json_encode(
+	'header-social-icon-line-height'            => wp_json_encode(
 		array(
 			'desktop' => '30',
 			'tablet'  => '30',
 			'mobile'  => '30',
 		)
 	),
-	'header-social-icon-size'                   => json_encode(
+	'header-social-icon-size'                   => wp_json_encode(
 		array(
 			'desktop' => '14',
 			'tablet'  => '14',
@@ -641,13 +642,14 @@ $header_defaults = array(
 		)
 	),
 
-	/*search*/
-	//drop down
+	/*
+	search*/
+	// drop down
 	'dd-search-placeholder'                     => esc_html__( 'Search', 'cosmoswp' ),
 	'dd-search-icon-align'                      => 'cwp-flex-align-right',
 	'dd-search-form-align'                      => 'cwp-search-align-left',
 	'drop-down-search-input-height'             => '45',
-	'drop-down-search-padding'                  => json_encode(
+	'drop-down-search-padding'                  => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -672,7 +674,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'drop-down-search-margin'                   => json_encode(
+	'drop-down-search-margin'                   => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -698,7 +700,7 @@ $header_defaults = array(
 		)
 	),
 	'dropdown-search-icon-size'                 => '18',
-	'dropdown-search-icon-styling'              => json_encode(
+	'dropdown-search-icon-styling'              => wp_json_encode(
 		array(
 			'normal-text-color'       => '#333',
 			'normal-bg-color'         => '',
@@ -766,7 +768,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'dropdown-search-form-styling'              => json_encode(
+	'dropdown-search-form-styling'              => wp_json_encode(
 		array(
 			'normal-text-color'       => '#ddd',
 			'normal-bg-color'         => '#fff',
@@ -835,7 +837,7 @@ $header_defaults = array(
 		)
 	),
 	'dd-search-typography-options'              => 'inherit',
-	'dd-search-typography'                      => json_encode(
+	'dd-search-typography'                      => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
@@ -864,7 +866,7 @@ $header_defaults = array(
 	),
 
 	'normal-search-placeholder'                 => esc_html__( 'Search', 'cosmoswp' ),
-	'normal-search-padding'                     => json_encode(
+	'normal-search-padding'                     => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -889,7 +891,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'normal-search-margin'                      => json_encode(
+	'normal-search-margin'                      => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -915,7 +917,7 @@ $header_defaults = array(
 		)
 	),
 	'normal-search-icon-size'                   => '18',
-	'normal-search-icon-styling'                => json_encode(
+	'normal-search-icon-styling'                => wp_json_encode(
 		array(
 			'normal-text-color'       => '#333',
 			'normal-bg-color'         => '',
@@ -984,7 +986,7 @@ $header_defaults = array(
 		)
 	),
 	'normal-search-input-height'                => '45',
-	'normal-search-form-styling'                => json_encode(
+	'normal-search-form-styling'                => wp_json_encode(
 		array(
 			'normal-text-color'       => '#333',
 			'normal-bg-color'         => '',
@@ -1054,7 +1056,7 @@ $header_defaults = array(
 		)
 	),
 	'normal-search-typography-options'          => 'inherit',
-	'normal-search-typography'                  => json_encode(
+	'normal-search-typography'                  => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
@@ -1095,7 +1097,7 @@ $header_defaults = array(
 	'sticky-top-header-text-color'              => '',
 	'sticky-top-header-link-color'              => '',
 	'sticky-top-header-link-hover-color'        => '',
-	'sticky-top-header-menu-color-options'      => json_encode(
+	'sticky-top-header-menu-color-options'      => wp_json_encode(
 		array(
 			'normal-text-color'   => '',
 			'normal-bg-color'     => '',
@@ -1108,7 +1110,7 @@ $header_defaults = array(
 	'sticky-main-header-text-color'             => '',
 	'sticky-main-header-link-color'             => '',
 	'sticky-main-header-link-hover-color'       => '',
-	'sticky-main-header-menu-color-options'     => json_encode(
+	'sticky-main-header-menu-color-options'     => wp_json_encode(
 		array(
 			'normal-text-color'   => '',
 			'normal-bg-color'     => '',
@@ -1121,7 +1123,7 @@ $header_defaults = array(
 	'sticky-bottom-header-text-color'           => '',
 	'sticky-bottom-header-link-color'           => '',
 	'sticky-bottom-header-link-hover-color'     => '',
-	'sticky-bottom-header-menu-color-options'   => json_encode(
+	'sticky-bottom-header-menu-color-options'   => wp_json_encode(
 		array(
 			'normal-text-color'   => '',
 			'normal-bg-color'     => '',
@@ -1135,21 +1137,21 @@ $header_defaults = array(
 	/*site identity*/
 	'site-identity-sorting'                     => array( 'site-title' ),
 	'site-logo-max-width'                       => '',
-	'site-logo-position'                        => json_encode(
+	'site-logo-position'                        => wp_json_encode(
 		array(
 			'desktop' => '',
 			'tablet'  => '',
 			'mobile'  => 'cwp-top',
 		)
 	),
-	'site-identity-align'                       => json_encode(
+	'site-identity-align'                       => wp_json_encode(
 		array(
 			'desktop' => '',
 			'tablet'  => '',
 			'mobile'  => 'cwp-text-left',
 		)
 	),
-	'site-identity-padding'                     => json_encode(
+	'site-identity-padding'                     => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1174,7 +1176,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'site-identity-margin'                      => json_encode(
+	'site-identity-margin'                      => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1199,7 +1201,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'site-identity-styling'                     => json_encode(
+	'site-identity-styling'                     => wp_json_encode(
 		array(
 			'site-title-color'         => '#275cf6',
 			'site-tagline-color'       => '#333',
@@ -1208,7 +1210,7 @@ $header_defaults = array(
 		)
 	),
 	'site-identity-typography-options'          => 'custom',
-	'site-title-typography'                     => json_encode(
+	'site-title-typography'                     => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
@@ -1235,7 +1237,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'site-tagline-typography'                   => json_encode(
+	'site-tagline-typography'                   => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
@@ -1266,7 +1268,7 @@ $header_defaults = array(
 	/*primary menu*/
 	'primary-menu-custom-menu'                  => '',
 	'primary-menu-disable-sub-menu'             => false,
-	'primary-menu-padding'                      => json_encode(
+	'primary-menu-padding'                      => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1291,7 +1293,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'primary-menu-margin'                       => json_encode(
+	'primary-menu-margin'                       => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1317,7 +1319,7 @@ $header_defaults = array(
 		)
 	),
 	'primary-menu-align'                        => 'cwp-flex-align-right',
-	'primary-menu-item-padding'                 => json_encode(
+	'primary-menu-item-padding'                 => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '10',
@@ -1342,7 +1344,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'primary-menu-item-margin'                  => json_encode(
+	'primary-menu-item-margin'                  => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1367,7 +1369,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'primary-menu-styling'                      => json_encode(
+	'primary-menu-styling'                      => wp_json_encode(
 		array(
 			'normal-text-color'    => '#333',
 			'normal-bg-color'      => '',
@@ -1438,7 +1440,7 @@ $header_defaults = array(
 		)
 	),
 	'primary-menu-typography-options'           => 'inherit',
-	'primary-menu-typography'                   => json_encode(
+	'primary-menu-typography'                   => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
@@ -1465,7 +1467,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'primary-menu-sub-menu-item-padding'        => json_encode(
+	'primary-menu-sub-menu-item-padding'        => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1490,7 +1492,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'primary-menu-sub-menu-item-margin'         => json_encode(
+	'primary-menu-sub-menu-item-margin'         => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1517,7 +1519,7 @@ $header_defaults = array(
 	),
 	'primary-menu-submenu-display-options'      => 'cwp-submenu-onhover',
 	'primary-menu-submenu-bg-color'             => '#fff',
-	'primary-menu-submenu-styling'              => json_encode(
+	'primary-menu-submenu-styling'              => wp_json_encode(
 		array(
 			'normal-text-color'    => '#333',
 			'normal-bg-color'      => '',
@@ -1589,7 +1591,7 @@ $header_defaults = array(
 	),
 	'primary-menu-submenu-icon-indicator'       => 'fas fa-angle-down', /*fixed on fronted*/
 	'primary-menu-submenu-typography-options'   => 'inherit',
-	'primary-menu-submenu-typography'           => json_encode(
+	'primary-menu-submenu-typography'           => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
@@ -1620,7 +1622,7 @@ $header_defaults = array(
 	/*secondary menu*/
 	'secondary-menu-custom-menu'                => '',
 	'secondary-menu-disable-sub-menu'           => true,
-	'secondary-menu-padding'                    => json_encode(
+	'secondary-menu-padding'                    => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1645,7 +1647,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'secondary-menu-margin'                     => json_encode(
+	'secondary-menu-margin'                     => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1671,7 +1673,7 @@ $header_defaults = array(
 		)
 	),
 	'secondary-menu-align'                      => 'cwp-flex-align-left',
-	'secondary-menu-item-padding'               => json_encode(
+	'secondary-menu-item-padding'               => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '10',
@@ -1696,7 +1698,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'secondary-menu-item-margin'                => json_encode(
+	'secondary-menu-item-margin'                => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1721,7 +1723,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'secondary-menu-styling'                    => json_encode(
+	'secondary-menu-styling'                    => wp_json_encode(
 		array(
 			'normal-text-color'    => '#333',
 			'normal-bg-color'      => '',
@@ -1792,7 +1794,7 @@ $header_defaults = array(
 		)
 	),
 	'secondary-menu-typography-options'         => 'inherit',
-	'secondary-menu-typography'                 => json_encode(
+	'secondary-menu-typography'                 => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
@@ -1819,7 +1821,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'secondary-menu-sub-menu-item-padding'      => json_encode(
+	'secondary-menu-sub-menu-item-padding'      => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1844,7 +1846,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'secondary-menu-sub-menu-item-margin'       => json_encode(
+	'secondary-menu-sub-menu-item-margin'       => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1872,7 +1874,7 @@ $header_defaults = array(
 	'secondary-menu-submenu-display-options'    => 'cwp-submenu-onhover',
 	'secondary-menu-submenu-icon-indicator'     => 'fas fa-angle-down', /*done in frontend*/
 	'secondary-menu-submenu-bg-color'           => '#000',
-	'secondary-menu-submenu-styling'            => json_encode(
+	'secondary-menu-submenu-styling'            => wp_json_encode(
 		array(
 			'normal-text-color'    => '#fff',
 			'normal-bg-color'      => '',
@@ -1943,7 +1945,7 @@ $header_defaults = array(
 		)
 	),
 	'secondary-menu-submenu-typography-options' => 'inherit',
-	'secondary-menu-submenu-typography'         => json_encode(
+	'secondary-menu-submenu-typography'         => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
@@ -1972,7 +1974,7 @@ $header_defaults = array(
 	),
 
 	/*Menu Icon*/
-	'menu-icon-sidebar-margin'                  => json_encode(
+	'menu-icon-sidebar-margin'                  => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -1997,7 +1999,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'menu-icon-sidebar-padding'                 => json_encode(
+	'menu-icon-sidebar-padding'                 => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -2023,12 +2025,14 @@ $header_defaults = array(
 		)
 	),
 	'menu-icon-display-menu'                    => 'cwp-left-menu-push',
-    'menu-icon-sidebar-width'         => json_encode(array(
-        'desktop' => '',
-        'tablet' => '',
-        'mobile' => '',
-    )),
-	'menu-icon-sidebar-color-options'           => json_encode(
+	'menu-icon-sidebar-width'                   => wp_json_encode(
+		array(
+			'desktop' => '',
+			'tablet'  => '',
+			'mobile'  => '',
+		)
+	),
+	'menu-icon-sidebar-color-options'           => wp_json_encode(
 		array(
 			'background-color' => '#444',
 			'text-color'       => '#fff',
@@ -2045,21 +2049,21 @@ $header_defaults = array(
 	'menu-icon-close-icon-position'             => 'before',
 	'menu-open-icon'                            => 'fas fa-bars', /*done in frontend*/
 	'menu-close-icon'                           => 'fas fa-times', /*done in frontend*/
-	'menu-open-icon-size-responsive'            => json_encode(
+	'menu-open-icon-size-responsive'            => wp_json_encode(
 		array(
 			'desktop' => '18',
 			'tablet'  => '18',
 			'mobile'  => '18',
 		)
 	),
-	'menu-icon-close-icon-size-responsive'      => json_encode(
+	'menu-icon-close-icon-size-responsive'      => wp_json_encode(
 		array(
 			'desktop' => '18',
 			'tablet'  => '18',
 			'mobile'  => '18',
 		)
 	),
-	'menu-open-icon-padding'                    => json_encode(
+	'menu-open-icon-padding'                    => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '10',
@@ -2084,7 +2088,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'menu-icon-close-padding'                   => json_encode(
+	'menu-icon-close-padding'                   => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '10',
@@ -2109,7 +2113,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'menu-open-icon-margin'                     => json_encode(
+	'menu-open-icon-margin'                     => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -2134,7 +2138,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'menu-icon-close-margin'                    => json_encode(
+	'menu-icon-close-margin'                    => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -2163,7 +2167,7 @@ $header_defaults = array(
 	'menu-icon-close-icon-align'                => 'cwp-flex-align-right',
 	'menu-open-icon-typography-options'         => 'inherit',
 	'menu-icon-close-text-typography-options'   => 'inherit',
-	'menu-open-icon-typography'                 => json_encode(
+	'menu-open-icon-typography'                 => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
@@ -2190,7 +2194,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'menu-icon-close-text-typography'           => json_encode(
+	'menu-icon-close-text-typography'           => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
@@ -2217,7 +2221,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'menu-open-icon-styling'                    => json_encode(
+	'menu-open-icon-styling'                    => wp_json_encode(
 		array(
 			'normal-text-color'       => '#333',
 			'normal-bg-color'         => '',
@@ -2285,7 +2289,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'menu-icon-close-icon-styling'              => json_encode(
+	'menu-icon-close-icon-styling'              => wp_json_encode(
 		array(
 			'normal-text-color'       => '#333',
 			'normal-bg-color'         => '',
@@ -2354,7 +2358,7 @@ $header_defaults = array(
 		)
 	),
 	'menu-icon-sidebar-submenu-bg-color'        => 'rgba(0,0,0,0.2)',
-	'menu-icon-sidebar-submenu-styling'         => json_encode(
+	'menu-icon-sidebar-submenu-styling'         => wp_json_encode(
 		array(
 			'normal-text-color'    => '#fff',
 			'normal-bg-color'      => '',
@@ -2430,7 +2434,7 @@ $header_defaults = array(
 	'button-one-text'                           => esc_html__( 'Button One', 'cosmoswp' ),
 	'button-one-class-name'                     => '',
 	'button-one-enable-icon'                    => true,
-	'button-one-align'                          => json_encode(
+	'button-one-align'                          => wp_json_encode(
 		array(
 			'desktop' => '',
 			'tablet'  => '',
@@ -2441,7 +2445,7 @@ $header_defaults = array(
 	'button-one-icon-position'                  => 'before',
 	'button-one-url'                            => '#',
 	'button-one-open-link-new-tab'              => '1',
-	'button-one-padding'                        => json_encode(
+	'button-one-padding'                        => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '6',
@@ -2466,7 +2470,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'button-one-margin'                         => json_encode(
+	'button-one-margin'                         => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -2491,7 +2495,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'button-one-styling'                        => json_encode(
+	'button-one-styling'                        => wp_json_encode(
 		array(
 			'normal-text-color'       => '#333',
 			'normal-bg-color'         => '#fff',
@@ -2560,7 +2564,7 @@ $header_defaults = array(
 		)
 	),
 	'button-one-typography-options'             => 'inherit',
-	'button-one-typography'                     => json_encode(
+	'button-one-typography'                     => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
@@ -2588,9 +2592,10 @@ $header_defaults = array(
 		)
 	),
 
-	/*contact Information
+	/*
+	contact Information
 	Fixed icon on frontend*/
-	'contact-information-data'                  => json_encode(
+	'contact-information-data'                  => wp_json_encode(
 		array(
 			array(
 				'enabled'   => '1',
@@ -2612,14 +2617,14 @@ $header_defaults = array(
 			),
 		)
 	),
-	'contact-information-align'                 => json_encode(
+	'contact-information-align'                 => wp_json_encode(
 		array(
 			'desktop' => '',
 			'tablet'  => '',
 			'mobile'  => 'cwp-flex-align-left',
 		)
 	),
-	'contact-info-padding'                      => json_encode(
+	'contact-info-padding'                      => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -2644,7 +2649,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'contact-info-margin'                       => json_encode(
+	'contact-info-margin'                       => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -2669,7 +2674,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'contact-info-icon-size'                    => json_encode(
+	'contact-info-icon-size'                    => wp_json_encode(
 		array(
 			'desktop' => '14',
 			'tablet'  => '14',
@@ -2680,7 +2685,7 @@ $header_defaults = array(
 
 	'contact-info-title-color'                  => '#333',
 	'contact-info-title-typography-options'     => 'custom',
-	'contact-info-title-typography'             => json_encode(
+	'contact-info-title-typography'             => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
@@ -2709,7 +2714,7 @@ $header_defaults = array(
 	),
 	'contact-info-subtitle-color'               => '#9e9e9e',
 	'contact-info-subtitle-typography-options'  => 'custom',
-	'contact-info-subtitle-typography'          => json_encode(
+	'contact-info-subtitle-typography'          => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
@@ -2736,7 +2741,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'contact-info-item-padding'                 => json_encode(
+	'contact-info-item-padding'                 => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '0',
@@ -2761,7 +2766,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'contact-info-item-margin'                  => json_encode(
+	'contact-info-item-margin'                  => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '0',
@@ -2786,7 +2791,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'contact-info-title-border-styling'         => json_encode(
+	'contact-info-title-border-styling'         => wp_json_encode(
 		array(
 			'border-style' => 'none',
 			'border-color' => '',
@@ -2805,7 +2810,7 @@ $header_defaults = array(
 	/*HTML*/
 	'html-container'                            => '',
 	'header-html-text-color'                    => '#fff',
-	'html-padding'                              => json_encode(
+	'html-padding'                              => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -2830,7 +2835,7 @@ $header_defaults = array(
 			),
 		)
 	),
-	'html-margin'                               => json_encode(
+	'html-margin'                               => wp_json_encode(
 		array(
 			'desktop' => array(
 				'top'         => '',
@@ -2856,7 +2861,7 @@ $header_defaults = array(
 		)
 	),
 	'html-typography-options'                   => 'inherit',
-	'html-typography'                           => json_encode(
+	'html-typography'                           => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',

@@ -5,6 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Customizer Options
+ *
  * @package CosmosWP
  */
 
@@ -30,7 +31,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 
 			// Only run these methods if they haven't been ran previously
 			if ( null === $instance ) {
-				$instance = new CosmosWP_WooCommerce_Advanced_Styling;
+				$instance = new CosmosWP_WooCommerce_Advanced_Styling();
 			}
 
 			// Always return the instance
@@ -50,7 +51,6 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 			add_filter( 'cosmoswp_default_theme_options', array( $this, 'defaults' ) );
 			add_action( 'customize_register', array( $this, 'customize_register' ), 100 );
 			add_filter( 'cosmoswp_dynamic_css', array( $this, 'dynamic_css' ), 100 );
-
 		}
 
 		/**
@@ -66,7 +66,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 		public function defaults( $default_options = array() ) {
 			$defaults = array(
 
-				'cwc-general-color-options'               => json_encode(
+				'cwc-general-color-options'               => wp_json_encode(
 					array(
 						'on-sale-bg'         => '#4cdf98',
 						'on-sale-color'      => '#fff',
@@ -75,14 +75,14 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 						'rating-color'       => '#f37224',
 					)
 				),
-				'cwc-product-toolbar'                     => json_encode(
+				'cwc-product-toolbar'                     => wp_json_encode(
 					array(
 						'background-color'      => '#f5f5f5',
 						'grid-list-color'       => '#999',
 						'grid-list-hover-color' => '#275cf6',
 					)
 				),
-				'cwc-product-box'                         => json_encode(
+				'cwc-product-box'                         => wp_json_encode(
 					array(
 						'categories-color'       => '#275cf6',
 						'categories-hover-color' => '#1949d4',
@@ -93,7 +93,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 						'content-color'          => '#333',
 					)
 				),
-				'cwc-product-button-styling'              => json_encode(
+				'cwc-product-button-styling'              => wp_json_encode(
 					array(
 						'normal-text-color'       => '#fff',
 						'normal-bg-color'         => '#275cf6',
@@ -161,7 +161,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 						),
 					)
 				),
-				'cwc-product-navigation-styling'          => json_encode(
+				'cwc-product-navigation-styling'          => wp_json_encode(
 					array(
 						'border-style'     => 'none',
 						'border-color'     => '',
@@ -195,7 +195,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 						),
 					)
 				),
-				'cwc-product-pagination-color-options'    => json_encode(
+				'cwc-product-pagination-color-options'    => wp_json_encode(
 					array(
 						'background-color'       => '#f5f5f5',
 						'background-hover-color' => '#275cf6',
@@ -203,41 +203,41 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 						'text-hover-color'       => '#fff',
 					)
 				),
-				'cwc-single-product-tab-bg-color-options' => json_encode(
+				'cwc-single-product-tab-bg-color-options' => wp_json_encode(
 					array(
 						'background-color'       => '#f5f5f5',
 						'background-hover-color' => '#fff',
 					)
 				),
-				'cwc-single-product-tab-text-color-options' => json_encode(
+				'cwc-single-product-tab-text-color-options' => wp_json_encode(
 					array(
 						'tab-list-color'       => '#999',
 						'tab-list-hover-color' => '#333',
 					)
 				),
-				'cwc-single-product-tab-border-color-options' => json_encode(
+				'cwc-single-product-tab-border-color-options' => wp_json_encode(
 					array(
 						'tab-border-color' => '#ddd',
 					)
 				),
-				'cwc-cart-table-bg-color'                 => json_encode(
+				'cwc-cart-table-bg-color'                 => wp_json_encode(
 					array(
 						'background-color'          => '#fff',
 						'background-stripped-color' => '#fff',
 					)
 				),
-				'cwc-cart-table-border-color'             => json_encode(
+				'cwc-cart-table-border-color'             => wp_json_encode(
 					array(
 						'border-color' => '#dddddd',
 					)
 				),
-				'cwc-cart-table-header-color-options'     => json_encode(
+				'cwc-cart-table-header-color-options'     => wp_json_encode(
 					array(
 						'background-color' => '#fff',
 						'text-color'       => '#333',
 					)
 				),
-				'cwc-cart-remove-button-color-options'    => json_encode(
+				'cwc-cart-remove-button-color-options'    => wp_json_encode(
 					array(
 						'background-color'       => '#f5f5f5',
 						'background-hover-color' => '#fb0909',
@@ -246,7 +246,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 					)
 				),
 				/* checkout button */
-				'cwc-checkout-button-styling'             => json_encode(
+				'cwc-checkout-button-styling'             => wp_json_encode(
 					array(
 						'normal-text-color'       => '#fff',
 						'normal-bg-color'         => '#275cf6',
@@ -315,14 +315,14 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 					)
 				),
 				/* error notice */
-				'cwc-notice-error-color-options'          => json_encode(
+				'cwc-notice-error-color-options'          => wp_json_encode(
 					array(
 						'background-color' => '#f8d7da',
 						'text-color'       => '#721c24',
 						'icon-color'       => '#721c24',
 					)
 				),
-				'cwc-notice-error-border-box'             => json_encode(
+				'cwc-notice-error-border-box'             => wp_json_encode(
 					array(
 						'border-style'     => 'solid',
 						'border-color'     => '#f5c6cb',
@@ -358,14 +358,14 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 				),
 
 				/* info notice */
-				'cwc-notice-info-color-options'           => json_encode(
+				'cwc-notice-info-color-options'           => wp_json_encode(
 					array(
 						'background-color' => '#d1ecf1',
 						'text-color'       => '#0c5460',
 						'icon-color'       => '#0c5460',
 					)
 				),
-				'cwc-notice-info-border-box'              => json_encode(
+				'cwc-notice-info-border-box'              => wp_json_encode(
 					array(
 						'border-style'     => 'solid',
 						'border-color'     => '#bee5eb',
@@ -401,14 +401,14 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 				),
 
 				/* success notice */
-				'cwc-notice-success-color-options'        => json_encode(
+				'cwc-notice-success-color-options'        => wp_json_encode(
 					array(
 						'background-color' => '#d4edda',
 						'text-color'       => '#155724',
 						'icon-color'       => '#155724',
 					)
 				),
-				'cwc-notice-success-border-box'           => json_encode(
+				'cwc-notice-success-border-box'           => wp_json_encode(
 					array(
 						'border-style'     => 'solid',
 						'border-color'     => '#c3e6cb',
@@ -445,7 +445,6 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 
 			);
 			return array_merge( $default_options, $defaults );
-
 		}
 
 		/**
@@ -464,14 +463,14 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 			/* Woocommerce Options */
 			/**
 			 * Customize Options
-			 **/
-			 require COSMOSWP_PATH . '/inc/addons/woocommerce/advanced-styling/cwp-woocommerce-options.php';
-
+			 */
+			require COSMOSWP_PATH . '/inc/addons/woocommerce/advanced-styling/cwp-woocommerce-options.php';
 		}
 
 		/**
 		 * Get dynamic CSS
 		 * Add Panel Section control
+		 *
 		 * @return array
 		 */
 		public function get_dynamic_css() {
@@ -991,12 +990,12 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 			if ( 'none' !== $product_navigation_border_style ) {
 
 				$product_navigation_css .= 'border-style:' . $product_navigation_border_style . ';';
-				//border width
+				// border width
 				$product_navigation_border_width = cosmoswp_cssbox_values_inline( cosmoswp_ifset( $product_navigation_border['border-width'] ), 'desktop' );
 				if ( strpos( $product_navigation_border_width, 'px' ) !== false ) {
 					$product_navigation_css .= 'border-width:' . $product_navigation_border_width . ';';
 				}
-				//border color
+				// border color
 				$product_navigation_border_color = cosmoswp_ifset( $product_navigation_border['border-color'] );
 				if ( $product_navigation_border_color ) {
 					$product_navigation_css .= 'border-color:' . $product_navigation_border_color . ';';
@@ -1266,12 +1265,12 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 			if ( 'none' !== $error_message_border_style ) {
 
 				$error_message_css .= 'border-style:' . $error_message_border_style . ';';
-				//border width
+				// border width
 				$error_message_border_width = cosmoswp_cssbox_values_inline( cosmoswp_ifset( $error_message_border['border-width'] ), 'desktop' );
 				if ( strpos( $error_message_border_width, 'px' ) !== false ) {
 					$error_message_css .= 'border-width:' . $error_message_border_width . ';';
 				}
-				//border color
+				// border color
 				$error_message_border_color = cosmoswp_ifset( $error_message_border['border-color'] );
 				if ( $error_message_border_color ) {
 					$error_message_css .= 'border-color:' . $error_message_border_color . ';';
@@ -1337,12 +1336,12 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 			if ( 'none' !== $information_message_border_style ) {
 
 				$information_message_css .= 'border-style:' . $information_message_border_style . ';';
-				//border width
+				// border width
 				$information_message_border_width = cosmoswp_cssbox_values_inline( cosmoswp_ifset( $information_message_border['border-width'] ), 'desktop' );
 				if ( strpos( $information_message_border_width, 'px' ) !== false ) {
 					$information_message_css .= 'border-width:' . $information_message_border_width . ';';
 				}
-				//border color
+				// border color
 				$information_message_border_color = cosmoswp_ifset( $information_message_border['border-color'] );
 				if ( $information_message_border_color ) {
 					$information_message_css .= 'border-color:' . $information_message_border_color . ';';

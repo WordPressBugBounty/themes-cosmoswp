@@ -5,6 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Header Builder and Customizer Options
+ *
  * @package CosmosWP
  */
 
@@ -18,7 +19,6 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $panel = 'cosmoswp_header';
 
@@ -28,7 +28,6 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $builder_section_controller = 'cosmoswp_header_builder_section_controller';
 
@@ -40,7 +39,6 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $header_top = 'cosmoswp_header_top';
 
@@ -50,7 +48,6 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $header_main = 'cosmoswp_header_main';
 
@@ -60,7 +57,6 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $header_bottom = 'cosmoswp_header_bottom';
 
@@ -72,7 +68,6 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $site_identity_logo = 'title_tagline';
 
@@ -82,7 +77,6 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $primary_menu = 'primary_menu';
 
@@ -92,7 +86,6 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $secondary_menu = 'secondary_menu';
 
@@ -102,7 +95,6 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $menu_icon = 'menu_icon';
 
@@ -112,7 +104,6 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $drop_down_search = 'drop_down_search';
 
@@ -122,7 +113,6 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $normal_search = 'normal_search';
 
@@ -132,7 +122,6 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $header_social = 'header_social';
 
@@ -142,7 +131,6 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $button_one = 'button_one';
 
@@ -152,7 +140,6 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $contact_information = 'contact_information';
 
@@ -162,7 +149,6 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $advertisement = 'advertisement';
 
@@ -172,7 +158,6 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $login = 'login';
 
@@ -182,7 +167,6 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $register = 'register';
 
@@ -192,7 +176,6 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $html = 'html';
 
@@ -214,7 +197,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 
 			// Only run these methods if they haven't been ran previously
 			if ( null === $instance ) {
-				$instance = new CosmosWP_Header_Builder;
+				$instance = new CosmosWP_Header_Builder();
 			}
 
 			// Always return the instance
@@ -255,7 +238,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		public function set_customizer() {
 			$builder = cosmoswp_get_theme_options( cosmoswp_header_builder()->builder_section_controller );
 			if ( is_array( $builder ) ) {
-				$builder = json_encode( urldecode_deep( $builder ), true );
+				$builder = wp_json_encode( urldecode_deep( $builder ), true );
 			}
 			set_theme_mod( cosmoswp_header_builder()->builder_section_controller, $builder );
 		}
@@ -417,7 +400,6 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 			);
 			$header_builder = apply_filters( 'cosmoswp_header_builder', $header_builder );
 			return array_merge( $builder, $header_builder );
-
 		}
 
 		/**
@@ -522,7 +504,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		}
 
 		/**
-		 *Column Element
+		 * Column Element
 		 *
 		 * @since    1.0.0
 		 * @access   public
@@ -560,7 +542,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 					$diff_grid = 'grid-' . $diff;
 					echo '<div class="' . $diff_grid . '"></div>';
 				}
-				$i++;
+				++$i;
 			}
 			echo '</div>';/*.grid-row*/
 			do_action( 'cosmoswp_below_row', $added_elements_ids );
@@ -608,7 +590,6 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 				</header>
 				<?php
 			}
-
 		}
 
 		/**
@@ -668,7 +649,6 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 				</div>
 				<?php
 			}
-
 		}
 
 		/**
@@ -724,7 +704,6 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 				?>
 			</div>
 			<?php
-
 		}
 
 		/**

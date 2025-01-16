@@ -1,6 +1,7 @@
 <?php
 /**
  * Header Builder and Customizer Options
+ *
  * @package CosmosWP
  */
 
@@ -18,7 +19,6 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $section = 'cosmoswp-general-setting';
 
@@ -28,7 +28,6 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $general_setting_section = 'cosmoswp-general-setting-section';
 
@@ -50,7 +49,7 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 
 			// Only run these methods if they haven't been ran previously
 			if ( null === $instance ) {
-				$instance = new CosmosWP_General_Setting_Controller;
+				$instance = new CosmosWP_General_Setting_Controller();
 			}
 
 			// Always return the instance
@@ -91,7 +90,7 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 				'dynamic-css-options'               => 'wp-head',
 				'general-setting-layout'            => 'cwp-full-width-body',
 				'general-content-layout'            => 'cwp-content-default',
-				'general-setting-color-options'     => json_encode(
+				'general-setting-color-options'     => wp_json_encode(
 					array(
 
 						'primary-color'    => '#275cf6',
@@ -102,7 +101,7 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 						'meta-color'       => '#999999',
 					)
 				),
-				'general-setting-body-p-typography' => json_encode(
+				'general-setting-body-p-typography' => wp_json_encode(
 					array(
 						'font-type'       => 'google',
 						'system-font'     => 'Verdana',
@@ -129,7 +128,7 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 						),
 					)
 				),
-				'general-setting-h1-typography'     => json_encode(
+				'general-setting-h1-typography'     => wp_json_encode(
 					array(
 						'font-type'       => 'google',
 						'system-font'     => 'Verdana',
@@ -156,7 +155,7 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 						),
 					)
 				),
-				'general-setting-h2-typography'     => json_encode(
+				'general-setting-h2-typography'     => wp_json_encode(
 					array(
 						'font-type'       => 'google',
 						'system-font'     => 'Verdana',
@@ -183,7 +182,7 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 						),
 					)
 				),
-				'general-setting-h3-typography'     => json_encode(
+				'general-setting-h3-typography'     => wp_json_encode(
 					array(
 						'font-type'       => 'google',
 						'system-font'     => 'Verdana',
@@ -210,7 +209,7 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 						),
 					)
 				),
-				'general-setting-h4-typography'     => json_encode(
+				'general-setting-h4-typography'     => wp_json_encode(
 					array(
 						'font-type'       => 'google',
 						'system-font'     => 'Verdana',
@@ -237,7 +236,7 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 						),
 					)
 				),
-				'general-setting-h5-typography'     => json_encode(
+				'general-setting-h5-typography'     => wp_json_encode(
 					array(
 						'font-type'       => 'google',
 						'system-font'     => 'Verdana',
@@ -264,7 +263,7 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 						),
 					)
 				),
-				'general-setting-h6-typography'     => json_encode(
+				'general-setting-h6-typography'     => wp_json_encode(
 					array(
 						'font-type'       => 'google',
 						'system-font'     => 'Verdana',

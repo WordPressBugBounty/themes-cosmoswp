@@ -5,6 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Footer Builder and Customizer Options
+ *
  * @package CosmosWP
  */
 if ( ! class_exists( 'CosmosWP_Footer_Builder' ) ) :
@@ -17,7 +18,6 @@ if ( ! class_exists( 'CosmosWP_Footer_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $panel = 'cosmoswp_footer';
 
@@ -27,7 +27,6 @@ if ( ! class_exists( 'CosmosWP_Footer_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $builder_section_controller = 'cosmoswp_footer_builder_section_controller';
 
@@ -39,7 +38,6 @@ if ( ! class_exists( 'CosmosWP_Footer_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $footer_top = 'cosmoswp_footer_top';
 
@@ -49,7 +47,6 @@ if ( ! class_exists( 'CosmosWP_Footer_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $footer_main = 'cosmoswp_footer_main';
 
@@ -59,7 +56,6 @@ if ( ! class_exists( 'CosmosWP_Footer_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $footer_bottom = 'cosmoswp_footer_bottom';
 
@@ -69,7 +65,6 @@ if ( ! class_exists( 'CosmosWP_Footer_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $footer_html = 'footer_html';
 
@@ -80,7 +75,6 @@ if ( ! class_exists( 'CosmosWP_Footer_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $copyright = 'footer_copyright';
 
@@ -90,7 +84,6 @@ if ( ! class_exists( 'CosmosWP_Footer_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $footer_menu = 'footer_menu';
 
@@ -100,7 +93,6 @@ if ( ! class_exists( 'CosmosWP_Footer_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $footer_social = 'footer_social';
 
@@ -110,7 +102,6 @@ if ( ! class_exists( 'CosmosWP_Footer_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $footer_sidebar_1 = 'sidebar-widgets-footer-sidebar-1';
 		public $footer_sidebar_2 = 'sidebar-widgets-footer-sidebar-2';
@@ -139,7 +130,7 @@ if ( ! class_exists( 'CosmosWP_Footer_Builder' ) ) :
 
 			// Only run these methods if they haven't been ran previously
 			if ( null === $instance ) {
-				$instance = new CosmosWP_Footer_Builder;
+				$instance = new CosmosWP_Footer_Builder();
 			}
 
 			// Always return the instance
@@ -164,7 +155,6 @@ if ( ! class_exists( 'CosmosWP_Footer_Builder' ) ) :
 			add_action( 'cosmoswp_action_footer', array( $this, 'display_footer' ), 100 );
 			add_filter( 'cosmoswp_dynamic_css', array( $this, 'dynamic_css' ), 100 );
 			add_filter( 'cosmoswp_enqueue_google_fonts', array( $this, 'enqueue_google_fonts' ), 1 );
-
 		}
 
 		/**
@@ -180,7 +170,7 @@ if ( ! class_exists( 'CosmosWP_Footer_Builder' ) ) :
 		public function set_customizer() {
 			$builder = cosmoswp_get_theme_options( cosmoswp_footer_builder()->builder_section_controller );
 			if ( is_array( $builder ) ) {
-				$builder = json_encode( urldecode_deep( $builder ), true );
+				$builder = wp_json_encode( urldecode_deep( $builder ), true );
 			}
 			set_theme_mod( cosmoswp_footer_builder()->builder_section_controller, $builder );
 		}
@@ -344,7 +334,6 @@ if ( ! class_exists( 'CosmosWP_Footer_Builder' ) ) :
 			);
 			$footer_builder = apply_filters( 'cosmoswp_footer_builder', $footer_builder );
 			return array_merge( $builder, $footer_builder );
-
 		}
 
 		/**
@@ -447,7 +436,7 @@ if ( ! class_exists( 'CosmosWP_Footer_Builder' ) ) :
 		}
 
 		/**
-		 *Reterive Column Element
+		 * Reterive Column Element
 		 *
 		 * @since    1.0.0
 		 * @access   public
@@ -490,7 +479,7 @@ if ( ! class_exists( 'CosmosWP_Footer_Builder' ) ) :
 					$diff_grid = 'grid-' . $diff;
 					echo '<div class="' . $diff_grid . '"></div>';
 				}
-				$i++;
+				++$i;
 			}
 			echo '</div>';/*.grid-row*/
 			echo '</div>';/*.grid-container*/
@@ -558,7 +547,7 @@ if ( ! class_exists( 'CosmosWP_Footer_Builder' ) ) :
 						?>
 						<!-- Start of .cwp-top-footer -->
 						<div class="cwp-top-footer <?php cosmoswp_footer_top_wrap_classes(); ?>" data-widget-title="<?php echo esc_attr( $top_widget_title_align ); ?>"
-							 data-widget-content="<?php echo esc_attr( $top_widget_content_align ); ?>">
+							data-widget-content="<?php echo esc_attr( $top_widget_content_align ); ?>">
 							<?php
 							$top_elements = cosmoswp_footer_builder()->sort_items( $desktop_builder['top'] );
 							cosmoswp_footer_builder()->column_elements( $top_elements );
@@ -571,7 +560,7 @@ if ( ! class_exists( 'CosmosWP_Footer_Builder' ) ) :
 					if ( isset( $desktop_builder['main'] ) ) {
 						?>
 						<div class="cwp-main-footer <?php cosmoswp_footer_main_wrap_classes(); ?>" data-widget-title="<?php echo esc_attr( $main_widget_title_align ); ?>"
-							 data-widget-content="<?php echo esc_attr( $main_widget_content_align ); ?>">
+							data-widget-content="<?php echo esc_attr( $main_widget_content_align ); ?>">
 							<?php
 							$main_elements = cosmoswp_footer_builder()->sort_items( $desktop_builder['main'] );
 							cosmoswp_footer_builder()->column_elements( $main_elements );
@@ -584,8 +573,8 @@ if ( ! class_exists( 'CosmosWP_Footer_Builder' ) ) :
 						?>
 						<!-- Start of .cwp-bottom-footer -->
 						<div class="cwp-bottom-footer <?php cosmoswp_footer_bottom_wrap_classes(); ?>"
-							 data-widget-title="<?php echo esc_attr( $bottom_widget_title_align ); ?>"
-							 data-widget-content="<?php echo esc_attr( $bottom_widget_content_align ); ?>">
+							data-widget-title="<?php echo esc_attr( $bottom_widget_title_align ); ?>"
+							data-widget-content="<?php echo esc_attr( $bottom_widget_content_align ); ?>">
 							<?php
 							$bottom_elements = cosmoswp_footer_builder()->sort_items( $desktop_builder['bottom'] );
 							cosmoswp_footer_builder()->column_elements( $bottom_elements );

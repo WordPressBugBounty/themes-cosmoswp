@@ -13,14 +13,12 @@ if ( ! function_exists( 'cosmoswp_sanitize_number' ) ) :
 	 * @param $cosmoswp_input
 	 * @param $cosmoswp_setting
 	 * @return int || float || numeric value
-	 *
 	 */
 	function cosmoswp_sanitize_number( $cosmoswp_input, $cosmoswp_setting ) {
 		$cosmoswp_sanitize_text = sanitize_text_field( $cosmoswp_input );
 
 		// If the input is an number, return it; otherwise, return the default
 		return ( is_numeric( $cosmoswp_sanitize_text ) ? $cosmoswp_sanitize_text : $cosmoswp_setting->default );
-
 	}
 
 endif;
@@ -34,7 +32,6 @@ if ( ! function_exists( 'cosmoswp_sanitize_checkbox' ) ) :
 	 *
 	 * @param $checked
 	 * @return Boolean
-	 *
 	 */
 	function cosmoswp_sanitize_checkbox( $checked ) {
 		// Boolean check.
@@ -51,7 +48,6 @@ if ( ! function_exists( 'cosmoswp_sanitize_page' ) ) :
 	 *
 	 * @param $input user input value
 	 * @return sanitized output as $input
-	 *
 	 */
 	function cosmoswp_sanitize_page( $input ) {
 		// Ensure $input is an absolute integer.
@@ -74,7 +70,6 @@ if ( ! function_exists( 'cosmoswp_sanitize_select' ) ) :
 	 * @param $input
 	 * @param $setting
 	 * @return sanitized output
-	 *
 	 */
 	function cosmoswp_sanitize_select( $input, $setting ) {
 
@@ -98,7 +93,6 @@ if ( ! function_exists( 'cosmoswp_sanitize_allowed_html' ) ) :
 	 *
 	 * @param $cosmoswp_input
 	 * @return string
-	 *
 	 */
 	function cosmoswp_sanitize_allowed_html( $input ) {
 		$output = wp_kses_post( $input );
@@ -115,7 +109,6 @@ if ( ! function_exists( 'cosmoswp_sanitize_textarea' ) ) :
 	 *
 	 * @param $cosmoswp_input
 	 * @return string
-	 *
 	 */
 	function cosmoswp_sanitize_textarea( $input ) {
 		if ( current_user_can( 'unfiltered_html' ) ) {
@@ -131,6 +124,7 @@ if ( ! function_exists( 'cosmoswp_sanitize_color' ) ) :
 	/**
 	 * Color sanitization callback
 	 * https://wordpress.stackexchange.com/questions/257581/escape-hexadecimals-rgba-values
+	 *
 	 * @since 1.0.0
 	 */
 	function cosmoswp_sanitize_color( $color ) {
@@ -161,7 +155,6 @@ if ( ! function_exists( 'cosmoswp_sanitize_multi_choices' ) ) :
 	 *
 	 * @param $cosmoswp_input
 	 * @return array
-	 *
 	 */
 	function cosmoswp_sanitize_multi_choices( $input, $setting ) {
 		// Get list of choices from the control associated with the setting.
@@ -189,7 +182,6 @@ if ( ! function_exists( 'cosmoswp_sanitize_multicheck' ) ) :
 	 *
 	 * @param $cosmoswp_input
 	 * @return array
-	 *
 	 */
 	function cosmoswp_sanitize_multicheck( $values ) {
 		$multi_values = ! is_array( $values ) ? explode( ',', $values ) : $values;
@@ -207,7 +199,6 @@ if ( ! function_exists( 'cosmoswp_sanitize_field_typography' ) ) :
 	 *
 	 * @param $input
 	 * @return array
-	 *
 	 */
 	function cosmoswp_sanitize_field_typography( $input, $cosmoswp_setting ) {
 		$input_decoded = json_decode( $input, true );
@@ -243,7 +234,7 @@ if ( ! function_exists( 'cosmoswp_sanitize_field_typography' ) ) :
 						break;
 				endswitch;
 			}
-			return json_encode( $output );
+			return wp_json_encode( $output );
 		}
 
 		return $input;
@@ -259,7 +250,6 @@ if ( ! function_exists( 'cosmoswp_sanitize_field_default_css_box' ) ) :
 	 *
 	 * @param $input
 	 * @return array
-	 *
 	 */
 	function cosmoswp_sanitize_field_default_css_box( $input, $cosmoswp_setting ) {
 
@@ -275,10 +265,9 @@ if ( ! function_exists( 'cosmoswp_sanitize_field_default_css_box' ) ) :
 					}
 				}
 			}
-			return json_encode( $output );
+			return wp_json_encode( $output );
 		}
 		return $input;
-
 	}
 endif;
 
@@ -291,7 +280,6 @@ if ( ! function_exists( 'cosmoswp_sanitize_field_border' ) ) :
 	 *
 	 * @param $input
 	 * @return array
-	 *
 	 */
 	function cosmoswp_sanitize_field_border( $input, $cosmoswp_setting ) {
 		$input_decoded = json_decode( $input, true );
@@ -310,17 +298,17 @@ if ( ! function_exists( 'cosmoswp_sanitize_field_border' ) ) :
 					case 'box-shadow-css':
 					case 'border-radius':
 						$devices_values = array();
-                        foreach ( $value as $device => $device_details ) {
-                            foreach ( $device_details as $device_key => $device_value ) {
-                                if ( $device_key == 'cssbox_link' ) {
-                                    $devices_values[ $device ][ $device_key ] = cosmoswp_sanitize_checkbox( $device_value );
-                                } elseif ( cosmoswp_not_empty( $device_value ) ) {
-                                    $devices_values[ $device ][ $device_key ] = absint( $device_value );
-                                } else {
-                                    $devices_values[ $device ][ $device_key ] = '';
-                                }
-                            }
-                        }
+						foreach ( $value as $device => $device_details ) {
+							foreach ( $device_details as $device_key => $device_value ) {
+								if ( $device_key == 'cssbox_link' ) {
+									$devices_values[ $device ][ $device_key ] = cosmoswp_sanitize_checkbox( $device_value );
+								} elseif ( cosmoswp_not_empty( $device_value ) ) {
+									$devices_values[ $device ][ $device_key ] = absint( $device_value );
+								} else {
+									$devices_values[ $device ][ $device_key ] = '';
+								}
+							}
+						}
 						$output[ $key ] = $devices_values;
 						break;
 
@@ -329,11 +317,10 @@ if ( ! function_exists( 'cosmoswp_sanitize_field_border' ) ) :
 						break;
 				endswitch;
 			}
-			return json_encode( $output );
+			return wp_json_encode( $output );
 		}
 
 		return $input;
-
 	}
 endif;
 
@@ -346,7 +333,6 @@ if ( ! function_exists( 'cosmoswp_sanitize_field_background' ) ) :
 	 *
 	 * @param $input
 	 * @return array
-	 *
 	 */
 	function cosmoswp_sanitize_field_background( $input, $cosmoswp_setting ) {
 
@@ -416,11 +402,10 @@ if ( ! function_exists( 'cosmoswp_sanitize_field_background' ) ) :
 						break;
 				endswitch;
 			}
-			return json_encode( $output );
+			return wp_json_encode( $output );
 		}
 
 		return $input;
-
 	}
 
 endif;
@@ -472,16 +457,14 @@ if ( ! function_exists( 'cosmoswp_sanitize_social_data' ) ) :
 						$input_decoded[ $boxes ][ $key ] = esc_url_raw( $value );
 					} elseif ( $key == 'checkbox' ) {
 						$input_decoded[ $boxes ][ $key ] = cosmoswp_sanitize_checkbox( $value );
-					}
-					elseif ( $key == 'color' ) {
+					} elseif ( $key == 'color' ) {
 						$input_decoded[ $boxes ][ $key ] = cosmoswp_sanitize_color( $value );
-					} 
-					else {
+					} else {
 						$input_decoded[ $boxes ][ $key ] = esc_attr( $value );
 					}
 				}
 			}
-			return json_encode( $input_decoded );
+			return wp_json_encode( $input_decoded );
 		}
 		return $input;
 	}
@@ -558,7 +541,7 @@ if ( ! function_exists( 'cosmoswp_sanitize_field_tabs' ) ) :
 						break;
 				endswitch;
 			}
-			return json_encode( $output );
+			return wp_json_encode( $output );
 		}
 
 		return $input;
@@ -581,14 +564,13 @@ if ( ! function_exists( 'cosmoswp_sanitize_slider_field' ) ) :
 
 		if ( ! empty( $input_decoded ) ) {
 			foreach ( $input_decoded as $device => $value ) {
-			    if ( cosmoswp_not_empty( $value ) ) {
-                    $output[ $device ] = absint( $value );
-                } else {
-                    $output[ $device ] = '';
-                }
-
+				if ( cosmoswp_not_empty( $value ) ) {
+					$output[ $device ] = absint( $value );
+				} else {
+					$output[ $device ] = '';
+				}
 			}
-			return json_encode( $output );
+			return wp_json_encode( $output );
 		}
 
 		return $input;
@@ -597,34 +579,32 @@ endif;
 
 if ( ! function_exists( 'cosmoswp_sanitize_slider_width_field' ) ) :
 
-    /**
-     * Sanitization Slider Field Data
-     *
-     * @since 1.2.1
-     * @param  $input
-     * @return array
-     */
-    function cosmoswp_sanitize_slider_width_field( $input ) {
-        $input_decoded = json_decode( $input, true );
-        $output        = array();
+	/**
+	 * Sanitization Slider Field Data
+	 *
+	 * @since 1.2.1
+	 * @param  $input
+	 * @return array
+	 */
+	function cosmoswp_sanitize_slider_width_field( $input ) {
+		$input_decoded = json_decode( $input, true );
+		$output        = array();
 
-        if ( ! empty( $input_decoded ) ) {
-            foreach ( $input_decoded as $device => $value ) {
-                if ( ! empty( $value ) ) {
-                    $output[ $device ] = absint( $value );
-                }
-                elseif(  $value === '0' || $value === 0) {
-                    $output[ $device ] = absint( $value );
-                }
-                else {
-                    $output[ $device ] = '';
-                }
-            }
-            return json_encode( $output );
-        }
+		if ( ! empty( $input_decoded ) ) {
+			foreach ( $input_decoded as $device => $value ) {
+				if ( ! empty( $value ) ) {
+					$output[ $device ] = absint( $value );
+				} elseif ( $value === '0' || $value === 0 ) {
+					$output[ $device ] = absint( $value );
+				} else {
+					$output[ $device ] = '';
+				}
+			}
+			return wp_json_encode( $output );
+		}
 
-        return $input;
-    }
+		return $input;
+	}
 endif;
 
 if ( ! function_exists( 'cosmoswp_sanitize_radio' ) ) :
@@ -632,20 +612,19 @@ if ( ! function_exists( 'cosmoswp_sanitize_radio' ) ) :
 	 * Sanitization Radio Field Data
 	 *
 	 * @since 1.2.1
-	 * @param  $input ,$setting
+	 * @param  input , $setting
 	 * @return array
 	 */
 	function cosmoswp_sanitize_radio( $input, $setting ) {
 
-		//input must be a slug: lowercase alphanumeric characters, dashes and underscores are allowed only
+		// input must be a slug: lowercase alphanumeric characters, dashes and underscores are allowed only
 		$input = sanitize_key( $input );
 
-		//get the list of possible radio box options
+		// get the list of possible radio box options
 		$choices = $setting->manager->get_control( $setting->id )->choices;
 
-		//return input if valid or return default option
+		// return input if valid or return default option
 		return ( array_key_exists( $input, $choices ) ? $input : $setting->default );
-
 	}
 
 endif;
@@ -655,7 +634,7 @@ if ( ! function_exists( 'cosmoswp_sanitize_spacing' ) ) :
 	 * Sanitization array
 	 *
 	 * @since 1.2.1
-	 * @param  $input ,$setting
+	 * @param  input , $setting
 	 * @return array
 	 */
 	function cosmoswp_sanitize_spacing( $input, $setting ) {
@@ -665,7 +644,6 @@ if ( ! function_exists( 'cosmoswp_sanitize_spacing' ) ) :
 		}
 
 		return array();
-
 	}
 
 endif;
@@ -675,7 +653,7 @@ if ( ! function_exists( 'cosmoswp_is_json' ) ) :
 	 * Check if Json
 	 *
 	 * @since 1.0.0
-	 * @param  $input ,$setting
+	 * @param  input , $setting
 	 * @return boolean
 	 */
 	function cosmoswp_is_json( $input ) {
@@ -689,7 +667,7 @@ if ( ! function_exists( 'cosmoswp_sanitize_responsive_range' ) ) :
 	 * Check if Json
 	 *
 	 * @since 1.0.0
-	 * @param  $input ,$setting
+	 * @param  input , $setting
 	 * @return boolean
 	 */
 	function cosmoswp_sanitize_responsive_range( $input ) {
@@ -701,7 +679,7 @@ if ( ! function_exists( 'cosmoswp_sanitize_responsive_range' ) ) :
 		$range_value['tablet']  = ! empty( $range_value['tablet'] ) || $range_value['tablet'] === '0' ? floatval( $range_value['tablet'] ) : '';
 		$range_value['mobile']  = ! empty( $range_value['mobile'] ) || $range_value['mobile'] === '0' ? floatval( $range_value['mobile'] ) : '';
 
-		return json_encode( $range_value );
+		return wp_json_encode( $range_value );
 	}
 
 endif;
@@ -711,7 +689,7 @@ if ( ! function_exists( 'cosmoswp_sanitize_field_responsive_buttonset' ) ) :
 	 * Check if Json
 	 *
 	 * @since 1.0.0
-	 * @param  $input ,$setting
+	 * @param  input , $setting
 	 * @return boolean
 	 */
 	function cosmoswp_sanitize_field_responsive_buttonset( $input ) {
@@ -721,7 +699,7 @@ if ( ! function_exists( 'cosmoswp_sanitize_field_responsive_buttonset' ) ) :
 		$range_value['tablet']  = ! empty( $range_value['tablet'] ) ? sanitize_text_field( $range_value['tablet'] ) : '';
 		$range_value['mobile']  = ! empty( $range_value['mobile'] ) ? sanitize_text_field( $range_value['mobile'] ) : '';
 
-		return json_encode( $range_value );
+		return wp_json_encode( $range_value );
 	}
 
 endif;

@@ -5,6 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Post Builder and Customizer Options
+ *
  * @package CosmosWP
  */
 if ( ! class_exists( 'CosmosWP_Post_Builder' ) ) :
@@ -17,7 +18,6 @@ if ( ! class_exists( 'CosmosWP_Post_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $panel = 'cosmoswp-post';
 
@@ -27,7 +27,6 @@ if ( ! class_exists( 'CosmosWP_Post_Builder' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $section = 'cosmoswp-post';
 
@@ -50,7 +49,7 @@ if ( ! class_exists( 'CosmosWP_Post_Builder' ) ) :
 
 			// Only run these methods if they haven't been ran previously
 			if ( null === $instance ) {
-				$instance = new CosmosWP_Post_Builder;
+				$instance = new CosmosWP_Post_Builder();
 			}
 
 			// Always return the instance
@@ -108,7 +107,7 @@ if ( ! class_exists( 'CosmosWP_Post_Builder' ) ) :
 
 				/*post navigation*/
 				'post-navigation-options'             => 'default',
-				'post-pagination-color-options'       => json_encode(
+				'post-pagination-color-options'       => wp_json_encode(
 					array(
 						'next-prev-color'       => '#999',
 						'next-prev-hover-color' => '#444',
@@ -116,7 +115,7 @@ if ( ! class_exists( 'CosmosWP_Post_Builder' ) ) :
 						'text-hover-color'      => '#1949d4',
 					)
 				),
-				'post-main-content-margin'            => json_encode(
+				'post-main-content-margin'            => wp_json_encode(
 					array(
 						'desktop' => array(
 							'top'         => '',
@@ -141,7 +140,7 @@ if ( ! class_exists( 'CosmosWP_Post_Builder' ) ) :
 						),
 					)
 				),
-				'post-main-content-padding'           => json_encode(
+				'post-main-content-padding'           => wp_json_encode(
 					array(
 						'desktop' => array(
 							'top'         => '80',
@@ -232,7 +231,7 @@ if ( ! class_exists( 'CosmosWP_Post_Builder' ) ) :
 				echo '</div>';/*.grid-row*/
 				echo '</div>';/*.grid-container*/
 				?>
-			   <?php do_action( 'cosmoswp_action_after_post_inside_wrap', $post_id ); ?>
+				<?php do_action( 'cosmoswp_action_after_post_inside_wrap', $post_id ); ?>
 			</div>
 			<!-- End of .blog-content -->
 			<?php
@@ -295,7 +294,7 @@ if ( ! class_exists( 'CosmosWP_Post_Builder' ) ) :
 		}
 
 		/**
-		 *cosmoswp_customize_partial_post_main_content,
+		 * cosmoswp_customize_partial_post_main_content,
 		 *
 		 * @since    1.0.0
 		 * @access   public
@@ -309,7 +308,6 @@ if ( ! class_exists( 'CosmosWP_Post_Builder' ) ) :
 			$value = ob_get_clean();
 			return $value;
 		}
-
 	}
 endif;
 

@@ -5,7 +5,7 @@ Tags: blog, e-commerce, portfolio, grid-layout, one-column, two-columns, three-c
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 5.6
-Stable tag: 1.4.0
+Stable tag: 1.4.1
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -95,6 +95,10 @@ Source: https://github.com/FortAwesome/Font-Awesome
 
 == Changelog ==
 
+= 1.4.1 - 2025-01-16 =
+* Updated: Starter content
+* Updated: Use of wp_json_encode.
+
 = 1.4.0 - 2025-01-16 =
 * Added: Theme json
 * Added: Starter content
@@ -102,7 +106,6 @@ Source: https://github.com/FortAwesome/Font-Awesome
 = 1.3.9 - 2025-01-11 =
 * Added: Improved compatibility with the latest WordPress version.
 * Added: Introduced new license management directly from our site, https://templateberg.com/.
-* Updated: Active subscribers now have access to all CosmosWP Pro templates.
 
 = 1.3.8 - 2024-04-04 =
 * Added:    WordPress 6.5 compatibility

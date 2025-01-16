@@ -53,7 +53,7 @@ class CosmosWP_Custom_Control_Responsive_Buttonset extends WP_Customize_Control 
 	}
 	public function render_content() {
 		if ( is_array( $this->value() ) && ! empty( $this->value() ) ) {
-			$values = json_encode( $this->value() );
+			$values = wp_json_encode( $this->value() );
 		} else {
 			$values = $this->value();
 		}
@@ -114,7 +114,7 @@ class CosmosWP_Custom_Control_Responsive_Buttonset extends WP_Customize_Control 
 						</button>
 					</li>
 					<?php
-					$i ++;
+					++$i;
 				}
 				?>
 			</ul>
@@ -154,7 +154,7 @@ class CosmosWP_Custom_Control_Responsive_Buttonset extends WP_Customize_Control 
 			}
 			echo '</li>';
 			echo '</ul>';
-			$i ++;
+			++$i;
 		}
 		?>
 		</div>

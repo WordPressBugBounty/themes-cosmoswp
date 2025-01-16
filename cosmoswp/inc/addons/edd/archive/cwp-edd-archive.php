@@ -86,7 +86,7 @@ if ( ! class_exists( 'CosmosWP_Edd_Archive' ) ) :
 			$defaults = array(
 
 				/* product catalog options */
-				'edd-show-downloads-per-row'   => json_encode(
+				'edd-show-downloads-per-row'   => wp_json_encode(
 					array(
 						'desktop' => '4',
 						'tablet'  => '3',
@@ -106,7 +106,7 @@ if ( ! class_exists( 'CosmosWP_Edd_Archive' ) ) :
 				'edd-archive-excerpt-length'   => 9,
 				'edd-archive-elements-align'   => 'cwp-text-center',
 				'edd-archive-grid-elements'    => array( 'image', 'cats', 'title', 'price', 'cart' ),
-				'edd-archive-list-media-width' => json_encode(
+				'edd-archive-list-media-width' => wp_json_encode(
 					array(
 						'desktop' => '40',
 						'tablet'  => '40',
@@ -159,7 +159,6 @@ if ( ! class_exists( 'CosmosWP_Edd_Archive' ) ) :
 
 			/* Edd Elements */
 			require COSMOSWP_PATH . '/inc/addons/edd/archive/main-content.php';
-
 		}
 
 		/**

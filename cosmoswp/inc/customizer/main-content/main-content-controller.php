@@ -5,6 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Main Content and Customizer Options
+ *
  * @package CosmosWP
  */
 if ( ! class_exists( 'CosmosWP_Main_Content_Controller' ) ) :
@@ -17,7 +18,6 @@ if ( ! class_exists( 'CosmosWP_Main_Content_Controller' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $panel = 'cosmoswp_main_content';
 
@@ -27,7 +27,6 @@ if ( ! class_exists( 'CosmosWP_Main_Content_Controller' ) ) :
 		 * @var string
 		 * @access public
 		 * @since 1.0.0
-		 *
 		 */
 		public $section = 'cosmoswp_main_content';
 
@@ -49,7 +48,7 @@ if ( ! class_exists( 'CosmosWP_Main_Content_Controller' ) ) :
 
 			// Only run these methods if they haven't been ran previously
 			if ( null === $instance ) {
-				$instance = new CosmosWP_Main_Content_Controller;
+				$instance = new CosmosWP_Main_Content_Controller();
 			}
 
 			// Always return the instance
@@ -70,7 +69,6 @@ if ( ! class_exists( 'CosmosWP_Main_Content_Controller' ) ) :
 			add_action( 'customize_register', array( $this, 'customize_register' ), 100 );
 			add_action( 'cosmoswp_action_page_header', array( $this, 'cosmoswp_banner' ), 1100 );
 			add_filter( 'cosmoswp_dynamic_css', array( $this, 'dynamic_css' ), 999 );
-
 		}
 
 		/**
@@ -87,7 +85,7 @@ if ( ! class_exists( 'CosmosWP_Main_Content_Controller' ) ) :
 
 			$defaults = array(
 
-				'main-content-general-padding'            => json_encode(
+				'main-content-general-padding'            => wp_json_encode(
 					array(
 						'desktop' => array(
 							'top'         => '',
@@ -112,7 +110,7 @@ if ( ! class_exists( 'CosmosWP_Main_Content_Controller' ) ) :
 						),
 					)
 				),
-				'main-content-general-margin'             => json_encode(
+				'main-content-general-margin'             => wp_json_encode(
 					array(
 						'desktop' => array(
 							'top'         => '',
@@ -137,7 +135,7 @@ if ( ! class_exists( 'CosmosWP_Main_Content_Controller' ) ) :
 						),
 					)
 				),
-				'main-content-general-background-options' => json_encode(
+				'main-content-general-background-options' => wp_json_encode(
 					array(
 						'background-color'      => '#fcfcfc',
 						'background-image'      => '',
@@ -147,7 +145,7 @@ if ( ! class_exists( 'CosmosWP_Main_Content_Controller' ) ) :
 						'background-attachment' => 'scroll',
 					)
 				),
-				'main-content-general-border-styling'     => json_encode(
+				'main-content-general-border-styling'     => wp_json_encode(
 					array(
 						'border-style'     => 'none',
 						'border-color'     => '',
@@ -191,7 +189,7 @@ if ( ! class_exists( 'CosmosWP_Main_Content_Controller' ) ) :
 				'banner-section-background-color'         => '#444',
 				'enable-banner-overlay-color'             => true,
 				'banner-overlay-color'                    => 'rgba(0,0,0,0.4)',
-				'banner-section-background-image-options' => json_encode(
+				'banner-section-background-image-options' => wp_json_encode(
 					array(
 
 						'desktop-background-size'       => 'cover',
@@ -210,14 +208,14 @@ if ( ! class_exists( 'CosmosWP_Main_Content_Controller' ) ) :
 						'mobile-background-attachment'  => 'scroll',
 					)
 				),
-				'cosmoswp-banner-height'                  => json_encode(
+				'cosmoswp-banner-height'                  => wp_json_encode(
 					array(
 						'desktop' => '500',
 						'tablet'  => '350',
 						'mobile'  => '200',
 					)
 				),
-				'banner-margin'                           => json_encode(
+				'banner-margin'                           => wp_json_encode(
 					array(
 						'desktop' => array(
 							'top'         => '0',
@@ -242,7 +240,7 @@ if ( ! class_exists( 'CosmosWP_Main_Content_Controller' ) ) :
 						),
 					)
 				),
-				'banner-padding'                          => json_encode(
+				'banner-padding'                          => wp_json_encode(
 					array(
 						'desktop' => array(
 							'top'         => '',
@@ -574,7 +572,6 @@ if ( ! class_exists( 'CosmosWP_Main_Content_Controller' ) ) :
 					)
 				)
 			);
-
 		}
 
 		/**
@@ -695,7 +692,6 @@ if ( ! class_exists( 'CosmosWP_Main_Content_Controller' ) ) :
 
 				}
 			}
-
 		}
 
 		/**
@@ -747,63 +743,63 @@ if ( ! class_exists( 'CosmosWP_Main_Content_Controller' ) ) :
 			if ( strpos( $main_content_general_padding_desktop, 'px' ) !== false ) {
 				$main_content_general_desktop_css .= 'padding:' . $main_content_general_padding_desktop . ';';
 			}
-			//tablet padding
+			// tablet padding
 			$main_content_general_padding_tablet = cosmoswp_cssbox_values_inline( $main_content_general_padding, 'tablet' );
 			if ( strpos( $main_content_general_padding_tablet, 'px' ) !== false ) {
 				$main_content_general_tablet_css .= 'padding:' . $main_content_general_padding_tablet . ';';
 			}
-			//mobile padding
+			// mobile padding
 			$main_content_general_padding_mobile = cosmoswp_cssbox_values_inline( $main_content_general_padding, 'mobile' );
 			if ( strpos( $main_content_general_padding_mobile, 'px' ) !== false ) {
 				$main_content_general_mobile_css .= 'padding:' . $main_content_general_padding_mobile . ';';
 			}
 
-			//background
+			// background
 			$main_content_general_bg          = cosmoswp_get_theme_options( 'main-content-general-background-options' );
 			$main_content_general_bg          = json_decode( $main_content_general_bg, true );
 			$main_content_general_overlay_css = '';
-			//bg color
+			// bg color
 			$main_content_general_bg_color = cosmoswp_ifset( $main_content_general_bg['background-color'] );
 			if ( $main_content_general_bg_color ) {
 				$main_content_general_css .= 'background-color:' . $main_content_general_bg_color . ';';
 			}
-			//bg image
+			// bg image
 			$main_content_general_bg_image = cosmoswp_ifset( $main_content_general_bg['background-image'] );
 			if ( $main_content_general_bg_image ) {
 				$main_content_general_css .= 'background-image:url(' . esc_url( $main_content_general_bg_image ) . ');';
-				//bg size
+				// bg size
 				$main_content_general_bg_size = cosmoswp_ifset( $main_content_general_bg['background-size'] );
 				if ( $main_content_general_bg_size ) {
 					$main_content_general_css .= 'background-size:' . $main_content_general_bg_size . ';';
 					$main_content_general_css .= '-webkit-background-size:' . $main_content_general_bg_size . ';';
 				}
-				//bg position
+				// bg position
 				$main_content_general_bg_position = cosmoswp_ifset( $main_content_general_bg['background-position'] );
 				if ( $main_content_general_bg_position ) {
 					$main_content_general_css .= 'background-position:' . str_replace( '_', ' ', $main_content_general_bg_position ) . ';';
 				}
-				//bg repeat
+				// bg repeat
 				$main_content_general_bg_repeat = cosmoswp_ifset( $main_content_general_bg['background-repeat'] );
 				if ( $main_content_general_bg_repeat ) {
 					$main_content_general_css .= 'background-repeat:' . $main_content_general_bg_repeat . ';';
 				}
-				//bg repeat
+				// bg repeat
 				$main_content_general_bg_attachment = cosmoswp_ifset( $main_content_general_bg['background-attachment'] );
 				if ( $main_content_general_bg_attachment ) {
 					$main_content_general_css .= 'background-attachment:' . $main_content_general_bg_attachment . ';';
 				}
 
-				//bg overlay color
+				// bg overlay color
 				$main_content_general_enable_overlay   = cosmoswp_ifset( $main_content_general_bg['enable-overlay'] );
 				$main_content_general_bg_overlay_color = cosmoswp_ifset( $main_content_general_bg['background-overlay-color'] );
 				if ( $main_content_general_bg_overlay_color && $main_content_general_enable_overlay ) {
 					$main_content_general_overlay_css .= 'background:' . $main_content_general_bg_overlay_color . ';';
 				}
 			}
-			//border options
+			// border options
 			$main_content_general_border = cosmoswp_get_theme_options( 'main-content-general-border-styling' );
 			$main_content_general_border = json_decode( $main_content_general_border, true );
-			//box shadow
+			// box shadow
 			$main_content_general_bx_shadow_css = cosmoswp_boxshadow_values_inline( cosmoswp_ifset( $main_content_general_border['box-shadow-css'] ), 'desktop' );
 			if ( strpos( $main_content_general_bx_shadow_css, 'px' ) !== false ) {
 				$main_content_general_bxshadow_color = cosmoswp_ifset( $main_content_general_border['box-shadow-color'] );
@@ -812,24 +808,24 @@ if ( ! class_exists( 'CosmosWP_Main_Content_Controller' ) ) :
 				$main_content_general_css           .= '-moz-box-shadow:' . $main_content_general_bx_shadow . ';';
 				$main_content_general_css           .= 'box-shadow:' . $main_content_general_bx_shadow . ';';
 			}
-			//border style
+			// border style
 			$main_content_general_border_style = cosmoswp_ifset( $main_content_general_border['border-style'] );
 			if ( 'none' !== $main_content_general_border_style ) {
 
 				$main_content_general_css .= 'border-style:' . $main_content_general_border_style . ';';
-				//border width
+				// border width
 				$main_content_general_border_width = cosmoswp_cssbox_values_inline( cosmoswp_ifset( $main_content_general_border['border-width'] ), 'desktop' );
 				if ( strpos( $main_content_general_border_width, 'px' ) !== false ) {
 					$main_content_general_css .= 'border-width:' . $main_content_general_border_width . ';';
 				}
-				//border color
+				// border color
 				$main_content_general_border_color = cosmoswp_ifset( $main_content_general_border['border-color'] );
 				if ( $main_content_general_border_color ) {
 					$main_content_general_css .= 'border-color:' . $main_content_general_border_color . ';';
 				}
 			}
 
-			//border radius
+			// border radius
 			$main_content_general_border_radius = cosmoswp_cssbox_values_inline( cosmoswp_ifset( $main_content_general_border['border-radius'] ), 'desktop' );
 			if ( strpos( $main_content_general_border_radius, 'px' ) !== false ) {
 				$main_content_general_css .= 'border-radius:' . $main_content_general_border_radius . ';';
@@ -907,12 +903,12 @@ if ( ! class_exists( 'CosmosWP_Main_Content_Controller' ) ) :
 			if ( strpos( $banner_padding_desktop, 'px' ) !== false ) {
 				$cosmoswp_banner_desktop_css .= 'padding:' . $banner_padding_desktop . ';';
 			}
-			//tablet padding
+			// tablet padding
 			$banner_padding_tablet = cosmoswp_cssbox_values_inline( $banner_padding, 'tablet' );
 			if ( strpos( $banner_padding_tablet, 'px' ) !== false ) {
 				$cosmoswp_banner_tablet_css .= 'padding:' . $banner_padding_tablet . ';';
 			}
-			//mobile padding
+			// mobile padding
 			$banner_padding_mobile = cosmoswp_cssbox_values_inline( $banner_padding, 'mobile' );
 			if ( strpos( $banner_padding_mobile, 'px' ) !== false ) {
 				$cosmoswp_banner_css .= 'padding:' . $banner_padding_mobile . ';';
@@ -926,24 +922,25 @@ if ( ! class_exists( 'CosmosWP_Main_Content_Controller' ) ) :
 					$banner_bg_options = cosmoswp_get_theme_options( 'banner-section-background-image-options' );
 					$banner_bg_options = json_decode( $banner_bg_options, true );
 
-					/* mobile css */
-					//bg size
+					/*
+					mobile css */
+					// bg size
 					$banner_bg_size = cosmoswp_ifset( $banner_bg_options['mobile-background-size'] );
 					if ( $banner_bg_size ) {
 						$cosmoswp_banner_css .= 'background-size:' . $banner_bg_size . ';';
 						$cosmoswp_banner_css .= '-webkit-background-size:' . $banner_bg_size . ';';
 					}
-					//bg position
+					// bg position
 					$banner_bg_position = cosmoswp_ifset( $banner_bg_options['mobile-background-position'] );
 					if ( $banner_bg_position ) {
 						$cosmoswp_banner_css .= 'background-position:' . str_replace( '_', ' ', $banner_bg_position ) . ';';
 					}
-					//bg repeat
+					// bg repeat
 					$banner_bg_repeat = cosmoswp_ifset( $banner_bg_options['mobile-background-repeat'] );
 					if ( $banner_bg_repeat ) {
 						$cosmoswp_banner_css .= 'background-repeat:' . $banner_bg_repeat . ';';
 					}
-					//bg repeat
+					// bg repeat
 					$banner_bg_attachment = cosmoswp_ifset( $banner_bg_options['mobile-background-attachment'] );
 					if ( $banner_bg_attachment ) {
 						$cosmoswp_banner_css .= 'background-attachment:' . $banner_bg_attachment . ';';
@@ -955,17 +952,17 @@ if ( ! class_exists( 'CosmosWP_Main_Content_Controller' ) ) :
 						$cosmoswp_banner_tablet_css .= 'background-size:' . $banner_bg_size . ';';
 						$cosmoswp_banner_tablet_css .= '-webkit-background-size:' . $banner_bg_size . ';';
 					}
-					//bg position
+					// bg position
 					$banner_bg_position = cosmoswp_ifset( $banner_bg_options['tablet-background-position'] );
 					if ( $banner_bg_position ) {
 						$cosmoswp_banner_tablet_css .= 'background-position:' . str_replace( '_', ' ', $banner_bg_position ) . ';';
 					}
-					//bg repeat
+					// bg repeat
 					$banner_bg_repeat = cosmoswp_ifset( $banner_bg_options['tablet-background-repeat'] );
 					if ( $banner_bg_repeat ) {
 						$cosmoswp_banner_tablet_css .= 'background-repeat:' . $banner_bg_repeat . ';';
 					}
-					//bg repeat
+					// bg repeat
 					$banner_bg_attachment = cosmoswp_ifset( $banner_bg_options['tablet-background-attachment'] );
 					if ( $banner_bg_attachment ) {
 						$cosmoswp_banner_tablet_css .= 'background-attachment:' . $banner_bg_attachment . ';';
@@ -977,17 +974,17 @@ if ( ! class_exists( 'CosmosWP_Main_Content_Controller' ) ) :
 						$cosmoswp_banner_desktop_css .= 'background-size:' . $banner_bg_size . ';';
 						$cosmoswp_banner_desktop_css .= '-webkit-background-size:' . $banner_bg_size . ';';
 					}
-					//bg position
+					// bg position
 					$banner_bg_position = cosmoswp_ifset( $banner_bg_options['desktop-background-position'] );
 					if ( $banner_bg_position ) {
 						$cosmoswp_banner_desktop_css .= 'background-position:' . str_replace( '_', ' ', $banner_bg_position ) . ';';
 					}
-					//bg repeat
+					// bg repeat
 					$banner_bg_repeat = cosmoswp_ifset( $banner_bg_options['desktop-background-repeat'] );
 					if ( $banner_bg_repeat ) {
 						$cosmoswp_banner_desktop_css .= 'background-repeat:' . $banner_bg_repeat . ';';
 					}
-					//bg repeat
+					// bg repeat
 					$banner_bg_attachment = cosmoswp_ifset( $banner_bg_options['desktop-background-attachment'] );
 					if ( $banner_bg_attachment ) {
 						$cosmoswp_banner_desktop_css .= 'background-attachment:' . $banner_bg_attachment . ';';
@@ -1058,7 +1055,6 @@ if ( ! class_exists( 'CosmosWP_Main_Content_Controller' ) ) :
 				return $main_content_dynamic_css;
 			}
 		}
-
 	}
 endif;
 

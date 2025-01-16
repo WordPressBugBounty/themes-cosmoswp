@@ -4,10 +4,10 @@ if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'CosmosWP_Custom_
 
 	/**
 	 * Custom Control Group
+	 *
 	 * @package CosmosWP
 	 * @subpackage CosmosWP
 	 * @since 1.0.0
-	 *
 	 */
 	class CosmosWP_Custom_Control_Group extends WP_Customize_Control {
 
@@ -58,7 +58,7 @@ if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'CosmosWP_Custom_
 
 		public function render_content() {
 			if ( is_array( $this->value() ) && ! empty( $this->value() ) ) {
-				$values = json_encode( $this->value() );
+				$values = wp_json_encode( $this->value() );
 			} else {
 				$values = $this->value();
 			}
@@ -184,7 +184,7 @@ if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'CosmosWP_Custom_
 									echo "<span class='customize-control-checkbox-wrap'>";
 									echo '<input id="' . esc_attr( $this->id . '-checkbox' ) . '" ' . checked( true, $new_value, false ) . ' data-default="' . esc_attr( $default ) . '" data-single-name="' . esc_attr( $key ) . '" type="checkbox" value="' . esc_attr( $new_value ) . '"/>';
 									?>
-									<label for="<?php echo  esc_attr( $this->id . '-checkbox' ); ?>" class="customize-control-title checkbox"><?php echo esc_html( $label ); ?></label>
+									<label for="<?php echo esc_attr( $this->id . '-checkbox' ); ?>" class="customize-control-title checkbox"><?php echo esc_html( $label ); ?></label>
 									</span>
 									<span class="description customize-control-description"><?php echo esc_html( $description ); ?></span>
 									<?php
@@ -227,7 +227,7 @@ if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'CosmosWP_Custom_
 									}
 									echo '<input data-default="' . esc_attr( $default ) . '" data-single-name="' . esc_attr( $key ) . '" type="text" value="' . esc_attr( $new_value ) . '" class="hidden image-value-url"/>';
 									?>
-									<span class="img-preview-wrap" <?php echo  $cosmoswp_display_none; ?>>
+									<span class="img-preview-wrap" <?php echo $cosmoswp_display_none; ?>>
 											<img class="widefat" src="<?php echo esc_url( $new_value ); ?>" alt="<?php esc_attr_e( 'Image preview', 'cosmoswp' ); ?>"  />
 									</span><!-- .img-preview-wrap -->
 									<input type="button" value="<?php esc_attr_e( 'Upload Image', 'cosmoswp' ); ?>" class="button cosmoswp-image-upload" data-title="<?php esc_attr_e( 'Select Image', 'cosmoswp' ); ?>" data-button="<?php esc_attr_e( 'Select Image', 'cosmoswp' ); ?>"/>
@@ -255,7 +255,7 @@ if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'CosmosWP_Custom_
 			<?php
 		}
 
-		public function css_box( $values = array(), $key= '', $cssbox_fields = array()) {
+		public function css_box( $values = array(), $key = '', $cssbox_fields = array() ) {
 			$box_fields = isset( $cssbox_fields['box_fields'] ) ? $cssbox_fields['box_fields'] : array();
 			$attr       = isset( $cssbox_fields['attr'] ) ? $cssbox_fields['attr'] : array();
 			$devices    = array(
@@ -304,7 +304,7 @@ if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'CosmosWP_Custom_
 							</button>
 						</li>
 						<?php
-						$i ++;
+						++$i;
 					}
 					?>
 				</ul>
@@ -358,7 +358,7 @@ if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'CosmosWP_Custom_
 					<?php
 				}
 				echo '</ul>';
-				$i ++;
+				++$i;
 			}
 			?>
 			</div>
