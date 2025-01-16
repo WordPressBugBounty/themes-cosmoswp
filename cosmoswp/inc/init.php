@@ -110,6 +110,9 @@ require cosmoswp_file_directory( 'inc/default-hooks.php' );/*checked*/
 */
 require cosmoswp_file_directory( 'inc/hooks/breadcrumb.php' );/*checked*/
 
+require cosmoswp_file_directory( 'inc/starter-content/index.php' );/*checked*/
+
+
 if ( is_admin() ) {
 	/*
 	* CosmosWP  notice and advanced import

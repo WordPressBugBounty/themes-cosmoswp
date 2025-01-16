@@ -5,7 +5,7 @@ Tags: blog, e-commerce, portfolio, grid-layout, one-column, two-columns, three-c
 Requires at least: 6.0
 Tested up to: 6.7
 Requires PHP: 5.6
-Stable tag: 1.3.9
+Stable tag: 1.4.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,6 +42,36 @@ License: GNU GPL, Version 3, https://www.gnu.org/licenses/gpl-3.0.html
 Font Awesome Svg are all licensed under CC BY 4.0 (https://fontawesome.com/license/free)
 https://fontawesome.com/icons
 
+
+=== Images ===
+
+License: GNU GPL, Version 3, https://www.gnu.org/licenses/gpl-3.0.html
+logo files (logo-1.png to logo-5.png)
+Copyright © 2020, AcmeIT
+
+License: CC0 https://creativecommons.org/publicdomain/zero/1.0/
+
+https://pxhere.com/en/photo/1674976
+https://pxhere.com/en/photo/1629588
+https://pxhere.com/en/photo/1058103
+https://pxhere.com/en/photo/38727
+https://pxhere.com/en/photo/764654
+https://pxhere.com/en/photo/910324
+https://pxhere.com/en/photo/764428
+https://pxhere.com/en/photo/868229
+https://pxhere.com/en/photo/695270
+https://pxhere.com/en/photo/1278242
+https://pxhere.com/en/photo/1594675
+
+=== Icons Images ===
+
+https://fontawesome.com/icons
+
+Font Awesome Icons
+Fonticons, Inc. (https://fontawesome.com)
+License: CC BY 4.0 (https://fontawesome.com/license/free)
+Source: https://github.com/FortAwesome/Font-Awesome
+
 == Frequently Asked Questions ==
 
 = How to install theme? =
@@ -65,9 +95,13 @@ https://fontawesome.com/icons
 
 == Changelog ==
 
+= 1.4.0 - 2025-01-16 =
+* Added: Theme json
+* Added: Starter content
+
 = 1.3.9 - 2025-01-11 =
 * Added: Improved compatibility with the latest WordPress version.
-* Added: Introduced new license management directly from our site, premium.acmeit.org.
+* Added: Introduced new license management directly from our site, https://templateberg.com/.
 * Updated: Active subscribers now have access to all CosmosWP Pro templates.
 
 = 1.3.8 - 2024-04-04 =
