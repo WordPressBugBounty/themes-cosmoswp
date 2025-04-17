@@ -25,7 +25,6 @@ if ( ! function_exists( 'cosmoswp_get_default_theme_options' ) ) :
 		return apply_filters( 'cosmoswp_default_theme_options', $default_theme_options );
 	}
 
-	cosmoswp_get_default_theme_options();
 endif;
 
 /**

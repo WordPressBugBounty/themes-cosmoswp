@@ -3,9 +3,9 @@
 Contributors: cosmoswp
 Tags: blog, e-commerce, portfolio, grid-layout, one-column, two-columns, three-columns, four-columns, left-sidebar, right-sidebar, custom-background, custom-colors, custom-header, custom-logo, custom-menu, editor-style, featured-images, flexible-header, footer-widgets, full-width-template, microformats, post-formats, rtl-language-support, sticky-post, theme-options, threaded-comments, translation-ready, block-styles, wide-blocks
 Requires at least: 6.0
-Tested up to: 6.7
+Tested up to: 6.8
 Requires PHP: 5.6
-Stable tag: 1.4.1
+Stable tag: 1.4.2
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -94,6 +94,10 @@ Source: https://github.com/FortAwesome/Font-Awesome
 
 
 == Changelog ==
+
+= 1.4.2 - 2025-04-17 =
+* Added: Tested with the latest WordPress.
+* Fixed: Resolved issue with translation function preload
 
 = 1.4.1 - 2025-01-16 =
 * Updated: Starter content
