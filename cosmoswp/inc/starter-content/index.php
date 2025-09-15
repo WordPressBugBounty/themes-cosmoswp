@@ -29,7 +29,9 @@ class CosmosWP_Starter_Content {
 	 */
 	public function __construct() {
 		// Register starter content.
-		add_action( 'after_setup_theme', array( $this, 'register_starter_content' ) );
+		add_action( 'after_setup_theme', array( $this, 'register_starter_content' ), 2 );
+
+		require_once trailingslashit( __DIR__ ) . 'content.php';
 	}
 
 	/**
@@ -499,11 +501,12 @@ class CosmosWP_Starter_Content {
 					'items' => $nav_items_header,
 				),
 			),
+			'posts'       => cosmoswp_get_starter_posts(),
 			'options'     => array(
-				'show_on_front' => 'page',
-				'page_on_front' => '{{home}}',
+				'show_on_front'  => 'page',
+				'page_on_front'  => '{{home}}',
+				'page_for_posts' => '{{blog}}',
 			),
-			'posts'       => require_once trailingslashit( __DIR__ ) . 'content.php',
 		);
 
 		// Add starter content support.

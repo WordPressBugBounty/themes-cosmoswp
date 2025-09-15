@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: CosmosWP 2.0.0\n"
+"Project-Id-Version: CosmosWP 2.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/cosmoswp\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-09-15T10:54:24+00:00\n"
+"POT-Creation-Date: 2025-09-15T12:31:19+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: cosmoswp\n"
@@ -2342,7 +2342,8 @@ msgid "Banner Setting"
 msgstr ""
 
 #: inc/customizer/blog-options/blog-builder.php:90
-#: inc/starter-content/index.php:84
+#: inc/starter-content/content.php:34
+#: inc/starter-content/index.php:86
 msgid "Blog"
 msgstr ""
 
@@ -4697,7 +4698,7 @@ msgid "Default Header Image"
 msgstr ""
 
 #: inc/default-hooks.php:128
-#: inc/starter-content/index.php:494
+#: inc/starter-content/index.php:496
 msgid "Header Primary Menu"
 msgstr ""
 
@@ -4706,7 +4707,7 @@ msgid "Header Secondary Menu"
 msgstr ""
 
 #: inc/default-hooks.php:130
-#: inc/starter-content/index.php:498
+#: inc/starter-content/index.php:500
 msgid "Footer Menu ( Support First Level Only )"
 msgstr ""
 
@@ -4873,33 +4874,33 @@ msgstr ""
 msgid "Display widgets footer section of the site."
 msgstr ""
 
-#: inc/starter-content/content.php:22
+#: inc/starter-content/content.php:29
 msgid "Home"
 msgstr ""
 
-#: inc/starter-content/index.php:69
+#: inc/starter-content/index.php:71
 #: patterns/landing.php:194
 msgid "About us"
 msgstr ""
 
-#: inc/starter-content/index.php:74
+#: inc/starter-content/index.php:76
 msgid "Services"
 msgstr ""
 
-#: inc/starter-content/index.php:79
+#: inc/starter-content/index.php:81
 msgid "Team"
 msgstr ""
 
-#: inc/starter-content/index.php:89
+#: inc/starter-content/index.php:91
 msgid "Contact"
 msgstr ""
 
-#: inc/starter-content/index.php:99
+#: inc/starter-content/index.php:101
 msgctxt "Theme starter content"
 msgid "Logo"
 msgstr ""
 
-#: inc/starter-content/index.php:105
+#: inc/starter-content/index.php:107
 msgctxt "Theme starter title"
 msgid "CosmosWP"
 msgstr ""
