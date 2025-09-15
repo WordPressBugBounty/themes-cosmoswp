@@ -1,4 +1,11 @@
 <?php
+/**
+ * Post layout functions
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -10,7 +17,6 @@ if ( ! function_exists( 'cosmoswp_heading_title' ) ) {
 	 *
 	 * @since CosmosWP 1.0.0
 	 *
-	 * @param null
 	 * @return string
 	 */
 	function cosmoswp_heading_title() {
@@ -20,8 +26,9 @@ if ( ! function_exists( 'cosmoswp_heading_title' ) ) {
 			<div class="entry-header">
 				<h1 class="page-title">
 					<?php
-					printf( // WPCS: XSS ok.
-						__( 'Search Results for: %s', 'cosmoswp' ),
+					printf(
+						// Translators: %s is the search query entered by the user.
+						esc_html__( 'Search Results for: %s', 'cosmoswp' ),
 						'<span>' . get_search_query() . '</span>'
 					);
 					?>
@@ -73,20 +80,20 @@ if ( ! function_exists( 'cosmoswp_heading_title' ) ) {
 			?>
 			<div class="entry-header">
 				<h1 class="page-title">
-					<?php echo woocommerce_page_title(); ?>
+					<?php woocommerce_page_title(); ?>
 				</h1>
 			</div><!-- .page-header --> 
 			<?php
 
 		} elseif ( is_singular() ) {
 			$banner_display_option = cosmoswp_get_theme_options( 'banner-section-display' );
-			if ( 'hide' != $banner_display_option && ( ! empty( $banner_display_option ) ) ) {
+			if ( 'hide' !== $banner_display_option && ( ! empty( $banner_display_option ) ) ) {
 				$single_title_options = cosmoswp_get_theme_options( 'single-banner-section-title' );
 				$tag                  = cosmoswp_get_theme_options( 'single-banner-title-tag' );
-				if ( $single_title_options == 'disable' ) {
+				if ( 'disable' === $single_title_options ) {
 					return false;
 				}
-				if ( $single_title_options == 'custom-title' ) {
+				if ( 'custom-title' === $single_title_options ) {
 					$banner_title = esc_html( cosmoswp_get_theme_options( 'single-custom-banner-title' ) );
 				} else {
 					$banner_title = get_the_title();
@@ -95,7 +102,7 @@ if ( ! function_exists( 'cosmoswp_heading_title' ) ) {
 			if ( ! empty( $banner_title ) ) {
 				?>
 				<div class="entry-header">
-					<?php echo '<' . $tag . ' class="page-title">' . $banner_title . '</' . $tag . '>'; ?>
+					<?php echo '<' . esc_attr( $tag ) . ' class="page-title">' . $banner_title . '</' . esc_attr( $tag ) . '>'; ?>
 				</div>
 				<?php
 			}
@@ -114,7 +121,7 @@ if ( ! function_exists( 'cosmoswp_heading_title' ) ) {
 			?>
 			<div class="entry-header">
 				<h1 class="page-title">
-					<?php echo get_the_title(); ?>
+					<?php echo get_the_title(); //phpcs:ignore?>
 				</h1>
 			</div>
 			<?php

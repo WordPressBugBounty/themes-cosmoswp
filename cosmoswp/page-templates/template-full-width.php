@@ -5,6 +5,12 @@
  * @since 1.4.0
  * @package CosmosWP
  */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 get_header();
 
 /* Start the Loop */

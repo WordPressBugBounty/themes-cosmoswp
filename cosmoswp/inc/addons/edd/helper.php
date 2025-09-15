@@ -1,29 +1,35 @@
 <?php
 /**
- * check if Edd activated
+ * EDD helpers functions
  */
-if ( ! function_exists( 'cosmoswp_is_edd_active' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
+if ( ! function_exists( 'cosmoswp_is_edd_active' ) ) {
+	/**
+	 * Check if Edd activated.
+	 */
 	function cosmoswp_is_edd_active() {
 		return class_exists( 'Easy_Digital_Downloads' ) ? true : false;
 	}
 }
 
-/**
- * EDD Downlaods navigation
- *
- * @since cosmoswp 1.0.0
- *
- * @return void
- */
-if ( ! function_exists( 'cosmoswp_downloads_navigation' ) ) :
+if ( ! function_exists( 'cosmoswp_downloads_navigation' ) ) {
+	/**
+	 * EDD Downloads navigation
+	 *
+	 * @since cosmoswp 1.0.0
+	 *
+	 * @return void
+	 */
 	function cosmoswp_downloads_navigation() {
 
 		$edd_navigation_options = cosmoswp_get_theme_options( 'edd-navigation-options' );
-		if ( 'disable' == $edd_navigation_options ) {
+		if ( 'disable' === $edd_navigation_options ) {
 			return;
 		}
-		if ( 'default' == $edd_navigation_options ) {
+		if ( 'default' === $edd_navigation_options ) {
 			// Previous/next page navigation.
 			the_posts_navigation(
 				array(
@@ -46,97 +52,108 @@ if ( ! function_exists( 'cosmoswp_downloads_navigation' ) ) :
 			);
 		}
 	}
-endif;
+}
 add_action( 'cosmoswp_action_edd_navigation', 'cosmoswp_downloads_navigation' );
 
-/**
- * Checks if the current page is a edd page
- *
- * @return boolean
- */
-function cosmoswp_is_edd_page() {
-	if (
+if ( ! function_exists( 'cosmoswp_is_edd_page' ) ) {
+	/**
+	 * Checks if the current page is a edd page
+	 *
+	 * @return boolean
+	 */
+	function cosmoswp_is_edd_page() {
+		if (
 		is_singular( 'download' ) ||
 		is_post_type_archive( 'download' ) ||
 		is_tax( 'download_category' ) ||
 		is_tax( 'download_tag' )
-	) {
-		return true;
+		) {
+			return true;
+		}
+		return false;
 	}
-	return false;
 }
 
-/**
- * Checks if the current page is a edd download archive
- *
- * @return boolean
- */
-function cosmoswp_is_edd_archive() {
-	if (
+if ( ! function_exists( 'cosmoswp_is_edd_archive' ) ) {
+	/**
+	 * Checks if the current page is a edd download archive
+	 *
+	 * @return boolean
+	 */
+	function cosmoswp_is_edd_archive() {
+		if (
 		is_post_type_archive( 'download' ) ||
 		is_tax( 'download_category' ) ||
 		is_tax( 'download_tag' )
-	) {
-		return true;
+		) {
+			return true;
+		}
+		return false;
 	}
-	return false;
 }
 
-/**
- * Checks if the current page is a edd single
- *
- * @return boolean
- */
-function cosmoswp_is_edd_single() {
-	if ( is_singular( 'download' ) ) {
-		return true;
+if ( ! function_exists( 'cosmoswp_is_edd_single' ) ) {
+	/**
+	 * Checks if the current page is a edd single
+	 *
+	 * @return boolean
+	 */
+	function cosmoswp_is_edd_single() {
+		if ( is_singular( 'download' ) ) {
+			return true;
+		}
+		return false;
 	}
-	return false;
 }
 
+if ( ! function_exists( 'cosmoswp_edd_sorting' ) ) {
+	/**
+	 * Edd Sorting Bar
+	 *
+	 * @return boolean
+	 */
+	function cosmoswp_edd_sorting() {
+		$options  = array(
+			'date'       => __( 'Latest', 'cosmoswp' ),
+			'date-asc'   => __( 'Oldest', 'cosmoswp' ),
+			'a-z'        => __( 'Alphabet', 'cosmoswp' ),
+			'z-a'        => __( 'Alphabet Desc', 'cosmoswp' ),
+			'price'      => __( 'Sort by price: low to high', 'cosmoswp' ),
+			'price-desc' => __( 'Sort by price: high to low', 'cosmoswp' ),
+		);
+		$selected = isset( $_GET['sortby'] ) ? $_GET['sortby'] : 'date';
 
-/**
- * Edd Sorting Bar
- *
- * @return boolean
- */
-function cosmoswp_edd_sorting() {
-	$options  = array(
-		'date'       => __( 'Latest', 'cosmoswp' ),
-		'date-asc'   => __( 'Oldest', 'cosmoswp' ),
-		'a-z'        => __( 'Alphabet', 'cosmoswp' ),
-		'z-a'        => __( 'Alphabet Desc', 'cosmoswp' ),
-		'price'      => __( 'Sort by price: low to high', 'cosmoswp' ),
-		'price-desc' => __( 'Sort by price: high to low', 'cosmoswp' ),
-	);
-	$selected = isset( $_GET['sortby'] ) ? $_GET['sortby'] : 'date';
-
-	$sorting_html
+		$sorting_html
 		= '<div class="sorting-wrap">
             <span>' . esc_html__( 'Sort By:', 'cosmoswp' ) . '</span>
             <div class="select-box"> <select name="" id="cosmoswp-edd-select-filter" class="selectpicker">';
 
-	foreach ( $options as $key => $val ) {
-		$sorting_html .= "<option value='" . esc_attr( $key ) . "' " . selected( $key, $selected, false ) . "'>";
-		$sorting_html .= esc_html( $val );
-		$sorting_html .= '</option>';
-	}
+		foreach ( $options as $key => $val ) {
+			$sorting_html .= "<option value='" . esc_attr( $key ) . "' " . selected( $key, $selected, false ) . "'>";
+			$sorting_html .= esc_html( $val );
+			$sorting_html .= '</option>';
+		}
 
-	$sorting_html
+		$sorting_html
 		.= '</select>
             </div>
         </div>';
-	$sorting_html  = apply_filters( 'cosmoswp_edd_sorting', $sorting_html );
-	return $sorting_html;
+		$sorting_html  = apply_filters( 'cosmoswp_edd_sorting', $sorting_html );
+		return $sorting_html;
+	}
 }
 
 
-/**
- * Filter pre_get_posts in EDD Archive
- *
- * @return boolean
- */
+
 if ( ! function_exists( 'edd_filter_products_by_permalink' ) ) {
+
+	/**
+	 * Filter pre_get_posts in EDD Archive
+	 *
+	 * @param object $query Query.
+	 *
+	 * @return boolean
+	 */
 	function edd_filter_products_by_permalink( $query ) {
 		if ( is_admin() ) :
 			return $query;
@@ -181,16 +198,14 @@ if ( ! function_exists( 'edd_filter_products_by_permalink' ) ) {
 }
 
 
-
-/**
- * Edd Archive Elements Sorting
- *
- * @since CosmosWP 1.0.0
- *
- * @param null
- * @return array $cosmoswp_edd_archive_elements_sorting
- */
-if ( ! function_exists( 'cosmoswp_edd_archive_elements_sorting' ) ) :
+if ( ! function_exists( 'cosmoswp_edd_archive_elements_sorting' ) ) {
+	/**
+	 * Edd Archive Elements Sorting
+	 *
+	 * @since CosmosWP 1.0.0
+	 *
+	 * @return array $cosmoswp_edd_archive_elements_sorting
+	 */
 	function cosmoswp_edd_archive_elements_sorting() {
 		$cosmoswp_edd_archive_elements_sorting = array(
 			'image'   => esc_html__( 'Image', 'cosmoswp' ),
@@ -204,17 +219,17 @@ if ( ! function_exists( 'cosmoswp_edd_archive_elements_sorting' ) ) :
 		);
 		return apply_filters( 'cosmoswp_edd_archive_elements_sorting', $cosmoswp_edd_archive_elements_sorting );
 	}
-endif;
+}
 
-/**
- * Edd Single Elements Sorting
- *
- * @since CosmosWP 1.0.0
- *
- * @param null
- * @return array $cosmoswp_edd_single_elements
- */
-if ( ! function_exists( 'cosmoswp_edd_single_elements' ) ) :
+
+if ( ! function_exists( 'cosmoswp_edd_single_elements' ) ) {
+	/**
+	 * Edd Single Elements Sorting
+	 *
+	 * @since CosmosWP 1.0.0
+	 *
+	 * @return array $cosmoswp_edd_single_elements
+	 */
 	function cosmoswp_edd_single_elements() {
 		$cosmoswp_edd_single_elements = array(
 			'cats'    => esc_html__( 'Categories', 'cosmoswp' ),
@@ -228,4 +243,4 @@ if ( ! function_exists( 'cosmoswp_edd_single_elements' ) ) :
 		);
 		return apply_filters( 'cosmoswp_edd_single_elements', $cosmoswp_edd_single_elements );
 	}
-endif;
+}

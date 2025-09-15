@@ -4,34 +4,40 @@
  *
  * @package CosmosWP
  */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $menu_title    = cosmoswp_get_theme_options( 'footer-menu-title' );
 $menu_position = cosmoswp_get_theme_options( 'footer-menu-display-position' );
 $custom_menu   = cosmoswp_get_theme_options( 'footer-menu-custom-menu' );
 
-// Footer Menu align
+// Footer Menu align.
 $footer_menu_align = cosmoswp_get_theme_options( 'footer-menu-align' );
 $footer_menu_align = json_decode( $footer_menu_align, true );
 
-// desktop align
+// desktop align.
 $footer_menu_align_desktop = cosmoswp_responsive_button_value( $footer_menu_align, 'desktop' );
 
-// tablet align
+// tablet align.
 $footer_menu_align_tablet = cosmoswp_responsive_button_value( $footer_menu_align, 'tablet' );
 
-// mobile align
+// mobile align.
 $footer_menu_align_mobile = cosmoswp_responsive_button_value( $footer_menu_align, 'mobile' );
 
-// Footer Menu align
+// Footer Menu align.
 $footer_title_align = cosmoswp_get_theme_options( 'footer-menu-title-align' );
 $footer_title_align = json_decode( $footer_title_align, true );
 
-// desktop align
+// desktop align.
 $footer_title_align_desktop = cosmoswp_responsive_button_value( $footer_title_align, 'desktop' );
 
-// tablet align
+// tablet align.
 $footer_title_align_tablet = cosmoswp_responsive_button_value( $footer_title_align, 'tablet' );
 
-// mobile align
+// mobile align.
 $footer_title_align_mobile = cosmoswp_responsive_button_value( $footer_title_align, 'mobile' );
 
 if ( $menu_title ) { ?>

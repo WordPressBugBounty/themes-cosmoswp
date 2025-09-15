@@ -1,15 +1,20 @@
-<?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
+<?php // phpcs:ignore WordPress.NamingConventions.ValidClassName.Prefix -- Class filename does not follow standard, but this is intentional.
 /**
  * Page Builder and Customizer Options
  *
  * @package CosmosWP
  */
-if ( ! class_exists( 'CosmosWP_Page_Builder' ) ) :
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+if ( ! class_exists( 'CosmosWP_Page_Builder' ) ) :
+	/**
+	 * Page Builder and Customizer Options
+	 *
+	 * @package CosmosWP
+	 */
 	class CosmosWP_Page_Builder {
 
 		/**
@@ -43,15 +48,12 @@ if ( ! class_exists( 'CosmosWP_Page_Builder' ) ) :
 		 */
 		public static function instance() {
 
-			// Store the instance locally to avoid private static replication
 			static $instance = null;
 
-			// Only run these methods if they haven't been ran previously
 			if ( null === $instance ) {
 				$instance = new CosmosWP_Page_Builder();
 			}
 
-			// Always return the instance
 			return $instance;
 		}
 
@@ -80,7 +82,7 @@ if ( ! class_exists( 'CosmosWP_Page_Builder' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param array $default_options
+		 * @param array $default_options Default options.
 		 * @return array
 		 */
 		public function page_defaults( $default_options = array() ) {
@@ -103,53 +105,26 @@ if ( ! class_exists( 'CosmosWP_Page_Builder' ) ) :
 				'page-img-size'                       => 'full',
 
 				/*margin and padding*/
-				'page-main-content-margin'            => wp_json_encode(
-					array(
-						'desktop' => array(
-							'top'         => '',
-							'right'       => '',
-							'bottom'      => '',
-							'left'        => '',
-							'cssbox_link' => true,
-						),
-						'tablet'  => array(
-							'top'         => '',
-							'right'       => '',
-							'bottom'      => '',
-							'left'        => '',
-							'cssbox_link' => true,
-						),
-						'mobile'  => array(
-							'top'         => '',
-							'right'       => '',
-							'bottom'      => '',
-							'left'        => '',
-							'cssbox_link' => true,
-						),
-					)
-				),
+				'page-main-content-margin'            => '',
 				'page-main-content-padding'           => wp_json_encode(
 					array(
 						'desktop' => array(
-							'top'         => '80',
-							'right'       => '0',
-							'bottom'      => '80',
-							'left'        => '0',
-							'cssbox_link' => true,
+							'top'    => '80',
+							'right'  => '0',
+							'bottom' => '80',
+							'left'   => '0',
 						),
 						'tablet'  => array(
-							'top'         => '40',
-							'right'       => '0',
-							'bottom'      => '60',
-							'left'        => '0',
-							'cssbox_link' => true,
+							'top'    => '40',
+							'right'  => '0',
+							'bottom' => '60',
+							'left'   => '0',
 						),
 						'mobile'  => array(
-							'top'         => '20',
-							'right'       => '0',
-							'bottom'      => '40',
-							'left'        => '0',
-							'cssbox_link' => true,
+							'top'    => '20',
+							'right'  => '0',
+							'bottom' => '40',
+							'left'   => '0',
 						),
 					)
 				),
@@ -165,7 +140,7 @@ if ( ! class_exists( 'CosmosWP_Page_Builder' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param object $wp_customize
+		 * @param object $wp_customize WordPress Customizer object.
 		 * @return void
 		 */
 		public function customize_register( $wp_customize ) {
@@ -205,7 +180,7 @@ if ( ! class_exists( 'CosmosWP_Page_Builder' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @return
+		 * @return void
 		 */
 		public function display_page() {
 			$sidebar = cosmoswp_get_theme_options( 'page-sidebar' );
@@ -230,7 +205,7 @@ if ( ! class_exists( 'CosmosWP_Page_Builder' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param $classes
+		 * @param array $classes array Body classes.
 		 * @return array
 		 */
 		public function add_body_class( $classes ) {
@@ -238,7 +213,7 @@ if ( ! class_exists( 'CosmosWP_Page_Builder' ) ) :
 				return $classes;
 			}
 			$sidebar = cosmoswp_get_theme_options( 'page-sidebar' );
-			if ( 'ful-ct' === $sidebar || 'middle-ct' == $sidebar ) {
+			if ( 'ful-ct' === $sidebar || 'middle-ct' === $sidebar ) {
 				$classes[] = 'cwp-main-content-only';
 			}
 
@@ -252,7 +227,7 @@ if ( ! class_exists( 'CosmosWP_Page_Builder' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param array $dynamic_css
+		 * @param array $dynamic_css Dynamic CSS.
 		 * @return array
 		 */
 		public function dynamic_css( $dynamic_css ) {
@@ -268,17 +243,17 @@ if ( ! class_exists( 'CosmosWP_Page_Builder' ) ) :
 			/* margin */
 			$main_content_margin = cosmoswp_get_theme_options( 'page-main-content-margin' );
 			$main_content_margin = json_decode( $main_content_margin, true );
-			// desktop margin
+			// desktop .
 			$main_content_margin_desktop = cosmoswp_cssbox_values_inline( $main_content_margin, 'desktop' );
 			if ( strpos( $main_content_margin_desktop, 'px' ) !== false ) {
 				$page_main_content_desktop_css .= 'margin:' . $main_content_margin_desktop . ';';
 			}
-			// tablet marign
+			// tablet margin.
 			$main_content_margin_tablet = cosmoswp_cssbox_values_inline( $main_content_margin, 'tablet' );
 			if ( strpos( $main_content_margin_tablet, 'px' ) !== false ) {
 				$page_main_content_tablet_css .= 'margin:' . $main_content_margin_tablet . ';';
 			}
-			// mobile margin
+			// mobile margin.
 			$main_content_margin_mobile = cosmoswp_cssbox_values_inline( $main_content_margin, 'mobile' );
 			if ( strpos( $main_content_margin_mobile, 'px' ) !== false ) {
 				$page_main_content_css .= 'margin:' . $main_content_margin_mobile . ';';
@@ -288,18 +263,18 @@ if ( ! class_exists( 'CosmosWP_Page_Builder' ) ) :
 			$main_content_padding = cosmoswp_get_theme_options( 'page-main-content-padding' );
 			$main_content_padding = json_decode( $main_content_padding, true );
 
-			// desktop padding
+			// desktop padding.
 			$main_content_padding_desktop = cosmoswp_cssbox_values_inline( $main_content_padding, 'desktop' );
 			if ( strpos( $main_content_padding_desktop, 'px' ) !== false ) {
 				$page_main_content_desktop_css .= 'padding:' . $main_content_padding_desktop . ';';
 			}
-			// tablet padding
+			// tablet padding.
 			$main_content_padding_tablet = cosmoswp_cssbox_values_inline( $main_content_padding, 'tablet' );
 			if ( strpos( $main_content_padding_tablet, 'px' ) !== false ) {
 				$page_main_content_tablet_css .= 'padding:' . $main_content_padding_tablet . ';';
 			}
 
-			// mobile padding
+			// mobile padding.
 			$main_content_padding_mobile = cosmoswp_cssbox_values_inline( $main_content_padding, 'mobile' );
 			if ( strpos( $main_content_padding_mobile, 'px' ) !== false ) {
 				$page_main_content_css .= 'padding:' . $main_content_padding_mobile . ';';
@@ -334,12 +309,11 @@ if ( ! class_exists( 'CosmosWP_Page_Builder' ) ) :
 		}
 
 		/**
-		 * cosmoswp_customize_partial_post_main_content,
+		 * Partial refresh for page main content.,
 		 *
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param null
 		 * @return String
 		 */
 		public function cosmoswp_customize_partial_page_main_content() {
@@ -347,6 +321,34 @@ if ( ! class_exists( 'CosmosWP_Page_Builder' ) ) :
 			$this->display_page();
 			$value = ob_get_clean();
 			return $value;
+		}
+
+		/**
+		 * Add selective refresh for the blog main content.
+		 *
+		 * @param WP_Customize_Manager $wp_customize The customizer manager.
+		 * @param string               $control_id The control ID.
+		 * @param array                $args Additional arguments.
+		 */
+		public function add_selective_refresh( $wp_customize, $control_id, $args = array() ) {
+			$defaults = array(
+				'selector'            => '#cosmoswp-page-main-content-wrapper',
+				'render_callback'     => array( $this, 'cosmoswp_customize_partial_page_main_content' ),
+				'container_inclusive' => false,
+				'fallback_refresh'    => false,
+			);
+
+			$args = wp_parse_args( $args, $defaults );
+
+			$wp_customize->selective_refresh->add_partial(
+				$control_id,
+				array(
+					'selector'            => $args['selector'],
+					'render_callback'     => $args['render_callback'],
+					'container_inclusive' => $args['container_inclusive'],
+					'fallback_refresh'    => $args['fallback_refresh'],
+				)
+			);
 		}
 	}
 
@@ -363,8 +365,7 @@ endif;
  */
 if ( ! function_exists( 'cosmoswp_page_builder' ) ) {
 
-	function cosmoswp_page_builder() {
-
+	function cosmoswp_page_builder() {//phpcs:ignore
 		return CosmosWP_Page_Builder::instance();
 	}
 

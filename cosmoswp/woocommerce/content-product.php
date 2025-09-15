@@ -1,17 +1,28 @@
 <?php
 /**
- * The template to override product content within loops
+ * The template for displaying product content within loops
  *
- * @see     https://docs.woocommerce.com/document/template-structure/
- * @version 3.6.0
+ * This template can be overridden by copying it to yourtheme/woocommerce/content-product.php.
+ *
+ * HOWEVER, on occasion WooCommerce will need to update template files and you
+ * (the theme developer) will need to copy the new files to your theme to
+ * maintain compatibility. We try to do this as little as possible, but it does
+ * happen. When this occurs the version of the template file will be bumped and
+ * the readme will list any important changes.
+ *
+ * @see     https://woocommerce.com/document/template-structure/
+ * @package WooCommerce\Templates
+ * @version 9.4.0
  */
 
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 global $product, $post;
 
-// Ensure visibility.
-if ( empty( $product ) || ! $product->is_visible() ) {
+// Check if the product is a valid WooCommerce product and ensure its visibility before proceeding.
+if ( ! is_a( $product, WC_Product::class ) || ! $product->is_visible() ) {
 	return;
 }
 
@@ -57,7 +68,7 @@ if ( isset( $cwc_archive_responsive_col['mobile-col'] ) ) {
 		}
 		echo "<div class='cwp-product-content'>";
 		foreach ( $woo_archive_list_elements as $element ) {
-			if ( 'image' == $element ) {
+			if ( 'image' === $element ) {
 				echo "<div class='cwp-image-box cwp-elements'>";
 				woocommerce_template_loop_product_link_open();
 				woocommerce_template_loop_product_thumbnail();
@@ -68,9 +79,9 @@ if ( isset( $cwc_archive_responsive_col['mobile-col'] ) ) {
 					woocommerce_show_product_loop_sale_flash();
 				}
 				echo '</div>';
-			} elseif ( 'cat' == $element ) {
+			} elseif ( 'cat' === $element ) {
 				echo wp_kses_post( wc_get_product_category_list( $product->get_id(), ', ', '<div class="cwp-woo-cat cwp-elements">', '</div>' ) );
-			} elseif ( 'title' == $element ) {
+			} elseif ( 'title' === $element ) {
 				/**
 				 * Hook: woocommerce_before_shop_loop_item_title.
 				 */
@@ -85,19 +96,19 @@ if ( isset( $cwc_archive_responsive_col['mobile-col'] ) ) {
 				 * Hook: woocommerce_after_shop_loop_item_title.
 				 */
 				do_action( 'woocommerce_after_shop_loop_item_title' );
-			} elseif ( 'price' == $element ) {
+			} elseif ( 'price' === $element ) {
 				echo "<div class='cwp-price-box cwp-elements'>";
 				woocommerce_template_loop_price();
 				echo '</div>';
-			} elseif ( 'rating' == $element ) {
+			} elseif ( 'rating' === $element ) {
 				echo "<div class='cwp-rating-box cwp-elements'>";
 				woocommerce_template_loop_rating();
 				echo '</div>';
-			} elseif ( 'cart' == $element ) {
+			} elseif ( 'cart' === $element ) {
 				echo "<div class='cwp-buttons cwp-elements'>";
 				woocommerce_template_loop_add_to_cart();
 				echo '</div>';
-			} elseif ( 'excerpt' == $element ) {
+			} elseif ( 'excerpt' === $element ) {
 				?>
 				<div class="entry-excerpt cwp-elements">
 					<?php
@@ -105,12 +116,12 @@ if ( isset( $cwc_archive_responsive_col['mobile-col'] ) ) {
 					if ( ! $length ) {
 						echo wp_kses_post( strip_shortcodes( $post->post_excerpt ) );
 					} else {
-						echo wp_trim_words( strip_shortcodes( $post->post_excerpt ), $length );
+						echo wp_kses_post( wp_trim_words( strip_shortcodes( $post->post_excerpt ), $length ) );
 					}
 					?>
 				</div><!-- .entry-content -->
 				<?php
-			} elseif ( 'content' == $element ) {
+			} elseif ( 'content' === $element ) {
 				?>
 				<div class="entry-content cwp-elements">
 					<?php

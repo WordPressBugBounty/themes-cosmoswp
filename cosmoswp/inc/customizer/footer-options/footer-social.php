@@ -1,7 +1,16 @@
 <?php
+/**
+ * Footer Social.
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+global $cosmoswp_customize_control;
 
 /*Adding sections for footer social options */
 $wp_customize->add_section(
@@ -22,7 +31,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Repeater_Control(
 		$wp_customize,
 		$this->footer_social,
@@ -74,7 +83,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'footer-social-icon-styling-msg',
@@ -95,7 +104,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_flex_align();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Responsive_Buttonset(
 		$wp_customize,
 		'footer-social-icon-align',
@@ -117,7 +126,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Slider(
 		$wp_customize,
 		'footer-social-icon-size',
@@ -143,7 +152,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Slider(
 		$wp_customize,
 		'footer-social-icon-radius',
@@ -169,7 +178,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Slider(
 		$wp_customize,
 		'footer-social-icon-width',
@@ -195,7 +204,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Slider(
 		$wp_customize,
 		'footer-social-icon-height',
@@ -221,7 +230,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Slider(
 		$wp_customize,
 		'footer-social-icon-line-height',
@@ -245,7 +254,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'footer-single-social-icon-styling-msg',
@@ -265,12 +274,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'individual-footer-social-icon-margin',
 		array(
-			'label'    => esc_html__( 'Individual Icon Margin', 'cosmoswp' ),
+			'label'    => esc_html__( 'Individual Icon Margin (px)', 'cosmoswp' ),
 			'section'  => $this->footer_social,
 			'settings' => 'individual-footer-social-icon-margin',
 		),
@@ -288,12 +297,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'individual-footer-social-icon-padding',
 		array(
-			'label'    => esc_html__( 'Individual Icon Padding', 'cosmoswp' ),
+			'label'    => esc_html__( 'Individual Icon Padding (px)', 'cosmoswp' ),
 			'section'  => $this->footer_social,
 			'settings' => 'individual-footer-social-icon-padding',
 		),
@@ -309,7 +318,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'footer-social-icon-section-styling-msg',
@@ -329,12 +338,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'footer-social-icon-section-margin',
 		array(
-			'label'    => esc_html__( 'Icon Section Margin', 'cosmoswp' ),
+			'label'    => esc_html__( 'Icon Section Margin (px)', 'cosmoswp' ),
 			'section'  => $this->footer_social,
 			'settings' => 'footer-social-icon-section-margin',
 		),
@@ -352,12 +361,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'footer-social-icon-section-padding',
 		array(
-			'label'    => esc_html__( 'Icon Section Padding', 'cosmoswp' ),
+			'label'    => esc_html__( 'Icon Section Padding (px)', 'cosmoswp' ),
 			'section'  => $this->footer_social,
 			'settings' => 'footer-social-icon-section-padding',
 		),

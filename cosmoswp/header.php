@@ -9,6 +9,10 @@
  * @version 1.0
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 ?><!DOCTYPE html>
 <html <?php cosmoswp_html_class(); ?> <?php language_attributes(); ?><?php cosmoswp_schema_markup( 'html' ); ?>>
 <head>
@@ -35,7 +39,7 @@
 		>
 			<?php
 			/**
-			 * cosmoswp_action_before_header hook
+			 * Hook cosmoswp_action_before_header hook
 			 *
 			 * @since CosmosWP 1.0.0
 			 *
@@ -44,7 +48,7 @@
 			do_action( 'cosmoswp_action_before_header' );
 
 			/**
-			 * cosmoswp_action_header hook
+			 * Hook cosmoswp_action_header hook
 			 *
 			 * @since CosmosWP 1.0.0
 			 *
@@ -53,7 +57,7 @@
 			do_action( 'cosmoswp_action_header' );
 
 			/**
-			 * cosmoswp_action_after_header hook
+			 * Hook cosmoswp_action_after_header hook
 			 *
 			 * @since CosmosWP 1.0.0
 			 *

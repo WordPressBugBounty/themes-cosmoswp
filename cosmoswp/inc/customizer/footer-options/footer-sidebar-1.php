@@ -1,7 +1,17 @@
 <?php
+/**
+ * Footer Sidebar 1.
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+global $cosmoswp_customize_control;
+
 /* Footer Sidebar 1 */
 $footer_sidebar1 = $wp_customize->get_section( 'sidebar-widgets-footer-sidebar-1' );
 if ( ! empty( $footer_sidebar1 ) ) {
@@ -15,7 +25,7 @@ if ( ! empty( $footer_sidebar1 ) ) {
 			'sanitize_callback' => 'wp_kses_post',
 		)
 	);
-	$wp_customize->add_control(
+	$cosmoswp_customize_control->add(
 		new CosmosWP_Custom_Control_Heading(
 			$wp_customize,
 			'footer-sidebar-1-widget-setting-msg',
@@ -37,7 +47,7 @@ if ( ! empty( $footer_sidebar1 ) ) {
 		)
 	);
 	$choices = cosmoswp_inherit_options();
-	$wp_customize->add_control(
+	$cosmoswp_customize_control->add(
 		'footer-sidebar-1-widget-setting-option',
 		array(
 			'label'    => esc_html__( 'Widget Setting Option', 'cosmoswp' ),
@@ -59,7 +69,7 @@ if ( ! empty( $footer_sidebar1 ) ) {
 		)
 	);
 	$choices = cosmoswp_text_align();
-	$wp_customize->add_control(
+	$cosmoswp_customize_control->add(
 		new CosmosWP_Custom_Control_Buttonset(
 			$wp_customize,
 			'footer-sidebar-1-content-align',
@@ -84,12 +94,12 @@ if ( ! empty( $footer_sidebar1 ) ) {
 			'transport'         => 'postMessage',
 		)
 	);
-	$wp_customize->add_control(
+	$cosmoswp_customize_control->add(
 		new CosmosWP_Custom_Control_Cssbox(
 			$wp_customize,
 			'footer-sidebar-1-margin',
 			array(
-				'label'           => esc_html__( 'Margin', 'cosmoswp' ),
+				'label'           => esc_html__( 'Margin (px)', 'cosmoswp' ),
 				'section'         => 'sidebar-widgets-footer-sidebar-1',
 				'active_callback' => 'cosmoswp_footer_sidebar_1_custom_widget_setting',
 				'priority'        => 110,
@@ -109,12 +119,12 @@ if ( ! empty( $footer_sidebar1 ) ) {
 			'transport'         => 'postMessage',
 		)
 	);
-	$wp_customize->add_control(
+	$cosmoswp_customize_control->add(
 		new CosmosWP_Custom_Control_Cssbox(
 			$wp_customize,
 			'footer-sidebar-1-padding',
 			array(
-				'label'           => esc_html__( 'Padding', 'cosmoswp' ),
+				'label'           => esc_html__( 'Padding (px)', 'cosmoswp' ),
 				'section'         => 'sidebar-widgets-footer-sidebar-1',
 				'active_callback' => 'cosmoswp_footer_sidebar_1_custom_widget_setting',
 				'settings'        => 'footer-sidebar-1-padding',

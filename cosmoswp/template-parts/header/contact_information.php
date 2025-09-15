@@ -1,15 +1,26 @@
 <?php
-// button align
+/**
+ * Contact Information Component.
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+// button align.
 $contact_info_align = cosmoswp_get_theme_options( 'contact-information-align' );
 $contact_info_align = json_decode( $contact_info_align, true );
 
-// desktop align
+// desktop align.
 $contact_info_align_desktop = cosmoswp_responsive_button_value( $contact_info_align, 'desktop' );
 
-// tablet align
+// tablet align.
 $contact_info_align_tablet = cosmoswp_responsive_button_value( $contact_info_align, 'tablet' );
 
-// mobile align
+// mobile align.
 $contact_info_align_mobile = cosmoswp_responsive_button_value( $contact_info_align, 'mobile' );
 
 $contact_information      = cosmoswp_get_theme_options( 'contact-information-data' );
@@ -32,9 +43,9 @@ $contact_information_data = apply_filters( 'cosmoswp_contact_information_data', 
 				$open_new_tab      = cosmoswp_ifset( $data['checkbox'] );
 				$target_blank      = ( $open_new_tab ) ? 'target=_blank' : '';
 				$link_href         = '';
-				if ( $contact_link_type == 'email' ) {
+				if ( 'email' === $contact_link_type ) {
 					$link_href = 'mailto:' . $contact_link . '';
-				} elseif ( $contact_link_type == 'tel' ) {
+				} elseif ( 'tel' === $contact_link_type ) {
 					$link_href = 'tel:' . $contact_link . '';
 				} else {
 					$link_href = $contact_link;

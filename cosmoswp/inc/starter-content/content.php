@@ -1,5 +1,14 @@
 <?php
-defined( 'ABSPATH' ) || exit;
+/**
+ * Starter Content
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 $theme_directory = get_template_directory();
 $file_path       = $theme_directory . '/patterns/landing.php';

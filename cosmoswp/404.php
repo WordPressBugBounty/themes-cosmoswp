@@ -5,13 +5,14 @@
  * @link https://codex.wordpress.org/Creating_an_Error_404_Page
  *
  * @package CosmosWP
- * @subpackage CosmosWP
  */
 
-get_header();
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
-?>
-<section class="cwp-error-404 not-found cwp-text-center">
+get_header();
+?><section class="cwp-error-404 not-found cwp-text-center">
 	<div class="grid-container">
 		<header class="entry-header">
 			<h1 class="page-title">

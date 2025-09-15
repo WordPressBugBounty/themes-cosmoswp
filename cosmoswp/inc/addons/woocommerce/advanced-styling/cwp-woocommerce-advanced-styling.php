@@ -4,13 +4,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Customizer Options
+ * WooCommerce Customizer Options
  *
  * @package CosmosWP
  */
 
 if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 
+	/**
+	 * WooCommerce Customizer Options
+	 *
+	 * @package CosmosWP
+	 */
 	class CosmosWP_WooCommerce_Advanced_Styling {
 
 		/**
@@ -25,16 +30,12 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 		 * @return object
 		 */
 		public static function instance() {
-
-			// Store the instance locally to avoid private static replication
 			static $instance = null;
 
-			// Only run these methods if they haven't been ran previously
 			if ( null === $instance ) {
 				$instance = new CosmosWP_WooCommerce_Advanced_Styling();
 			}
 
-			// Always return the instance
 			return $instance;
 		}
 
@@ -51,6 +52,8 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 			add_filter( 'cosmoswp_default_theme_options', array( $this, 'defaults' ) );
 			add_action( 'customize_register', array( $this, 'customize_register' ), 100 );
 			add_filter( 'cosmoswp_dynamic_css', array( $this, 'dynamic_css' ), 100 );
+
+			add_filter( 'cosmoswp_customize_css_refresher', array( $this, 'add_css_refresher' ) );
 		}
 
 		/**
@@ -60,7 +63,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param array $default_options
+		 * @param array $default_options Default options.
 		 * @return array
 		 */
 		public function defaults( $default_options = array() ) {
@@ -118,15 +121,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 							),
 						),
 						'normal-box-shadow-color' => '',
-						'normal-box-shadow-css'   => array(
-							'desktop' => array(
-								'x'           => '',
-								'Y'           => '',
-								'BLUR'        => '',
-								'SPREAD'      => '',
-								'cssbox_link' => true,
-							),
-						),
+						'normal-box-shadow-css'   => array(),
 						'hover-text-color'        => '#fff',
 						'hover-bg-color'          => '#1949d4',
 						'hover-border-style'      => 'solid',
@@ -150,15 +145,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 							),
 						),
 						'hover-box-shadow-color'  => '',
-						'hover-box-shadow-css'    => array(
-							'desktop' => array(
-								'x'           => '',
-								'Y'           => '',
-								'BLUR'        => '',
-								'SPREAD'      => '',
-								'cssbox_link' => true,
-							),
-						),
+						'hover-box-shadow-css'    => array(),
 					)
 				),
 				'cwc-product-navigation-styling'          => wp_json_encode(
@@ -166,24 +153,8 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 						'border-style'     => 'none',
 						'border-color'     => '',
 						'box-shadow-color' => '',
-						'border-width'     => array(
-							'desktop' => array(
-								'top'         => '',
-								'right'       => '',
-								'bottom'      => '',
-								'left'        => '',
-								'cssbox_link' => true,
-							),
-						),
-						'box-shadow-css'   => array(
-							'desktop' => array(
-								'x'           => '',
-								'Y'           => '',
-								'BLUR'        => '',
-								'SPREAD'      => '',
-								'cssbox_link' => true,
-							),
-						),
+						'border-width'     => array(),
+						'box-shadow-css'   => array(),
 						'border-radius'    => array(
 							'desktop' => array(
 								'top'         => '3',
@@ -271,15 +242,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 							),
 						),
 						'normal-box-shadow-color' => '',
-						'normal-box-shadow-css'   => array(
-							'desktop' => array(
-								'x'           => '',
-								'Y'           => '',
-								'BLUR'        => '',
-								'SPREAD'      => '',
-								'cssbox_link' => true,
-							),
-						),
+						'normal-box-shadow-css'   => array(),
 						'hover-text-color'        => '#fff',
 						'hover-bg-color'          => '#275cf6',
 						'hover-border-style'      => 'solid',
@@ -303,15 +266,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 							),
 						),
 						'hover-box-shadow-color'  => '#275cf6',
-						'hover-box-shadow-css'    => array(
-							'desktop' => array(
-								'x'           => '',
-								'Y'           => '',
-								'BLUR'        => '',
-								'SPREAD'      => '',
-								'cssbox_link' => true,
-							),
-						),
+						'hover-box-shadow-css'    => array(),
 					)
 				),
 				/* error notice */
@@ -333,27 +288,11 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 								'right'       => '0',
 								'bottom'      => '0',
 								'left'        => '0',
-								'cssbox_link' => true,
+								'cssbox_link' => false,
 							),
 						),
-						'box-shadow-css'   => array(
-							'desktop' => array(
-								'x'           => '',
-								'Y'           => '',
-								'BLUR'        => '',
-								'SPREAD'      => '',
-								'cssbox_link' => true,
-							),
-						),
-						'border-radius'    => array(
-							'desktop' => array(
-								'top'         => '',
-								'right'       => '',
-								'bottom'      => '',
-								'left'        => '',
-								'cssbox_link' => true,
-							),
-						),
+						'box-shadow-css'   => array(),
+						'border-radius'    => array(),
 					)
 				),
 
@@ -372,31 +311,14 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 						'box-shadow-color' => '',
 						'border-width'     => array(
 							'desktop' => array(
-								'top'         => '2',
-								'right'       => '0',
-								'bottom'      => '0',
-								'left'        => '0',
-								'cssbox_link' => true,
+								'top'    => '2',
+								'right'  => '0',
+								'bottom' => '0',
+								'left'   => '0',
 							),
 						),
-						'box-shadow-css'   => array(
-							'desktop' => array(
-								'x'           => '',
-								'Y'           => '',
-								'BLUR'        => '',
-								'SPREAD'      => '',
-								'cssbox_link' => true,
-							),
-						),
-						'border-radius'    => array(
-							'desktop' => array(
-								'top'         => '',
-								'right'       => '',
-								'bottom'      => '',
-								'left'        => '',
-								'cssbox_link' => true,
-							),
-						),
+						'box-shadow-css'   => array(),
+						'border-radius'    => array(),
 					)
 				),
 
@@ -415,31 +337,14 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 						'box-shadow-color' => '',
 						'border-width'     => array(
 							'desktop' => array(
-								'top'         => '2',
-								'right'       => '0',
-								'bottom'      => '0',
-								'left'        => '0',
-								'cssbox_link' => true,
+								'top'    => '2',
+								'right'  => '0',
+								'bottom' => '0',
+								'left'   => '0',
 							),
 						),
-						'box-shadow-css'   => array(
-							'desktop' => array(
-								'x'           => '',
-								'Y'           => '',
-								'BLUR'        => '',
-								'SPREAD'      => '',
-								'cssbox_link' => true,
-							),
-						),
-						'border-radius'    => array(
-							'desktop' => array(
-								'top'         => '',
-								'right'       => '',
-								'bottom'      => '',
-								'left'        => '',
-								'cssbox_link' => true,
-							),
-						),
+						'box-shadow-css'   => array(),
+						'border-radius'    => array(),
 					)
 				),
 
@@ -454,7 +359,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param object $wp_customize
+		 * @param WP_Customize_Manager $wp_customize WordPress Customizer Object.
 		 * @return void
 		 */
 		public function customize_register( $wp_customize ) {
@@ -474,13 +379,12 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 		 * @return array
 		 */
 		public function get_dynamic_css() {
-			/*
-			* WooCommerce Related Dynamic Css
-			 *  */
-			$wc_dynamic_css['all']     = '';
-			$wc_dynamic_css['tablet']  = '';
-			$wc_dynamic_css['desktop'] = '';
-
+			/** WooCommerce Related Dynamic Css */
+			$wc_dynamic_css = array(
+				'all'     => '',
+				'tablet'  => '',
+				'desktop' => '',
+			);
 			/* Wc general color options */
 			$wc_general_color = cosmoswp_get_theme_options( 'cwc-general-color-options' );
 			$wc_general_color = json_decode( $wc_general_color, true );
@@ -628,7 +532,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
                 .cwp-woocommerce-active div.product .entry-title a,
                 .cwp-woocommerce-active .wc-block-grid .wc-block-grid__product-title{
                     ' . $title_css . '
-                	}';
+                }';
 				$wc_dynamic_css['all'] .= $title_dynamic_css;
 			}
 
@@ -643,7 +547,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
                 .cwp-woocommerce-active div.product .entry-title a:hover,
                 .cwp-woocommerce-active .wc-block-grid .wc-block-grid__product-title:hover{
                     ' . $title_hover_css . '
-                	}';
+                }';
 				$wc_dynamic_css['all']  .= $title_dynamic_hover_css;
 			}
 
@@ -976,13 +880,13 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 			$product_navigation_border = json_decode( $product_navigation_border, true );
 
 			/*box shadow*/
-			$product_navigationbx_shadow_css = cosmoswp_boxshadow_values_inline( cosmoswp_ifset( $product_navigation_border['box-shadow-css'] ), 'desktop' );
-			if ( strpos( $product_navigationbx_shadow_css, 'px' ) !== false ) {
-				$product_navigationbxshadow_color = cosmoswp_ifset( $product_navigation_border['box-shadow-color'] );
-				$product_navigationbx_shadow      = $product_navigationbx_shadow_css . ' ' . $product_navigationbxshadow_color;
-				$product_navigation_css          .= '-webkit-box-shadow:' . $product_navigationbx_shadow . ';';
-				$product_navigation_css          .= '-moz-box-shadow:' . $product_navigationbx_shadow . ';';
-				$product_navigation_css          .= 'box-shadow:' . $product_navigationbx_shadow . ';';
+			$product_navigation_bx_shadow_css = cosmoswp_boxshadow_values_inline( cosmoswp_ifset( $product_navigation_border['box-shadow-css'] ), 'desktop' );
+			if ( strpos( $product_navigation_bx_shadow_css, 'px' ) !== false ) {
+				$product_navigation_bx_shadow_color = cosmoswp_ifset( $product_navigation_border['box-shadow-color'] );
+				$product_navigation_bx_shadow       = $product_navigation_bx_shadow_css . ' ' . $product_navigation_bx_shadow_color;
+				$product_navigation_css            .= '-webkit-box-shadow:' . $product_navigation_bx_shadow . ';';
+				$product_navigation_css            .= '-moz-box-shadow:' . $product_navigation_bx_shadow . ';';
+				$product_navigation_css            .= 'box-shadow:' . $product_navigation_bx_shadow . ';';
 			}
 
 			/*border style*/
@@ -990,12 +894,12 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 			if ( 'none' !== $product_navigation_border_style ) {
 
 				$product_navigation_css .= 'border-style:' . $product_navigation_border_style . ';';
-				// border width
+				// border width.
 				$product_navigation_border_width = cosmoswp_cssbox_values_inline( cosmoswp_ifset( $product_navigation_border['border-width'] ), 'desktop' );
 				if ( strpos( $product_navigation_border_width, 'px' ) !== false ) {
 					$product_navigation_css .= 'border-width:' . $product_navigation_border_width . ';';
 				}
-				// border color
+				// border color.
 				$product_navigation_border_color = cosmoswp_ifset( $product_navigation_border['border-color'] );
 				if ( $product_navigation_border_color ) {
 					$product_navigation_css .= 'border-color:' . $product_navigation_border_color . ';';
@@ -1251,13 +1155,13 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 			$error_message_border = json_decode( $error_message_border, true );
 
 			/*box shadow*/
-			$error_messagebx_shadow_css = cosmoswp_boxshadow_values_inline( cosmoswp_ifset( $error_message_border['box-shadow-css'] ), 'desktop' );
-			if ( strpos( $error_messagebx_shadow_css, 'px' ) !== false ) {
-				$error_messagebxshadow_color = cosmoswp_ifset( $error_message_border['box-shadow-color'] );
-				$error_messagebx_shadow      = $error_messagebx_shadow_css . ' ' . $error_messagebxshadow_color;
-				$error_message_css          .= '-webkit-box-shadow:' . $error_messagebx_shadow . ';';
-				$error_message_css          .= '-moz-box-shadow:' . $error_messagebx_shadow . ';';
-				$error_message_css          .= 'box-shadow:' . $error_messagebx_shadow . ';';
+			$error_message_bx_shadow_css = cosmoswp_boxshadow_values_inline( cosmoswp_ifset( $error_message_border['box-shadow-css'] ), 'desktop' );
+			if ( strpos( $error_message_bx_shadow_css, 'px' ) !== false ) {
+				$error_message_bx_shadow_color = cosmoswp_ifset( $error_message_border['box-shadow-color'] );
+				$error_message_bx_shadow       = $error_message_bx_shadow_css . ' ' . $error_message_bx_shadow_color;
+				$error_message_css            .= '-webkit-box-shadow:' . $error_message_bx_shadow . ';';
+				$error_message_css            .= '-moz-box-shadow:' . $error_message_bx_shadow . ';';
+				$error_message_css            .= 'box-shadow:' . $error_message_bx_shadow . ';';
 			}
 
 			/*border style*/
@@ -1265,12 +1169,12 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 			if ( 'none' !== $error_message_border_style ) {
 
 				$error_message_css .= 'border-style:' . $error_message_border_style . ';';
-				// border width
+				// border width.
 				$error_message_border_width = cosmoswp_cssbox_values_inline( cosmoswp_ifset( $error_message_border['border-width'] ), 'desktop' );
 				if ( strpos( $error_message_border_width, 'px' ) !== false ) {
 					$error_message_css .= 'border-width:' . $error_message_border_width . ';';
 				}
-				// border color
+				// border color.
 				$error_message_border_color = cosmoswp_ifset( $error_message_border['border-color'] );
 				if ( $error_message_border_color ) {
 					$error_message_css .= 'border-color:' . $error_message_border_color . ';';
@@ -1295,8 +1199,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 			$error_message_icon_color = cosmoswp_ifset( $error_message_color['icon-color'] );
 			if ( $error_message_icon_color ) {
 				$error_message_dynamic_css = '.cwp-woocommerce-active .woocommerce-error:before {
-		 color:' . $error_message_icon_color . ';
-	}';
+		color:' . $error_message_icon_color . ';}';
 				$wc_dynamic_css['all']    .= $error_message_dynamic_css;
 
 			}
@@ -1322,13 +1225,13 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 			$information_message_border = json_decode( $information_message_border, true );
 
 			/*box shadow*/
-			$information_messagebx_shadow_css = cosmoswp_boxshadow_values_inline( cosmoswp_ifset( $information_message_border['box-shadow-css'] ), 'desktop' );
-			if ( strpos( $information_messagebx_shadow_css, 'px' ) !== false ) {
-				$information_messagebxshadow_color = cosmoswp_ifset( $information_message_border['box-shadow-color'] );
-				$information_messagebx_shadow      = $information_messagebx_shadow_css . ' ' . $information_messagebxshadow_color;
-				$information_message_css          .= '-webkit-box-shadow:' . $information_messagebx_shadow . ';';
-				$information_message_css          .= '-moz-box-shadow:' . $information_messagebx_shadow . ';';
-				$information_message_css          .= 'box-shadow:' . $information_messagebx_shadow . ';';
+			$information_message_bx_shadow_css = cosmoswp_boxshadow_values_inline( cosmoswp_ifset( $information_message_border['box-shadow-css'] ), 'desktop' );
+			if ( strpos( $information_message_bx_shadow_css, 'px' ) !== false ) {
+				$information_message_bx_shadow_color = cosmoswp_ifset( $information_message_border['box-shadow-color'] );
+				$information_message_bx_shadow       = $information_message_bx_shadow_css . ' ' . $information_message_bx_shadow_color;
+				$information_message_css            .= '-webkit-box-shadow:' . $information_message_bx_shadow . ';';
+				$information_message_css            .= '-moz-box-shadow:' . $information_message_bx_shadow . ';';
+				$information_message_css            .= 'box-shadow:' . $information_message_bx_shadow . ';';
 			}
 
 			/*border style*/
@@ -1336,12 +1239,12 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 			if ( 'none' !== $information_message_border_style ) {
 
 				$information_message_css .= 'border-style:' . $information_message_border_style . ';';
-				// border width
+				// border width.
 				$information_message_border_width = cosmoswp_cssbox_values_inline( cosmoswp_ifset( $information_message_border['border-width'] ), 'desktop' );
 				if ( strpos( $information_message_border_width, 'px' ) !== false ) {
 					$information_message_css .= 'border-width:' . $information_message_border_width . ';';
 				}
-				// border color
+				// border color.
 				$information_message_border_color = cosmoswp_ifset( $information_message_border['border-color'] );
 				if ( $information_message_border_color ) {
 					$information_message_css .= 'border-color:' . $information_message_border_color . ';';
@@ -1366,7 +1269,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 			$information_message_icon_color = cosmoswp_ifset( $information_message_color['icon-color'] );
 			if ( $information_message_icon_color ) {
 				$information_message_dynamic_css = '.cwp-woocommerce-active .woocommerce-info:before {
-		 color:' . $information_message_icon_color . ';
+		color:' . $information_message_icon_color . ';
 	}';
 				$wc_dynamic_css['all']          .= $information_message_dynamic_css;
 
@@ -1392,13 +1295,13 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 			$success_message_border = json_decode( $success_message_border, true );
 
 			/*box shadow*/
-			$success_messagebx_shadow_css = cosmoswp_boxshadow_values_inline( cosmoswp_ifset( $success_message_border['box-shadow-css'] ), 'desktop' );
-			if ( strpos( $success_messagebx_shadow_css, 'px' ) !== false ) {
-				$success_messagebxshadow_color = cosmoswp_ifset( $success_message_border['box-shadow-color'] );
-				$success_messagebx_shadow      = $success_messagebx_shadow_css . ' ' . $success_messagebxshadow_color;
-				$success_message_css          .= '-webkit-box-shadow:' . $success_messagebx_shadow . ';';
-				$success_message_css          .= '-moz-box-shadow:' . $success_messagebx_shadow . ';';
-				$success_message_css          .= 'box-shadow:' . $success_messagebx_shadow . ';';
+			$success_message_bx_shadow_css = cosmoswp_boxshadow_values_inline( cosmoswp_ifset( $success_message_border['box-shadow-css'] ), 'desktop' );
+			if ( strpos( $success_message_bx_shadow_css, 'px' ) !== false ) {
+				$success_message_bx_shadow_color = cosmoswp_ifset( $success_message_border['box-shadow-color'] );
+				$success_message_bx_shadow       = $success_message_bx_shadow_css . ' ' . $success_message_bx_shadow_color;
+				$success_message_css            .= '-webkit-box-shadow:' . $success_message_bx_shadow . ';';
+				$success_message_css            .= '-moz-box-shadow:' . $success_message_bx_shadow . ';';
+				$success_message_css            .= 'box-shadow:' . $success_message_bx_shadow . ';';
 			}
 
 			/*border style*/
@@ -1436,7 +1339,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 			$success_message_icon_color = cosmoswp_ifset( $success_message_color['icon-color'] );
 			if ( $success_message_icon_color ) {
 				$success_message_dynamic_css = '.cwp-woocommerce-active .woocommerce-message:before {
-         color:' . $success_message_icon_color . ';
+        color:' . $success_message_icon_color . ';
     }';
 				$wc_dynamic_css['all']      .= $success_message_dynamic_css;
 
@@ -1451,16 +1354,16 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 			if ( $image_width_css ) {
 				$woocommerce_list_image_width_all_dynamic_css = '
     .cwp-woocommerce-active .cosmoswp-woo-archive-grid-row.cwp-list .product .cwp-list-image-box.cwp-list-image-box {
-         width:' . $image_width_css . ';
+        width:' . $image_width_css . ';
     }';
 				$wc_dynamic_css['all']                       .= $woocommerce_list_image_width_all_dynamic_css;
 
 			}
 			if ( $image_width_css ) {
 				$woocommerce_list_content_width_all_dynamic_css = '
-     .cwp-woocommerce-active .cosmoswp-woo-archive-grid-row.cwp-list .product .cwp-product-content {
- 		 width:calc(100% - ' . $image_width_css . ' - 30px);
- 	}';
+    .cwp-woocommerce-active .cosmoswp-woo-archive-grid-row.cwp-list .product .cwp-product-content {
+    width:calc(100% - ' . $image_width_css . ' - 30px);
+    }';
 				$wc_dynamic_css['all']                         .= $woocommerce_list_content_width_all_dynamic_css;
 
 			}
@@ -1469,15 +1372,15 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 			if ( $image_width_tablet_css ) {
 				$woocommerce_list_image_width_tablet_dynamic_css = '
     .cwp-woocommerce-active .cosmoswp-woo-archive-grid-row.cwp-list .product .cwp-list-image-box.cwp-list-image-box {
-         width:' . $image_width_tablet_css . ';
+        width:' . $image_width_tablet_css . ';
     }';
 				$wc_dynamic_css['tablet']                       .= $woocommerce_list_image_width_tablet_dynamic_css;
 			}
 			if ( $image_width_tablet_css ) {
 				$woocommerce_list_content_width_tablet_dynamic_css = '
-     .cwp-woocommerce-active .cosmoswp-woo-archive-grid-row.cwp-list .product .cwp-product-content {
-          width:calc(100% - ' . $image_width_tablet_css . ' - 30px);
-     }';
+    .cwp-woocommerce-active .cosmoswp-woo-archive-grid-row.cwp-list .product .cwp-product-content {
+        width:calc(100% - ' . $image_width_tablet_css . ' - 30px);
+    }';
 				$wc_dynamic_css['tablet']                         .= $woocommerce_list_content_width_tablet_dynamic_css;
 			}
 
@@ -1485,15 +1388,15 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 			if ( $image_width_desktop_css ) {
 				$woocommerce_list_image_width_desktop_dynamic_css = '
     .cwp-woocommerce-active .cosmoswp-woo-archive-grid-row.cwp-list .product .cwp-list-image-box.cwp-list-image-box {
-         width:' . $image_width_desktop_css . ';
+        width:' . $image_width_desktop_css . ';
     }';
 				$wc_dynamic_css['desktop']                       .= $woocommerce_list_image_width_desktop_dynamic_css;
 			}
 			if ( $image_width_desktop_css ) {
 				$woocommerce_list_content_width_desktop_dynamic_css = '
-     .cwp-woocommerce-active .cosmoswp-woo-archive-grid-row.cwp-list .product .cwp-product-content {
-          width:calc(100% - ' . $image_width_desktop_css . ' - 30px);
-     }';
+    .cwp-woocommerce-active .cosmoswp-woo-archive-grid-row.cwp-list .product .cwp-product-content {
+        width:calc(100% - ' . $image_width_desktop_css . ' - 30px);
+    }';
 				$wc_dynamic_css['desktop']                         .= $woocommerce_list_content_width_desktop_dynamic_css;
 			}
 			return $wc_dynamic_css;
@@ -1506,7 +1409,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param object $dynamic_css
+		 * @param object $dynamic_css Dynamic CSS.
 		 * @return array|string
 		 */
 		public function dynamic_css( $dynamic_css ) {
@@ -1517,6 +1420,21 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Advanced_Styling' ) ) :
 			} else {
 				return $wc_dynamic_css;
 			}
+		}
+
+		/**
+		 * Callback functions for cosmoswp_customize_css_refresher,
+		 * Add CSS refresher settings
+		 *
+		 * @since    1.0.0
+		 * @access   public
+		 *
+		 * @param array $css_refresher CSS refresher.
+		 * @return array
+		 */
+		public function add_css_refresher( $css_refresher ) {
+			$defaults_keys = array_keys( $this->defaults() );
+			return array_unique( array_merge( $css_refresher, $defaults_keys ) );
 		}
 	}
 endif;
@@ -1532,10 +1450,8 @@ endif;
  */
 if ( ! function_exists( 'cosmoswp_woocommerce_advanced_styling' ) ) {
 
-	function cosmoswp_woocommerce_advanced_styling() {
-
+	function cosmoswp_woocommerce_advanced_styling() {//phpcs:ignore
 		return CosmosWP_WooCommerce_Advanced_Styling::instance();
 	}
-
 	cosmoswp_woocommerce_advanced_styling()->run();
 }

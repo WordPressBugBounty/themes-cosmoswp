@@ -1,7 +1,16 @@
 <?php
+/**
+ * General settings.
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+global $cosmoswp_customize_control;
 
 $static_front_page = $wp_customize->get_section( 'static_front_page' );
 if ( ! empty( $static_front_page ) ) {
@@ -31,7 +40,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'cosmoswp_sanitize_select',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'dynamic-css-options',
 	array(
 		'label'    => esc_html__( 'Dynamic css options', 'cosmoswp' ),
@@ -53,7 +62,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'general-setting-layout',
 	array(
 		'label'    => esc_html__( 'Site Layout', 'cosmoswp' ),
@@ -75,7 +84,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'general-content-layout',
 	array(
 		'label'    => esc_html__( 'Content Layout', 'cosmoswp' ),
@@ -94,7 +103,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'general-setting-styling-msg',
@@ -115,7 +124,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'general-setting-color-options',
@@ -161,7 +170,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'general-setting-typography-msg',
@@ -174,6 +183,7 @@ $wp_customize->add_control(
 );
 
 /*Body/P Typography*/
+
 $wp_customize->add_setting(
 	'general-setting-body-p-typography',
 	array(
@@ -182,12 +192,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'general-setting-body-p-typography',
 		array(
-			'label'    => esc_html__( 'Body & Paragraph', 'cosmoswp' ),
+			'label'    => esc_html__( 'Body and Paragraph', 'cosmoswp' ),
 			'section'  => $this->general_setting_section,
 			'settings' => 'general-setting-body-p-typography',
 			'priority' => 60,
@@ -205,7 +215,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'general-setting-h1-typography',
@@ -228,7 +238,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'general-setting-h2-typography',
@@ -252,7 +262,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'general-setting-h3-typography',
@@ -275,7 +285,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'general-setting-h4-typography',
@@ -299,7 +309,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'general-setting-h5-typography',
@@ -323,7 +333,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'general-setting-h6-typography',
@@ -337,4 +347,3 @@ $wp_customize->add_control(
 		cosmoswp_typography_group_fields()
 	)
 );
-

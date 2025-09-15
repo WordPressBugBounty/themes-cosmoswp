@@ -1,7 +1,15 @@
 <?php
+/**
+ * Default Hooks
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
 
 if ( ! function_exists( 'cosmoswp_custom_header_setup' ) ) {
 
@@ -46,7 +54,7 @@ if ( ! function_exists( 'cosmoswp_body_classes' ) ) {
 	/**
 	 * Adds custom classes to the array of body classes.
 	 *
-	 * @param array $classes Classes for the body element.
+	 * @param array $classes Classes for the element.
 	 * @return array
 	 */
 	function cosmoswp_body_classes( $classes ) {
@@ -111,7 +119,7 @@ if ( ! function_exists( 'cosmoswp_setup' ) ) :
 		add_theme_support( 'post-thumbnails' );
 		set_post_thumbnail_size( 340, 240, true );
 
-		// Adding excerpt for page
+		// Adding excerpt for page.
 		add_post_type_support( 'page', 'excerpt' );
 
 		// This theme uses wp_nav_menu() in one location.
@@ -122,6 +130,7 @@ if ( ! function_exists( 'cosmoswp_setup' ) ) :
 				'footer-menu'           => esc_html__( 'Footer Menu ( Support First Level Only )', 'cosmoswp' ),
 			)
 		);
+
 		/*
 		* Switch default core markup for search form, comment form, and comments
 		* to output valid HTML5.
@@ -302,14 +311,14 @@ if ( ! function_exists( 'cosmoswp_scripts' ) ) {
 		}
 
 		/*Custom Grid*/
-		wp_enqueue_style( 'wpness-grid', COSMOSWP_URL . '/assets/library/wpness-grid/wpness-grid' . COSMOSWP_SCRIPT_PREFIX . '.css', array(), '1.0.0' );
+		wp_enqueue_style( 'wpness-grid', COSMOSWP_URL . '/build/wpness-grid/wpness-grid.css', array(), '1.0.0' );
 		wp_style_add_data( 'wpness-grid', 'rtl', 'replace' );
 
-		wp_enqueue_style( 'cosmoswp-style', COSMOSWP_URL . '/style' . COSMOSWP_SCRIPT_PREFIX . '.css', array(), COSMOSWP_VERSION );
+		wp_enqueue_style( 'cosmoswp-style', COSMOSWP_URL . '/build/public/index.css', array(), COSMOSWP_VERSION );
 		wp_style_add_data( 'cosmoswp-style', 'rtl', 'replace' );
 
 		/*theme custom js*/
-		wp_enqueue_script( 'cosmoswp-custom', COSMOSWP_URL . '/assets/js/cosmoswp' . COSMOSWP_SCRIPT_PREFIX . '.js', apply_filters( 'cosmoswp_js_dep', array( 'jquery' ) ), COSMOSWP_VERSION, true );
+		wp_enqueue_script( 'cosmoswp-custom', COSMOSWP_URL . '/build/public/index.js', apply_filters( 'cosmoswp_js_dep', array( 'jquery' ) ), COSMOSWP_VERSION, true );
 
 		global $wp_query;
 		$paged         = ( get_query_var( 'paged' ) > 1 ) ? get_query_var( 'paged' ) : 1;
@@ -344,13 +353,14 @@ if ( ! function_exists( 'cosmoswp_scripts' ) ) {
 if ( ! function_exists( 'cosmoswp_admin_scripts' ) ) {
 
 	/**
-	 * cosmoswp_admin_scripts
+	 * Add admin scripts and styles.
 	 *
-	 * @param $hook
+	 * @param string $hook The current admin page.
+	 * @return void
 	 */
 	function cosmoswp_admin_scripts( $hook ) {
 
-		if ( 'widgets.php' == $hook || cosmoswp_is_edit_page() ) {
+		if ( 'widgets.php' === $hook || cosmoswp_is_edit_page() ) {
 			wp_enqueue_media();
 			if ( defined( 'GUTENTOR_URL' ) ) {
 				wp_enqueue_style(
@@ -367,7 +377,10 @@ if ( ! function_exists( 'cosmoswp_admin_scripts' ) ) {
 
 			wp_enqueue_script( 'wp-color-picker' );
 			wp_enqueue_style( 'wp-color-picker' );
-			wp_enqueue_script( 'cosmoswp-admin', COSMOSWP_URL . '/assets/js/cosmoswp-admin' . COSMOSWP_SCRIPT_PREFIX . '.js', '', COSMOSWP_VERSION, true );
+			wp_enqueue_script( 'cosmoswp-admin', COSMOSWP_URL . '/build/editor/index.js', '', COSMOSWP_VERSION, true );
+		}
+		if ( cosmoswp_is_edit_page() ) {
+			wp_enqueue_style( 'cosmoswp-meta-box-css', COSMOSWP_URL . '/inc/metabox/meta-box.css', array(), COSMOSWP_VERSION );
 		}
 	}
 	add_action( 'admin_enqueue_scripts', 'cosmoswp_admin_scripts' );
@@ -375,7 +388,10 @@ if ( ! function_exists( 'cosmoswp_admin_scripts' ) ) {
 
 if ( ! function_exists( 'cosmoswp_header_layout_class' ) ) {
 	/**
-	 * add class to body
+	 * Add class to body.
+	 *
+	 * @param array $classes Classes for the element.
+	 * @return array Additional classes.
 	 */
 	function cosmoswp_header_layout_class( $classes ) {
 
@@ -393,28 +409,28 @@ if ( ! function_exists( 'cosmoswp_header_layout_class' ) ) {
 
 		/*header position options*/
 		$header_position_options = cosmoswp_get_theme_options( 'header-position-options' );
-		if ( ! empty( $header_position_options ) && ( 'normal' != $header_position_options ) ) {
+		if ( ! empty( $header_position_options ) && ( 'normal' !== $header_position_options ) ) {
 			$classes[] = esc_attr( $header_position_options );
 		}
 
 		/*header general layout*/
-		if ( 'normal' == $header_position_options || 'cwp-overlay-fixed' == $header_position_options ) {
+		if ( 'normal' === $header_position_options || 'cwp-overlay-fixed' === $header_position_options ) {
 			$header_layout = apply_filters( 'cosmoswp_header_layout_body_class', cosmoswp_get_theme_options( 'header-general-width' ) );
-			if ( $header_layout != 'inherit' ) {
+			if ( 'inherit' !== $header_layout ) {
 				$classes[] = esc_attr( $header_layout );
 			}
 		}
 		$footer_layout = apply_filters( 'cosmoswp_footer_layout_body_class', cosmoswp_get_theme_options( 'footer-general-layout' ) );
-		if ( ! empty( $footer_layout ) && ( 'inherit' != $footer_layout ) ) {
+		if ( ! empty( $footer_layout ) && ( 'inherit' !== $footer_layout ) ) {
 			$classes[] = esc_attr( $footer_layout );
 		}
 		$footer_display_style = cosmoswp_get_theme_options( 'footer-display-style' );
-		if ( ! empty( $footer_display_style ) && ( 'cwp-normal-footer' != $footer_display_style ) ) {
+		if ( ! empty( $footer_display_style ) && ( 'cwp-normal-footer' !== $footer_display_style ) ) {
 			$classes[] = esc_attr( $footer_display_style );
 		}
 
 		$banner_display_option = cosmoswp_get_theme_options( 'banner-section-display' );
-		if ( 'hide' != $banner_display_option && ( ! empty( $banner_display_option ) ) ) {
+		if ( 'hide' !== $banner_display_option && ( ! empty( $banner_display_option ) ) ) {
 			$classes[] = esc_attr( 'cwp-has-banner' );
 		}
 		return $classes;
@@ -428,18 +444,18 @@ if ( ! function_exists( 'cosmoswp_main_wrapper_class' ) ) {
 	/**
 	 * Add class to dynamic header wrapper
 	 *
-	 * @param $classes
+	 * @param array $classes Classes for the element.
 	 * @return array
 	 */
 	function cosmoswp_main_wrapper_class( $classes ) {
 
 		$header_position_options = cosmoswp_get_theme_options( 'header-position-options' );
-		if ( ! empty( $header_position_options ) && ( 'cwp-vertical-header' == $header_position_options ) ) {
+		if ( ! empty( $header_position_options ) && ( 'cwp-vertical-header' === $header_position_options ) ) {
 			$vertical_header_position = cosmoswp_get_theme_options( 'vertical-header-position' );
 			if ( ! empty( $vertical_header_position ) ) {
-				if ( $vertical_header_position == 'cwp-vertical-header-left' ) {
+				if ( 'cwp-vertical-header-left' === $vertical_header_position ) {
 					$classes[] = 'cwp-vertical-body-content-left';
-				} elseif ( $vertical_header_position == 'cwp-vertical-header-right' ) {
+				} elseif ( 'cwp-vertical-header-right' === $vertical_header_position ) {
 					$classes[] = 'cwp-vertical-body-content-right';
 				}
 			}
@@ -453,22 +469,22 @@ if ( ! function_exists( 'cosmoswp_main_wrapper_class' ) ) {
 if ( ! function_exists( 'cosmoswp_header_top_class' ) ) {
 
 	/**
-	 * add class to header top
+	 * Add class to header top
 	 * cosmoswp_header_top_class
 	 *
-	 * @param $classes
+	 * @param array $classes Classes for the element.
 	 * @return array
 	 */
 	function cosmoswp_header_top_class( $classes ) {
 
 		$sticky_header_top = cosmoswp_get_theme_options( 'sticky-header-include-top' );
-		if ( $sticky_header_top == false ) {
+		if ( ! $sticky_header_top ) {
 			$classes[] = 'cwp-sticky-disable';
 		}
 		$header_top_bg                = cosmoswp_get_theme_options( 'header-top-background-options' );
 		$header_top_bg                = json_decode( $header_top_bg, true );
 		$header_top_bg_enable_overlay = cosmoswp_ifset( $header_top_bg['enable-overlay'] );
-		if ( true == $header_top_bg_enable_overlay ) {
+		if ( $header_top_bg_enable_overlay ) {
 			$classes[] = 'cwp-enable-overlay';
 		}
 		return $classes;
@@ -480,22 +496,21 @@ if ( ! function_exists( 'cosmoswp_header_top_class' ) ) {
 if ( ! function_exists( 'cosmoswp_header_main_class' ) ) {
 
 	/**
-	 * add class to header main
-	 * cosmoswp_header_main_class
+	 * Add class to header main
 	 *
-	 * @param $classes
+	 * @param array $classes Classes for the element.
 	 * @return array
 	 */
 	function cosmoswp_header_main_class( $classes ) {
 
 		$sticky_header_top = cosmoswp_get_theme_options( 'sticky-header-include-main' );
-		if ( $sticky_header_top == false ) {
+		if ( ! $sticky_header_top ) {
 			$classes[] = 'cwp-sticky-disable';
 		}
 		$header_main_bg                = cosmoswp_get_theme_options( 'header-main-background-options' );
 		$header_main_bg                = json_decode( $header_main_bg, true );
 		$header_main_bg_enable_overlay = cosmoswp_ifset( $header_main_bg['enable-overlay'] );
-		if ( true == $header_main_bg_enable_overlay ) {
+		if ( $header_main_bg_enable_overlay ) {
 			$classes[] = 'cwp-enable-overlay';
 		}
 		return $classes;
@@ -507,21 +522,21 @@ if ( ! function_exists( 'cosmoswp_header_main_class' ) ) {
 if ( ! function_exists( 'cosmoswp_header_bottom_class' ) ) {
 
 	/**
-	 * add class to header bottom
+	 * Add class to header bottom
 	 *
-	 * @param $classes
+	 * @param array $classes Classes for the element.
 	 * @return array
 	 */
 	function cosmoswp_header_bottom_class( $classes ) {
 
 		$sticky_header_top = cosmoswp_get_theme_options( 'sticky-header-include-bottom' );
-		if ( $sticky_header_top == false ) {
+		if ( ! $sticky_header_top ) {
 			$classes[] = 'cwp-sticky-disable';
 		}
 		$header_bottom_bg                = cosmoswp_get_theme_options( 'header-bottom-background-options' );
 		$header_bottom_bg                = json_decode( $header_bottom_bg, true );
 		$header_bottom_bg_enable_overlay = cosmoswp_ifset( $header_bottom_bg['enable-overlay'] );
-		if ( true == $header_bottom_bg_enable_overlay ) {
+		if ( $header_bottom_bg_enable_overlay ) {
 			$classes[] = 'cwp-enable-overlay';
 		}
 		return $classes;
@@ -533,15 +548,15 @@ if ( ! function_exists( 'cosmoswp_header_bottom_class' ) ) {
 if ( ! function_exists( 'cosmoswp_header_wrapper_class' ) ) {
 
 	/**
-	 * add class to header bottom
+	 * Add class to header bottom
 	 *
-	 * @param $classes
+	 * @param array $classes Classes for the element.
 	 * @return array
 	 */
 	function cosmoswp_header_wrapper_class( $classes ) {
 
 		$sticky_header_top = cosmoswp_get_theme_options( 'sticky-header-mobile-enable' );
-		if ( $sticky_header_top == false ) {
+		if ( ! $sticky_header_top ) {
 			$classes[] = 'cwp-sticky-disable';
 		}
 		$sticky_header_options   = cosmoswp_get_theme_options( 'sticky-header-options' );
@@ -551,7 +566,7 @@ if ( ! function_exists( 'cosmoswp_header_wrapper_class' ) ) {
 		}
 		$remove_sticky = array( 'cwp-vertical-header', 'cwp-overlay-transparent' );
 		if ( ! empty( $header_position_options ) && ! in_array( $header_position_options, $remove_sticky ) ) {
-			if ( $sticky_header_options == 'normal' ) {
+			if ( 'normal' === $sticky_header_options ) {
 				$classes[] = 'cwp-header-sticky';
 			}
 			$sticky_header_animation = cosmoswp_get_theme_options( 'sticky-header-animation-options' );
@@ -559,7 +574,7 @@ if ( ! function_exists( 'cosmoswp_header_wrapper_class' ) ) {
 				$classes[] = $sticky_header_animation;
 			}
 		}
-		if ( 'cwp-vertical-header' == $header_position_options ) {
+		if ( 'cwp-vertical-header' === $header_position_options ) {
 			$vertical_header_position = cosmoswp_get_theme_options( 'vertical-header-position' );
 			if ( ! empty( $vertical_header_position ) ) {
 				$classes[] = $vertical_header_position;
@@ -568,7 +583,7 @@ if ( ! function_exists( 'cosmoswp_header_wrapper_class' ) ) {
 		$header_general_bg                = cosmoswp_get_theme_options( 'header-general-background-options' );
 		$header_general_bg                = json_decode( $header_general_bg, true );
 		$header_general_bg_enable_overlay = cosmoswp_ifset( $header_general_bg['enable-overlay'] );
-		if ( true == $header_general_bg_enable_overlay ) {
+		if ( $header_general_bg_enable_overlay ) {
 			$classes[] = 'cwp-enable-overlay';
 		}
 		return $classes;
@@ -580,17 +595,17 @@ if ( ! function_exists( 'cosmoswp_header_wrapper_class' ) ) {
 if ( ! function_exists( 'cosmoswp_vertical_header_classes' ) ) {
 
 	/**
-	 *  cosmoswp_vertical_header_classes
+	 * Add class to vertical header.
 	 * add class to header bottom
 	 *
-	 * @param $classes
+	 * @param array $classes Classes for the element.
 	 * @return array
 	 */
 	function cosmoswp_vertical_header_classes( $classes ) {
 
 		$header_position = cosmoswp_get_theme_options( 'header-position-options' );
 		$site_layout     = cosmoswp_get_theme_options( 'general-setting-layout' );
-		if ( $header_position == 'cwp-vertical-header' && $site_layout == 'cwp-boxed-width-body' ) {
+		if ( 'cwp-vertical-header' === $header_position && 'cwp-boxed-width-body' === $site_layout ) {
 			$classes[] = 'cwp-vertical-header-wrap';
 		}
 		return $classes;
@@ -599,42 +614,25 @@ if ( ! function_exists( 'cosmoswp_vertical_header_classes' ) ) {
 	add_filter( 'cosmoswp_vertical_header_main_wrap_classes', 'cosmoswp_vertical_header_classes' );
 }
 
-if ( ! function_exists( 'cosmoswp_get_menu_id_by_location' ) ) {
-	/*
-	 *
-	 * Get nav menu id by location
-	 *
-	 *  @param $location
-	 */
-	function cosmoswp_get_menu_id_by_location( $location ) {
-		// Get all locations
-		$locations = get_nav_menu_locations();
-		// Get object id by location
-		if ( array_key_exists( $location, $locations ) ) {
-			$term_id = $locations[ $location ];
-			return $term_id;
-		} else {
-			return 0;
-		}
-	}
-}
-
 if ( ! function_exists( 'cosmoswp_main_header_classes' ) ) {
 
 	/**
-	 *  cosmoswp_main_header_classes
-	 * add class to header bottom
+	 * Add class to header bottom
 	 *
-	 * @param $classes
-	 * @return array
+	 * @since CosmosWP 1.0.0
+	 *
+	 * @param array $classes Existing header classes.
+	 * @return array Modified header classes.
 	 */
 	function cosmoswp_main_header_classes( $classes ) {
 
 		$header_main_boxwidth = cosmoswp_get_theme_options( 'header-main-enable-box-width' );
 		$header_general_width = cosmoswp_get_theme_options( 'header-general-width' );
-		if ( $header_main_boxwidth && $header_general_width != 'cwp-boxed-width-header' ) {
+
+		if ( $header_main_boxwidth && 'cwp-boxed-width-header' !== $header_general_width ) {
 			$classes[] = 'cwp-box-width';
 		}
+
 		return $classes;
 	}
 
@@ -644,67 +642,76 @@ if ( ! function_exists( 'cosmoswp_main_header_classes' ) ) {
 if ( ! function_exists( 'cosmoswp_main_add_classes' ) ) {
 
 	/**
-	 *  cosmoswp_main_header_classes
-	 * add class to header bottom
+	 * Add class to main wrapper based on background overlay option
 	 *
-	 * @param $classes
-	 * @return array
+	 * @since CosmosWP 1.0.0
+	 *
+	 * @param array $classes Existing main wrapper classes.
+	 * @return array Modified main wrapper classes.
 	 */
 	function cosmoswp_main_add_classes( $classes ) {
 
 		$main_body_general_bg                = cosmoswp_get_theme_options( 'main-content-general-background-options' );
 		$main_body_general_bg                = json_decode( $main_body_general_bg, true );
 		$main_body_general_bg_enable_overlay = cosmoswp_ifset( $main_body_general_bg['enable-overlay'] );
-		if ( true == $main_body_general_bg_enable_overlay ) {
+
+		if ( $main_body_general_bg_enable_overlay ) {
 			$classes[] = 'cwp-enable-overlay';
 		}
+
 		return $classes;
 	}
 
 	add_filter( 'cosmoswp_main_classes', 'cosmoswp_main_add_classes' );
 }
 
+
 if ( ! function_exists( 'cosmoswp_footer_general_wrap_classes' ) ) {
 
 	/**
-	 *  cosmoswp_footer_wrap_classes
-	 * add class to header bottom
+	 * Add class to footer wrapper based on background overlay option
 	 *
-	 * @param $classes
-	 * @return array
+	 * @since CosmosWP 1.0.0
+	 *
+	 * @param array $classes Existing footer wrapper classes.
+	 * @return array Modified footer wrapper classes.
 	 */
 	function cosmoswp_footer_general_wrap_classes( $classes ) {
 
 		$footer_general_bg                = cosmoswp_get_theme_options( 'footer-general-background-options' );
 		$footer_general_bg                = json_decode( $footer_general_bg, true );
 		$footer_general_bg_enable_overlay = cosmoswp_ifset( $footer_general_bg['enable-overlay'] );
-		if ( true == $footer_general_bg_enable_overlay ) {
+
+		if ( $footer_general_bg_enable_overlay ) {
 			$classes[] = 'cwp-enable-overlay';
 		}
+
 		return $classes;
 	}
 
 	add_filter( 'cosmoswp_footer_wrap_classes', 'cosmoswp_footer_general_wrap_classes' );
 }
 
-
 if ( ! function_exists( 'cosmoswp_footer_top_add_classes' ) ) {
 
 	/**
-	 *  cosmoswp_footer_wrap_classes
-	 * add class to header bottom
+	 * Add class to footer top wrapper based on background overlay option.
 	 *
-	 * @param $classes
-	 * @return array
+	 * @since CosmosWP 1.0.0
+	 *
+	 * @param array $classes Existing footer top wrapper classes.
+	 * @return array Modified footer top wrapper classes.
 	 */
 	function cosmoswp_footer_top_add_classes( $classes ) {
 
 		$footer_top_bg                = cosmoswp_get_theme_options( 'footer-top-background-options' );
 		$footer_top_bg                = json_decode( $footer_top_bg, true );
 		$footer_top_bg_enable_overlay = cosmoswp_ifset( $footer_top_bg['enable-overlay'] );
-		if ( true == $footer_top_bg_enable_overlay ) {
+
+		if ( $footer_top_bg_enable_overlay ) {
 			$classes[] = 'cwp-enable-overlay';
 		}
+
 		return $classes;
 	}
 
@@ -714,159 +721,114 @@ if ( ! function_exists( 'cosmoswp_footer_top_add_classes' ) ) {
 if ( ! function_exists( 'cosmoswp_footer_main_add_classes' ) ) {
 
 	/**
-	 *  cosmoswp_footer_wrap_classes
-	 * add class to header bottom
+	 * Add class to footer main wrapper based on background overlay option.
 	 *
-	 * @param $classes
-	 * @return array
+	 * @since CosmosWP 1.0.0
+	 *
+	 * @param array $classes Existing footer main wrapper classes.
+	 * @return array Modified footer main wrapper classes.
 	 */
 	function cosmoswp_footer_main_add_classes( $classes ) {
 
 		$footer_main_bg                = cosmoswp_get_theme_options( 'footer-main-background-options' );
 		$footer_main_bg                = json_decode( $footer_main_bg, true );
 		$footer_main_bg_enable_overlay = cosmoswp_ifset( $footer_main_bg['enable-overlay'] );
-		if ( true == $footer_main_bg_enable_overlay ) {
+
+		if ( $footer_main_bg_enable_overlay ) {
 			$classes[] = 'cwp-enable-overlay';
 		}
+
 		return $classes;
 	}
 
 	add_filter( 'cosmoswp_footer_main_wrap_classes', 'cosmoswp_footer_main_add_classes' );
 }
 
-
 if ( ! function_exists( 'cosmoswp_footer_bottom_add_classes' ) ) {
 
 	/**
-	 *  cosmoswp_footer_wrap_classes
-	 * add class to header bottom
+	 * Add class to footer bottom wrapper based on background overlay option.
 	 *
-	 * @param $classes
-	 * @return array
+	 * @since CosmosWP 1.0.0
+	 *
+	 * @param array $classes Existing footer bottom wrapper classes.
+	 * @return array Modified footer bottom wrapper classes.
 	 */
 	function cosmoswp_footer_bottom_add_classes( $classes ) {
 
 		$footer_bottom_bg                = cosmoswp_get_theme_options( 'footer-bottom-background-options' );
 		$footer_bottom_bg                = json_decode( $footer_bottom_bg, true );
 		$footer_bottom_bg_enable_overlay = cosmoswp_ifset( $footer_bottom_bg['enable-overlay'] );
-		if ( true == $footer_bottom_bg_enable_overlay ) {
+
+		if ( $footer_bottom_bg_enable_overlay ) {
 			$classes[] = 'cwp-enable-overlay';
 		}
+
 		return $classes;
 	}
 
 	add_filter( 'cosmoswp_footer_bottom_wrap_classes', 'cosmoswp_footer_bottom_add_classes' );
 }
 
-
 if ( ! function_exists( 'cosmoswp_blog_add_grid_classes' ) ) {
 
 	/**
-	 *  cosmoswp_blog_grid_classes
-	 * add class blog
+	 * Add grid layout class to blog wrapper.
 	 *
-	 * @param $classes
-	 * @return array
+	 * @since CosmosWP 1.0.0
+	 *
+	 * @param array $classes Existing blog wrapper classes.
+	 * @return array Modified blog wrapper classes.
 	 */
 	function cosmoswp_blog_add_grid_classes( $classes ) {
 
 		$blog_layout        = cosmoswp_get_theme_options( 'blog-post-view-layout' );
 		$blog_column_number = cosmoswp_get_theme_options( 'blog-column-number' );
-		if ( 'column-layout' == $blog_layout && $blog_column_number ) {
+
+		if ( 'column-layout' === $blog_layout && $blog_column_number ) {
 			$classes[] = cosmoswp_get_grid_class( $blog_column_number );
 		}
+
 		return $classes;
 	}
 
 	add_filter( 'cosmoswp_blog_grid_classes', 'cosmoswp_blog_add_grid_classes' );
 }
 
-if ( ! function_exists( 'cosmoswp_save_menu_location' ) ) {
-	/**
-	 * cosmoswp_save_menu_location
-	 * will removed on future
-	 *
-	 * since 1.1.7
-	 * Save menu location for select menu on customizer
-	 *
-	 * @return void
-	 */
-	function cosmoswp_save_menu_location() {
-
-		if ( ! current_user_can( 'manage_options' ) ) {
-			return;
-		}
-		/*update menu location value*/
-		if ( is_customize_preview() ) {
-			$nav_locations = get_theme_mod( 'nav_menu_locations' );
-			if ( isset( $nav_locations['header-primary-menu'] ) ) {
-				set_theme_mod( 'primary-menu-custom-menu', $nav_locations['header-primary-menu'] );
-			}
-			if ( isset( $nav_locations['header-secondary-menu'] ) ) {
-				set_theme_mod( 'secondary-menu-custom-menu', $nav_locations['header-secondary-menu'] );
-			}
-			if ( isset( $nav_locations['footer-menu'] ) ) {
-				set_theme_mod( 'footer-menu-custom-menu', $nav_locations['footer-menu'] );
-			}
-			if ( isset( $nav_locations['dropdown-menu'] ) ) {
-				set_theme_mod( 'dropdown-menu-custom-menu', $nav_locations['dropdown-menu'] );
-			}
-			if ( isset( $nav_locations['sticky-footer-menu'] ) ) {
-				set_theme_mod( 'sticky-footer-menu-custom-menu', $nav_locations['sticky-footer-menu'] );
-			}
-		}
-		/*just run once for previous*/
-		if ( get_theme_mod( 'primary_menu' ) !== 'lUpdated' ) {
-			$nav_locations = get_theme_mod( 'nav_menu_locations' );
-			if ( 'custom' == get_theme_mod( 'primary_menu' ) && get_theme_mod( 'primary-menu-custom-menu' ) ) {
-				$nav_locations['header-primary-menu'] = get_theme_mod( 'primary-menu-custom-menu' );
-			}
-			if ( get_theme_mod( 'secondary-menu-custom-menu' ) ) {
-				$nav_locations['header-secondary-menu'] = get_theme_mod( 'secondary-menu-custom-menu' );
-			}
-			if ( get_theme_mod( 'footer-menu-custom-menu' ) ) {
-				$nav_locations['footer-menu'] = get_theme_mod( 'footer-menu-custom-menu' );
-			}
-			if ( get_theme_mod( 'dropdown-menu-custom-menu' ) ) {
-				$nav_locations['dropdown-menu'] = get_theme_mod( 'dropdown-menu-custom-menu' );
-			}
-			if ( get_theme_mod( 'sticky-footer-menu-custom-menu' ) ) {
-				$nav_locations['sticky-footer-menu'] = get_theme_mod( 'sticky-footer-menu-custom-menu' );
-			}
-			/*Now we dont need this theme mode*/
-			set_theme_mod( 'primary_menu', 'lUpdated' );
-			if ( is_array( $nav_locations ) ) {
-				set_theme_mod( 'nav_menu_locations', array_map( 'absint', $nav_locations ) );
-			}
-		}
-	}
-	add_action( 'after_setup_theme', 'cosmoswp_save_menu_location' );
-}
-
 if ( ! function_exists( 'cosmoswp_add_submenu_icon' ) ) {
 	/**
-	 * cosmoswp_add_submenu_icon
-	 * will removed on future
+	 * Add submenu icon to the menu item.
 	 *
-	 * since 1.1.7
-	 * Save menu location for select menu on customizer
+	 * This function adds a submenu indicator icon before the menu item title,
+	 * depending on the theme location and menu settings.
 	 *
-	 * @return void
+	 * @since CosmosWP 1.1.7
+	 *
+	 * @param string $title The menu item title.
+	 * @param object $item  The menu item object.
+	 * @param object $args  The arguments for the menu.
+	 * @param int    $depth The depth of the menu item.
+	 * @return string The modified menu item title.
 	 */
 	function cosmoswp_add_submenu_icon( $title, $item, $args, $depth ) {
-		if ( in_array( 'menu-item-has-children', $item->classes ) ) {
+		if ( in_array( 'menu-item-has-children', $item->classes, true ) ) {
+
 			if ( 'header-primary-menu' === $args->theme_location && ! cosmoswp_get_theme_options( 'primary-menu-disable-sub-menu' ) ) {
 				$submenu_indicator = cosmoswp_get_correct_fa_font( cosmoswp_get_theme_options( 'primary-menu-submenu-icon-indicator' ) );
-				return "<i class='submenu-icon " . $submenu_indicator . "'></i>" . $title;
+				return "<i class='submenu-icon {$submenu_indicator}'></i>" . $title;
+
 			} elseif ( 'header-secondary-menu' === $args->theme_location && ! cosmoswp_get_theme_options( 'secondary-menu-disable-sub-menu' ) ) {
 				$submenu_indicator = cosmoswp_get_correct_fa_font( cosmoswp_get_theme_options( 'secondary-menu-submenu-icon-indicator' ) );
-				return "<i class='submenu-icon " . $submenu_indicator . "'></i>" . $title;
+				return "<i class='submenu-icon {$submenu_indicator}'></i>" . $title;
+
 			} elseif ( 'dropdown-menu' === $args->theme_location && ! cosmoswp_get_theme_options( 'dropdown-menu-disable-sub-menu' ) ) {
 				$submenu_indicator = cosmoswp_get_correct_fa_font( cosmoswp_get_theme_options( 'dropdown-menu-submenu-icon-indicator' ) );
-				return "<i class='submenu-icon " . $submenu_indicator . "'></i>" . $title;
+				return "<i class='submenu-icon {$submenu_indicator}'></i>" . $title;
 			}
 		}
+
 		return $title;
 	}
+
 	add_action( 'nav_menu_item_title', 'cosmoswp_add_submenu_icon', 10, 4 );
 }

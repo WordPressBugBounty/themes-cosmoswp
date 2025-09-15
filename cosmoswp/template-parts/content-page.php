@@ -5,8 +5,12 @@
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
  * @package CosmosWP
- * @subpackage CosmosWP
  */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /* check element banner title type and select page element */
 $page_sorting_element = cosmoswp_get_theme_options( 'page-elements-sorting-with-title' );

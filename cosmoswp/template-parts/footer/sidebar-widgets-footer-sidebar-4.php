@@ -4,8 +4,13 @@
  *
  * @package CosmosWP
  */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 $widget_setting       = cosmoswp_get_theme_options( 'footer-sidebar-4-widget-setting-option' );
-$footer_sidebar_align = ( $widget_setting != 'inherit' ) ? cosmoswp_get_theme_options( 'footer-sidebar-4-content-align' ) : '';
+$footer_sidebar_align = ( 'inherit' !== $widget_setting ) ? cosmoswp_get_theme_options( 'footer-sidebar-4-content-align' ) : '';
 ?>
 <div class="cwp-footer-sidebar cwp-footer-sidebar-4 <?php echo esc_attr( $footer_sidebar_align ); ?>">
 	<?php

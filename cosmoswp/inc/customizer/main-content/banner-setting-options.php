@@ -1,11 +1,41 @@
 <?php
+/**
+ * Banner Setting Options
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+global $cosmoswp_customize_control;
+
 $wp_customize->get_section( 'header_image' )->panel           = cosmoswp_main_content_controller()->panel;
 $wp_customize->get_section( 'header_image' )->priority        = 9;
 $wp_customize->get_section( 'header_image' )->title           = esc_html__( 'Banner Section', 'cosmoswp' );
 $wp_customize->get_control( 'header_image' )->active_callback = 'cosmoswp_banner_section_display_image';
+$wp_customize->get_control( 'header_image' )->transport       = 'refresh';
+
+/*Background Styling*/
+$wp_customize->add_setting(
+	'banner-section-display-msg',
+	array(
+		'sanitize_callback' => 'wp_kses_post',
+	)
+);
+$cosmoswp_customize_control->add(
+	new CosmosWP_Custom_Control_Heading(
+		$wp_customize,
+		'banner-section-display-msg',
+		array(
+			'label'    => esc_html__( 'The banner option does not display if the banner option in the page/post is selected as hide or page template does not display banner.Go to page where Banner Section is not hidden', 'cosmoswp' ),
+			'section'  => 'header_image',
+			'priority' => -1,
+		)
+	)
+);
 
 
 /*single Banner Title*/
@@ -18,7 +48,7 @@ $wp_customize->add_setting(
 	)
 );
 $single_choices = cosmoswp_single_banner_title_type();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'single-banner-section-title',
 	array(
 		'label'           => esc_html__( 'Single Banner Section Title ', 'cosmoswp' ),
@@ -39,7 +69,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'single-custom-banner-title',
 	array(
 		'label'           => esc_html__( 'Single Custom Banner Title', 'cosmoswp' ),
@@ -60,7 +90,7 @@ $wp_customize->add_setting(
 	)
 );
 $cwp_tag = cosmoswp_single_banner_title_tag();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'single-banner-title-tag',
 	array(
 		'label'           => esc_html__( 'Single Banner Title Tag', 'cosmoswp' ),
@@ -82,7 +112,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_text_align();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Buttonset(
 		$wp_customize,
 		'banner-section-title-align',
@@ -106,7 +136,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_banner_content_position();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Buttonset(
 		$wp_customize,
 		'banner-section-content-position',
@@ -130,7 +160,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'banner-section-display',
 	array(
 		'choices'  => $choices,
@@ -142,24 +172,6 @@ $wp_customize->add_control(
 	)
 );
 
-/*Background Styling*/
-$wp_customize->add_setting(
-	'banner-section-display-msg',
-	array(
-		'sanitize_callback' => 'wp_kses_post',
-	)
-);
-$wp_customize->add_control(
-	new CosmosWP_Custom_Control_Heading(
-		$wp_customize,
-		'banner-section-display-msg',
-		array(
-			'label'    => esc_html__( 'The banner option does not display if the banner option in the page/post is selected as "hide" or page template does not display banner.Go to page where Banner Section is not hidden', 'cosmoswp' ),
-			'section'  => 'header_image',
-			'priority' => 100,
-		)
-	)
-);
 
 /*Banner Color*/
 $wp_customize->add_setting(
@@ -170,7 +182,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Color(
 		$wp_customize,
 		'banner-section-color',
@@ -192,7 +204,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Color(
 		$wp_customize,
 		'banner-section-background-color',
@@ -214,12 +226,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'enable-banner-overlay-color',
 	array(
 		'label'           => esc_html__( 'Enable Overlay Color', 'cosmoswp' ),
 		'section'         => 'header_image',
-		'active_callback' => 'cosmoswp_enable_overlay_active',
+		'active_callback' => 'cosmoswp_banner_section_display_image',
 		'settings'        => 'enable-banner-overlay-color',
 		'type'            => 'checkbox',
 	)
@@ -234,14 +246,15 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Color(
 		$wp_customize,
 		'banner-overlay-color',
 		array(
-			'label'    => esc_html__( 'Banner Overlay Color', 'cosmoswp' ),
-			'section'  => 'header_image',
-			'settings' => 'banner-overlay-color',
+			'label'           => esc_html__( 'Banner Overlay Color', 'cosmoswp' ),
+			'section'         => 'header_image',
+			'settings'        => 'banner-overlay-color',
+			'active_callback' => 'cosmoswp_enable_overlay_active_color_active',
 		)
 	)
 );
@@ -255,14 +268,14 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Slider(
 		$wp_customize,
 		'cosmoswp-banner-height',
 		array(
 			'label'           => esc_html__( 'Banner Height (px)', 'cosmoswp' ),
 			'section'         => 'header_image',
-			'active_callback' => 'cosmoswp_banner_height_activecallback',
+			'active_callback' => 'cosmoswp_banner_height_active_callback',
 			'settings'        => 'cosmoswp-banner-height',
 			'input_attrs'     => array(
 				'min'  => 0,
@@ -286,7 +299,7 @@ $background_image_size_options       = cosmoswp_background_image_size_options();
 $background_image_position_options   = cosmoswp_background_image_position_options();
 $background_image_repeat_options     = cosmoswp_background_image_repeat_options();
 $background_image_attachment_options = cosmoswp_background_image_attachment_options();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Tabs(
 		$wp_customize,
 		'banner-section-background-image-options',
@@ -408,12 +421,12 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'banner-padding-margin-styling-msg',
 		array(
-			'label'           => esc_html__( 'Margin & Padding', 'cosmoswp' ),
+			'label'           => esc_html__( 'Margin and Padding', 'cosmoswp' ),
 			'active_callback' => 'cosmoswp_banner_section_display_enable',
 			'section'         => 'header_image',
 		)
@@ -429,12 +442,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'banner-margin',
 		array(
-			'label'           => esc_html__( 'Margin', 'cosmoswp' ),
+			'label'           => esc_html__( 'Margin (px)', 'cosmoswp' ),
 			'section'         => 'header_image',
 			'active_callback' => 'cosmoswp_banner_section_display_enable',
 			'settings'        => 'banner-margin',
@@ -453,12 +466,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'banner-padding',
 		array(
-			'label'           => esc_html__( 'Padding', 'cosmoswp' ),
+			'label'           => esc_html__( 'Padding (px)', 'cosmoswp' ),
 			'section'         => 'header_image',
 			'active_callback' => 'cosmoswp_banner_section_display_enable',
 			'settings'        => 'banner-padding',

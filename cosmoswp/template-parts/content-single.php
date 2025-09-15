@@ -5,8 +5,13 @@
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
  * @package CosmosWP
- * @subpackage CosmosWP
  */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /* post element with sorting */
 
 if ( has_post_thumbnail() ) {

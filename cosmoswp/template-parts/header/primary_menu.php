@@ -1,4 +1,15 @@
 <?php
+/**
+ * Primary Menu
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $menu_align             = cosmoswp_get_theme_options( 'primary-menu-align' );
 $submenu_display_option = cosmoswp_get_theme_options( 'primary-menu-submenu-display-options' );
 

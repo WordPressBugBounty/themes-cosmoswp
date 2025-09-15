@@ -1,4 +1,15 @@
 <?php
+/**
+ * Button One Component
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $button_css_class = cosmoswp_get_theme_options( 'button-one-class-name' );
 $button1_link     = cosmoswp_get_theme_options( 'button-one-url' );
 $button_link      = ( $button1_link ) ? $button1_link : '#';
@@ -41,7 +52,7 @@ if ( ! empty( $button_text ) || ( $enable_icon != false ) ) {
 	<!-- Start of .cwp-header-button -->
 	<span class="cwp-header-button cwp-button-one <?php echo esc_attr( cosmoswp_string_concator( $button_align_desktop, $button_align_tablet, $button_align_mobile, $icon_spacer, $button_css_class ) ); ?> ">
 		<a href="<?php echo esc_attr( $button_link ); ?>" <?php echo esc_attr( $target_blank ); ?>
-		   class="btn btn-primary"><?php echo $button_one_structure; ?></a>
+			class="btn btn-primary"><?php echo $button_one_structure;//phpcs:ignore ?></a>
 	</span>
 	<!-- End of .cwp-header-button -->
 	<?php

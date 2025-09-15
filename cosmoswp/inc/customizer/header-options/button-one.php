@@ -1,7 +1,16 @@
 <?php
+/**
+ * Button one.
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+global $cosmoswp_customize_control;
 
 /*Button one section*/
 $wp_customize->add_section(
@@ -21,7 +30,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'button-one-text',
 	array(
 		'label'    => esc_html__( 'Button Text', 'cosmoswp' ),
@@ -40,7 +49,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'button-one-enable-icon',
 	array(
 		'label'    => esc_html__( 'Enable Icon', 'cosmoswp' ),
@@ -59,7 +68,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Customize_Icons_Control(
 		$wp_customize,
 		'button-one-icon',
@@ -82,7 +91,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_icon_position();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Buttonset(
 		$wp_customize,
 		'button-one-icon-position',
@@ -105,7 +114,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'button-one-url',
 	array(
 		'label'     => esc_html__( 'Button URL', 'cosmoswp' ),
@@ -125,7 +134,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'button-one-open-link-new-tab',
 	array(
 		'label'    => esc_html__( 'Open link in a new tab', 'cosmoswp' ),
@@ -143,7 +152,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'button-one-class-name',
 	array(
 		'label'       => esc_html__( 'Button CSS Class ', 'cosmoswp' ),
@@ -154,19 +163,19 @@ $wp_customize->add_control(
 	)
 );
 
-/*Margin & Padding Msg*/
+/*Margin and Padding Msg*/
 $wp_customize->add_setting(
 	'button-one-padding-margin-msg',
 	array(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'button-one-padding-margin-msg',
 		array(
-			'label'   => esc_html__( 'Margin & Padding', 'cosmoswp' ),
+			'label'   => esc_html__( 'Margin and Padding', 'cosmoswp' ),
 			'section' => $this->button_one,
 		)
 	)
@@ -181,12 +190,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'button-one-margin',
 		array(
-			'label'    => esc_html__( 'Margin', 'cosmoswp' ),
+			'label'    => esc_html__( 'Margin (px)', 'cosmoswp' ),
 			'section'  => $this->button_one,
 			'settings' => 'button-one-margin',
 		),
@@ -204,12 +213,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'button-one-padding',
 		array(
-			'label'    => esc_html__( 'Padding', 'cosmoswp' ),
+			'label'    => esc_html__( 'Padding (px)', 'cosmoswp' ),
 			'section'  => $this->button_one,
 			'settings' => 'button-one-padding',
 		),
@@ -225,7 +234,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'button-one-styling-styling-msg',
@@ -246,7 +255,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_flex_align();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Responsive_Buttonset(
 		$wp_customize,
 		'button-one-align',
@@ -269,7 +278,7 @@ $wp_customize->add_setting(
 	)
 );
 $border_style_choices = cosmoswp_header_border_style();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Tabs(
 		$wp_customize,
 		'button-one-styling',
@@ -352,6 +361,7 @@ $wp_customize->add_control(
 				),
 				'normal-box-shadow-css'   => array(
 					'type'       => 'cssbox',
+					'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 					'tab'        => 'button-one-normal',
 					'class'      => 'cwp-element-show',
 					'box_fields' => array(
@@ -438,6 +448,7 @@ $wp_customize->add_control(
 				),
 				'hover-box-shadow-css'    => array(
 					'type'       => 'cssbox',
+					'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 					'tab'        => 'button-one-hover',
 					'class'      => 'cwp-element-show',
 					'box_fields' => array(
@@ -475,7 +486,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_inherit_options();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'button-one-typography-options',
 	array(
 		'label'    => esc_html__( 'Typography Options', 'cosmoswp' ),
@@ -496,7 +507,7 @@ $wp_customize->add_setting(
 	)
 );
 
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'button-one-typography',

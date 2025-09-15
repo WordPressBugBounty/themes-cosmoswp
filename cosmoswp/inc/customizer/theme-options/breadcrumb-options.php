@@ -1,7 +1,15 @@
 <?php
+/**
+ * Breadcrumb Options.
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+global $cosmoswp_customize_control;
 
 /*Breadcrumb Options*/
 $wp_customize->add_section(
@@ -22,7 +30,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_breadcrumb_options();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'cosmoswp-breadcrumb-options',
 	array(
 		'choices'     => $choices,
@@ -41,14 +49,14 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'breadcrumb-display-position-msg',
 		array(
 			'label'           => esc_html__( 'Breadcrumb Display Location', 'cosmoswp' ),
 			'description'     => esc_html__( 'Where to display breadcrumb ?', 'cosmoswp' ),
-			'active_callback' => 'cosmoswp_breadcrumb_activecallback',
+			'active_callback' => 'cosmoswp_breadcrumb_active_callback',
 			'section'         => $this->breadcrumb_options,
 		)
 	)
@@ -62,13 +70,13 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'cosmoswp_sanitize_checkbox',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'breadcrumb-before-banner-title',
 	array(
 		'label'           => esc_html__( 'Before Banner Title', 'cosmoswp' ),
 		'section'         => $this->breadcrumb_options,
 		'settings'        => 'breadcrumb-before-banner-title',
-		'active_callback' => 'cosmoswp_breadcrumb_With_banner_activecallback',
+		'active_callback' => 'cosmoswp_breadcrumb_with_banner_active_callback',
 		'type'            => 'checkbox',
 	)
 );
@@ -81,13 +89,13 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'cosmoswp_sanitize_checkbox',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'breadcrumb-after-banner-title',
 	array(
 		'label'           => esc_html__( 'After Banner Title', 'cosmoswp' ),
 		'section'         => $this->breadcrumb_options,
 		'settings'        => 'breadcrumb-after-banner-title',
-		'active_callback' => 'cosmoswp_breadcrumb_With_banner_activecallback',
+		'active_callback' => 'cosmoswp_breadcrumb_with_banner_active_callback',
 		'type'            => 'checkbox',
 	)
 );
@@ -100,13 +108,13 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'cosmoswp_sanitize_checkbox',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'breadcrumb-before-content',
 	array(
 		'label'           => esc_html__( 'Before Content', 'cosmoswp' ),
 		'section'         => $this->breadcrumb_options,
 		'settings'        => 'breadcrumb-before-content',
-		'active_callback' => 'cosmoswp_breadcrumb_activecallback',
+		'active_callback' => 'cosmoswp_breadcrumb_active_callback',
 		'type'            => 'checkbox',
 	)
 );
@@ -118,13 +126,13 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'breadcrumb-color-option-msg',
 		array(
 			'label'           => esc_html__( 'Banner Breadcrumb Color Option', 'cosmoswp' ),
-			'active_callback' => 'cosmoswp_breadcrumb_activecallback',
+			'active_callback' => 'cosmoswp_breadcrumb_active_callback',
 			'section'         => $this->breadcrumb_options,
 		)
 	)
@@ -138,7 +146,7 @@ $wp_customize->add_setting(
 		'default'           => $theme_option_defaults['breadcrumb-color-options'],
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'breadcrumb-color-options',
@@ -146,7 +154,7 @@ $wp_customize->add_control(
 			'label'           => esc_html__( 'Color Options', 'cosmoswp' ),
 			'section'         => $this->breadcrumb_options,
 			'settings'        => 'breadcrumb-color-options',
-			'active_callback' => 'cosmoswp_breadcrumb_activecallback',
+			'active_callback' => 'cosmoswp_breadcrumb_active_callback',
 		),
 		array(
 			'link-color'       => array(

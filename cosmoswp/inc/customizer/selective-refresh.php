@@ -1,4 +1,11 @@
 <?php
+/**
+ * Selective Refresh
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -64,6 +71,21 @@ if ( ! function_exists( 'cosmoswp_customize_partial_header' ) ) :
 		return $value;
 	}
 endif;
+if ( ! function_exists( 'cosmoswp_customize_partial_header_menu_sidebar' ) ) :
+
+	/**
+	 * Render the site tagline for the selective refresh partial.
+	 *
+	 * @return string
+	 */
+	function cosmoswp_customize_partial_header_menu_sidebar() {
+		ob_start();
+		cosmoswp_header_builder()->header_outside();
+
+		$value = ob_get_clean();
+		return $value;
+	}
+endif;
 
 if ( ! function_exists( 'cosmoswp_customize_partial_footer' ) ) :
 
@@ -108,26 +130,53 @@ if ( ! function_exists( 'cosmoswp_customize_partial_page_header' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'cosmoswp_customize_partial_refresh_dynamic_css' ) ) :
 
+if ( ! function_exists( 'cosmoswp_customize_partial_refresh_dynamic_css' ) ) {
 	/**
-	 * Render the site tagline for the selective refresh partial.
+	 * Get dynamic CSS output for partial refresh.
 	 *
-	 * @return string
+	 * @since 1.0.0
+	 *
+	 * @return string Sanitized CSS output.
 	 */
 	function cosmoswp_customize_partial_refresh_dynamic_css() {
 		$output = cosmoswp_dynamic_css()->get_dynamic_css( array(), true );
 		return wp_strip_all_tags( $output );
 	}
+}
 
+if ( ! function_exists( 'cosmoswp_customize_partial_refresh_ajax_dynamic_css' ) ) {
+
+	/**
+	 * AJAX callback: Return sanitized dynamic CSS.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 *
+	 * @hook wp_ajax_cosmoswp_head_ajax_dynamic_css
+	 */
 	function cosmoswp_customize_partial_refresh_ajax_dynamic_css() {
+		check_ajax_referer( 'cosmoswp_customizer_nonce', 'security' );
+
 		$output = cosmoswp_customize_partial_refresh_dynamic_css();
 		wp_send_json_success( wp_strip_all_tags( $output ) );
 	}
+}
+add_action( 'wp_ajax_cosmoswp_head_ajax_dynamic_css', 'cosmoswp_customize_partial_refresh_ajax_dynamic_css' );
 
-	add_action( 'wp_ajax_cosmoswp_head_ajax_dynamic_css', 'cosmoswp_customize_partial_refresh_ajax_dynamic_css' );
-
+if ( ! function_exists( 'cosmoswp_customize_partial_refresh_typography' ) ) {
+	/**
+	 * AJAX callback: Return dynamic CSS and Google Font URL for typography.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 *
+	 * @hook wp_ajax_general_partial_ajax_typography
+	 */
 	function cosmoswp_customize_partial_refresh_typography() {
+		check_ajax_referer( 'cosmoswp_customizer_nonce', 'security' );
 
 		$dynamic_css = cosmoswp_customize_partial_refresh_dynamic_css();
 		$font_url    = cosmoswp_typography_fonts()->get_google_font_url( true );
@@ -137,10 +186,21 @@ if ( ! function_exists( 'cosmoswp_customize_partial_refresh_dynamic_css' ) ) :
 		);
 		wp_send_json_success( $output );
 	}
+}
+add_action( 'wp_ajax_general_partial_ajax_typography', 'cosmoswp_customize_partial_refresh_typography' );
 
-	add_action( 'wp_ajax_general_partial_ajax_typography', 'cosmoswp_customize_partial_refresh_typography' );
-
+if ( ! function_exists( 'cosmoswp_customize_partial_get_multiple_class' ) ) {
+	/**
+	 * AJAX callback: Return body and layout wrapper classes.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 *
+	 * @hook wp_ajax_general_header_multiple_class_refresh
+	 */
 	function cosmoswp_customize_partial_get_multiple_class() {
+		check_ajax_referer( 'cosmoswp_customizer_nonce', 'security' );
 
 		$output = array(
 			'body_class'                                 => join( ' ', get_body_class() ),
@@ -150,6 +210,5 @@ if ( ! function_exists( 'cosmoswp_customize_partial_refresh_dynamic_css' ) ) :
 		);
 		wp_send_json_success( $output );
 	}
-	add_action( 'wp_ajax_general_header_multiple_class_refresh', 'cosmoswp_customize_partial_get_multiple_class' );
-
-endif;
+}
+add_action( 'wp_ajax_general_header_multiple_class_refresh', 'cosmoswp_customize_partial_get_multiple_class' );

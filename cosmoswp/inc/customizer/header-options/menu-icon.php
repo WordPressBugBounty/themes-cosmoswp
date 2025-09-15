@@ -1,7 +1,16 @@
 <?php
+/**
+ * Menu Icon Options.
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+global $cosmoswp_customize_control;
 
 /*Menu Icon section*/
 $wp_customize->add_section(
@@ -20,7 +29,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'menu-icon-open-icon-msg',
@@ -41,7 +50,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_menu_indicator_options();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'menu-icon-open-icon-options',
 	array(
 		'choices'  => $choices,
@@ -61,7 +70,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'menu-open-text',
 	array(
 		'label'           => esc_html__( 'Open Text', 'cosmoswp' ),
@@ -72,7 +81,6 @@ $wp_customize->add_control(
 	)
 );
 
-
 /*Menu Open Icon*/
 $wp_customize->add_setting(
 	'menu-open-icon',
@@ -82,7 +90,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Customize_Icons_Control(
 		$wp_customize,
 		'menu-open-icon',
@@ -105,7 +113,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_icon_position();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Buttonset(
 		$wp_customize,
 		'menu-icon-open-icon-position',
@@ -128,12 +136,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Slider(
 		$wp_customize,
 		'menu-open-icon-size-responsive',
 		array(
-			'label'           => esc_html__( 'Icon Size', 'cosmoswp' ),
+			'label'           => esc_html__( 'Icon Size (px)', 'cosmoswp' ),
 			'section'         => $this->menu_icon,
 			'settings'        => 'menu-open-icon-size-responsive',
 			'input_attrs'     => array(
@@ -156,7 +164,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_flex_align();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Buttonset(
 		$wp_customize,
 		'menu-open-icon-align',
@@ -178,12 +186,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'menu-open-icon-padding',
 		array(
-			'label'    => esc_html__( 'Padding', 'cosmoswp' ),
+			'label'    => esc_html__( 'Padding (px)', 'cosmoswp' ),
 			'section'  => $this->menu_icon,
 			'settings' => 'menu-open-icon-padding',
 		),
@@ -201,12 +209,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'menu-open-icon-margin',
 		array(
-			'label'    => esc_html__( 'Margin', 'cosmoswp' ),
+			'label'    => esc_html__( 'Margin (px)', 'cosmoswp' ),
 			'section'  => $this->menu_icon,
 			'settings' => 'menu-open-icon-margin',
 		),
@@ -225,7 +233,7 @@ $wp_customize->add_setting(
 	)
 );
 $border_style_choices = cosmoswp_header_border_style();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Tabs(
 		$wp_customize,
 		'menu-open-icon-styling',
@@ -308,6 +316,7 @@ $wp_customize->add_control(
 				),
 				'normal-box-shadow-css'   => array(
 					'type'       => 'cssbox',
+					'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 					'tab'        => 'menu-icon-normal',
 					'class'      => 'cwp-element-show',
 					'box_fields' => array(
@@ -394,6 +403,7 @@ $wp_customize->add_control(
 				),
 				'hover-box-shadow-css'    => array(
 					'type'       => 'cssbox',
+					'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 					'tab'        => 'menu-icon-hover',
 					'class'      => 'cwp-element-show',
 					'box_fields' => array(
@@ -431,7 +441,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_inherit_options();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'menu-open-icon-typography-options',
 	array(
 		'label'           => esc_html__( 'Typography Options', 'cosmoswp' ),
@@ -452,7 +462,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'menu-open-icon-typography',
@@ -475,7 +485,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'menu-icon-close-icon-msg',
@@ -496,7 +506,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_menu_indicator_options();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'menu-icon-close-icon-options',
 	array(
 		'choices'  => $choices,
@@ -516,7 +526,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'menu-close-text',
 	array(
 		'label'           => esc_html__( 'Close Text', 'cosmoswp' ),
@@ -537,7 +547,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Customize_Icons_Control(
 		$wp_customize,
 		'menu-close-icon',
@@ -560,7 +570,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_icon_position();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Buttonset(
 		$wp_customize,
 		'menu-icon-close-icon-position',
@@ -583,12 +593,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Slider(
 		$wp_customize,
 		'menu-icon-close-icon-size-responsive',
 		array(
-			'label'           => esc_html__( 'Menu Icon Size', 'cosmoswp' ),
+			'label'           => esc_html__( 'Menu Icon Size (px)', 'cosmoswp' ),
 			'section'         => $this->menu_icon,
 			'settings'        => 'menu-icon-close-icon-size-responsive',
 			'input_attrs'     => array(
@@ -611,7 +621,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_flex_align();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Buttonset(
 		$wp_customize,
 		'menu-icon-close-icon-align',
@@ -634,12 +644,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'menu-icon-close-padding',
 		array(
-			'label'    => esc_html__( 'Padding', 'cosmoswp' ),
+			'label'    => esc_html__( 'Padding (px)', 'cosmoswp' ),
 			'section'  => $this->menu_icon,
 			'settings' => 'menu-icon-close-padding',
 		),
@@ -657,12 +667,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'menu-icon-close-margin',
 		array(
-			'label'    => esc_html__( 'Margin', 'cosmoswp' ),
+			'label'    => esc_html__( 'Margin (px)', 'cosmoswp' ),
 			'section'  => $this->menu_icon,
 			'settings' => 'menu-icon-close-margin',
 		),
@@ -681,7 +691,7 @@ $wp_customize->add_setting(
 	)
 );
 $border_style_choices = cosmoswp_header_border_style();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Tabs(
 		$wp_customize,
 		'menu-icon-close-icon-styling',
@@ -764,6 +774,7 @@ $wp_customize->add_control(
 				),
 				'normal-box-shadow-css'   => array(
 					'type'       => 'cssbox',
+					'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 					'tab'        => 'menu-icon-normal',
 					'class'      => 'cwp-element-show',
 					'box_fields' => array(
@@ -850,6 +861,7 @@ $wp_customize->add_control(
 				),
 				'hover-box-shadow-css'    => array(
 					'type'       => 'cssbox',
+					'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 					'tab'        => 'menu-icon-hover',
 					'class'      => 'cwp-element-show',
 					'box_fields' => array(
@@ -887,7 +899,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_inherit_options();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'menu-icon-close-text-typography-options',
 	array(
 		'label'           => esc_html__( 'Typography Options', 'cosmoswp' ),
@@ -908,7 +920,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'menu-icon-close-text-typography',

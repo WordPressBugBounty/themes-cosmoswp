@@ -1,8 +1,15 @@
-<?php
+<?php // phpcs:ignore WordPress.NamingConventions.ValidClassName.Prefix -- Class filename does not follow standard, but this is intentional.
+/**
+ * Addons base for adding customization.
+ * Use on premium version.
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
 if ( ! class_exists( 'Cosmoswp_Addons_Base' ) ) {
 
 	/**
@@ -36,7 +43,7 @@ if ( ! class_exists( 'Cosmoswp_Addons_Base' ) ) {
 		 * @param    object $component        A reference to the instance of the object on which the filter is defined.
 		 * @param    string $callback         The name of the function definition on the $component.
 		 * @param    int    $priority         Optional. The priority at which the function should be fired. Default is 10.
-		 * @param    int    $accepted_args    Optional. The number of arguments that should be passed to the $callback. Default is 1
+		 * @param    int    $accepted_args    Optional. The number of arguments that should be passed to the $callback. Default is 1.
 		 */
 		public function add_filter( $hook, $component, $callback, $priority = 10, $accepted_args = 1 ) {
 			add_filter( $hook, array( $component, $callback ), $priority, $accepted_args );

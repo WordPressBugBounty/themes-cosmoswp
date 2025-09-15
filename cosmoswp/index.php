@@ -11,6 +11,11 @@
  *
  * @package CosmosWP
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $breadcrumb_before_content = cosmoswp_get_theme_options( 'breadcrumb-before-content' );
 get_header();
 do_action( 'cosmoswp_action_before_blog' );

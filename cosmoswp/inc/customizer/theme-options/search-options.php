@@ -1,7 +1,16 @@
 <?php
+/**
+ * Search Options.
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+global $cosmoswp_customize_control;
 
 /*Adding Sections for Search Placeholder*/
 $wp_customize->add_section(
@@ -20,7 +29,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'search-options-msg',
@@ -39,7 +48,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'sanitize_text_field',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'search-placeholder',
 	array(
 		'label'    => esc_html__( 'Search Placeholder', 'cosmoswp' ),
@@ -58,7 +67,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_search_template_options();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'search-template-options',
 	array(
 		'choices'  => $choices,

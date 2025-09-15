@@ -1,18 +1,30 @@
 <?php
+/**
+ * Header Social Icon
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $social_information      = cosmoswp_get_theme_options( 'header-social-icon-data' );
 $social_information_data = json_decode( $social_information, true );
 $social_information_data = apply_filters( 'cosmoswp_header_social_icon', $social_information_data );
-// icon align
+
+// icon align.
 $social_icon_align = cosmoswp_get_theme_options( 'header-social-icon-align' );
 $social_icon_align = json_decode( $social_icon_align, true );
 
-// desktop align
+// desktop align.
 $social_icon_align_desktop = cosmoswp_responsive_button_value( $social_icon_align, 'desktop' );
 
-// tablet align
+// tablet align.
 $social_icon_align_tablet = cosmoswp_responsive_button_value( $social_icon_align, 'tablet' );
 
-// mobile align
+// mobile align.
 $social_icon_align_mobile = cosmoswp_responsive_button_value( $social_icon_align, 'mobile' );
 ?>
 <!-- Start of .cwp-social-links -->

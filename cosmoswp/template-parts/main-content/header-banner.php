@@ -1,15 +1,17 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
 /**
  * Template part for displaying banner.
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
  * @package CosmosWP
- * @subpackage CosmosWP
  */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $banner_type              = '';
 $bg_image                 = '';
 $breadcrumb_before_banner = cosmoswp_get_theme_options( 'breadcrumb-before-banner-title' );
@@ -24,18 +26,18 @@ if ( 'bg-image' == $banner_display_option ) {
 }
 ?>
 <div id="cwp-banner-wrap" class="cwp-banner <?php echo esc_attr( cosmoswp_string_concator( $banner_title_align, $banner_content_position, $enable_banner ) ); ?>" <?php echo esc_attr( $bg_image ); ?>
-	 >
+	>
 	<?php
-	if ( 'video' == $banner_display_option ) {
+	if ( 'video' === $banner_display_option ) {
 		$banner_type = 'has-video';
 		the_custom_header_markup();
-	} elseif ( 'normal-image' == $banner_display_option ) {
+	} elseif ( 'normal-image' === $banner_display_option ) {
 		$banner_type              = 'has-normal-image';
 		$the_custom_header_markup = apply_filters( 'cosmoswp_custom_header_markup', get_custom_header_markup() );
-		echo $the_custom_header_markup;
-	} elseif ( 'bg-image' == $banner_display_option ) {
+		echo $the_custom_header_markup;//phpcs:ignore
+	} elseif ( 'bg-image' === $banner_display_option ) {
 		$banner_type = 'has-bg-image';
-	} elseif ( 'color' == $banner_display_option ) {
+	} elseif ( 'color' === $banner_display_option ) {
 		$banner_type = 'has-bg-color';
 	}
 	?>

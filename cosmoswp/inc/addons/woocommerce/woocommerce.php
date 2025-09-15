@@ -1,9 +1,25 @@
-<?php
+<?php // phpcs:ignore WordPress.NamingConventions.ValidClassName.Prefix -- Class filename does not follow standard, but this is intentional.
+/**
+ * WooCommerce customizations.
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /*Required Helper File*/
 require COSMOSWP_PATH . '/inc/addons/woocommerce/helper.php';
 
 if ( ! class_exists( 'CosmosWP_WooCommerce' ) ) :
 
+	/**
+	 * WooCommerce customizations.
+	 *
+	 * @package CosmosWP
+	 */
 	class CosmosWP_WooCommerce {
 
 		/**
@@ -19,15 +35,12 @@ if ( ! class_exists( 'CosmosWP_WooCommerce' ) ) :
 		 */
 		public static function instance() {
 
-			// Store the instance locally to avoid private static replication
 			static $instance = null;
 
-			// Only run these methods if they haven't been ran previously
 			if ( null === $instance ) {
-				$instance = new CosmosWP_WooCommerce;
+				$instance = new CosmosWP_WooCommerce();
 			}
 
-			// Always return the instance
 			return $instance;
 		}
 
@@ -82,10 +95,9 @@ if ( ! class_exists( 'CosmosWP_WooCommerce' ) ) :
 				add_action( 'cosmoswp_woo_primary_sidebar', array( $this, 'primary_sidebar' ), 10 );
 				add_action( 'cosmoswp_woo_secondary_sidebar', array( $this, 'secondary_sidebar' ), 10 );
 
-                /*add class in single product class*/
+				/*add class in single product class*/
 				add_action( 'woocommerce_post_class', array( $this, 'single_product_class' ), 10, 2 );
 			}
-
 		}
 
 		/**
@@ -108,10 +120,9 @@ if ( ! class_exists( 'CosmosWP_WooCommerce' ) ) :
 		/**
 		 * Add 'woocommerce-active' class to the body tag
 		 *
-		 * @param  array $classes css classes applied to the body tag.
 		 * @return void
 		 */
-		public function cosmoswp_woo_widget_init( $classes ) {
+		public function cosmoswp_woo_widget_init() {
 			$description = esc_html__( 'Displays widgets in Primary Sidebar', 'cosmoswp' );
 			register_sidebar(
 				array(
@@ -148,7 +159,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce' ) ) :
 			if ( cosmoswp_is_woocommerce_active() ) {
 				$classes[]      = 'cwp-woocommerce-active';
 				$wc_tabs_design = cosmoswp_get_theme_options( 'cwc-single-tab-design' );
-				if ( 'default' != $wc_tabs_design ) {
+				if ( 'default' !== $wc_tabs_design ) {
 					if ( is_product() ) {
 						$classes[] = esc_attr( 'wc-single-vertical-tab' );
 					}
@@ -199,7 +210,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce' ) ) :
 		 *
 		 * @since 1.0.0
 		 */
-		function before_main_content() {
+		public function before_main_content() {
 			do_action( 'cosmoswp_action_before_page' );
 			do_action( 'cosmoswp_action_breadcrumb' );
 		}
@@ -209,7 +220,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce' ) ) :
 		 *
 		 * @since 1.0.0
 		 */
-		function after_main_content() {
+		public function after_main_content() {
 			do_action( 'cosmoswp_action_after_page' );
 		}
 
@@ -229,7 +240,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce' ) ) :
 		}
 
 		/**
-		 * Remove elements.
+		 * Remove archive elements.
 		 *
 		 * @since 1.0.0
 		 */
@@ -249,6 +260,11 @@ if ( ! class_exists( 'CosmosWP_WooCommerce' ) ) :
 			remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
 		}
 
+		/**
+		 * Remove single elements.
+		 *
+		 * @since 1.0.0
+		 */
 		public function remove_single_elements() {
 
 			remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
@@ -260,6 +276,11 @@ if ( ! class_exists( 'CosmosWP_WooCommerce' ) ) :
 			remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
 		}
 
+		/**
+		 * Add single elements.
+		 *
+		 * @since 1.0.0
+		 */
 		public function single_product_summary() {
 			$woo_single_list_elements = cosmoswp_get_theme_options( 'cwc-single-elements' );
 			$woo_single_list_elements = apply_filters( 'cosmoswp_woo_single_list_elements', $woo_single_list_elements );
@@ -267,17 +288,17 @@ if ( ! class_exists( 'CosmosWP_WooCommerce' ) ) :
 				return;
 			}
 			foreach ( $woo_single_list_elements as $element ) {
-				if ( 'title' == $element ) {
+				if ( 'title' === $element ) {
 					woocommerce_template_single_title();
-				} elseif ( 'rating' == $element ) {
+				} elseif ( 'rating' === $element ) {
 					woocommerce_template_single_rating();
-				} elseif ( 'price' == $element ) {
+				} elseif ( 'price' === $element ) {
 					woocommerce_template_single_price();
-				} elseif ( 'excerpt' == $element ) {
+				} elseif ( 'excerpt' === $element ) {
 					woocommerce_template_single_excerpt();
-				} elseif ( 'cart' == $element ) {
+				} elseif ( 'cart' === $element ) {
 					woocommerce_template_single_add_to_cart();
-				} elseif ( 'metadata' == $element ) {
+				} elseif ( 'metadata' === $element ) {
 					woocommerce_template_single_meta();
 				}
 			}
@@ -290,7 +311,6 @@ if ( ! class_exists( 'CosmosWP_WooCommerce' ) ) :
 		 */
 		public function add_archive_elements() {
 			add_action( 'woocommerce_shop_loop_item_title', array( $this, 'woocommerce_template_loop_product_title' ), 10 );
-
 		}
 
 		/**
@@ -301,10 +321,14 @@ if ( ! class_exists( 'CosmosWP_WooCommerce' ) ) :
 		public function add_single_elements() {
 			add_filter( 'woocommerce_upsell_display_args', array( $this, 'woocommerce_upsell_display_args' ), 10 );
 			add_filter( 'woocommerce_output_related_products_args', array( $this, 'woocommerce_output_related_products_args' ), 10 );
-
 		}
 
-		function woocommerce_template_loop_product_title() {
+		/**
+		 * Single page product title.
+		 *
+		 * @since 1.0.0
+		 */
+		public function woocommerce_template_loop_product_title() {
 			global $product;
 
 			?>
@@ -319,33 +343,36 @@ if ( ! class_exists( 'CosmosWP_WooCommerce' ) ) :
 
 		/**
 		 * Output the related products.
+		 *
+		 * @param array $args Args.
+		 * return Args array.
 		 */
-		function woocommerce_upsell_display_args( $args ) {
+		public function woocommerce_upsell_display_args( $args ) {
 
 			$args['columns']        = cosmoswp_get_theme_options( 'cwc-single-upsell-col' );
 			$args['posts_per_page'] = cosmoswp_get_theme_options( 'cwc-single-upsell-number' );
 			return $args;
-
 		}
 
 		/**
 		 * Output the related products.
+		 *
+		 * @param array $args Args.
+		 * return Args array.
 		 */
-		function woocommerce_output_related_products_args( $args ) {
+		public function woocommerce_output_related_products_args( $args ) {
 
 			$args['columns']        = cosmoswp_get_theme_options( 'cwc-single-related-col' );
 			$args['posts_per_page'] = cosmoswp_get_theme_options( 'cwc-single-related-number' );
 			return $args;
-
 		}
-
 
 		/**
 		 * Woocommerce wrapper start.
 		 *
 		 * @since 1.0.0
 		 */
-		function woocommerce_output_content_wrapper() {
+		public function woocommerce_output_content_wrapper() {
 			echo '<div class="cosmoswp-woocommerce cwp-content-wrapper">';
 		}
 
@@ -354,23 +381,25 @@ if ( ! class_exists( 'CosmosWP_WooCommerce' ) ) :
 		 *
 		 * @since 1.0.0
 		 */
-		function woocommerce_output_content_wrapper_end() {
+		public function woocommerce_output_content_wrapper_end() {
 			echo '</div><!-- .cosmoswp-woocommerce -->';
 		}
 
 		/**
 		 * Show the subcategory title in the product loop.
 		 * Original function wp-content\plugins\woocommerce\includes\wc-template-functions.php line 1128
+		 *
 		 * @param object $category Category object.
 		 */
-		function woocommerce_template_loop_category_title( $category ) {
+		public function woocommerce_template_loop_category_title( $category ) {
 			?>
 			<h2 class="woocommerce-loop-category__title entry-title">
 				<?php
 				echo esc_html( $category->name );
 
 				if ( $category->count > 0 ) {
-					echo apply_filters( 'woocommerce_subcategory_count_html', ' <mark class="count">' . esc_html( $category->count ) . esc_html__( ' Products', 'cosmoswp' ) . '</mark>', $category ); // WPCS: XSS ok.
+					$product_count_html = '<mark class="count">' . esc_html( $category->count ) . esc_html__( ' Products', 'cosmoswp' ) . '</mark>';
+					echo apply_filters( 'woocommerce_subcategory_count_html', $product_count_html, $category ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHookname
 				}
 				?>
 			</h2>
@@ -382,7 +411,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce' ) ) :
 		 *
 		 * @since 1.0.0
 		 */
-		function primary_sidebar() {
+		public function primary_sidebar() {
 
 			$global_widget_title_align   = cosmoswp_get_theme_options( 'global-widget-title-align' );
 			$global_widget_content_align = cosmoswp_get_theme_options( 'global-widget-content-align' );
@@ -390,7 +419,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce' ) ) :
 			do_action( 'cosmoswp_action_before_sidebar' );
 			?>
 			<div class="cwp-sidebar<?php echo esc_attr( $cwc_archive_psp_sm ? ' cwc-archive-psp-sm-wrap' : '' ); ?>" data-widget-title="<?php echo esc_attr( $global_widget_title_align ); ?>"
-				 data-widget-content="<?php echo esc_attr( $global_widget_content_align ); ?>">
+				data-widget-content="<?php echo esc_attr( $global_widget_content_align ); ?>">
 				<?php
 				if ( $cwc_archive_psp_sm ) {
 					echo '<a class="cwc-archive-psp-sm cwc-archive-psp-sm-toggle" href="#">' . wp_kses_post( cosmoswp_get_theme_options( 'cwc-archive-psp-sm-close-text' ) ) . '</a>';
@@ -409,13 +438,13 @@ if ( ! class_exists( 'CosmosWP_WooCommerce' ) ) :
 		 *
 		 * @since 1.0.0
 		 */
-		function secondary_sidebar() {
+		public function secondary_sidebar() {
 			$global_widget_title_align   = cosmoswp_get_theme_options( 'global-widget-title-align' );
 			$global_widget_content_align = cosmoswp_get_theme_options( 'global-widget-content-align' );
 			do_action( 'cosmoswp_action_before_sidebar' );
 			?>
 			<div class="cwp-sidebar" data-widget-title="<?php echo esc_attr( $global_widget_title_align ); ?>"
-				 data-widget-content="<?php echo esc_attr( $global_widget_content_align ); ?>">
+				data-widget-content="<?php echo esc_attr( $global_widget_content_align ); ?>">
 				<?php
 				if ( is_active_sidebar( 'cosmoswp-woo-secondary-sidebar' ) ) {
 					dynamic_sidebar( 'cosmoswp-woo-secondary-sidebar' );
@@ -426,44 +455,49 @@ if ( ! class_exists( 'CosmosWP_WooCommerce' ) ) :
 			do_action( 'cosmoswp_action_after_sidebar' );
 		}
 
-        /**
-         * WooCommerce Post Class filter.
-         *
-         * @since 3.6.2
-         * @param array      $classes Array of CSS classes.
-         * @param WC_Product $product Product object.
-         */
-        function single_product_class( $classes, $product ) {
-            global $woocommerce_loop;
-            // is_product() - Returns true on a single product page
-            // NOT single product page, so return
-            if ( ! is_product() ) return $classes;
+		/**
+		 * WooCommerce Post Class filter.
+		 *
+		 * @since 3.6.2
+		 * @param array      $classes Array of CSS classes.
+		 * @param WC_Product $product Product object.
+		 * return array      $classes Array of CSS classes.
+		 */
+		public function single_product_class( $classes, $product ) {
+			global $woocommerce_loop;
+			// is_product() - Returns true on a single product page
+			// NOT single product page, so return.
+			if ( ! is_product() ) {
+				return $classes;
+			}
 
-            // The related products section, so return
-            if ( $woocommerce_loop['name'] == 'related' ) return $classes;
+			// The related products section, so return.
+			if ( 'related' === $woocommerce_loop['name'] ) {
+				return $classes;
+			}
 
-            $cwc_single_media_width = cosmoswp_get_theme_options('cwc-single-media-width');
-            $cwc_single_media_width = json_decode($cwc_single_media_width, true);
-            if (isset($cwc_single_media_width['mobile'])) {
-                if($cwc_single_media_width['mobile'] === 100){
-                    // Add new class
-                    $classes[] = 'cwp-single-img-full-m';
-                }
-            }
-            if (isset($cwc_single_media_width['tablet'])) {
-                if($cwc_single_media_width['tablet'] === 100){
-                    // Add new class
-                    $classes[] = 'cwp-single-img-full-t';
-                }
-            }
-            if (isset($cwc_single_media_width['desktop'])) {
-                if($cwc_single_media_width['desktop'] === 100){
-                    // Add new class
-                    $classes[] = 'cwp-single-img-full-d';
-                }
-            }
-            return $classes;
-        }
+			$cwc_single_media_width = cosmoswp_get_theme_options( 'cwc-single-media-width' );
+			$cwc_single_media_width = json_decode( $cwc_single_media_width, true );
+			if ( isset( $cwc_single_media_width['mobile'] ) ) {
+				if ( 100 === $cwc_single_media_width['mobile'] ) {
+					// Add new class.
+					$classes[] = 'cwp-single-img-full-m';
+				}
+			}
+			if ( isset( $cwc_single_media_width['tablet'] ) ) {
+				if ( 100 === $cwc_single_media_width['tablet'] ) {
+					// Add new class.
+					$classes[] = 'cwp-single-img-full-t';
+				}
+			}
+			if ( isset( $cwc_single_media_width['desktop'] ) ) {
+				if ( 100 === $cwc_single_media_width['desktop'] ) {
+					// Add new class.
+					$classes[] = 'cwp-single-img-full-d';
+				}
+			}
+			return $classes;
+		}
 	}
 endif;
 
@@ -478,8 +512,7 @@ endif;
  */
 if ( ! function_exists( 'cosmoswp_woocommerce' ) ) {
 
-	function cosmoswp_woocommerce() {
-
+	function cosmoswp_woocommerce() {//phpcs:ignore
 		return CosmosWP_WooCommerce::instance();
 	}
 

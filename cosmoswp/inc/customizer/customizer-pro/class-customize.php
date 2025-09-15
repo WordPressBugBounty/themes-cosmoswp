@@ -1,4 +1,15 @@
-<?php
+<?php // phpcs:ignore WordPress.NamingConventions.ValidClassName.Prefix -- Class filename does not follow standard, but this is intentional.
+/**
+ * Singleton class for handling the theme's customizer integration.
+ *
+ * @since  1.0.0
+ * @access public
+ */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 /**
  * Singleton class for handling the theme's customizer integration.
  *
@@ -56,7 +67,7 @@ final class CosmosWP_Customize {
 	 *
 	 * @since  1.0.0
 	 * @access public
-	 * @param  object $manager
+	 * @param  object $manager Customizer object.
 	 * @return void
 	 */
 	public function sections( $manager ) {
@@ -94,8 +105,8 @@ final class CosmosWP_Customize {
 	public function enqueue_control_scripts() {
 		require_once cosmoswp_file_directory( 'inc/customizer/customizer-pro/section-pro.php' );
 
-		wp_enqueue_script( 'cosmoswp-customize-controls', trailingslashit( get_template_directory_uri() ) . 'inc/customizer/customizer-pro/customize-controls.js', array( 'customize-controls' ) );
-		wp_enqueue_style( 'cosmoswp-customize-controls', trailingslashit( get_template_directory_uri() ) . 'inc/customizer/customizer-pro/customize-controls.css' );
+		wp_enqueue_script( 'cosmoswp-customize-controls', trailingslashit( get_template_directory_uri() ) . 'inc/customizer/customizer-pro/customize-controls.js', array( 'customize-controls' ), COSMOSWP_VERSION, false );
+		wp_enqueue_style( 'cosmoswp-customize-controls', trailingslashit( get_template_directory_uri() ) . 'inc/customizer/customizer-pro/customize-controls.css', array(), COSMOSWP_VERSION );
 	}
 }
 // Doing this customizer thang!

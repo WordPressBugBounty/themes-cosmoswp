@@ -1,7 +1,15 @@
 <?php
+/**
+ * EDD Customizer Options.
+ *
+ * @package CosmosWP
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+global $cosmoswp_customize_control;
 
 /*Edd Advanced Styling*/
 $wp_customize->add_section(
@@ -20,7 +28,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'edd-product-styling-msg',
@@ -37,9 +45,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_background',
 		'default'           => $styling_defaults['edd-product-toolbar'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'edd-product-toolbar',
@@ -71,9 +80,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_background',
 		'default'           => $styling_defaults['edd-product-box'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'edd-product-box',
@@ -146,7 +156,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'edd-edd-product-button-styling-msg',
@@ -163,10 +173,11 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_tabs',
 		'default'           => $styling_defaults['edd-product-button-styling'],
+		'transport'         => 'postMessage',
 	)
 );
 $border_style_choices = cosmoswp_header_border_style();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Tabs(
 		$wp_customize,
 		'edd-product-button-styling',
@@ -247,12 +258,14 @@ $wp_customize->add_control(
 				),
 				'normal-box-shadow-css'   => array(
 					'type'       => 'cssbox',
+					'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 					'tab'        => 'button-one-normal',
 					'box_fields' => array(
 						'x'      => true,
 						'Y'      => true,
 						'BLUR'   => true,
 						'SPREAD' => true,
+
 					),
 					'attr'       => array(
 						'min'         => 0,
@@ -330,6 +343,7 @@ $wp_customize->add_control(
 				),
 				'hover-box-shadow-css'    => array(
 					'type'       => 'cssbox',
+					'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 					'tab'        => 'button-one-hover',
 					'box_fields' => array(
 						'x'      => true,
@@ -363,7 +377,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'edd-edd-product-navigation-styling-msg',
@@ -374,20 +388,21 @@ $wp_customize->add_control(
 	)
 );
 
-/*Border & Box Msg*/
+/*Border and Box Msg*/
 $wp_customize->add_setting(
 	'edd-product-navigation-styling',
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_border',
 		'default'           => $styling_defaults['edd-product-navigation-styling'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'edd-product-navigation-styling',
 		array(
-			'label'    => esc_html__( 'Border & Box', 'cosmoswp' ),
+			'label'    => esc_html__( 'Border and Box Shadow', 'cosmoswp' ),
 			'section'  => 'edd-setting-collection',
 			'settings' => 'edd-product-navigation-styling',
 		),
@@ -451,6 +466,7 @@ $wp_customize->add_control(
 			),
 			'box-shadow-css'   => array(
 				'type'       => 'cssbox',
+				'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 				'box_fields' => array(
 					'x'      => true,
 					'Y'      => true,
@@ -482,9 +498,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_background',
 		'default'           => $styling_defaults['edd-product-pagination-color-options'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'edd-product-pagination-color-options',
@@ -521,7 +538,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'edd-cart-styling-msg',
@@ -538,9 +555,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_background',
 		'default'           => $styling_defaults['edd-cart-table-bg-color'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'edd-cart-table-bg-color',
@@ -568,9 +586,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_background',
 		'default'           => $styling_defaults['edd-cart-table-bg-color'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'edd-cart-table-border-color',
@@ -594,9 +613,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_background',
 		'default'           => $styling_defaults['edd-cart-table-header-color-options'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'edd-cart-table-header-color-options',
@@ -624,9 +644,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_background',
 		'default'           => $styling_defaults['edd-cart-remove-text-color-options'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'edd-cart-remove-text-color-options',
@@ -655,7 +676,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'edd-notice-error-styling-msg',
@@ -672,9 +693,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_background',
 		'default'           => $styling_defaults['edd-notice-error-color-options'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'edd-notice-error-color-options',
@@ -707,7 +729,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'edd-notice-info-styling-msg',
@@ -724,9 +746,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_background',
 		'default'           => $styling_defaults['edd-notice-info-color-options'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'edd-notice-info-color-options',
@@ -759,7 +782,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'edd-notice-success-styling-msg',
@@ -776,9 +799,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_background',
 		'default'           => $styling_defaults['edd-notice-success-color-options'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'edd-notice-success-color-options',

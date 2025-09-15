@@ -1,9 +1,24 @@
-<?php
+<?php // phpcs:ignore WordPress.NamingConventions.ValidClassName.Prefix -- Class filename does not follow standard, but this is intentional.
+
+/**
+ * EDD customizations.
+ *
+ * @package CosmosWP
+ */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /*Required Helper File*/
 require COSMOSWP_PATH . '/inc/addons/edd/helper.php';
 
 if ( ! class_exists( 'CosmosWP_Edd' ) ) :
 
+	/**
+	 * EDD customizations.
+	 *
+	 * @package CosmosWP
+	 */
 	class CosmosWP_Edd {
 
 		/**
@@ -19,15 +34,12 @@ if ( ! class_exists( 'CosmosWP_Edd' ) ) :
 		 */
 		public static function instance() {
 
-			// Store the instance locally to avoid private static replication
 			static $instance = null;
 
-			// Only run these methods if they haven't been ran previously
 			if ( null === $instance ) {
 				$instance = new CosmosWP_Edd();
 			}
 
-			// Always return the instance
 			return $instance;
 		}
 
@@ -72,7 +84,6 @@ if ( ! class_exists( 'CosmosWP_Edd' ) ) :
 			require COSMOSWP_PATH . '/inc/addons/edd/single/cwp-edd-single.php';
 			require COSMOSWP_PATH . '/inc/addons/edd/advanced-styling/cwp-edd-advanced-styling.php';
 			require COSMOSWP_PATH . '/inc/addons/edd/cart/cart.php';
-
 		}
 
 		/**
@@ -87,7 +98,7 @@ if ( ! class_exists( 'CosmosWP_Edd' ) ) :
 		/**
 		 * Add 'edd-active' class to the body tag
 		 *
-		 * @return array $classes modified to include 'edd-active' class
+		 * @return void.
 		 */
 		public function cosmoswp_edd_widget_init() {
 			$description = esc_html__( 'Displays widgets in Primary Sidebar', 'cosmoswp' );
@@ -136,14 +147,14 @@ if ( ! class_exists( 'CosmosWP_Edd' ) ) :
 		 *
 		 * @since 1.0.0
 		 */
-		function primary_sidebar() {
+		public function primary_sidebar() {
 
 			$global_widget_title_align   = cosmoswp_get_theme_options( 'global-widget-title-align' );
 			$global_widget_content_align = cosmoswp_get_theme_options( 'global-widget-content-align' );
 			do_action( 'cosmoswp_action_before_sidebar' );
 			?>
 			<div class="cwp-sidebar" data-widget-title="<?php echo esc_attr( $global_widget_title_align ); ?>"
-				 data-widget-content="<?php echo esc_attr( $global_widget_content_align ); ?>">
+				data-widget-content="<?php echo esc_attr( $global_widget_content_align ); ?>">
 				<?php
 				if ( is_active_sidebar( 'cosmoswp-edd-primary-sidebar' ) ) {
 					dynamic_sidebar( 'cosmoswp-edd-primary-sidebar' );
@@ -159,13 +170,13 @@ if ( ! class_exists( 'CosmosWP_Edd' ) ) :
 		 *
 		 * @since 1.0.0
 		 */
-		function secondary_sidebar() {
+		public function secondary_sidebar() {
 			$global_widget_title_align   = cosmoswp_get_theme_options( 'global-widget-title-align' );
 			$global_widget_content_align = cosmoswp_get_theme_options( 'global-widget-content-align' );
 			do_action( 'cosmoswp_action_before_sidebar' );
 			?>
 			<div class="cwp-sidebar" data-widget-title="<?php echo esc_attr( $global_widget_title_align ); ?>"
-				 data-widget-content="<?php echo esc_attr( $global_widget_content_align ); ?>">
+				data-widget-content="<?php echo esc_attr( $global_widget_content_align ); ?>">
 				<?php
 				if ( is_active_sidebar( 'cosmoswp-edd-secondary-sidebar' ) ) {
 					dynamic_sidebar( 'cosmoswp-edd-secondary-sidebar' );
@@ -190,8 +201,7 @@ endif;
  */
 if ( ! function_exists( 'cosmoswp_edd' ) ) {
 
-	function cosmoswp_edd() {
-
+	function cosmoswp_edd() {//phpcs:ignore
 		return CosmosWP_Edd::instance();
 	}
 

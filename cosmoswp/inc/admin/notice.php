@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore WordPress.NamingConventions.ValidClassName.Prefix -- Class filename does not follow standard, but this is intentional.
 /**
  * CosmosWP Notice Handler
  *
@@ -7,7 +7,11 @@
  * @since   1.0.0
  */
 
-defined( 'ABSPATH' ) || exit;
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 
 /**
  * Class to handle notices and Advanced Demo Import
@@ -17,13 +21,18 @@ defined( 'ABSPATH' ) || exit;
 class CosmosWP_Theme_Notice {
 
 
+	/**
+	 * Notice type
+	 *
+	 * @since 1.0.0
+	 * @var string
+	 */
 	private $notice_type = 'welcome';
 
 	/**
 	 * Empty Constructor
 	 */
-	public function __construct() {
-	}
+	public function __construct() {}
 
 	/**
 	 * Gets an instance of this object.
@@ -35,15 +44,12 @@ class CosmosWP_Theme_Notice {
 	 * @return object
 	 */
 	public static function instance() {
-		// Store the instance locally to avoid private static replication
 		static $instance = null;
 
-		// Only run these methods if they haven't been ran previously
 		if ( null === $instance ) {
 			$instance = new self();
 		}
 
-		// Always return the instance
 		return $instance;
 	}
 
@@ -65,7 +71,7 @@ class CosmosWP_Theme_Notice {
 	 */
 	private function get_started_notice() {
 
-		add_action( 'wp_loaded', array( $this, 'admin_notice' ), 20 );
+		add_action( 'admin_init', array( $this, 'admin_notice' ), 20 );
 		add_action( 'wp_loaded', array( $this, 'hide_notices' ), 15 );
 		add_action( 'wp_ajax_cosmoswp_getting_started', array( $this, 'install_advanced_import' ) );
 	}
@@ -79,8 +85,8 @@ class CosmosWP_Theme_Notice {
 		/*Check for notice nag*/
 		$notice_nag = get_option( 'cosmoswp_admin_notice_' . cosmoswp_theme_notice()->notice_type );
 		if ( ! $notice_nag ) {
-			wp_enqueue_style( 'cosmoswp-notice', COSMOSWP_URL . '/inc/admin/notice.css', array(), '1.0.0' );
-			wp_enqueue_script( 'cosmoswp-adi-install', COSMOSWP_URL . '/inc/admin/notice.js', array( 'jquery' ), '', true );
+			wp_enqueue_style( 'cosmoswp-notice', COSMOSWP_URL . '/build/admin/notice/index.css', array(), '1.0.0' );
+			wp_enqueue_script( 'cosmoswp-adi-install', COSMOSWP_URL . '/build/admin/notice/index.js', array( 'jquery' ), '1.0.0', true );
 
 			$translation = array(
 				'btn_text' => esc_html__( 'Processing...', 'cosmoswp' ),
@@ -102,11 +108,11 @@ class CosmosWP_Theme_Notice {
 
 		if ( isset( $_GET['cosmoswp-gsm-hide-notice'] ) && isset( $_GET['cosmoswp_gsm_admin_notice_nonce'] ) ) { // WPCS: input var ok.
 			if ( ! wp_verify_nonce( wp_unslash( $_GET['cosmoswp_gsm_admin_notice_nonce'] ), 'cosmoswp_gsm_hide_notices_nonce' ) ) { // phpcs:ignore WordPress.VIP.ValidatedSanitizedInput.InputNotSanitized
-				wp_die( __( 'Action failed. Please refresh the page and retry.', 'cosmoswp' ) ); // WPCS: xss ok.
+				wp_die( esc_html__( 'Action failed. Please refresh the page and retry.', 'cosmoswp' ) ); // WPCS: xss ok.
 			}
 
 			if ( ! current_user_can( 'manage_options' ) ) {
-				wp_die( __( 'Cheatin&#8217; huh?', 'cosmoswp' ) ); // WPCS: xss ok.
+				wp_die( esc_html__( 'Cheatin&#8217; huh?', 'cosmoswp' ) ); // WPCS: xss ok.
 			}
 
 			$notice_type = sanitize_text_field( wp_unslash( $_GET['cosmoswp-gsm-hide-notice'] ) );
@@ -140,7 +146,7 @@ class CosmosWP_Theme_Notice {
 						printf(
 						/* translators: 1: welcome page link starting html tag, 2: welcome page link ending html tag. */
 							esc_html__( 'Welcome! Thank you for choosing %1$s! To fully take advantage of the best our theme can offer, please make sure you visit our %2$swelcome page%3$s.', 'cosmoswp' ),
-							'<strong>' . wp_get_theme()->get( 'Name' ) . '</strong>',
+							'<strong>' . esc_html( wp_get_theme()->get( 'Name' ) ) . '</strong>',
 							'<a href="' . esc_url( admin_url( 'themes.php?page=cosmoswp-intro' ) ) . '">',
 							'</a>'
 						);
@@ -177,7 +183,7 @@ class CosmosWP_Theme_Notice {
 		$status['redirect'] = admin_url( '/themes.php?page=advanced-import&browse=all&cosmoswp-gsm-hide-notice=' . cosmoswp_theme_notice()->notice_type );
 
 		if ( is_plugin_active_for_network( $plugin ) || is_plugin_active( $plugin ) ) {
-			// Plugin is activated
+			// Plugin is activated.
 			wp_send_json_success( $status );
 		}
 
@@ -443,7 +449,7 @@ class CosmosWP_Theme_Notice {
 	 * Enqueue the required CSS file for theme review notice on admin page.
 	 */
 	public function review_notice_enqueue() {
-		wp_enqueue_style( 'cosmoswp-review-notice', COSMOSWP_URL . '/inc/admin/notice.css' );
+		wp_enqueue_style( 'cosmoswp-review-notice', COSMOSWP_URL . '/inc/admin/notice.css', array(), COSMOSWP_VERSION );
 	}
 }
 
@@ -452,7 +458,7 @@ class CosmosWP_Theme_Notice {
  *
  * @since    1.0.0
  */
-function cosmoswp_theme_notice() {
+function cosmoswp_theme_notice() {//phpcs:ignore
 	return CosmosWP_Theme_Notice::instance();
 }
 cosmoswp_theme_notice()->run();

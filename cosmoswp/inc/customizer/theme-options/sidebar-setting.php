@@ -1,7 +1,17 @@
 <?php
+/**
+ * Sidebar Setting Options.
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+global $cosmoswp_customize_control;
+
 /*Adding sections for default layout options panel*/
 $wp_customize->add_section(
 	$this->sidebar_setting,
@@ -19,7 +29,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'global-sidebar-styling-msg',
@@ -38,7 +48,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'sanitize_hex_color',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new WP_Customize_Color_Control(
 		$wp_customize,
 		'global-widget-link-color',
@@ -59,12 +69,12 @@ $wp_customize->add_setting(
 		'default'           => $theme_option_defaults['global-sidebar-padding'],
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'global-sidebar-padding',
 		array(
-			'label'    => esc_html__( 'Padding', 'cosmoswp' ),
+			'label'    => esc_html__( 'Padding (px)', 'cosmoswp' ),
 			'section'  => $this->sidebar_setting,
 			'settings' => 'global-sidebar-padding',
 		),
@@ -81,7 +91,7 @@ $wp_customize->add_setting(
 		'default'           => $theme_option_defaults['global-sidebar-background-options'],
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'global-sidebar-background-options',
@@ -106,7 +116,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'global-sidebar-widget-title-setting-msg',
@@ -126,7 +136,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_text_align();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Buttonset(
 		$wp_customize,
 		'global-widget-title-align',
@@ -147,7 +157,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'sanitize_hex_color',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new WP_Customize_Color_Control(
 		$wp_customize,
 		'global-widget-title-color',
@@ -168,12 +178,12 @@ $wp_customize->add_setting(
 		'default'           => $theme_option_defaults['global-widget-title-margin'],
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'global-widget-title-margin',
 		array(
-			'label'    => esc_html__( 'Margin', 'cosmoswp' ),
+			'label'    => esc_html__( 'Margin (px)', 'cosmoswp' ),
 			'section'  => $this->sidebar_setting,
 			'settings' => 'global-widget-title-margin',
 		),
@@ -190,12 +200,12 @@ $wp_customize->add_setting(
 		'default'           => $theme_option_defaults['global-widget-title-padding'],
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'global-widget-title-padding',
 		array(
-			'label'    => esc_html__( 'Padding', 'cosmoswp' ),
+			'label'    => esc_html__( 'Padding (px)', 'cosmoswp' ),
 			'section'  => $this->sidebar_setting,
 			'settings' => 'global-widget-title-padding',
 		),
@@ -204,7 +214,7 @@ $wp_customize->add_control(
 	)
 );
 
-/*Border & Box*/
+/*Border and Box*/
 $wp_customize->add_setting(
 	'global-widget-title-border-styling',
 	array(
@@ -212,12 +222,12 @@ $wp_customize->add_setting(
 		'default'           => $theme_option_defaults['global-widget-title-border-styling'],
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'global-widget-title-border-styling',
 		array(
-			'label'    => esc_html__( 'Border & Box', 'cosmoswp' ),
+			'label'    => esc_html__( 'Border Options', 'cosmoswp' ),
 			'section'  => $this->sidebar_setting,
 			'settings' => 'global-widget-title-border-styling',
 		),
@@ -229,7 +239,7 @@ $wp_customize->add_control(
 			),
 			'border-width' => array(
 				'type'       => 'cssbox',
-				'label'      => esc_html__( 'Border Width', 'cosmoswp' ),
+				'label'      => esc_html__( 'Border Width (px)', 'cosmoswp' ),
 				'class'      => 'cwp-element-show',
 				'box_fields' => array(
 					'top'    => true,
@@ -267,7 +277,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'cosmoswp_sanitize_select',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'global-widget-title-typography-options',
 	array(
 		'label'    => esc_html__( 'Typography Options', 'cosmoswp' ),
@@ -286,7 +296,7 @@ $wp_customize->add_setting(
 		'default'           => $theme_option_defaults['global-widget-title-typography'],
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'global-widget-title-typography',
@@ -307,7 +317,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'global-sidebar-widget-styling-msg',
@@ -327,7 +337,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_text_align();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Buttonset(
 		$wp_customize,
 		'global-widget-content-align',
@@ -348,7 +358,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'sanitize_hex_color',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new WP_Customize_Color_Control(
 		$wp_customize,
 		'global-widget-content-color',
@@ -369,12 +379,12 @@ $wp_customize->add_setting(
 		'default'           => $theme_option_defaults['global-widget-content-margin'],
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'global-widget-content-margin',
 		array(
-			'label'    => esc_html__( 'Margin', 'cosmoswp' ),
+			'label'    => esc_html__( 'Margin (px)', 'cosmoswp' ),
 			'section'  => $this->sidebar_setting,
 			'settings' => 'global-widget-content-margin',
 		),
@@ -391,12 +401,12 @@ $wp_customize->add_setting(
 		'default'           => $theme_option_defaults['global-widget-content-padding'],
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'global-widget-content-padding',
 		array(
-			'label'    => esc_html__( 'Padding', 'cosmoswp' ),
+			'label'    => esc_html__( 'Padding (px)', 'cosmoswp' ),
 			'section'  => $this->sidebar_setting,
 			'settings' => 'global-widget-content-padding',
 		),
@@ -405,7 +415,7 @@ $wp_customize->add_control(
 	)
 );
 
-/*Border & Box*/
+/*Border and Box*/
 $wp_customize->add_setting(
 	'global-widget-content-border-styling',
 	array(
@@ -413,12 +423,12 @@ $wp_customize->add_setting(
 		'default'           => $theme_option_defaults['global-widget-content-border-styling'],
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'global-widget-content-border-styling',
 		array(
-			'label'    => esc_html__( 'Border & Box', 'cosmoswp' ),
+			'label'    => esc_html__( 'Border Options', 'cosmoswp' ),
 			'section'  => $this->sidebar_setting,
 			'settings' => 'global-widget-content-border-styling',
 		),
@@ -434,7 +444,7 @@ $wp_customize->add_control(
 			),
 			'border-width' => array(
 				'type'       => 'cssbox',
-				'label'      => esc_html__( 'Border Width', 'cosmoswp' ),
+				'label'      => esc_html__( 'Border Width (px)', 'cosmoswp' ),
 				'class'      => 'cwp-element-show',
 				'box_fields' => array(
 					'top'    => true,
@@ -468,7 +478,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_inherit_options();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'global-widget-content-typography-options',
 	array(
 		'label'    => esc_html__( 'Typography Options', 'cosmoswp' ),
@@ -487,7 +497,7 @@ $wp_customize->add_setting(
 		'default'           => $theme_option_defaults['global-widget-content-typography'],
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'global-widget-content-typography',
@@ -500,9 +510,3 @@ $wp_customize->add_control(
 		cosmoswp_sub_typography_group_fields()
 	)
 );
-
-
-
-
-
-

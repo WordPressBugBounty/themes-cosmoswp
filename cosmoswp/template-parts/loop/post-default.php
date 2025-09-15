@@ -5,8 +5,13 @@
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
  * @package CosmosWP
- * @subpackage CosmosWP
  */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $post_sorting_element = cosmoswp_get_theme_options( 'post-elements-sorting' );
 $post_sorting_element = apply_filters( 'cosmoswp_post_elements', $post_sorting_element );
 

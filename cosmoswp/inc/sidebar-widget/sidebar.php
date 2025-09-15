@@ -1,14 +1,22 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
 /**
  * Register widget area.
  *
- * @link http://codex.wordpress.org/Function_Reference/register_sidebar
+ * @package CosmosWP
  */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if ( ! function_exists( 'cosmoswp_widget_init' ) ) {
 
+	/**
+	 * Register widget area.
+	 *
+	 * @link http://codex.wordpress.org/Function_Reference/register_sidebar
+	 */
 	function cosmoswp_widget_init() {
 
 		$description = esc_html__( 'Displays widgets in Primary Sidebar', 'cosmoswp' );
@@ -38,7 +46,11 @@ if ( ! function_exists( 'cosmoswp_widget_init' ) ) {
 		for ( $sidebar = 1; $sidebar <= 8; $sidebar++ ) {
 			register_sidebar(
 				array(
-					'name'          => sprintf( esc_html__( 'Footer Sidebar %d ', 'cosmoswp' ), $sidebar ),
+					'name'          => sprintf(
+						// translators: %d: The sidebar number.
+						esc_html__( 'Footer Sidebar %d ', 'cosmoswp' ),
+						$sidebar
+					),
 					'id'            => 'footer-sidebar-' . $sidebar,
 					'description'   => esc_html__( 'Display widgets footer section of the site.', 'cosmoswp' ),
 					'before_widget' => '<aside id="%1$s" class="widget %2$s">',
@@ -58,8 +70,8 @@ if ( ! function_exists( 'cosmoswp_widget_init' ) ) {
  *
  * @link https://developer.wordpress.org/reference/hooks/customize_section_active/
  *
- * @param bool   $active
- * @param string $section
+ * @param bool   $active is the section active.
+ * @param object $section is the section object.
  *
  * @return bool
  */
@@ -67,7 +79,6 @@ function cosmoswp_customizer_footer_sidebar_force_display( $active, $section ) {
 	if ( strpos( $section->id, 'footer-sidebar-' ) ) {
 		$active = true;
 	}
-
 	return $active;
 }
 

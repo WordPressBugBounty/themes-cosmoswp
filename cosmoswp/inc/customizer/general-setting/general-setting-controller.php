@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore WordPress.NamingConventions.ValidClassName.Prefix -- Class filename does not follow standard, but this is intentional.
 /**
  * Header Builder and Customizer Options
  *
@@ -11,6 +11,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 
+	/**
+	 * Header Builder and Customizer Options
+	 *
+	 * @package CosmosWP
+	 */
 	class CosmosWP_General_Setting_Controller {
 
 		/**
@@ -44,15 +49,12 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 		 */
 		public static function instance() {
 
-			// Store the instance locally to avoid private static replication
 			static $instance = null;
 
-			// Only run these methods if they haven't been ran previously
 			if ( null === $instance ) {
 				$instance = new CosmosWP_General_Setting_Controller();
 			}
 
-			// Always return the instance
 			return $instance;
 		}
 
@@ -79,7 +81,7 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param array $default_options
+		 * @param array $default_options Default options.
 		 * @return array
 		 */
 		public function general_setting_defaults( $default_options = array() ) {
@@ -94,8 +96,8 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 					array(
 
 						'primary-color'    => '#275cf6',
-						'text-color'       => '#333333',
-						'title-color'      => '#202020',
+						'text-color'       => '#5e5e5e',
+						'title-color'      => '#414141',
 						'link-color'       => '#275cf6',
 						'link-hover-color' => '#1949d4',
 						'meta-color'       => '#999999',
@@ -105,36 +107,29 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 					array(
 						'font-type'       => 'google',
 						'system-font'     => 'Verdana',
-						'google-font'     => 'Lora',
+						'google-font'     => 'Open Sans',
 						'custom-font'     => '',
 						'font-weight'     => '400',
 						'font-style'      => 'normal',
 						'text-decoration' => 'none',
 						'text-transform'  => 'none',
 						'font-size'       => array(
-							'desktop' => '17',
-							'tablet'  => '16',
-							'mobile'  => '14',
+							'mobile' => '14',
 						),
 						'line-height'     => array(
-							'desktop' => '28',
-							'tablet'  => '28',
-							'mobile'  => '28',
+
+							'mobile' => '24',
 						),
-						'letter-spacing'  => array(
-							'desktop' => '0',
-							'tablet'  => '0',
-							'mobile'  => '0',
-						),
+						'letter-spacing'  => array(),
 					)
 				),
 				'general-setting-h1-typography'     => wp_json_encode(
 					array(
 						'font-type'       => 'google',
 						'system-font'     => 'Verdana',
-						'google-font'     => 'Montserrat',
+						'google-font'     => 'Open Sans',
 						'custom-font'     => '',
-						'font-weight'     => '700',
+						'font-weight'     => '800',
 						'font-style'      => 'normal',
 						'text-decoration' => 'none',
 						'text-transform'  => 'none',
@@ -144,14 +139,13 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 							'mobile'  => '30',
 						),
 						'line-height'     => array(
-							'desktop' => '40',
-							'tablet'  => '40',
-							'mobile'  => '40',
+
+							'mobile' => '40',
 						),
 						'letter-spacing'  => array(
-							'desktop' => '0',
-							'tablet'  => '0',
-							'mobile'  => '0',
+							'desktop' => '',
+							'tablet'  => '',
+							'mobile'  => '',
 						),
 					)
 				),
@@ -159,7 +153,7 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 					array(
 						'font-type'       => 'google',
 						'system-font'     => 'Verdana',
-						'google-font'     => 'Montserrat',
+						'google-font'     => 'Open Sans',
 						'custom-font'     => '',
 						'font-weight'     => '700',
 						'font-style'      => 'normal',
@@ -171,14 +165,14 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 							'mobile'  => '30',
 						),
 						'line-height'     => array(
-							'desktop' => '35',
-							'tablet'  => '35',
+							'desktop' => '',
+							'tablet'  => '',
 							'mobile'  => '35',
 						),
 						'letter-spacing'  => array(
-							'desktop' => '0',
-							'tablet'  => '0',
-							'mobile'  => '0',
+							'desktop' => '',
+							'tablet'  => '',
+							'mobile'  => '',
 						),
 					)
 				),
@@ -186,7 +180,7 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 					array(
 						'font-type'       => 'google',
 						'system-font'     => 'Verdana',
-						'google-font'     => 'Montserrat',
+						'google-font'     => 'Open Sans',
 						'custom-font'     => '',
 						'font-weight'     => '600',
 						'font-style'      => 'normal',
@@ -198,14 +192,13 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 							'mobile'  => '24',
 						),
 						'line-height'     => array(
-							'desktop' => '32',
-							'tablet'  => '32',
-							'mobile'  => '32',
+
+							'mobile' => '32',
 						),
 						'letter-spacing'  => array(
-							'desktop' => '0',
-							'tablet'  => '0',
-							'mobile'  => '0',
+							'desktop' => '',
+							'tablet'  => '',
+							'mobile'  => '',
 						),
 					)
 				),
@@ -213,7 +206,7 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 					array(
 						'font-type'       => 'google',
 						'system-font'     => 'Verdana',
-						'google-font'     => 'Montserrat',
+						'google-font'     => 'Open Sans',
 						'custom-font'     => '',
 						'font-weight'     => '500',
 						'font-style'      => 'normal',
@@ -225,14 +218,13 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 							'mobile'  => '22',
 						),
 						'line-height'     => array(
-							'desktop' => '24',
-							'tablet'  => '24',
-							'mobile'  => '24',
+
+							'mobile' => '24',
 						),
 						'letter-spacing'  => array(
-							'desktop' => '0',
-							'tablet'  => '0',
-							'mobile'  => '0',
+							'desktop' => '',
+							'tablet'  => '',
+							'mobile'  => '',
 						),
 					)
 				),
@@ -240,26 +232,24 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 					array(
 						'font-type'       => 'google',
 						'system-font'     => 'Verdana',
-						'google-font'     => 'Montserrat',
+						'google-font'     => 'Open Sans',
 						'custom-font'     => '',
 						'font-weight'     => '400',
 						'font-style'      => 'normal',
 						'text-decoration' => 'none',
 						'text-transform'  => 'none',
 						'font-size'       => array(
-							'desktop' => '24',
-							'tablet'  => '24',
-							'mobile'  => '24',
+
+							'mobile' => '24',
 						),
 						'line-height'     => array(
-							'desktop' => '32',
-							'tablet'  => '32',
-							'mobile'  => '32',
+
+							'mobile' => '32',
 						),
 						'letter-spacing'  => array(
-							'desktop' => '0',
-							'tablet'  => '0',
-							'mobile'  => '0',
+							'desktop' => '',
+							'tablet'  => '',
+							'mobile'  => '',
 						),
 					)
 				),
@@ -267,26 +257,24 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 					array(
 						'font-type'       => 'google',
 						'system-font'     => 'Verdana',
-						'google-font'     => 'Montserrat',
+						'google-font'     => 'Open Sans',
 						'custom-font'     => '',
 						'font-weight'     => '300',
 						'font-style'      => 'normal',
 						'text-decoration' => 'none',
 						'text-transform'  => 'none',
 						'font-size'       => array(
-							'desktop' => '18',
-							'tablet'  => '18',
-							'mobile'  => '18',
+
+							'mobile' => '18',
 						),
 						'line-height'     => array(
-							'desktop' => '24',
-							'tablet'  => '24',
-							'mobile'  => '24',
+
+							'mobile' => '24',
 						),
 						'letter-spacing'  => array(
-							'desktop' => '0',
-							'tablet'  => '0',
-							'mobile'  => '0',
+							'desktop' => '',
+							'tablet'  => '',
+							'mobile'  => '',
 						),
 					)
 				),
@@ -302,12 +290,12 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param object $wp_customize
+		 * @param object $wp_customize WordPress Customizer Object.
 		 * @return void
 		 */
 		public function customize_register( $wp_customize ) {
 
-			$general_setting_defaults = cosmoswp_genral_setting_controller()->general_setting_defaults();
+			$general_setting_defaults = cosmoswp_general_setting_controller()->general_setting_defaults();
 
 			/*Background message*/
 			$wp_customize->add_setting(
@@ -316,7 +304,9 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 					'sanitize_callback' => 'wp_kses_post',
 				)
 			);
-			$wp_customize->add_control(
+			global $cosmoswp_customize_control;
+
+			$cosmoswp_customize_control->add(
 				new CosmosWP_Custom_Control_Heading(
 					$wp_customize,
 					'general-setting-background-msg',
@@ -327,20 +317,20 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 					)
 				)
 			);
-			$wp_customize->get_control( 'background_color' )->section  = cosmoswp_genral_setting_controller()->general_setting_section;
+			$wp_customize->get_control( 'background_color' )->section  = cosmoswp_general_setting_controller()->general_setting_section;
 			$wp_customize->get_control( 'background_color' )->priority = 100;
 
-			$wp_customize->get_control( 'background_image' )->section       = cosmoswp_genral_setting_controller()->general_setting_section;
+			$wp_customize->get_control( 'background_image' )->section       = cosmoswp_general_setting_controller()->general_setting_section;
 			$wp_customize->get_control( 'background_image' )->priority      = 100;
-			$wp_customize->get_control( 'background_preset' )->section      = cosmoswp_genral_setting_controller()->general_setting_section;
+			$wp_customize->get_control( 'background_preset' )->section      = cosmoswp_general_setting_controller()->general_setting_section;
 			$wp_customize->get_control( 'background_preset' )->priority     = 100;
-			$wp_customize->get_control( 'background_position' )->section    = cosmoswp_genral_setting_controller()->general_setting_section;
+			$wp_customize->get_control( 'background_position' )->section    = cosmoswp_general_setting_controller()->general_setting_section;
 			$wp_customize->get_control( 'background_position' )->priority   = 100;
-			$wp_customize->get_control( 'background_size' )->section        = cosmoswp_genral_setting_controller()->general_setting_section;
+			$wp_customize->get_control( 'background_size' )->section        = cosmoswp_general_setting_controller()->general_setting_section;
 			$wp_customize->get_control( 'background_size' )->priority       = 100;
-			$wp_customize->get_control( 'background_repeat' )->section      = cosmoswp_genral_setting_controller()->general_setting_section;
+			$wp_customize->get_control( 'background_repeat' )->section      = cosmoswp_general_setting_controller()->general_setting_section;
 			$wp_customize->get_control( 'background_repeat' )->priority     = 100;
-			$wp_customize->get_control( 'background_attachment' )->section  = cosmoswp_genral_setting_controller()->general_setting_section;
+			$wp_customize->get_control( 'background_attachment' )->section  = cosmoswp_general_setting_controller()->general_setting_section;
 			$wp_customize->get_control( 'background_attachment' )->priority = 100;
 
 			/*general setting section*/
@@ -354,7 +344,7 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param array $dynamic_css
+		 * @param array $dynamic_css Dynamic CSS.
 		 * @return array
 		 */
 		public function dynamic_css( $dynamic_css ) {
@@ -376,7 +366,7 @@ if ( ! class_exists( 'CosmosWP_General_Setting_Controller' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param $google_font_family_array
+		 * @param array $google_font_family_array Google font family.
 		 * @return array
 		 */
 		public function enqueue_google_fonts( $google_font_family_array ) {
@@ -468,12 +458,11 @@ endif;
  * @param
  * @return object
  */
-if ( ! function_exists( 'cosmoswp_genral_setting_controller' ) ) {
+if ( ! function_exists( 'cosmoswp_general_setting_controller' ) ) {
 
-	function cosmoswp_genral_setting_controller() {
-
+	function cosmoswp_general_setting_controller() {//phpcs:ignore
 		return CosmosWP_General_Setting_Controller::instance();
 	}
 
-	cosmoswp_genral_setting_controller()->run();
+	cosmoswp_general_setting_controller()->run();
 }

@@ -1,16 +1,21 @@
-<?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+<?php // phpcs:ignore WordPress.NamingConventions.ValidClassName.Prefix -- Class filename does not follow standard, but this is intentional.
 
 /**
  * EDD Single Customizer Options
  *
  * @package CosmosWP
  */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 
+	/**
+	 * EDD Single Customizer Options
+	 *
+	 * @package CosmosWP
+	 */
 	class CosmosWP_Edd_Single {
 
 		/**
@@ -44,15 +49,12 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 		 */
 		public static function instance() {
 
-			// Store the instance locally to avoid private static replication
 			static $instance = null;
 
-			// Only run these methods if they haven't been ran previously
 			if ( null === $instance ) {
 				$instance = new CosmosWP_Edd_Single();
 			}
 
-			// Always return the instance
 			return $instance;
 		}
 
@@ -76,6 +78,8 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 			add_action( 'cosmoswp_action_after_edd_single', array( $this, 'display_edd_related' ), 100, 1 );
 
 			add_filter( 'cosmoswp_dynamic_css', array( $this, 'dynamic_css' ), 100 );
+
+			add_filter( 'cosmoswp_customize_css_refresher', array( $this, 'add_css_refresher' ) );
 		}
 
 		/**
@@ -85,13 +89,14 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param array $default_options
+		 * @param array $default_options Default options.
 		 * @return array
 		 */
 		public function defaults( $default_options = array() ) {
 			$defaults = array(
 
 				/*Sidebar*/
+				'edd-img-size'              => 'full',
 				'cwp-edd-single-sidebar'    => 'ct-ps',
 
 				'edd-single-content-length' => 20,
@@ -120,7 +125,7 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param object $wp_customize
+		 * @param object $wp_customize WordPress customizer object.
 		 * @return void
 		 */
 		public function customize_register( $wp_customize ) {
@@ -157,11 +162,14 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 		 * Edd Post Class filter.
 		 *
 		 * @since 3.6.2
+		 *
 		 * @param array  $classes Array of CSS classes.
-		 * @param string $class Array of CSS classes.
-		 * @param string $postID Array of CSS classes.
+		 * @param string $class   Array of CSS classes.
+		 * @param string $post_id Post ID.
+		 *
+		 * @return array Modified array of CSS classes.
 		 */
-		function single_download_class( $classes, $class, $postID ) {
+		public function single_download_class( $classes, $class, $post_id ) {
 
 			if ( ! is_singular( 'download' ) ) {
 				return $classes;
@@ -169,20 +177,20 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 			$edd_single_media_width = cosmoswp_get_theme_options( 'edd-single-content-width' );
 			$edd_single_media_width = json_decode( $edd_single_media_width, true );
 			if ( isset( $edd_single_media_width['mobile'] ) ) {
-				if ( $edd_single_media_width['mobile'] === 100 ) {
-					// Add new class
+				if ( 100 === $edd_single_media_width['mobile'] ) {
+					// Add new class.
 					$classes[] = 'cwp-single-img-full-m';
 				}
 			}
 			if ( isset( $edd_single_media_width['tablet'] ) ) {
-				if ( $edd_single_media_width['tablet'] === 100 ) {
-					// Add new class
+				if ( 100 === $edd_single_media_width['tablet'] ) {
+					// Add new class.
 					$classes[] = 'cwp-single-img-full-t';
 				}
 			}
 			if ( isset( $edd_single_media_width['desktop'] ) ) {
-				if ( $edd_single_media_width['desktop'] === 100 ) {
-					// Add new class
+				if ( 100 === $edd_single_media_width['desktop'] ) {
+					// Add new class.
 					$classes[] = 'cwp-single-img-full-d';
 				}
 			}
@@ -190,7 +198,7 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 		}
 
 		/**
-		 * Callback Function for cosmoswp_action_eddcommerce_single
+		 * Callback Function for cosmoswp_action_edd_single
 		 * Display WooCommerce Single Product
 		 *
 		 * @since    1.0.0
@@ -202,7 +210,7 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 			$sidebar = cosmoswp_get_theme_options( 'cwp-edd-single-sidebar' );
 			?>
 			<!-- Start of .blog-content-->
-			<div class="cwp-page cwp-content-wrapper <?php echo esc_attr( 'cwp-' . $sidebar ); ?> <?php cosmoswp_blog_main_wrap_classes(); ?>" id="cwp-blog-main-content-wrapper">
+			<div class="cwp-page cwp-content-wrapper <?php echo esc_attr( 'cwp-' . $sidebar ); ?> <?php cosmoswp_blog_main_wrap_classes(); ?>" id="cwp-edd-single-main-content-wrapper">
 				<?php
 				echo '<div class="grid-container"><div class="grid-row">';
 				cosmoswp_sidebar_template( $sidebar, 'cwp-edd-single' );
@@ -220,8 +228,8 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 		 *
 		 * @since    1.0.0
 		 * @access   public
-		 *
-		 * @return void
+		 * @param integer $post_id Post ID.
+		 * @return boolean||void
 		 */
 		public function display_edd_related( $post_id ) {
 
@@ -237,7 +245,7 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 				return false;
 			}
 			$edd_related_post_number = cosmoswp_get_theme_options( 'edd-single-related-number' );
-			if ( absint( $edd_related_post_number ) == 0 ) {
+			if ( 0 === absint( $edd_related_post_number ) ) {
 				return false;
 			}
 			$cosmoswp_cat_post_args = array(
@@ -247,7 +255,7 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 				'post_status'         => 'publish',
 				'ignore_sticky_posts' => true,
 			);
-			if ( $edd_related_item_from_options == 'edd-categories' ) {
+			if ( 'edd-categories' === $edd_related_item_from_options ) {
 				$product_categories_terms = wp_get_object_terms( $post_id, 'download_category' );
 				$category_ids             = array();
 				if ( ! empty( $product_categories_terms ) ) {
@@ -266,7 +274,7 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 						'operator'         => 'IN',
 					),
 				);
-			} elseif ( $edd_related_item_from_options == 'edd-tags' ) {
+			} elseif ( 'edd-tags' === $edd_related_item_from_options ) {
 				$tag_ids            = array();
 				$product_tags_terms = wp_get_object_terms( $post_id, 'download_tag' );
 				$category_ids       = array();
@@ -288,21 +296,21 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 				);
 
 			}
-			$related_post_query = new wp_query( $cosmoswp_cat_post_args );
+			$related_post_query = new WP_Query( $cosmoswp_cat_post_args );
 			if ( $related_post_query->have_posts() ) {
 				echo '<div id="related_posts"><div class="grid-container"><h2>' . esc_html__( 'Related Posts', 'cosmoswp' ) . '</h2><div class="grid-row">';
 				while ( $related_post_query->have_posts() ) {
 					$related_post_query->the_post();
-					$columns = cosmoswp_get_theme_options( 'edd-single-related-col' );
-					if ( 1 == $columns ) {
+					$columns = absint( cosmoswp_get_theme_options( 'edd-single-related-col' ) );
+					if ( 1 === $columns ) {
 						$grid = 'grid-12';
-					} elseif ( 2 == $columns ) {
+					} elseif ( 2 === $columns ) {
 						$grid = 'grid-lg-6 grid-md-6 grid-12';
-					} elseif ( 3 == $columns ) {
+					} elseif ( 3 === $columns ) {
 						$grid = 'grid-lg-4 grid-md-4 grid-12';
-					} elseif ( 4 == $columns ) {
+					} elseif ( 4 === $columns ) {
 						$grid = 'grid-lg-3 grid-sm-4 grid-12';
-					} elseif ( 5 == $columns ) {
+					} elseif ( 5 === $columns ) {
 						$grid = 'grid-lg-2m3 grid-md-4 grid-12';
 					} else {
 						$grid = 'grid-lg-3 grid-12';
@@ -313,7 +321,7 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 						<?php
 						echo "<div class='cwp-product-content'>";
 						foreach ( $edd_archive_list_elements as $element ) {
-							if ( 'image' == $element ) {
+							if ( 'image' === $element ) {
 								?>
 								<div class="cwp-image-box cwp-elements">
 									<a href="<?php the_permalink(); ?>">
@@ -323,20 +331,19 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 									</a>
 								</div>
 								<?php
-							} elseif ( 'cats' == $element ) {
+							} elseif ( 'cats' === $element ) {
 								echo wp_kses_post( get_the_term_list( get_the_ID(), 'download_category', '<div class="cwp-edd-cat cwp-elements">', ',', '</div>' ) );
-							} elseif ( 'tags' == $element ) {
+							} elseif ( 'tags' === $element ) {
 								echo wp_kses_post( get_the_term_list( get_the_ID(), 'download_tag', '<div class="cwp-edd-tag cwp-elements">', ',', '</div>' ) );
-							} elseif ( 'author' == $element ) {
-
+							} elseif ( 'author' === $element ) {
 								echo "<div class='cwp-elements'>";
 								echo esc_html( get_the_author() );
 								echo '</div>';
-							} elseif ( 'published-date' == $element ) {
+							} elseif ( 'published-date' === $element ) {
 								echo "<div class='cwp-elements'>";
 								echo esc_html( get_the_date() );
 								echo '</div>';
-							} elseif ( 'title' == $element ) {
+							} elseif ( 'title' === $element ) {
 								?>
 								<header class="entry-header cwp-elements">
 									<?php
@@ -344,15 +351,14 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 									?>
 								</header><!-- .entry-header -->
 								<?php
-							} elseif ( 'price' == $element ) {
+							} elseif ( 'price' === $element ) {
 								if ( ! edd_has_variable_prices( get_the_ID() ) ) {
-
 									echo esc_html( edd_get_download_price( get_the_ID() ) );
 								}
-							} elseif ( 'cart' == $element ) {
-								echo edd_get_purchase_link();
+							} elseif ( 'cart' === $element ) {
+								echo edd_get_purchase_link();//phpcs:ignore
 
-							} elseif ( 'excerpt' == $element ) {
+							} elseif ( 'excerpt' === $element ) {
 								?>
 								<div class="entry-excerpt">
 									<?php
@@ -361,12 +367,12 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 									if ( ! $length ) {
 										echo wp_kses_post( strip_shortcodes( $post->post_excerpt ) );
 									} else {
-										echo wp_trim_words( strip_shortcodes( $post->post_excerpt ), $length );
+										echo wp_kses_post( wp_trim_words( strip_shortcodes( $post->post_excerpt ), $length ) );
 									}
 									?>
 								</div><!-- .entry-content -->
 								<?php
-							} elseif ( 'content' == $element ) {
+							} elseif ( 'content' === $element ) {
 								?>
 								<div class="entry-content">
 									<?php
@@ -389,7 +395,7 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 				}
 				echo '</div></div></div>';
 			}
-			wp_reset_query();
+			wp_reset_postdata();
 		}
 
 		/**
@@ -399,69 +405,99 @@ if ( ! class_exists( 'CosmosWP_Edd_Single' ) ) :
 		 * @since    1.0.9
 		 * @access   public
 		 *
-		 * @param array $dynamic_css
+		 * @param array $dynamic_css Dynamic CSS.
 		 * @return array
 		 */
 		public function dynamic_css( $dynamic_css ) {
-			/**
-			 * Blog Option Dynamic CSS
-			 */
-			$edd_dynamic_css['all']     = '';
-			$edd_dynamic_css['tablet']  = '';
-			$edd_dynamic_css['desktop'] = '';
+			$edd_dynamic_css = array(
+				'all'     => '',
+				'tablet'  => '',
+				'desktop' => '',
+			);
 
-			$edd_main_content_css         = '';
-			$edd_main_content_tablet_css  = '';
-			$edd_main_content_desktop_css = '';
+			$edd_single_media_width = json_decode( cosmoswp_get_theme_options( 'edd-single-content-width' ), true );
+			$device_types           = array_keys( $edd_dynamic_css );
 
-			$edd_single_summary_content_css         = '';
-			$edd_single_summary_content_tablet_css  = '';
-			$edd_single_summary_content_desktop_css = '';
+			foreach ( $device_types as $device ) {
+				if ( isset( $edd_single_media_width[ $device ] ) ) {
+					$width_value        = $edd_single_media_width[ $device ];
+					$main_content_css   = 'width:' . $width_value . '%;';
+					$sidebar_width_calc = ( 100 === $width_value ) ? '100%' : 'calc(100% - ' . $width_value . '%';
+					$sidebar_css        = 'width:' . $sidebar_width_calc . ( 'tablet' === $device || 'desktop' === $device ? ' - 40px)' : ')' ) . ';';
 
-			$edd_single_media_width = cosmoswp_get_theme_options( 'edd-single-content-width' );
-			$edd_single_media_width = json_decode( $edd_single_media_width, true );
-
-			if ( isset( $edd_single_media_width['mobile'] ) ) {
-				$edd_main_content_css           .= 'width:' . $edd_single_media_width['mobile'] . '%;';
-				$edd_dynamic_css['all']         .= '
-                .cosmoswp-edd-single-grid-row .cwp-edd-download-gallery-content{
-                    ' . $edd_main_content_css . '
-                }';
-				$edd_single_summary_content_css .= $edd_single_media_width['mobile'] === 100 ? 'width:100%;' : 'width:calc(100% - ' . $edd_single_media_width['mobile'] . '%);';
-				$edd_dynamic_css['all']         .= '.cosmoswp-edd-single-sidebar{
-                ' . $edd_single_summary_content_css . '
-                }';
-			}
-			if ( isset( $edd_single_media_width['tablet'] ) ) {
-				$edd_main_content_tablet_css           .= 'width:' . $edd_single_media_width['tablet'] . '%;';
-				$edd_dynamic_css['tablet']             .= '
-                .cosmoswp-edd-single-grid-row .cwp-edd-download-gallery-content{
-                    ' . $edd_main_content_tablet_css . '
-                }';
-				$edd_single_summary_content_tablet_css .= $edd_single_media_width['tablet'] === 100 ? 'width:100%;' : 'width:calc(100% - ' . $edd_single_media_width['tablet'] . '% - 40px);';
-				$edd_dynamic_css['tablet']             .= '.cosmoswp-edd-single-sidebar{
-                ' . $edd_single_summary_content_tablet_css . '
-                }';
-			}
-			if ( isset( $edd_single_media_width['desktop'] ) ) {
-				$edd_main_content_desktop_css           .= 'width:' . $edd_single_media_width['desktop'] . '%;';
-				$edd_dynamic_css['desktop']             .= '
-                .cosmoswp-edd-single-grid-row .cwp-edd-download-gallery-content{
-                    ' . $edd_main_content_desktop_css . '
-                }';
-				$edd_single_summary_content_desktop_css .= $edd_single_media_width['desktop'] === 100 ? 'width:100%;' : 'width:calc(100% - ' . $edd_single_media_width['desktop'] . '% - 40px);';
-				$edd_dynamic_css['desktop']             .= '.cosmoswp-edd-single-sidebar{
-                ' . $edd_single_summary_content_desktop_css . '
-                }';
+					$edd_dynamic_css[ $device ] .= "
+				.cosmoswp-edd-single-grid-row .cwp-edd-download-gallery-content {
+					{$main_content_css}
+				}
+				.cosmoswp-edd-single-sidebar {
+					{$sidebar_css}
+				}
+			";
+				}
 			}
 
-			/*Return*/
-			if ( is_array( $dynamic_css ) && ! empty( $dynamic_css ) ) {
-				$all_css = array_merge_recursive( $dynamic_css, $edd_dynamic_css );
-				return $all_css;
-			} else {
-				return $edd_dynamic_css;
-			}
+			/* Return */
+			return is_array( $dynamic_css ) && ! empty( $dynamic_css ) ? array_merge_recursive( $dynamic_css, $edd_dynamic_css ) : $edd_dynamic_css;
+		}
+
+		/**
+		 * Partial refreshment.
+		 *
+		 * @since    1.0.0
+		 * @access   public
+		 *
+		 * @return String
+		 */
+		public function partial_content() {
+			ob_start();
+			$this->display_edd_single();
+			$value = ob_get_clean();
+			return $value;
+		}
+
+		/**
+		 * Add selective refresh for the blog main content.
+		 *
+		 * @param WP_Customize_Manager $wp_customize The customizer manager.
+		 * @param string               $control_id The control ID.
+		 * @param array                $args Additional arguments.
+		 */
+		public function add_selective_refresh( $wp_customize, $control_id, $args = array() ) {
+			$defaults = array(
+				'selector'            => '#cwp-edd-single-main-content-wrapper',
+				'render_callback'     => array( $this, 'partial_content' ),
+				'container_inclusive' => false,
+				'fallback_refresh'    => false,
+			);
+
+			$args = wp_parse_args( $args, $defaults );
+
+			$wp_customize->selective_refresh->add_partial(
+				$control_id,
+				array(
+					'selector'            => $args['selector'],
+					'render_callback'     => $args['render_callback'],
+					'container_inclusive' => $args['container_inclusive'],
+					'fallback_refresh'    => $args['fallback_refresh'],
+				)
+			);
+		}
+
+		/**
+		 * Callback functions for cosmoswp_customize_css_refresher,
+		 * Add CSS refresher settings
+		 *
+		 * @since    1.0.0
+		 * @access   public
+		 *
+		 * @param array $css_refresher CSS refresher.
+		 * @return array
+		 */
+		public function add_css_refresher( $css_refresher ) {
+			$all_settings = array_keys( $this->defaults() );
+
+			$css_settings = cosmoswp_get_settings_by_type( $all_settings, 'css', array( 'width' ) );
+			return array_unique( array_merge( $css_refresher, $css_settings ) );
 		}
 	}
 endif;
@@ -477,8 +513,7 @@ endif;
  */
 if ( ! function_exists( 'cosmoswp_edd_single' ) ) {
 
-	function cosmoswp_edd_single() {
-
+	function cosmoswp_edd_single() {//phpcs:ignore
 		return CosmosWP_Edd_Single::instance();
 	}
 

@@ -1,7 +1,16 @@
 <?php
+/**
+ * DropDown search section
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+global $cosmoswp_customize_control;
 
 /*DropDown search section*/
 $wp_customize->add_section(
@@ -21,7 +30,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'dd-search-placeholder',
 	array(
 		'label'    => esc_html__( 'Placeholder', 'cosmoswp' ),
@@ -38,7 +47,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'dd-search-layout-msg',
@@ -59,7 +68,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_flex_align();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Buttonset(
 		$wp_customize,
 		'dd-search-icon-align',
@@ -82,7 +91,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_dd_search_form_align();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Buttonset(
 		$wp_customize,
 		'dd-search-form-align',
@@ -102,12 +111,12 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'dd-search-margin-padding-msg',
 		array(
-			'label'   => esc_html__( 'Icon ( Margin & Padding )', 'cosmoswp' ),
+			'label'   => esc_html__( 'Icon ( Margin and Padding )', 'cosmoswp' ),
 			'section' => $this->drop_down_search,
 		)
 	)
@@ -122,12 +131,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'drop-down-search-margin',
 		array(
-			'label'    => esc_html__( 'Margin', 'cosmoswp' ),
+			'label'    => esc_html__( 'Margin (px)', 'cosmoswp' ),
 			'section'  => $this->drop_down_search,
 			'settings' => 'drop-down-search-margin',
 		),
@@ -145,12 +154,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'drop-down-search-padding',
 		array(
-			'label'    => esc_html__( 'Padding', 'cosmoswp' ),
+			'label'    => esc_html__( 'Padding (px)', 'cosmoswp' ),
 			'section'  => $this->drop_down_search,
 			'settings' => 'drop-down-search-padding',
 		),
@@ -166,7 +175,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'dropdown-search-icon-styling-msg',
@@ -186,19 +195,19 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
-    'dropdown-search-icon-size',
-    array(
-        'label'       => esc_html__( 'Icon Size (px)', 'cosmoswp' ),
-        'section'     => $this->drop_down_search,
-        'settings'    => 'dropdown-search-icon-size',
-        'type'    => 'number',
-        'input_attrs' => array(
-            'min'  => 8,
-            'max'  => 400,
-            'step' => 1,
-        ),
-    )
+$cosmoswp_customize_control->add(
+	'dropdown-search-icon-size',
+	array(
+		'label'       => esc_html__( 'Icon Size (px)', 'cosmoswp' ),
+		'section'     => $this->drop_down_search,
+		'settings'    => 'dropdown-search-icon-size',
+		'type'        => 'number',
+		'input_attrs' => array(
+			'min'  => 8,
+			'max'  => 400,
+			'step' => 1,
+		),
+	)
 );
 
 /*Tabs*/
@@ -211,7 +220,7 @@ $wp_customize->add_setting(
 	)
 );
 $border_style_choices = cosmoswp_header_border_style();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Tabs(
 		$wp_customize,
 		'dropdown-search-icon-styling',
@@ -294,6 +303,7 @@ $wp_customize->add_control(
 				),
 				'normal-box-shadow-css'   => array(
 					'type'       => 'cssbox',
+					'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 					'tab'        => 'search-icon-normal',
 					'class'      => 'cwp-element-show',
 					'box_fields' => array(
@@ -380,6 +390,7 @@ $wp_customize->add_control(
 				),
 				'hover-box-shadow-css'    => array(
 					'type'       => 'cssbox',
+					'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 					'class'      => 'cwp-element-show',
 					'tab'        => 'search-icon-hover',
 					'box_fields' => array(
@@ -414,7 +425,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'drop-down-search-styling-msg',
@@ -434,19 +445,19 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
-    'drop-down-search-input-height',
-    array(
-        'label'       => esc_html__( 'Form Input Height (px)', 'cosmoswp' ),
-        'section'     => $this->drop_down_search,
-        'settings'    => 'drop-down-search-input-height',
-        'type'    => 'number',
-        'input_attrs' => array(
-            'min'  => 1,
-            'max'  => 400,
-            'step' => 1,
-        ),
-    )
+$cosmoswp_customize_control->add(
+	'drop-down-search-input-height',
+	array(
+		'label'       => esc_html__( 'Form Input Height (px)', 'cosmoswp' ),
+		'section'     => $this->drop_down_search,
+		'settings'    => 'drop-down-search-input-height',
+		'type'        => 'number',
+		'input_attrs' => array(
+			'min'  => 1,
+			'max'  => 400,
+			'step' => 1,
+		),
+	)
 );
 
 /*Tabs*/
@@ -459,7 +470,7 @@ $wp_customize->add_setting(
 	)
 );
 $border_style_choices = cosmoswp_header_border_style();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Tabs(
 		$wp_customize,
 		'dropdown-search-form-styling',
@@ -542,6 +553,7 @@ $wp_customize->add_control(
 				),
 				'normal-box-shadow-css'   => array(
 					'type'       => 'cssbox',
+					'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 					'class'      => 'cwp-element-show',
 					'tab'        => 'search-icon-normal',
 					'box_fields' => array(
@@ -628,6 +640,7 @@ $wp_customize->add_control(
 				),
 				'hover-box-shadow-css'    => array(
 					'type'       => 'cssbox',
+					'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 					'tab'        => 'search-icon-hover',
 					'class'      => 'cwp-element-show',
 					'box_fields' => array(
@@ -665,7 +678,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'dd-search-typography-options',
 	array(
 		'label'    => esc_html__( 'Typography Options', 'cosmoswp' ),
@@ -685,7 +698,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'dd-search-typography',

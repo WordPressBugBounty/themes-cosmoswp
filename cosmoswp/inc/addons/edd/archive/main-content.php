@@ -1,16 +1,31 @@
 <?php
+/**
+ * EDD main content options.
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-/*Grid Elements*/
+
+global $cosmoswp_customize_control;
+
+/*Message*/
 $wp_customize->add_setting(
 	'edd-archive-url-msg',
 	array(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$description = sprintf( esc_html__( 'The options will work on %1$sEDD Archive %2$s page', 'cosmoswp' ), "<a href='" . esc_url( get_post_type_archive_link( 'download' ) ) . "' target='_blank'>", '</a>' );
-$wp_customize->add_control(
+$description = sprintf(
+/* translators: %1$s represents the opening anchor tag, %2$s represents the closing anchor tag.*/
+	esc_html__( 'The options will work on %1$sEDD Archive %2$s page', 'cosmoswp' ),
+	"<a href='" . esc_url( get_post_type_archive_link( 'download' ) ) . "' target='_blank'>",
+	'</a>'
+);
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Message(
 		$wp_customize,
 		'edd-archive-url-msg',
@@ -21,7 +36,7 @@ $wp_customize->add_control(
 	)
 );
 
-/*EDD Single Sidebar*/
+/*EDD Archive Sidebar*/
 $wp_customize->add_setting(
 	'cwp-edd-archive-sidebar',
 	array(
@@ -29,14 +44,15 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'cosmoswp_sanitize_select',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'cwp-edd-archive-sidebar',
 	array(
-		'label'    => esc_html__( 'Content/Sidebar', 'cosmoswp' ),
-		'choices'  => cosmoswp_sidebar_options(),
-		'section'  => $this->section,
-		'settings' => 'cwp-edd-archive-sidebar',
-		'type'     => 'select',
+		'label'     => esc_html__( 'Content/Sidebar', 'cosmoswp' ),
+		'choices'   => cosmoswp_sidebar_options(),
+		'section'   => $this->section,
+		'settings'  => 'cwp-edd-archive-sidebar',
+		'type'      => 'select',
+		'transport' => 'postMessage',
 	)
 );
 
@@ -46,9 +62,10 @@ $wp_customize->add_setting(
 	array(
 		'default'           => $defaults['edd-archive-main-title'],
 		'sanitize_callback' => 'sanitize_text_field',
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'edd-archive-main-title',
 	array(
 		'label'    => esc_html__( 'Main Title', 'cosmoswp' ),
@@ -64,9 +81,10 @@ $wp_customize->add_setting(
 	array(
 		'default'           => $defaults['edd-archive-default-view'],
 		'sanitize_callback' => 'cosmoswp_sanitize_select',
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'edd-archive-default-view',
 	array(
 		'choices'  => array(
@@ -87,7 +105,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'edd-archive-general-setting-msg',
@@ -104,9 +122,10 @@ $wp_customize->add_setting(
 	array(
 		'default'           => $defaults['edd-archive-show-sort-bar'],
 		'sanitize_callback' => 'cosmoswp_sanitize_checkbox',
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'edd-archive-show-sort-bar',
 	array(
 		'label'    => esc_html__( 'Show Sort Bar', 'cosmoswp' ),
@@ -122,9 +141,10 @@ $wp_customize->add_setting(
 	array(
 		'default'           => $defaults['edd-archive-show-grid-list'],
 		'sanitize_callback' => 'cosmoswp_sanitize_checkbox',
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'edd-archive-show-grid-list',
 	array(
 		'label'    => esc_html__( 'Show Grid List', 'cosmoswp' ),
@@ -140,9 +160,10 @@ $wp_customize->add_setting(
 	array(
 		'default'           => $defaults['edd-show-downloads-per-row'],
 		'sanitize_callback' => 'cosmoswp_sanitize_slider_field',
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Slider(
 		$wp_customize,
 		'edd-show-downloads-per-row',
@@ -165,7 +186,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'edd-archive-grid-elements-msg',
@@ -181,10 +202,11 @@ $wp_customize->add_setting(
 	array(
 		'default'           => $defaults['edd-archive-grid-elements'],
 		'sanitize_callback' => 'cosmoswp_sanitize_multi_choices',
+		'transport'         => 'postMessage',
 	)
 );
 $choices = cosmoswp_edd_archive_elements_sorting();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Sortable(
 		$wp_customize,
 		'edd-archive-grid-elements',
@@ -202,10 +224,11 @@ $wp_customize->add_setting(
 	array(
 		'default'           => $defaults['edd-archive-elements-align'],
 		'sanitize_callback' => 'cosmoswp_sanitize_select',
+		'transport'         => 'postMessage',
 	)
 );
 $choices = cosmoswp_text_align();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Buttonset(
 		$wp_customize,
 		'edd-archive-elements-align',
@@ -224,9 +247,10 @@ $wp_customize->add_setting(
 	array(
 		'default'           => $defaults['edd-archive-content-length'],
 		'sanitize_callback' => 'esc_attr',
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'edd-archive-content-length',
 	array(
 		'label'       => esc_html__( 'Excerpt length (count words)', 'cosmoswp' ),
@@ -243,9 +267,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_slider_field',
 		'default'           => $defaults['edd-archive-list-media-width'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Slider(
 		$wp_customize,
 		'edd-archive-list-media-width',
@@ -268,10 +293,11 @@ $wp_customize->add_setting(
 	array(
 		'default'           => $defaults['edd-navigation-options'],
 		'sanitize_callback' => 'cosmoswp_sanitize_select',
+		'transport'         => 'postMessage',
 	)
 );
 $choices = cosmoswp_pagination_options();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'edd-navigation-options',
 	array(
 		'choices'  => $choices,
@@ -281,3 +307,20 @@ $wp_customize->add_control(
 		'type'     => 'select',
 	)
 );
+
+$partial_controls = array(
+	'cwp-edd-archive-sidebar',
+	'edd-archive-default-view',
+	'edd-archive-show-sort-bar',
+	'edd-archive-show-grid-list',
+	'edd-show-downloads-per-row',
+	'edd-archive-grid-elements',
+	'edd-archive-elements-align',
+	'edd-archive-content-length',
+	'edd-archive-list-media-width',
+	'edd-navigation-options',
+);
+
+foreach ( $partial_controls as $control_id ) {
+	$this->add_selective_refresh( $wp_customize, $control_id );
+}

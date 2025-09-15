@@ -1,7 +1,16 @@
 <?php
+/**
+ * Scroll Top Options.
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+global $cosmoswp_customize_control;
 
 /*Scroll Icon section*/
 $wp_customize->add_section(
@@ -20,7 +29,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'scroll-top-button-setting-msg',
@@ -38,7 +47,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'cosmoswp_sanitize_checkbox',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'enable-scroll-top-button',
 	array(
 		'label'    => esc_html__( 'Enable Scroll Top', 'cosmoswp' ),
@@ -55,7 +64,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'cosmoswp_sanitize_checkbox',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'remove-scroll-top-button-mobile',
 	array(
 		'label'    => esc_html__( 'Remove Scroll Top in mobile.', 'cosmoswp' ),
@@ -73,7 +82,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_position_options();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Buttonset(
 		$wp_customize,
 		'scroll-icon-position-options',
@@ -94,12 +103,12 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'cosmoswp_sanitize_slider_field',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Slider(
 		$wp_customize,
 		'scroll-top-button-height',
 		array(
-			'label'       => esc_html__( 'Height', 'cosmoswp' ),
+			'label'       => esc_html__( 'Height (px)', 'cosmoswp' ),
 			'section'     => 'cosmoswp-scroll-top-section',
 			'settings'    => 'scroll-top-button-height',
 			'input_attrs' => array(
@@ -119,12 +128,12 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'cosmoswp_sanitize_slider_field',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Slider(
 		$wp_customize,
 		'scroll-top-button-width',
 		array(
-			'label'       => esc_html__( 'width', 'cosmoswp' ),
+			'label'       => esc_html__( 'width (px)', 'cosmoswp' ),
 			'section'     => 'cosmoswp-scroll-top-section',
 			'settings'    => 'scroll-top-button-width',
 			'input_attrs' => array(
@@ -144,12 +153,12 @@ $wp_customize->add_setting(
 		'default'           => $theme_option_defaults['scroll-top-icon-padding'],
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'scroll-top-icon-padding',
 		array(
-			'label'    => esc_html__( 'Padding', 'cosmoswp' ),
+			'label'    => esc_html__( 'Padding (px)', 'cosmoswp' ),
 			'section'  => 'cosmoswp-scroll-top-section',
 			'settings' => 'scroll-top-icon-padding',
 		),
@@ -166,12 +175,12 @@ $wp_customize->add_setting(
 		'default'           => $theme_option_defaults['scroll-top-icon-margin'],
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'scroll-top-icon-margin',
 		array(
-			'label'    => esc_html__( 'Margin', 'cosmoswp' ),
+			'label'    => esc_html__( 'Margin (px)', 'cosmoswp' ),
 			'section'  => 'cosmoswp-scroll-top-section',
 			'settings' => 'scroll-top-icon-margin',
 		),
@@ -189,7 +198,7 @@ $wp_customize->add_setting(
 	)
 );
 $border_style_choices = cosmoswp_header_border_style();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Tabs(
 		$wp_customize,
 		'scroll-top-icon-styling',
@@ -272,6 +281,7 @@ $wp_customize->add_control(
 				),
 				'normal-box-shadow-css'   => array(
 					'type'       => 'cssbox',
+                    'label' => esc_html__( 'Box Shadow', 'cosmoswp' ),
 					'tab'        => 'scroll-top-icon-normal',
 					'class'      => 'cwp-element-show',
 					'box_fields' => array(
@@ -358,6 +368,7 @@ $wp_customize->add_control(
 				),
 				'hover-box-shadow-css'    => array(
 					'type'       => 'cssbox',
+                    'label' => esc_html__( 'Box Shadow', 'cosmoswp' ),
 					'tab'        => 'scroll-top-icon-hover',
 					'class'      => 'cwp-element-show',
 					'box_fields' => array(
@@ -393,7 +404,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'scroll-top-icon-options-msg',
@@ -413,7 +424,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_menu_indicator_options();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'scroll-top-icon-options',
 	array(
 		'choices'  => $choices,
@@ -432,7 +443,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'sanitize_text_field',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'scroll-top-text',
 	array(
 		'label'           => esc_html__( 'Scroll Top Open Text', 'cosmoswp' ),
@@ -451,7 +462,7 @@ $wp_customize->add_setting(
 		'default'           => $theme_option_defaults['scroll-top-icon'],
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Customize_Icons_Control(
 		$wp_customize,
 		'scroll-top-icon',
@@ -473,7 +484,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_icon_four_position();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Buttonset(
 		$wp_customize,
 		'scroll-top-icon-position',
@@ -495,12 +506,12 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'cosmoswp_sanitize_slider_field',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Slider(
 		$wp_customize,
 		'scroll-top-icon-size-responsive',
 		array(
-			'label'           => esc_html__( 'Scroll Top Icon Size', 'cosmoswp' ),
+			'label'           => esc_html__( 'Scroll Top Icon Size (px)', 'cosmoswp' ),
 			'section'         => 'cosmoswp-scroll-top-section',
 			'settings'        => 'scroll-top-icon-size-responsive',
 			'input_attrs'     => array(
@@ -522,7 +533,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_inherit_options();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'scroll-top-icon-typography-options',
 	array(
 		'label'           => esc_html__( 'Typography Options', 'cosmoswp' ),
@@ -542,7 +553,7 @@ $wp_customize->add_setting(
 		'default'           => $theme_option_defaults['scroll-top-icon-typography'],
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'scroll-top-icon-typography',

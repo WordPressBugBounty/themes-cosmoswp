@@ -1,4 +1,9 @@
-<?php
+<?php // phpcs:ignore WordPress.NamingConventions.ValidClassName.Prefix -- Class filename does not follow standard, but this is intentional.
+/**
+ * WooCommerce Single Customizer Options
+ *
+ * @package CosmosWP
+ */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -11,6 +16,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'CosmosWP_WooCommerce_Single' ) ) :
 
+	/**
+	 * WooCommerce Single Customizer Options
+	 *
+	 * @package CosmosWP
+	 */
 	class CosmosWP_WooCommerce_Single {
 
 
@@ -44,15 +54,12 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Single' ) ) :
 		 */
 		public static function instance() {
 
-			// Store the instance locally to avoid private static replication
 			static $instance = null;
 
-			// Only run these methods if they haven't been ran previously
 			if ( null === $instance ) {
 				$instance = new CosmosWP_WooCommerce_Single();
 			}
 
-			// Always return the instance
 			return $instance;
 		}
 
@@ -71,13 +78,15 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Single' ) ) :
 			add_action( 'cosmoswp_action_woocommerce_single', array( $this, 'display_woo_single' ), 110 );
 
 			add_filter( 'cosmoswp_dynamic_css', array( $this, 'dynamic_css' ), 100 );
+
+			add_filter( 'cosmoswp_customize_css_refresher', array( $this, 'add_css_refresher' ) );
 		}
 
 		/**
 		 * Callback functions for cosmoswp_default_theme_options,
 		 * Add Header Builder defaults values
 		 *
-		 * @param array $default_options
+		 * @param array $default_options Default Options.
 		 * @return array
 		 * @since    1.0.0
 		 * @access   public
@@ -112,7 +121,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Single' ) ) :
 		 * Callback functions for customize_register,
 		 * Add Panel Section control
 		 *
-		 * @param object $wp_customize
+		 * @param object $wp_customize WordPress customizer object.
 		 * @return void
 		 * @since    1.0.0
 		 * @access   public
@@ -160,7 +169,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Single' ) ) :
 			?>
 			<!-- Start of .blog-content-->
 			<div class="cwp-page cwp-content-wrapper <?php echo esc_attr( 'cwp-' . $sidebar ); ?> <?php cosmoswp_blog_main_wrap_classes(); ?>"
-				id="cwp-blog-main-content-wrapper">
+				id="cwp-woo-single-main-content-wrapper">
 				<?php
 				echo '<div class="grid-container"><div class="grid-row">';
 				cosmoswp_sidebar_template( $sidebar, 'cwp-woo-single' );
@@ -176,7 +185,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Single' ) ) :
 		 * Callback functions for cosmoswp_dynamic_css,
 		 * Add Dynamic Css
 		 *
-		 * @param array $dynamic_css
+		 * @param array $dynamic_css Dynamic CSS.
 		 * @return array
 		 * @since    1.0.9
 		 * @access   public
@@ -185,9 +194,11 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Single' ) ) :
 			/**
 			 * Blog Option Dynamic CSS
 			 */
-			$woo_dynamic_css['all']     = '';
-			$woo_dynamic_css['tablet']  = '';
-			$woo_dynamic_css['desktop'] = '';
+			$woo_dynamic_css = array(
+				'all'     => '',
+				'tablet'  => '',
+				'desktop' => '',
+			);
 
 			$woo_main_content_css                   = '';
 			$woo_single_summary_content_css         = '';
@@ -201,7 +212,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Single' ) ) :
 
 			if ( isset( $cwc_single_media_width['mobile'] ) ) {
 				$woo_main_content_css           .= 'width:' . $cwc_single_media_width['mobile'] . '%;';
-				$woo_single_summary_content_css .= $cwc_single_media_width['mobile'] === 100 ? 'width:100%;' : 'width:calc(100% - ' . $cwc_single_media_width['mobile'] . '%);';
+				$woo_single_summary_content_css .= 100 === $cwc_single_media_width['mobile'] ? 'width:100%;' : 'width:calc(100% - ' . $cwc_single_media_width['mobile'] . '%);';
 				$woo_dynamic_css['all']         .= '.woocommerce div.product div.images{
                     ' . $woo_main_content_css . '
                 }';
@@ -211,7 +222,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Single' ) ) :
 			}
 			if ( isset( $cwc_single_media_width['tablet'] ) ) {
 				$woo_main_content_tablet_css           .= 'width:' . $cwc_single_media_width['tablet'] . '%;';
-				$woo_single_summary_content_tablet_css .= $cwc_single_media_width['tablet'] === 100 ? 'width:100%;' : 'width:calc(100% - ' . $cwc_single_media_width['tablet'] . '% - 40px);';
+				$woo_single_summary_content_tablet_css .= 100 === $cwc_single_media_width['tablet'] ? 'width:100%;' : 'width:calc(100% - ' . $cwc_single_media_width['tablet'] . '% - 40px);';
 
 				$woo_dynamic_css['tablet'] .= '.woocommerce div.product div.images{
                     ' . $woo_main_content_tablet_css . '
@@ -222,7 +233,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Single' ) ) :
 			}
 			if ( isset( $cwc_single_media_width['desktop'] ) ) {
 				$woo_main_content_desktop_css           .= 'width:' . $cwc_single_media_width['desktop'] . '%;';
-				$woo_single_summary_content_desktop_css .= $cwc_single_media_width['desktop'] === 100 ? 'width:100%;' : 'width:calc(100% - ' . $cwc_single_media_width['desktop'] . '% - 40px);';
+				$woo_single_summary_content_desktop_css .= 100 === $cwc_single_media_width['desktop'] ? 'width:100%;' : 'width:calc(100% - ' . $cwc_single_media_width['desktop'] . '% - 40px);';
 
 				$woo_dynamic_css['desktop'] .= '.woocommerce div.product div.images{
                     ' . $woo_main_content_desktop_css . '
@@ -239,6 +250,66 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Single' ) ) :
 				return $woo_dynamic_css;
 			}
 		}
+
+		/**
+		 * Partial refreshment.
+		 *
+		 * @since    1.0.0
+		 * @access   public
+		 *
+		 * @return String
+		 */
+		public function partial_content() {
+			ob_start();
+			$this->display_woo_single();
+			$value = ob_get_clean();
+			return $value;
+		}
+
+		/**
+		 * Add selective refresh for the blog main content.
+		 *
+		 * @param WP_Customize_Manager $wp_customize The customizer manager.
+		 * @param string               $control_id The control ID.
+		 * @param array                $args Additional arguments.
+		 */
+		public function add_selective_refresh( $wp_customize, $control_id, $args = array() ) {
+			$defaults = array(
+				'selector'            => '#cwp-woo-single-main-content-wrapper',
+				'render_callback'     => array( $this, 'partial_content' ),
+				'container_inclusive' => false,
+				'fallback_refresh'    => false,
+			);
+
+			$args = wp_parse_args( $args, $defaults );
+
+			$wp_customize->selective_refresh->add_partial(
+				$control_id,
+				array(
+					'selector'            => $args['selector'],
+					'render_callback'     => $args['render_callback'],
+					'container_inclusive' => $args['container_inclusive'],
+					'fallback_refresh'    => $args['fallback_refresh'],
+				)
+			);
+		}
+
+		/**
+		 * Callback functions for cosmoswp_customize_css_refresher,
+		 * Add CSS refresher settings
+		 *
+		 * @since    1.0.0
+		 * @access   public
+		 *
+		 * @param array $css_refresher CSS refresher.
+		 * @return array
+		 */
+		public function add_css_refresher( $css_refresher ) {
+			$all_settings = array_keys( $this->defaults() );
+
+			$css_settings = cosmoswp_get_settings_by_type( $all_settings, 'css', array( 'width' ) );
+			return array_unique( array_merge( $css_refresher, $css_settings ) );
+		}
 	}
 endif;
 
@@ -252,7 +323,7 @@ endif;
  */
 if ( ! function_exists( 'cosmoswp_woocommerce_single' ) ) {
 
-	function cosmoswp_woocommerce_single() {
+	function cosmoswp_woocommerce_single() {//phpcs:ignore
 
 		return CosmosWP_WooCommerce_Single::instance();
 	}

@@ -1,18 +1,24 @@
 <?php
+/**
+ * CosmosWP Init File
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
- * Main include functions ( to support child theme ) that child theme can override file too
- *
- * @since CosmosWP 1.0.0
- *
- * @param string $file_path , path from the theme
- * @return string full path of file inside theme
- */
 if ( ! function_exists( 'cosmoswp_file_directory' ) ) {
-
+	/**
+	 * Main include functions ( to support child theme ) that child theme can override file too
+	 *
+	 * @since CosmosWP 1.0.0
+	 *
+	 * @param string $file_path , path from the theme.
+	 * @return string full path of file inside theme
+	 */
 	function cosmoswp_file_directory( $file_path ) {
 		if ( file_exists( trailingslashit( get_stylesheet_directory() ) . $file_path ) ) {
 			return trailingslashit( get_stylesheet_directory() ) . $file_path;
@@ -22,7 +28,6 @@ if ( ! function_exists( 'cosmoswp_file_directory' ) ) {
 	}
 }
 
-
 if ( ! function_exists( 'cosmoswp_is_null_or_empty' ) ) {
 
 	/**
@@ -30,7 +35,7 @@ if ( ! function_exists( 'cosmoswp_is_null_or_empty' ) ) {
 	 *
 	 * @since  CosmosWP 1.0.0
 	 *
-	 * @param string $str , string
+	 * @param string $str , string.
 	 * @return boolean
 	 */
 	function cosmoswp_is_null_or_empty( $str ) {
@@ -96,13 +101,13 @@ require cosmoswp_file_directory( 'inc/functions/template-functions.php' );/*chec
 require cosmoswp_file_directory( 'inc/functions/post-layout.php' );/*checked*/
 
 /*
-* Files for hooks
-*/
-/*
 * file for Templates
 */
 require cosmoswp_file_directory( 'inc/hooks/templates.php' );/*checked*/
 
+/*
+* Files for hooks
+*/
 require cosmoswp_file_directory( 'inc/default-hooks.php' );/*checked*/
 
 /*
@@ -112,11 +117,8 @@ require cosmoswp_file_directory( 'inc/hooks/breadcrumb.php' );/*checked*/
 
 require cosmoswp_file_directory( 'inc/starter-content/index.php' );/*checked*/
 
-
 if ( is_admin() ) {
-	/*
-	* CosmosWP  notice and advanced import
-	* */
+	// CosmosWP  notice and advanced import.
 	require cosmoswp_file_directory( 'inc/admin/advanced-import.php' );
 	require cosmoswp_file_directory( 'inc/admin/notice.php' );
 	require cosmoswp_file_directory( 'inc/admin/intro.php' );

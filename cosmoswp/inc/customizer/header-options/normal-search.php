@@ -1,7 +1,16 @@
 <?php
+/**
+ * Normal Search Options
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+global $cosmoswp_customize_control;
 
 /*Normal Search section*/
 $wp_customize->add_section(
@@ -21,7 +30,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'normal-search-placeholder',
 	array(
 		'label'    => esc_html__( 'Placeholder', 'cosmoswp' ),
@@ -38,12 +47,12 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'normal-search-margin-padding-msg',
 		array(
-			'label'   => esc_html__( 'Icon ( Margin & Padding )', 'cosmoswp' ),
+			'label'   => esc_html__( 'Icon ( Margin and Padding )', 'cosmoswp' ),
 			'section' => $this->normal_search,
 		)
 	)
@@ -58,12 +67,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'normal-search-margin',
 		array(
-			'label'    => esc_html__( 'Margin', 'cosmoswp' ),
+			'label'    => esc_html__( 'Margin (px)', 'cosmoswp' ),
 			'section'  => $this->normal_search,
 			'settings' => 'normal-search-margin',
 		),
@@ -81,12 +90,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'normal-search-padding',
 		array(
-			'label'    => esc_html__( 'Padding', 'cosmoswp' ),
+			'label'    => esc_html__( 'Padding (px)', 'cosmoswp' ),
 			'section'  => $this->normal_search,
 			'settings' => 'normal-search-padding',
 		),
@@ -102,7 +111,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'normal-search-icon-styling-msg',
@@ -122,19 +131,19 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
-    'normal-search-icon-size',
-    array(
-        'label'       => esc_html__( 'Icon Size (px)', 'cosmoswp' ),
-        'section'     => $this->normal_search,
-        'settings'    => 'normal-search-icon-size',
-        'type'          => 'number',
-        'input_attrs' => array(
-            'min'  => 0,
-            'max'  => 4000,
-            'step' => 1,
-        ),
-    )
+$cosmoswp_customize_control->add(
+	'normal-search-icon-size',
+	array(
+		'label'       => esc_html__( 'Icon Size (px)', 'cosmoswp' ),
+		'section'     => $this->normal_search,
+		'settings'    => 'normal-search-icon-size',
+		'type'        => 'number',
+		'input_attrs' => array(
+			'min'  => 0,
+			'max'  => 4000,
+			'step' => 1,
+		),
+	)
 );
 
 /*Tabs*/
@@ -147,7 +156,7 @@ $wp_customize->add_setting(
 	)
 );
 $border_style_choices = cosmoswp_header_border_style();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Tabs(
 		$wp_customize,
 		'normal-search-icon-styling',
@@ -230,6 +239,7 @@ $wp_customize->add_control(
 				),
 				'normal-box-shadow-css'   => array(
 					'type'       => 'cssbox',
+					'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 					'tab'        => 'search-icon-normal',
 					'class'      => 'cwp-element-show',
 					'box_fields' => array(
@@ -316,6 +326,7 @@ $wp_customize->add_control(
 				),
 				'hover-box-shadow-css'    => array(
 					'type'       => 'cssbox',
+					'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 					'tab'        => 'search-icon-hover',
 					'class'      => 'cwp-element-show',
 					'box_fields' => array(
@@ -350,7 +361,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'normal-search-styling-msg',
@@ -370,19 +381,19 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
-    'normal-search-input-height',
-    array(
-        'label'       => esc_html__( 'Form Input Height (px)', 'cosmoswp' ),
-        'section'     => $this->normal_search,
-        'settings'    => 'normal-search-input-height',
-        'type'    => 'number',
-        'input_attrs' => array(
-            'min'  => 0,
-            'max'  => 4000,
-            'step' => 1,
-        ),
-    )
+$cosmoswp_customize_control->add(
+	'normal-search-input-height',
+	array(
+		'label'       => esc_html__( 'Form Input Height (px)', 'cosmoswp' ),
+		'section'     => $this->normal_search,
+		'settings'    => 'normal-search-input-height',
+		'type'        => 'number',
+		'input_attrs' => array(
+			'min'  => 0,
+			'max'  => 4000,
+			'step' => 1,
+		),
+	)
 );
 
 /*Form Styling*/
@@ -395,7 +406,7 @@ $wp_customize->add_setting(
 	)
 );
 $border_style_choices = cosmoswp_header_border_style();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Tabs(
 		$wp_customize,
 		'normal-search-form-styling',
@@ -478,6 +489,7 @@ $wp_customize->add_control(
 				),
 				'normal-box-shadow-css'   => array(
 					'type'       => 'cssbox',
+					'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 					'tab'        => 'search-icon-normal',
 					'class'      => 'cwp-element-show',
 					'box_fields' => array(
@@ -564,6 +576,7 @@ $wp_customize->add_control(
 				),
 				'hover-box-shadow-css'    => array(
 					'type'       => 'cssbox',
+					'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 					'tab'        => 'search-icon-hover',
 					'class'      => 'cwp-element-show',
 					'box_fields' => array(
@@ -601,7 +614,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_inherit_options();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'normal-search-typography-options',
 	array(
 		'label'    => esc_html__( 'Typography Options', 'cosmoswp' ),
@@ -621,7 +634,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'normal-search-typography',

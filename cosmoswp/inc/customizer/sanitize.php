@@ -1,4 +1,11 @@
 <?php
+/**
+ * General settings.
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -10,14 +17,14 @@ if ( ! function_exists( 'cosmoswp_sanitize_number' ) ) :
 	 *
 	 * @since CosmosWP 1.0.0
 	 *
-	 * @param $cosmoswp_input
-	 * @param $cosmoswp_setting
+	 * @param string $cosmoswp_input The input value.
+	 * @param object $cosmoswp_setting The setting object.
 	 * @return int || float || numeric value
 	 */
 	function cosmoswp_sanitize_number( $cosmoswp_input, $cosmoswp_setting ) {
 		$cosmoswp_sanitize_text = sanitize_text_field( $cosmoswp_input );
 
-		// If the input is an number, return it; otherwise, return the default
+		// If the input is an number, return it; otherwise, return the default.
 		return ( is_numeric( $cosmoswp_sanitize_text ) ? $cosmoswp_sanitize_text : $cosmoswp_setting->default );
 	}
 
@@ -30,12 +37,12 @@ if ( ! function_exists( 'cosmoswp_sanitize_checkbox' ) ) :
 	 *
 	 * @since CosmosWP 1.0.0
 	 *
-	 * @param $checked
+	 * @param mixed $checked is checkbox value.
 	 * @return Boolean
 	 */
 	function cosmoswp_sanitize_checkbox( $checked ) {
 		// Boolean check.
-		return ( ( isset( $checked ) && true == $checked ) ? true : false );
+		return ( ( isset( $checked ) && $checked ) ? true : false );
 	}
 endif;
 
@@ -46,14 +53,14 @@ if ( ! function_exists( 'cosmoswp_sanitize_page' ) ) :
 	 *
 	 * @since CosmosWP 1.0.0
 	 *
-	 * @param $input user input value
+	 * @param integer $input user input value.
 	 * @return sanitized output as $input
 	 */
 	function cosmoswp_sanitize_page( $input ) {
 		// Ensure $input is an absolute integer.
 		$page_id = absint( $input );
-		// If $page_id is an ID of a published page, return it; otherwise, return false
-		return ( 'publish' == get_post_status( $page_id ) ? $page_id : false );
+		// If $page_id is an ID of a published page, return it; otherwise, return false.
+		return ( 'publish' === get_post_status( $page_id ) ? $page_id : false );
 	}
 endif;
 
@@ -64,11 +71,10 @@ if ( ! function_exists( 'cosmoswp_sanitize_select' ) ) :
 	 *
 	 * @since CosmosWP 1.0.0
 	 *
-	 * @see sanitize_key()               https://developer.wordpress.org/reference/functions/sanitize_key/
-	 * @see $wp_customize->get_control() https://developer.wordpress.org/reference/classes/wp_customize_manager/get_control/
+	 * @see sanitize_key() https://developer.wordpress.org/reference/functions/sanitize_key/
 	 *
-	 * @param $input
-	 * @param $setting
+	 * @param string               $input The input value.
+	 * @param WP_Customize_Setting $setting The setting object.
 	 * @return sanitized output
 	 */
 	function cosmoswp_sanitize_select( $input, $setting ) {
@@ -76,8 +82,15 @@ if ( ! function_exists( 'cosmoswp_sanitize_select' ) ) :
 		// Ensure input is a slug.
 		$input = sanitize_key( $input );
 
-		// Get list of choices from the control associated with the setting.
-		$choices = $setting->manager->get_control( $setting->id )->choices;
+		// Try to get choices from the control first.
+		$control = $setting->manager->get_control( $setting->id );
+		if ( $control && isset( $control->choices ) && is_array( $control->choices ) ) {
+			$choices = $control->choices;
+		} elseif ( isset( $setting->choices ) && is_array( $setting->choices ) ) {
+			$choices = $setting->choices;
+		} else {
+			return $input;
+		}
 
 		// If the input is a valid key, return it; otherwise, return the default.
 		return ( array_key_exists( $input, $choices ) ? $input : $setting->default );
@@ -91,7 +104,7 @@ if ( ! function_exists( 'cosmoswp_sanitize_allowed_html' ) ) :
 	 *
 	 * @since CosmosWP 1.0.0
 	 *
-	 * @param $cosmoswp_input
+	 * @param string $input The input value.
 	 * @return string
 	 */
 	function cosmoswp_sanitize_allowed_html( $input ) {
@@ -107,7 +120,7 @@ if ( ! function_exists( 'cosmoswp_sanitize_textarea' ) ) :
 	 *
 	 * @since CosmosWP 1.0.0
 	 *
-	 * @param $cosmoswp_input
+	 * @param string $input The input value.
 	 * @return string
 	 */
 	function cosmoswp_sanitize_textarea( $input ) {
@@ -125,6 +138,7 @@ if ( ! function_exists( 'cosmoswp_sanitize_color' ) ) :
 	 * Color sanitization callback
 	 * https://wordpress.stackexchange.com/questions/257581/escape-hexadecimals-rgba-values
 	 *
+	 * @param string $color The input value.
 	 * @since 1.0.0
 	 */
 	function cosmoswp_sanitize_color( $color ) {
@@ -133,8 +147,20 @@ if ( ! function_exists( 'cosmoswp_sanitize_color' ) ) :
 		}
 
 		// If string does not start with 'rgba', then treat as hex.
-		// sanitize the hex color and finally convert hex to rgba
 		if ( false === strpos( $color, 'rgba' ) ) {
+			// Sanitize the hex color.
+			// Check for 8-digit hex (e.g., #RRGGBBAA).
+			if ( preg_match( '/^#([A-Fa-f0-9]{2}){4}$/', $color ) ) {
+				// Extract components.
+				$red   = hexdec( substr( $color, 1, 2 ) );
+				$green = hexdec( substr( $color, 3, 2 ) );
+				$blue  = hexdec( substr( $color, 5, 2 ) );
+				$alpha = round( hexdec( substr( $color, 7, 2 ) ) / 255, 2 ); // Alpha from 0-255 to 0-1.
+
+				return 'rgba(' . $red . ',' . $green . ',' . $blue . ',' . $alpha . ')';
+			}
+
+			// For 3-digit (#RGB) or 6-digit (#RRGGBB) hex, use the standard WordPress function.
 			return sanitize_hex_color( $color );
 		}
 
@@ -153,23 +179,36 @@ if ( ! function_exists( 'cosmoswp_sanitize_multi_choices' ) ) :
 	 *
 	 * @since CosmosWP 1.0.0
 	 *
-	 * @param $cosmoswp_input
-	 * @return array
+	 * @param array                $input   The array of choices.
+	 * @param WP_Customize_Setting $setting The setting object.
+	 * @return array Sanitized array of choices.
 	 */
 	function cosmoswp_sanitize_multi_choices( $input, $setting ) {
-		// Get list of choices from the control associated with the setting.
-		$choices    = $setting->manager->get_control( $setting->id )->choices;
-		$input_keys = $input;
 
-		foreach ( $input_keys as $key => $value ) {
-			if ( ! array_key_exists( $value, $choices ) ) {
-				unset( $input[ $key ] );
-			}
+		$sanitized_input = array();
+		// Try to get choices from the control first.
+		$control = $setting->manager->get_control( $setting->id );
+		if ( $control && isset( $control->choices ) && is_array( $control->choices ) ) {
+			$choices = $control->choices;
+		} elseif ( isset( $setting->choices ) && is_array( $setting->choices ) ) {
+			$choices = $setting->choices;
 		}
 
-		// If the input is a valid key, return it;
-		// otherwise, return the default.
-		return ( is_array( $input ) ? $input : $setting->default );
+		if ( is_array( $input ) && ! empty( $choices ) ) {
+			foreach ( $input as $value ) {
+				if ( array_key_exists( $value, $choices ) ) {
+					$sanitized_input[] = sanitize_text_field( $value );
+				}
+			}
+			return $sanitized_input;
+
+		} elseif ( is_array( $input ) ) {
+			foreach ( $input as $value ) {
+				$sanitized_input[] = sanitize_text_field( $value );
+			}
+			return $sanitized_input;
+		}
+		return array();
 	}
 endif;
 
@@ -180,7 +219,7 @@ if ( ! function_exists( 'cosmoswp_sanitize_multicheck' ) ) :
 	 *
 	 * @since CosmosWP 1.0.0
 	 *
-	 * @param $cosmoswp_input
+	 * @param array|string $values The input value.
 	 * @return array
 	 */
 	function cosmoswp_sanitize_multicheck( $values ) {
@@ -197,10 +236,10 @@ if ( ! function_exists( 'cosmoswp_sanitize_field_typography' ) ) :
 	 *
 	 * @since CosmosWP 1.0.0
 	 *
-	 * @param $input
-	 * @return array
+	 * @param string $input The input value.
+	 * @return string $input
 	 */
-	function cosmoswp_sanitize_field_typography( $input, $cosmoswp_setting ) {
+	function cosmoswp_sanitize_field_typography( $input ) {
 		$input_decoded = json_decode( $input, true );
 		$output        = array();
 
@@ -248,17 +287,17 @@ if ( ! function_exists( 'cosmoswp_sanitize_field_default_css_box' ) ) :
 	 *
 	 * @since CosmosWP 1.0.0
 	 *
-	 * @param $input
-	 * @return array
+	 * @param string $input The input value.
+	 * @return string $input
 	 */
-	function cosmoswp_sanitize_field_default_css_box( $input, $cosmoswp_setting ) {
+	function cosmoswp_sanitize_field_default_css_box( $input ) {
 
 		$input_decoded = json_decode( $input, true );
 		$output        = array();
 		if ( ! empty( $input_decoded ) ) {
 			foreach ( $input_decoded as $device_id => $device_details ) {
 				foreach ( $device_details as $key => $value ) {
-					if ( $key == 'cssbox_link' ) {
+					if ( 'cssbox_link' == $key ) {
 						$output[ $device_id ][ $key ] = cosmoswp_sanitize_checkbox( $value );
 					} else {
 						$output[ $device_id ][ $key ] = cosmoswp_not_empty( $value ) ? intval( $value ) : '';
@@ -278,10 +317,10 @@ if ( ! function_exists( 'cosmoswp_sanitize_field_border' ) ) :
 	 *
 	 * @since CosmosWP 1.0.0
 	 *
-	 * @param $input
-	 * @return array
+	 * @param string $input The input value.
+	 * @return string $input
 	 */
-	function cosmoswp_sanitize_field_border( $input, $cosmoswp_setting ) {
+	function cosmoswp_sanitize_field_border( $input ) {
 		$input_decoded = json_decode( $input, true );
 
 		$output = array();
@@ -331,10 +370,10 @@ if ( ! function_exists( 'cosmoswp_sanitize_field_background' ) ) :
 	 *
 	 * @since CosmosWP 1.0.0
 	 *
-	 * @param $input
-	 * @return array
+	 * @param string $input The input value.
+	 * @return string $input
 	 */
-	function cosmoswp_sanitize_field_background( $input, $cosmoswp_setting ) {
+	function cosmoswp_sanitize_field_background( $input ) {
 
 		$input_decoded = json_decode( $input, true );
 		$output        = array();
@@ -415,6 +454,9 @@ if ( ! function_exists( 'cosmoswp_sanitize_image' ) ) :
 	/**
 	 * Image sanitization callback
 	 *
+	 * @param string $image The input value.
+	 * @param object $setting The setting object.
+	 * @return string $input
 	 * @since 1.2.1
 	 */
 	function cosmoswp_sanitize_image( $image, $setting ) {
@@ -445,19 +487,19 @@ if ( ! function_exists( 'cosmoswp_sanitize_social_data' ) ) :
 	 * Sanitization Social Data
 	 *
 	 * @since 1.2.1
-	 * @param  $input
-	 * @return array
+	 * @param string $input The input value.
+	 * @return string $input json encoded string
 	 */
 	function cosmoswp_sanitize_social_data( $input ) {
 		$input_decoded = json_decode( $input, true );
 		if ( ! empty( $input_decoded ) ) {
 			foreach ( $input_decoded as $boxes => $box ) {
 				foreach ( $box as $key => $value ) {
-					if ( $key == 'link ' ) {
+					if ( 'link' === $key ) {
 						$input_decoded[ $boxes ][ $key ] = esc_url_raw( $value );
-					} elseif ( $key == 'checkbox' ) {
+					} elseif ( 'checkbox' === $key ) {
 						$input_decoded[ $boxes ][ $key ] = cosmoswp_sanitize_checkbox( $value );
-					} elseif ( $key == 'color' ) {
+					} elseif ( 'color' === $key ) {
 						$input_decoded[ $boxes ][ $key ] = cosmoswp_sanitize_color( $value );
 					} else {
 						$input_decoded[ $boxes ][ $key ] = esc_attr( $value );
@@ -477,10 +519,10 @@ if ( ! function_exists( 'cosmoswp_sanitize_field_tabs' ) ) :
 	 * Sanitization Tab Field Data
 	 *
 	 * @since 1.2.1
-	 * @param  $input
-	 * @return array
+	 * @param  string $input The input value.
+	 * @return string json encoded string
 	 */
-	function cosmoswp_sanitize_field_tabs( $input, $cosmoswp_setting ) {
+	function cosmoswp_sanitize_field_tabs( $input ) {
 
 		$input_decoded = json_decode( $input, true );
 		$output        = array();
@@ -555,8 +597,8 @@ if ( ! function_exists( 'cosmoswp_sanitize_slider_field' ) ) :
 	 * Sanitization Slider Field Data
 	 *
 	 * @since 1.2.1
-	 * @param  $input
-	 * @return array
+	 * @param  string $input The input value.
+	 * @return string json encoded string
 	 */
 	function cosmoswp_sanitize_slider_field( $input ) {
 		$input_decoded = json_decode( $input, true );
@@ -583,8 +625,8 @@ if ( ! function_exists( 'cosmoswp_sanitize_slider_width_field' ) ) :
 	 * Sanitization Slider Field Data
 	 *
 	 * @since 1.2.1
-	 * @param  $input
-	 * @return array
+	 * @param  string $input The input value.
+	 * @return string json encoded string
 	 */
 	function cosmoswp_sanitize_slider_width_field( $input ) {
 		$input_decoded = json_decode( $input, true );
@@ -594,7 +636,7 @@ if ( ! function_exists( 'cosmoswp_sanitize_slider_width_field' ) ) :
 			foreach ( $input_decoded as $device => $value ) {
 				if ( ! empty( $value ) ) {
 					$output[ $device ] = absint( $value );
-				} elseif ( $value === '0' || $value === 0 ) {
+				} elseif ( in_array( $value, array( '0', 0 ), true ) ) {
 					$output[ $device ] = absint( $value );
 				} else {
 					$output[ $device ] = '';
@@ -612,40 +654,31 @@ if ( ! function_exists( 'cosmoswp_sanitize_radio' ) ) :
 	 * Sanitization Radio Field Data
 	 *
 	 * @since 1.2.1
-	 * @param  input , $setting
-	 * @return array
+	 * @param  string $input The input value.
+	 * @param  object $setting The setting object.
+	 * @return string $input
 	 */
 	function cosmoswp_sanitize_radio( $input, $setting ) {
 
-		// input must be a slug: lowercase alphanumeric characters, dashes and underscores are allowed only
+		// input must be a slug: lowercase alphanumeric characters, dashes and underscores are allowed only.
 		$input = sanitize_key( $input );
 
-		// get the list of possible radio box options
-		$choices = $setting->manager->get_control( $setting->id )->choices;
-
-		// return input if valid or return default option
-		return ( array_key_exists( $input, $choices ) ? $input : $setting->default );
-	}
-
-endif;
-
-if ( ! function_exists( 'cosmoswp_sanitize_spacing' ) ) :
-	/**
-	 * Sanitization array
-	 *
-	 * @since 1.2.1
-	 * @param  input , $setting
-	 * @return array
-	 */
-	function cosmoswp_sanitize_spacing( $input, $setting ) {
-
-		if ( is_array( $input ) ) {
+		// Try to get choices from the control first.
+		$control = $setting->manager->get_control( $setting->id );
+		if ( $control && isset( $control->choices ) && is_array( $control->choices ) ) {
+			$choices = $control->choices;
+		} elseif ( isset( $setting->choices ) && is_array( $setting->choices ) ) {
+			$choices = $setting->choices;
+		} else {
 			return $input;
 		}
 
-		return array();
+		if ( array_key_exists( $input, $choices ) ) {
+			return $input;
+		} else {
+			return $setting->default;
+		}
 	}
-
 endif;
 
 if ( ! function_exists( 'cosmoswp_is_json' ) ) :
@@ -653,7 +686,7 @@ if ( ! function_exists( 'cosmoswp_is_json' ) ) :
 	 * Check if Json
 	 *
 	 * @since 1.0.0
-	 * @param  input , $setting
+	 * @param  string $input The input value.
 	 * @return boolean
 	 */
 	function cosmoswp_is_json( $input ) {
@@ -664,33 +697,35 @@ endif;
 
 if ( ! function_exists( 'cosmoswp_sanitize_responsive_range' ) ) :
 	/**
-	 * Check if Json
+	 * Sanitize responsive range input.
 	 *
 	 * @since 1.0.0
-	 * @param  input , $setting
-	 * @return boolean
+	 * @param  string $input The input value.
+	 * @return string|float
 	 */
 	function cosmoswp_sanitize_responsive_range( $input ) {
 		if ( ! cosmoswp_is_json( $input ) ) {
 			return floatval( $input );
 		}
-		$range_value            = json_decode( $input, true );
-		$range_value['desktop'] = ! empty( $range_value['desktop'] ) || $range_value['desktop'] === '0' ? floatval( $range_value['desktop'] ) : '';
-		$range_value['tablet']  = ! empty( $range_value['tablet'] ) || $range_value['tablet'] === '0' ? floatval( $range_value['tablet'] ) : '';
-		$range_value['mobile']  = ! empty( $range_value['mobile'] ) || $range_value['mobile'] === '0' ? floatval( $range_value['mobile'] ) : '';
+
+		$range_value = json_decode( $input, true );
+
+		$range_value['desktop'] = ( ! empty( $range_value['desktop'] ) || '0' === $range_value['desktop'] || 0 === $range_value['desktop'] ) ? floatval( $range_value['desktop'] ) : '';
+		$range_value['tablet']  = ( ! empty( $range_value['tablet'] ) || '0' === $range_value['tablet'] || 0 === $range_value['tablet'] ) ? floatval( $range_value['tablet'] ) : '';
+		$range_value['mobile']  = ( ! empty( $range_value['mobile'] ) || '0' === $range_value['mobile'] || 0 === $range_value['mobile'] ) ? floatval( $range_value['mobile'] ) : '';
 
 		return wp_json_encode( $range_value );
 	}
-
 endif;
+
 
 if ( ! function_exists( 'cosmoswp_sanitize_field_responsive_buttonset' ) ) :
 	/**
-	 * Check if Json
+	 * Sanitize responsive buttonset input.
 	 *
 	 * @since 1.0.0
-	 * @param  input , $setting
-	 * @return boolean
+	 * @param  string $input The input value.
+	 * @return string json encoded string
 	 */
 	function cosmoswp_sanitize_field_responsive_buttonset( $input ) {
 

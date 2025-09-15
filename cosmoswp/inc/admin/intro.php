@@ -1,6 +1,4 @@
-<?php
-defined( 'ABSPATH' ) || exit;
-
+<?php // phpcs:ignore WordPress.NamingConventions.ValidClassName.Prefix -- Class filename does not follow standard, but this is intentional.
 /**
  * CosmosWP Intro Admin Page
  *
@@ -8,6 +6,12 @@ defined( 'ABSPATH' ) || exit;
  * @package CosmosWP
  * @since   1.0.2
  */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Class to handle notices and Advanced Demo Import
  *
@@ -16,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
 class CosmosWP_Intro {
 
 	/**
-	 * current added Menu hook_suffix
+	 * Current added Menu hook_suffix.
 	 *
 	 * @since    1.0.0
 	 * @access   public
@@ -39,15 +43,12 @@ class CosmosWP_Intro {
 	 * @return object
 	 */
 	public static function instance() {
-		// Store the instance locally to avoid private static replication
 		static $instance = null;
 
-		// Only run these methods if they haven't been ran previously
 		if ( null === $instance ) {
 			$instance = new self();
 		}
 
-		// Always return the instance
 		return $instance;
 	}
 
@@ -64,16 +65,17 @@ class CosmosWP_Intro {
 	/**
 	 * Register the JavaScript for the admin area.
 	 *
+	 * @param array $hook_suffix current page info.
 	 * @since    1.0.0
 	 */
 	public function add_scripts( $hook_suffix ) {
-		if ( ! is_array( $this->hook_suffix ) || ! in_array( $hook_suffix, $this->hook_suffix ) ) {
+		if ( ! is_array( $this->hook_suffix ) || ! in_array( $hook_suffix, $this->hook_suffix, true ) ) {
 			return;
 		}
-		wp_enqueue_style( 'wpness-grid', COSMOSWP_URL . '/assets/library/wpness-grid/wpness-grid' . COSMOSWP_SCRIPT_PREFIX . '.css', array(), '1.0.0' );
+		wp_enqueue_style( 'wpness-grid', COSMOSWP_URL . '/build/wpness-grid/wpness-grid.css', array(), '1.0.0' );
 
-		wp_enqueue_style( 'cosmoswp-notice', COSMOSWP_URL . '/inc/admin/notice.css', array(), '1.0.0' );
-		wp_enqueue_script( 'cosmoswp-adi-install', COSMOSWP_URL . '/inc/admin/notice.js', array( 'jquery' ), '', true );
+		wp_enqueue_style( 'cosmoswp-notice', COSMOSWP_URL . '/build/admin/notice/index.css', array(), '1.0.0' );
+		wp_enqueue_script( 'cosmoswp-adi-install', COSMOSWP_URL . '/build/admin/notice/index.js', array( 'jquery' ), '1.0.0', true );
 
 		$translation = array(
 			'btn_text' => esc_html__( 'Processing...', 'cosmoswp' ),
@@ -84,6 +86,7 @@ class CosmosWP_Intro {
 
 	/**
 	 * Add admin menus
+	 *
 	 * @access public
 	 */
 	public function intro() {
@@ -91,8 +94,11 @@ class CosmosWP_Intro {
 	}
 
 	/**
-	 * parse changelog
+	 * Parse changelog.
+	 *
 	 * @access Private
+	 *
+	 * @param string $content Content.
 	 * @return string
 	 */
 	private function parse_changelog( $content ) {
@@ -114,11 +120,11 @@ class CosmosWP_Intro {
 		}
 
 		return wp_kses_post( $changelog );
-
 	}
 
 	/**
 	 * More Setting/Options array specially for Pro
+	 *
 	 * @access Private
 	 * @return array
 	 */
@@ -191,11 +197,11 @@ class CosmosWP_Intro {
 			),
 		);
 		return $more_setting;
-
 	}
 
 	/**
 	 * FAQ Array
+	 *
 	 * @access Private
 	 * @return array
 	 */
@@ -204,11 +210,24 @@ class CosmosWP_Intro {
 		$faq = array(
 			array(
 				'q' => esc_html__( 'How to hide/change footer Powered text?', 'cosmoswp' ),
-				'a' => sprintf( esc_html__( 'Please go to %1$sFooter Copyright%2$s option, you can edit copyright text, also remove it completely.', 'cosmoswp' ), "<a href='" . add_query_arg( array( 'autofocus[section]' => 'footer_copyright' ), admin_url( 'customize.php' ) ) . "' target='_blank'>", '</a>' ),
+				'a' => sprintf(
+				/* translators: %1$s: link to customize footer copyright section, %2$s: closing link tag */
+					esc_html__( 'Please go to %1$sFooter Copyright%2$s option, you can edit copyright text, also remove it completely.', 'cosmoswp' ),
+					"<a href='" . add_query_arg( array( 'autofocus[section]' => 'footer_copyright' ), admin_url( 'customize.php' ) ) . "' target='_blank'>",
+					'</a>'
+				),
 			),
 			array(
 				'q' => esc_html__( 'Does this theme support Gutenberg Blocks?', 'cosmoswp' ),
-				'a' => sprintf( esc_html__( 'Yes, the theme fully supports Gutenberg Blocks. The demo of CosmosWP theme is created primarily on the base of %1$sGutentor: WordPress Page Building Blocks%2$s ', 'cosmoswp' ), "<a href='https://www.gutentor.com/' target='_blank'>", '</a>' ),
+				'a' => sprintf(
+					esc_html__(
+					/* translators: %1$s: link to customize footer copyright section, %2$s: closing link tag */
+						'Yes, the theme fully supports Gutenberg Blocks. The demo of CosmosWP theme is created primarily on the base of %1$sGutentor: WordPress Page Building Blocks%2$s ',
+						'cosmoswp'
+					),
+					"<a href='https://www.gutentor.com/' target='_blank'>",
+					'</a>'
+				),
 
 			),
 			array(
@@ -217,15 +236,20 @@ class CosmosWP_Intro {
 			),
 			array(
 				'q' => esc_html__( 'What is Gutentor?', 'cosmoswp' ),
-				'a' => sprintf( esc_html__( 'Gutentor is a WordPress plugin based on Gutenberg Blocks, modern drag & drop WordPress page builder Know more about it on %1$sGutentor official website%2$s', 'cosmoswp' ), "<a href='https://www.gutentor.com/' target='_blank'>", '</a>' ),
+				'a' => sprintf(
+				/* translators: %1$s: link to customize footer copyright section, %2$s: closing link tag */
+					esc_html__( 'Gutentor is a WordPress plugin based on Gutenberg Blocks, modern drag & drop WordPress page builder Know more about it on %1$sGutentor official website%2$s', 'cosmoswp' ),
+					"<a href='https://www.gutentor.com/' target='_blank'>",
+					'</a>'
+				),
 			),
 		);
-		return  $faq;
-
+		return $faq;
 	}
 
 	/**
 	 * Show the plugin recommended screen
+	 *
 	 * @access public
 	 * @return void
 	 */
@@ -247,7 +271,7 @@ class CosmosWP_Intro {
 								<?php
 								if ( ! function_exists( 'run_cosmoswp_pro' ) ) {
 									$upgrade = '<a href="https://www.cosmoswp.com/pricing/" target="_blank" rel="noopener" class="cwp-btn cwp-btn-sucess">' . esc_html__( 'Get CosmosWP Pro', 'cosmoswp' ) . '</a>';
-									echo apply_filters( 'cosmoswp_intro_upgrade_msg', $upgrade );
+									echo apply_filters( 'cosmoswp_intro_upgrade_msg', $upgrade );//phpcs:ignore
 								}
 								?>
 							</div>
@@ -330,175 +354,175 @@ class CosmosWP_Intro {
 							</div>
 						</div>
 						<div class="grid-md-8 grid-lg-9 ">
-						   <div class="grid-row cwp-info-box">
-							   <div class="grid-lg-3 grid-md-6">
+							<div class="grid-row cwp-info-box">
+								<div class="grid-lg-3 grid-md-6">
 								<div class="cwp-card">
 									<div class="cwp-card-header">
 										<h4 class="cwp-card-heading"> <span class="dashicons dashicons-media-document"></span><?php esc_html_e( 'Knowledge Base', 'cosmoswp' ); ?></h4>
 									</div>
 									<div class="cwp-card-body">
-									  <p>
-										  <?php esc_html_e( 'In-depth and well documented articles will help you to use the CosmosWP Themes in easiest way.', 'cosmoswp' ); ?>
-									  </p>
+										<p>
+											<?php esc_html_e( 'In-depth and well documented articles will help you to use the CosmosWP Themes in easiest way.', 'cosmoswp' ); ?>
+										</p>
 										<a href="https://www.cosmoswp.com/documentation/" target="_blank" class="cwp-btn cwp-btn-primary">
 											<?php esc_html_e( 'Visit Knowledge Base', 'cosmoswp' ); ?>
 										</a>
 									</div>
 								</div>
-							   </div>
-							   <div class="grid-lg-3 grid-md-6">
-								   <div class="cwp-card">
+								</div>
+								<div class="grid-lg-3 grid-md-6">
+									<div class="cwp-card">
 									<div class="cwp-card-header">
 										<h4 class="cwp-card-heading"> <span class="dashicons dashicons-format-chat"></span>
 											<?php esc_html_e( 'Community', 'cosmoswp' ); ?>
 										</h4>
 									</div>
 									<div class="cwp-card-body">
-									   <p>
-										   <?php esc_html_e( 'We want to make customer experience even better. So, join our Facebook community for instant support from experts.', 'cosmoswp' ); ?>
-									   </p>
+										<p>
+											<?php esc_html_e( 'We want to make customer experience even better. So, join our Facebook community for instant support from experts.', 'cosmoswp' ); ?>
+										</p>
 										<a href="https://www.facebook.com/groups/552911942158030/" target="_blank" class="cwp-btn cwp-btn-primary">
-										   <?php esc_html_e( 'Join Facebook Group', 'cosmoswp' ); ?>
-									   </a>
+											<?php esc_html_e( 'Join Facebook Group', 'cosmoswp' ); ?>
+										</a>
 									</div>
 								</div>
-							   </div>
-							   <div class="grid-lg-3 grid-md-6">
-								   <div class="cwp-card">
+								</div>
+								<div class="grid-lg-3 grid-md-6">
+									<div class="cwp-card">
 									<div class="cwp-card-header">
 										<h4 class="cwp-card-heading"> <span class="dashicons dashicons-backup"></span> <?php esc_html_e( '24x7 Support', 'cosmoswp' ); ?> </h4>
 									</div>
 									<div class="cwp-card-body">
-									   <p>
-										   <?php esc_html_e( 'We have dedicated support team 24*7 to help you in case you encounter any issue during and after the use of CosmosWP.', 'cosmoswp' ); ?>
-									   </p>
+										<p>
+											<?php esc_html_e( 'We have dedicated support team 24*7 to help you in case you encounter any issue during and after the use of CosmosWP.', 'cosmoswp' ); ?>
+										</p>
 										<a href="https://premium.acmeit.org/support-tickets/" target="_blank" class="cwp-btn cwp-btn-primary"><?php esc_html_e( 'Create A Ticket', 'cosmoswp' ); ?></a>
 									</div>
 								</div>
-							   </div>
-							   <div class="grid-lg-3 grid-md-6">
-								   <div class="cwp-card">
+								</div>
+								<div class="grid-lg-3 grid-md-6">
+									<div class="cwp-card">
 									<div class="cwp-card-header">
 										<h4 class="cwp-card-heading"> <span class="dashicons dashicons-video-alt3"></span><?php esc_html_e( 'Video Guide', 'cosmoswp' ); ?></h4>
 									</div>
 									<div class="cwp-card-body">
-									   <p>
-										   <?php esc_html_e( 'CosmosWP Theme comes with detailed video tutorials of each and every customization with practical demonstration.', 'cosmoswp' ); ?>
-									   </p>
-									   <a href="https://www.cosmoswp.com/" class="cwp-btn cwp-btn-primary" target="_blank" rel="noopener"><?php esc_html_e( 'View Video Guide', 'cosmoswp' ); ?></a>
+										<p>
+											<?php esc_html_e( 'CosmosWP Theme comes with detailed video tutorials of each and every customization with practical demonstration.', 'cosmoswp' ); ?>
+										</p>
+										<a href="https://www.cosmoswp.com/" class="cwp-btn cwp-btn-primary" target="_blank" rel="noopener"><?php esc_html_e( 'View Video Guide', 'cosmoswp' ); ?></a>
 									</div>
 								</div>
-							   </div>
-						   </div>
-						   <div class="grid-row cwp-info-box cwp-customizer-info">
+								</div>
+							</div>
+							<div class="grid-row cwp-info-box cwp-customizer-info">
 								<div class="grid-lg-12 grid-md-12">
 									<div class="cwp-card">
 											<div class="cwp-card-header">
 												<h4 class="cwp-card-heading"><?php esc_html_e( 'Links To Customizer Settings', 'cosmoswp' ); ?></h4>
 											</div>
 											<div class="cwp-card-body">
-											  <ul class="cwp-list">
+												<ul class="cwp-list">
 
-												  <li class="">
-													  <?php
+													<li class="">
+														<?php
 														$section_link = add_query_arg( array( 'autofocus[section]' => 'cosmoswp-general-setting-section' ), admin_url( 'customize.php' ) );
 														?>
-													  <a href="<?php echo esc_url( $section_link ); ?>" target="_blank">
-														  <span class="dashicons dashicons-editor-textcolor"></span>
-														  <?php esc_html_e( 'Colors/Fonts', 'cosmoswp' ); ?>
+														<a href="<?php echo esc_url( $section_link ); ?>" target="_blank">
+															<span class="dashicons dashicons-editor-textcolor"></span>
+															<?php esc_html_e( 'Colors/Fonts', 'cosmoswp' ); ?>
 														</a>
 													</li>
 
-												  <li class="">
-													  <?php
+													<li class="">
+														<?php
 														$section_link = add_query_arg( array( 'autofocus[section]' => 'title_tagline' ), admin_url( 'customize.php' ) );
 														?>
-													  <a href="<?php echo esc_url( $section_link ); ?>" target="_blank">
-														  <span class="dashicons dashicons-format-image"></span>
-														  <?php esc_html_e( 'Upload Logo', 'cosmoswp' ); ?>
-													  </a>
-												  </li>
-												  <li class="">
-													  <?php
+														<a href="<?php echo esc_url( $section_link ); ?>" target="_blank">
+															<span class="dashicons dashicons-format-image"></span>
+															<?php esc_html_e( 'Upload Logo', 'cosmoswp' ); ?>
+														</a>
+													</li>
+													<li class="">
+														<?php
 														$panel_link = add_query_arg( array( 'autofocus[panel]' => 'cosmoswp_header' ), admin_url( 'customize.php' ) );
 														?>
-													  <a href="<?php echo esc_url( $panel_link ); ?>" target="_blank">
-														  <span class="dashicons dashicons-menu-alt3"></span>
-														  <?php esc_html_e( 'Header Options', 'cosmoswp' ); ?>
-													  </a>
-												  </li>
-												  <li class="">
-													  <?php
+														<a href="<?php echo esc_url( $panel_link ); ?>" target="_blank">
+															<span class="dashicons dashicons-menu-alt3"></span>
+															<?php esc_html_e( 'Header Options', 'cosmoswp' ); ?>
+														</a>
+													</li>
+													<li class="">
+														<?php
 														$panel_link = add_query_arg( array( 'autofocus[panel]' => 'cosmoswp_footer' ), admin_url( 'customize.php' ) );
 														?>
-													  <a href="<?php echo esc_url( $panel_link ); ?>" target="_blank">
-														  <span class="dashicons dashicons-tagcloud"></span>
-														  <?php esc_html_e( 'Footer Options', 'cosmoswp' ); ?>
-													  </a>
-												  </li>
-												  <li class="">
-													  <?php
+														<a href="<?php echo esc_url( $panel_link ); ?>" target="_blank">
+															<span class="dashicons dashicons-tagcloud"></span>
+															<?php esc_html_e( 'Footer Options', 'cosmoswp' ); ?>
+														</a>
+													</li>
+													<li class="">
+														<?php
 														$section_link = add_query_arg( array( 'autofocus[section]' => 'header_image' ), admin_url( 'customize.php' ) );
 														?>
-													  <a href="<?php echo esc_url( $section_link ); ?>" target="_blank">
-														  <span class="dashicons dashicons-format-image"></span>
-														  <?php esc_html_e( 'Banner Section', 'cosmoswp' ); ?>
-													  </a>
-												  </li>
-												  <li class="">
-													  <?php
+														<a href="<?php echo esc_url( $section_link ); ?>" target="_blank">
+															<span class="dashicons dashicons-format-image"></span>
+															<?php esc_html_e( 'Banner Section', 'cosmoswp' ); ?>
+														</a>
+													</li>
+													<li class="">
+														<?php
 														$section_link = add_query_arg( array( 'autofocus[section]' => 'cosmoswp_main_content' ), admin_url( 'customize.php' ) );
 														?>
-													  <a href="<?php echo esc_url( $section_link ); ?>" target="_blank">
-														  <span class="dashicons dashicons-tagcloud"></span>
-														  <?php esc_html_e( 'Content Section', 'cosmoswp' ); ?>
-													  </a>
-												  </li>
-												  <li class="">
-													  <?php
+														<a href="<?php echo esc_url( $section_link ); ?>" target="_blank">
+															<span class="dashicons dashicons-tagcloud"></span>
+															<?php esc_html_e( 'Content Section', 'cosmoswp' ); ?>
+														</a>
+													</li>
+													<li class="">
+														<?php
 														$panel_link = add_query_arg( array( 'autofocus[section]' => 'cosmoswp-blog' ), admin_url( 'customize.php' ) );
 														?>
-													  <a href="<?php echo esc_url( $panel_link ); ?>" target="_blank">
-														  <span class="dashicons dashicons-layout"></span>
-														  <?php esc_html_e( 'Blog Options', 'cosmoswp' ); ?>
-													  </a>
-												  </li>
-												  <li class="">
-													  <?php
+														<a href="<?php echo esc_url( $panel_link ); ?>" target="_blank">
+															<span class="dashicons dashicons-layout"></span>
+															<?php esc_html_e( 'Blog Options', 'cosmoswp' ); ?>
+														</a>
+													</li>
+													<li class="">
+														<?php
 														$panel_link = add_query_arg( array( 'autofocus[section]' => 'cosmoswp-page' ), admin_url( 'customize.php' ) );
 														?>
-													  <a href="<?php echo esc_url( $panel_link ); ?>" target="_blank">
-														  <span class="dashicons dashicons-layout"></span>
-														  <?php esc_html_e( 'Page Options', 'cosmoswp' ); ?>
-													  </a>
-												  </li>
-												  <li class="">
-													  <?php
+														<a href="<?php echo esc_url( $panel_link ); ?>" target="_blank">
+															<span class="dashicons dashicons-layout"></span>
+															<?php esc_html_e( 'Page Options', 'cosmoswp' ); ?>
+														</a>
+													</li>
+													<li class="">
+														<?php
 														$panel_link = add_query_arg( array( 'autofocus[panel]' => 'cosmoswp_post_panel' ), admin_url( 'customize.php' ) );
 														?>
-													  <a href="<?php echo esc_url( $panel_link ); ?>" target="_blank">
-														  <span class="dashicons dashicons-layout"></span>
-														  <?php esc_html_e( 'Post Options', 'cosmoswp' ); ?>
-													  </a>
-												  </li>
-												  <li class="">
-													  <?php
+														<a href="<?php echo esc_url( $panel_link ); ?>" target="_blank">
+															<span class="dashicons dashicons-layout"></span>
+															<?php esc_html_e( 'Post Options', 'cosmoswp' ); ?>
+														</a>
+													</li>
+													<li class="">
+														<?php
 														$panel_link = add_query_arg( array( 'autofocus[panel]' => 'cosmoswp_theme_options' ), admin_url( 'customize.php' ) );
 														?>
-													  <a href="<?php echo esc_url( $panel_link ); ?>" target="_blank">
-														  <span class="dashicons dashicons-admin-customizer"></span>
-														  <?php esc_html_e( 'Theme Options', 'cosmoswp' ); ?>
-													  </a>
-												  </li>
-											  </ul>
+														<a href="<?php echo esc_url( $panel_link ); ?>" target="_blank">
+															<span class="dashicons dashicons-admin-customizer"></span>
+															<?php esc_html_e( 'Theme Options', 'cosmoswp' ); ?>
+														</a>
+													</li>
+												</ul>
 											</div>
 									</div>
 								</div>
-						   </div>
+							</div>
 
-						   <div class="grid-row cwp-info-box">
-							   <div class="grid-lg-5 grid-md-5">
-								   <div class="cwp-card">
+							<div class="grid-row cwp-info-box">
+								<div class="grid-lg-5 grid-md-5">
+									<div class="cwp-card">
 									<div class="cwp-card-header">
 										<h4 class="cwp-card-heading"> <span class="dashicons dashicons-format-image"></span><?php esc_html_e( 'More Options', 'cosmoswp' ); ?></h4>
 									</div>
@@ -522,10 +546,10 @@ class CosmosWP_Intro {
 									</div>
 								</div>
 
-							   </div>
-							   <div class="grid-lg-7 grid-md-7">
+								</div>
+								<div class="grid-lg-7 grid-md-7">
 									
-								   <div class="cwp-card">
+									<div class="cwp-card">
 									<div class="cwp-card-header">
 										<h4 class="cwp-card-heading"> <span class="dashicons dashicons-format-image"></span><?php esc_html_e( ' Change Log', 'cosmoswp' ); ?></h4>
 									</div>
@@ -548,12 +572,12 @@ class CosmosWP_Intro {
 										</div>
 									</div>
 								</div>
-							   </div>
-						   </div>
+								</div>
+							</div>
 
-						   <div class="grid-row cwp-info-box">
-							   <div class="grid-lg-12 grid-md-12">
-								   <div class="cwp-card">
+							<div class="grid-row cwp-info-box">
+								<div class="grid-lg-12 grid-md-12">
+									<div class="cwp-card">
 									<div class="cwp-card-header">
 										<h4 class="cwp-card-heading"> <span class="dashicons dashicons-format-image"></span><?php esc_html_e( '  Frequently Asked Questions', 'cosmoswp' ); ?></h4>
 									</div>
@@ -583,8 +607,8 @@ class CosmosWP_Intro {
 										</div>
 									</div>
 								</div>
-							   </div>
-						   </div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -599,7 +623,7 @@ class CosmosWP_Intro {
  *
  * @since    1.0.0
  */
-function cosmoswp_intro() {
+function cosmoswp_intro() {//phpcs:ignore
 	return CosmosWP_Intro::instance();
 }
 cosmoswp_intro()->run();

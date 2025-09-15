@@ -1,6 +1,6 @@
-<?php
+<?php // phpcs:ignore WordPress.NamingConventions.ValidClassName.Prefix -- Class filename does not follow standard, but this is intentional.
 /**
- * Header Builder and Customizer Options
+ * Advanced Banner Options
  *
  * @package CosmosWP
  */
@@ -11,6 +11,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'CosmosWP_Advanced_Banner_Controller' ) ) :
 
+	/**
+	 * Advanced Banner Options
+	 *
+	 * @package CosmosWP
+	 */
 	class CosmosWP_Advanced_Banner_Controller {
 
 		/**
@@ -26,15 +31,12 @@ if ( ! class_exists( 'CosmosWP_Advanced_Banner_Controller' ) ) :
 		 */
 		public static function instance() {
 
-			// Store the instance locally to avoid private static replication
 			static $instance = null;
 
-			// Only run these methods if they haven't been ran previously
 			if ( null === $instance ) {
 				$instance = new CosmosWP_Advanced_Banner_Controller();
 			}
 
-			// Always return the instance
 			return $instance;
 		}
 
@@ -48,14 +50,13 @@ if ( ! class_exists( 'CosmosWP_Advanced_Banner_Controller' ) ) :
 		 */
 		public function run() {
 
-			add_action( 'cosmoswp_default_theme_options', array( $this, 'add_defaults' ) );
+			add_action( 'cosmoswp_default_theme_options', array( $this, 'defaults' ) );
 			add_action( 'customize_register', array( $this, 'customize_register' ) );
 			if ( is_admin() ) {
 				add_action( 'load-post.php', array( $this, 'init_metabox' ) );
 				add_action( 'load-post-new.php', array( $this, 'init_metabox' ) );
 			}
 			add_filter( 'cosmoswp_banner-section-display', array( $this, 'customize_banner_section_display' ), 900 );
-
 		}
 		/**
 		 * Meta box initialization.
@@ -89,6 +90,10 @@ if ( ! class_exists( 'CosmosWP_Advanced_Banner_Controller' ) ) :
 
 		/**
 		 * Renders the meta box.
+		 *
+		 * @param WP_Post $post The current post object.
+		 *
+		 * @return void
 		 */
 		public function render_metabox( $post ) {
 
@@ -98,10 +103,10 @@ if ( ! class_exists( 'CosmosWP_Advanced_Banner_Controller' ) ) :
 			if ( ! cosmoswp_is_null_or_empty( $cosmoswp_site_layout_value ) ) {
 				$cosmoswp_site_layout = $cosmoswp_site_layout_value;
 			}
-			// true ensures you get just one value instead of an array
+			// true ensures you get just one value instead of an array.
 			wp_nonce_field( basename( __FILE__ ), 'cosmoswp_advanced_banner_meta_nonce' );
 			?>
-			<div class="cosmowp-custom-meta components-base-control">
+			<div class="cosmoswp-custom-meta components-base-control">
 				<div class="components-base-control__field">
 					<label class="components-base-control__label"><?php echo esc_html__( 'Banner Options', 'cosmoswp' ); ?></label>
 					<select name="cosmoswp_banner_options_layout" id="cosmoswp_banner_options_layout"
@@ -127,9 +132,10 @@ if ( ! class_exists( 'CosmosWP_Advanced_Banner_Controller' ) ) :
 		public function save_metabox( $post_id, $post ) {
 
 			/*
-			  * A Guide to Writing Secure Themes – Part 4: Securing Post Meta
-			  *https://make.wordpress.org/themes/2015/06/09/a-guide-to-writing-secure-themes-part-4-securing-post-meta/
-			  * */
+			 * A Guide to Writing Secure Themes – Part 4: Securing Post Meta
+			 *https://make.wordpress.org/themes/2015/06/09/a-guide-to-writing-secure-themes-part-4-securing-post-meta/
+			 * */
+
 			if (
 				! isset( $_POST['cosmoswp_advanced_banner_meta_nonce'] ) ||
 				! wp_verify_nonce( $_POST['cosmoswp_advanced_banner_meta_nonce'], basename( __FILE__ ) ) || /*Protecting against unwanted requests*/
@@ -148,7 +154,7 @@ if ( ! class_exists( 'CosmosWP_Advanced_Banner_Controller' ) ) :
 			}
 
 			// Execute this saving function
-			// Banner layout
+			// Banner layout.
 			if ( isset( $_POST['cosmoswp_banner_options_layout'] ) ) {
 				$old = get_post_meta( $post_id, 'cosmoswp_banner_options_layout', true );
 				$new = esc_attr( $_POST['cosmoswp_banner_options_layout'] );
@@ -170,10 +176,10 @@ if ( ! class_exists( 'CosmosWP_Advanced_Banner_Controller' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param array $default_options
+		 * @param array $default_options Default options.
 		 * @return array
 		 */
-		public function add_defaults( $default_options ) {
+		public function defaults( $default_options ) {
 			$this_defaults = array(
 				'cosmoswp-banner-options-page' => 'default',
 				'cosmoswp-banner-options-post' => 'default',
@@ -189,12 +195,14 @@ if ( ! class_exists( 'CosmosWP_Advanced_Banner_Controller' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param WP_Customize_Manager $wp_customize
+		 * @param WP_Customize_Manager $ WordPress Customizer Object.
 		 * @return void
 		 */
 		public function customize_register( $wp_customize ) {
 
-			$adv_banner_defaults = $this->add_defaults( array() );
+			global $cosmoswp_customize_control;
+
+			$adv_banner_defaults = $this->defaults( array() );
 
 			/*Page Banner setting Section*/
 			$wp_customize->add_section(
@@ -225,7 +233,7 @@ if ( ! class_exists( 'CosmosWP_Advanced_Banner_Controller' ) ) :
 				)
 			);
 			$choices = cosmoswp_singular_post_page_banner_option();
-			$wp_customize->add_control(
+			$cosmoswp_customize_control->add(
 				'cosmoswp-banner-options-page',
 				array(
 					'label'    => esc_html__( 'Banner Options', 'cosmoswp' ),
@@ -245,7 +253,7 @@ if ( ! class_exists( 'CosmosWP_Advanced_Banner_Controller' ) ) :
 				)
 			);
 			$choices = cosmoswp_singular_post_page_banner_option();
-			$wp_customize->add_control(
+			$cosmoswp_customize_control->add(
 				'cosmoswp-banner-options-post',
 				array(
 					'label'    => esc_html__( 'Banner Options', 'cosmoswp' ),
@@ -264,27 +272,27 @@ if ( ! class_exists( 'CosmosWP_Advanced_Banner_Controller' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param $banner_options string
+		 * @param $banner_options string Banner option.
 		 * @return string
 		 */
 		public function customize_banner_section_display( $banner_options ) {
 			if ( is_singular( array( 'post', 'page' ) ) || ( is_home() && ! is_front_page() ) ) {
 				if ( is_singular( 'post' ) ) {
 					$banner_options_page = cosmoswp_get_theme_options( 'cosmoswp-banner-options-post' );
-					if ( 'default' != $banner_options_page ) {
+					if ( 'default' !== $banner_options_page ) {
 						$banner_options = $banner_options_page;
 					}
 				} else {
 					$banner_options_post = cosmoswp_get_theme_options( 'cosmoswp-banner-options-page' );
 
-					if ( 'default' != $banner_options_post ) {
+					if ( 'default' !== $banner_options_post ) {
 						$banner_options = $banner_options_post;
 					}
 				}
 				/*Meta for singular or blog page*/
 				$post_id                    = is_singular() ? get_the_ID() : get_option( 'page_for_posts' );
 				$cosmoswp_site_layout_value = get_post_meta( $post_id, 'cosmoswp_banner_options_layout', true );
-				if ( $cosmoswp_site_layout_value && 'default' != $cosmoswp_site_layout_value ) {
+				if ( $cosmoswp_site_layout_value && 'default' !== $cosmoswp_site_layout_value ) {
 					$banner_options = $cosmoswp_site_layout_value;
 				}
 			}
@@ -306,8 +314,7 @@ endif;
  */
 if ( ! function_exists( 'cosmoswp_advanced_banner_controller' ) ) {
 
-	function cosmoswp_advanced_banner_controller() {
-
+	function cosmoswp_advanced_banner_controller() {//phpcs:ignore
 		return CosmosWP_Advanced_Banner_Controller::instance();
 	}
 

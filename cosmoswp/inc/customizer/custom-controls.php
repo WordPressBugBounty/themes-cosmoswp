@@ -1,4 +1,11 @@
 <?php
+/**
+ * Include custom controls for the Customizer.
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -19,14 +26,7 @@ require cosmoswp_file_directory( 'inc/customizer/custom-controls/cssbox/class-co
 require cosmoswp_file_directory( 'inc/customizer/custom-controls/tabs/class-control-tabs.php' );
 
 /*Register Section*/
-$wp_customize->register_section_type( 'CosmosWP_WP_Customize_Section_H3' );
-$wp_customize->register_section_type( 'CosmosWP_WP_Customize_Section_P' );
+$wp_customize->register_section_type( 'CosmosWP_WP_Customize_Section' );
 
-// Register JS control types
-$wp_customize->register_control_type( 'CosmosWP_Custom_Control_Buttonset' );
-$wp_customize->register_control_type( 'CosmosWP_Custom_Control_Color' );
-$wp_customize->register_control_type( 'CosmosWP_Custom_Control_Message' );
-$wp_customize->register_control_type( 'CosmosWP_Custom_Control_Heading' );
-$wp_customize->register_control_type( 'CosmosWP_Custom_Control_Slider' );
-$wp_customize->register_control_type( 'CosmosWP_Custom_Control_Sortable' );
-$wp_customize->register_control_type( 'CosmosWP_Customize_Multicheck_Control' );
+// Register JS control types.
+require cosmoswp_file_directory( 'inc/customizer/custom-controls/back-compact/index.php' );

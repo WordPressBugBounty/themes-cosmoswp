@@ -1,23 +1,28 @@
 <?php
 /**
- * check if WooCommerce activated
+ * WooCommerce helpers functions
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if ( ! function_exists( 'cosmoswp_is_woocommerce_active' ) ) {
 
+	/**
+	 * Check if WooCommerce activated
+	 */
 	function cosmoswp_is_woocommerce_active() {
 		return class_exists( 'WooCommerce' ) ? true : false;
 	}
 }
 
-/**
- * Checks if the current page is a product archive
- *
- * @return boolean
- */
-/**
- * check if WooCommerce activated
- */
 if ( ! function_exists( 'cosmoswp_is_woocommerce_archive' ) ) {
+	/**
+	 * Checks if the current page is a product archive
+	 *
+	 * @return boolean
+	 */
 	function cosmoswp_is_woocommerce_archive() {
 		if ( cosmoswp_is_woocommerce_active() ) {
 			if ( is_shop() || is_product_taxonomy() || is_product_category() || is_product_tag() ) {
@@ -30,16 +35,14 @@ if ( ! function_exists( 'cosmoswp_is_woocommerce_archive' ) ) {
 	}
 }
 
-
-/**
- * Woo Archive Elements Sorting
- *
- * @since CosmosWP 1.0.0
- *
- * @param null
- * @return array $cosmoswp_woo_archive_elements_sorting
- */
-if ( ! function_exists( 'cosmoswp_woo_archive_elements_sorting' ) ) :
+if ( ! function_exists( 'cosmoswp_woo_archive_elements_sorting' ) ) {
+	/**
+	 * Woo Archive Elements Sorting
+	 *
+	 * @since CosmosWP 1.0.0
+	 *
+	 * @return array $cosmoswp_woo_archive_elements_sorting
+	 */
 	function cosmoswp_woo_archive_elements_sorting() {
 		$cosmoswp_woo_archive_elements_sorting = array(
 			'cat'     => esc_html__( 'Category', 'cosmoswp' ),
@@ -53,17 +56,17 @@ if ( ! function_exists( 'cosmoswp_woo_archive_elements_sorting' ) ) :
 		);
 		return apply_filters( 'cosmoswp_woo_archive_elements_sorting', $cosmoswp_woo_archive_elements_sorting );
 	}
-endif;
+}
 
-/**
- * Woo Single Tab Design
- *
- * @since CosmosWP 1.0.0
- *
- * @param null
- * @return array $cosmoswp_woo_single_tab_design
- */
-if ( ! function_exists( 'cosmoswp_woo_single_tab_design' ) ) :
+
+if ( ! function_exists( 'cosmoswp_woo_single_tab_design' ) ) {
+	/**
+	 * Woo Single Tab Design
+	 *
+	 * @since CosmosWP 1.0.0
+	 *
+	 * @return array $cosmoswp_woo_single_tab_design
+	 */
 	function cosmoswp_woo_single_tab_design() {
 		$cosmoswp_woo_single_tab_design = array(
 			'default'                => esc_html__( 'Default', 'cosmoswp' ),
@@ -71,17 +74,17 @@ if ( ! function_exists( 'cosmoswp_woo_single_tab_design' ) ) :
 		);
 		return apply_filters( 'cosmoswp_woo_single_tab_design', $cosmoswp_woo_single_tab_design );
 	}
-endif;
+}
 
-/**
- * Woo Single Elements Sorting
- *
- * @since CosmosWP 1.0.0
- *
- * @param null
- * @return array $cosmoswp_woo_single_elements
- */
-if ( ! function_exists( 'cosmoswp_woo_single_elements' ) ) :
+
+if ( ! function_exists( 'cosmoswp_woo_single_elements' ) ) {
+	/**
+	 * Woo Single Elements Sorting
+	 *
+	 * @since CosmosWP 1.0.0
+	 *
+	 * @return array $cosmoswp_woo_single_elements
+	 */
 	function cosmoswp_woo_single_elements() {
 		$cosmoswp_woo_single_elements = array(
 			'title'    => esc_html__( 'Title', 'cosmoswp' ),
@@ -94,18 +97,4 @@ if ( ! function_exists( 'cosmoswp_woo_single_elements' ) ) :
 		);
 		return apply_filters( 'cosmoswp_woo_single_elements', $cosmoswp_woo_single_elements );
 	}
-endif;
-
-/**
- * Woo Check if Mobile Primary sidebar popup enabled
- *
- * @since CosmosWP 1.1.2
- *
- * @param null
- * @return boolean
- */
-if ( ! function_exists( 'cosmoswp_is_wc_archive_psp_sm' ) ) :
-	function cosmoswp_is_wc_archive_psp_sm() {
-		return cosmoswp_get_theme_options( 'cwc-archive-psp-sm' );
-	}
-endif;
+}

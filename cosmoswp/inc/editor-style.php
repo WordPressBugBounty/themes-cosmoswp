@@ -1,15 +1,21 @@
 <?php
-
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
 /**
- * CosmosWP_Editor_Style
+ * Editor Style
  *
  * @package CosmosWP
  */
-if ( ! class_exists( 'CosmosWP_Editor_Style' ) ) :
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+if ( ! class_exists( 'CosmosWP_Editor_Style' ) ) :
+	/**
+	 * CosmosWP_Editor_Style
+	 *
+	 * @package CosmosWP
+	 */
 	class CosmosWP_Editor_Style {
 
 		/**
@@ -25,15 +31,12 @@ if ( ! class_exists( 'CosmosWP_Editor_Style' ) ) :
 		 */
 		public static function instance() {
 
-			// Store the instance locally to avoid private static replication
 			static $instance = null;
 
-			// Only run these methods if they haven't been ran previously
 			if ( null === $instance ) {
-				$instance = new CosmosWP_Editor_Style;
+				$instance = new CosmosWP_Editor_Style();
 			}
 
-			// Always return the instance
 			return $instance;
 		}
 
@@ -50,6 +53,14 @@ if ( ! class_exists( 'CosmosWP_Editor_Style' ) ) :
 			add_action( 'after_setup_theme', array( $this, 'add_editor_styles' ) );
 		}
 
+		/**
+		 * Generate Dynamic CSS
+		 *
+		 * @since    1.0.0
+		 * @access   public
+		 *
+		 * @return array of dynamic css.
+		 */
 		public function dynamic_css() {
 			/**
 			 * General Setting Dynamic CSS
@@ -525,42 +536,42 @@ if ( ! class_exists( 'CosmosWP_Editor_Style' ) ) :
 		 * @return void
 		 */
 		public function add_editor_dynamic_styles() {
-			$getCSS      = '';
+			$get_dnc_css = '';
 			$dynamic_css = $this->dynamic_css();
 
 			if ( is_array( $dynamic_css ) ) {
 				foreach ( $dynamic_css as $screen => $css ) {
-					if ( $screen == 'all' ) {
+					if ( 'all' == $screen ) {
 
 						if ( is_array( $css ) ) {
-							$getCSS .= implode( ' ', $css );
+							$get_dnc_css .= implode( ' ', $css );
 						} else {
-							$getCSS .= $css;
+							$get_dnc_css .= $css;
 						}
-					} elseif ( $screen == 'tablet' ) {
+					} elseif ( 'tablet' == $screen ) {
 
-						$getCSS .= '@media (min-width: 720px) {';
+						$get_dnc_css .= '@media (min-width: 720px) {';
 						if ( is_array( $css ) ) {
-							$getCSS .= implode( ' ', $css );
+							$get_dnc_css .= implode( ' ', $css );
 						} else {
-							$getCSS .= $css;
+							$get_dnc_css .= $css;
 						}
-						$getCSS .= '}';
-					} elseif ( $screen == 'desktop' ) {
+						$get_dnc_css .= '}';
+					} elseif ( 'desktop' == $screen ) {
 
-						$getCSS .= '@media (min-width: 992px) {';
+						$get_dnc_css .= '@media (min-width: 992px) {';
 						if ( is_array( $css ) ) {
-							$getCSS .= implode( ' ', $css );
+							$get_dnc_css .= implode( ' ', $css );
 						} else {
-							$getCSS .= $css;
+							$get_dnc_css .= $css;
 						}
-						$getCSS .= '}';
+						$get_dnc_css .= '}';
 					}
 				}
 			}
-			$output = cosmoswp_dynamic_css()->minify_css( $getCSS );
+			$output = cosmoswp_dynamic_css()->minify_css( $get_dnc_css );
 			$styles = $output;
-			wp_add_inline_style( 'cosmmoswp-block-google-fonts', $styles );
+			wp_add_inline_style( 'cosmoswp-block-google-fonts', $styles );
 		}
 
 		/**
@@ -595,8 +606,7 @@ endif;
  */
 if ( ! function_exists( 'cosmoswp_editor_style' ) ) {
 
-	function cosmoswp_editor_style() {
-
+	function cosmoswp_editor_style() {//phpcs:ignore
 		return CosmosWP_Editor_Style::instance();
 	}
 

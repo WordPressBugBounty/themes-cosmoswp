@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore WordPress.NamingConventions.ValidClassName.Prefix -- Class filename does not follow standard, but this is intentional.
 /**
  * CosmosWP Notice Handler
  *
@@ -7,7 +7,10 @@
  * @since   1.0.0
  */
 
-defined( 'ABSPATH' ) || exit;
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Class to handle notices and Advanced Demo Import
@@ -31,15 +34,12 @@ class CosmosWP_Advanced_Import {
 	 * @return object
 	 */
 	public static function instance() {
-		// Store the instance locally to avoid private static replication
 		static $instance = null;
 
-		// Only run these methods if they haven't been ran previously
 		if ( null === $instance ) {
 			$instance = new self();
 		}
 
-		// Always return the instance
 		return $instance;
 	}
 

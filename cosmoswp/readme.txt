@@ -5,7 +5,7 @@ Tags: blog, e-commerce, portfolio, grid-layout, one-column, two-columns, three-c
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 5.6
-Stable tag: 1.4.2
+Stable tag: 2.0.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -95,9 +95,17 @@ Source: https://github.com/FortAwesome/Font-Awesome
 
 == Changelog ==
 
-= 1.4.2 - 2025-04-17 =
-* Added: Tested with the latest WordPress.
-* Fixed: Resolved issue with translation function preload
+= 2.0.0 - 2025-09-15 =
+* Added: React-based customizer for performance
+* Added: Hybrid theme foundation
+* Updated: Screenshot with latest design
+* Updated: CSS management for better consistency
+* Updated: Customizer design for improved usability
+* Updated: Header and footer builder for a modern look
+
+= 1.4.2 - 2025-01-16 =
+* Updated: Starter content
+* Updated: Use of wp_json_encode.
 
 = 1.4.1 - 2025-01-16 =
 * Updated: Starter content

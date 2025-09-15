@@ -1,7 +1,15 @@
 <?php
+/**
+ * Sticky Header Options
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+global $cosmoswp_customize_control;
 
 /*Sticky Header Message*/
 $wp_customize->add_setting(
@@ -10,7 +18,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'header-general-sticky-msg',
@@ -32,7 +40,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_sticky_header_options();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'sticky-header-options',
 	array(
 		'choices'         => $choices,
@@ -54,7 +62,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_sticky_header_animation_options();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'sticky-header-animation-options',
 	array(
 		'choices'         => $choices,
@@ -75,7 +83,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'sticky-header-trigger-height',
 	array(
 		'label'           => esc_html__( 'Sticky header Trigger Height (px)', 'cosmoswp' ),
@@ -100,7 +108,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'sticky-header-include-top',
 	array(
 		'label'           => esc_html__( 'Include Header Top on Sticky Header', 'cosmoswp' ),
@@ -120,7 +128,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'sticky-header-include-main',
 	array(
 		'label'           => esc_html__( 'Include Header Main on Sticky Header', 'cosmoswp' ),
@@ -140,7 +148,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'sticky-header-include-bottom',
 	array(
 		'label'           => esc_html__( 'Include Header Bottom on Sticky Header', 'cosmoswp' ),
@@ -160,7 +168,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'sticky-header-mobile-enable',
 	array(
 		'label'           => esc_html__( 'Enable Sticky Header on Mobile', 'cosmoswp' ),
@@ -180,7 +188,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'enable-sticky-header-color-options',
 	array(
 		'label'           => esc_html__( 'Enable Sticky Header Color Options', 'cosmoswp' ),
@@ -200,7 +208,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Color(
 		$wp_customize,
 		'sticky-header-bg-color',
@@ -220,7 +228,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'sticky-top-header-options-styling-msg',
@@ -241,7 +249,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new WP_Customize_Color_Control(
 		$wp_customize,
 		'sticky-top-header-text-color',
@@ -264,7 +272,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new WP_Customize_Color_Control(
 		$wp_customize,
 		'sticky-top-header-link-color',
@@ -287,7 +295,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new WP_Customize_Color_Control(
 		$wp_customize,
 		'sticky-top-header-link-hover-color',
@@ -310,7 +318,7 @@ $wp_customize->add_setting(
 	)
 );
 $border_style_choices = cosmoswp_header_border_style();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Tabs(
 		$wp_customize,
 		'sticky-top-header-menu-color-options',
@@ -373,7 +381,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'sticky-main-header-options-styling-msg',
@@ -394,7 +402,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new WP_Customize_Color_Control(
 		$wp_customize,
 		'sticky-main-header-text-color',
@@ -417,7 +425,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new WP_Customize_Color_Control(
 		$wp_customize,
 		'sticky-main-header-link-color',
@@ -440,7 +448,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new WP_Customize_Color_Control(
 		$wp_customize,
 		'sticky-main-header-link-hover-color',
@@ -463,7 +471,7 @@ $wp_customize->add_setting(
 	)
 );
 $border_style_choices = cosmoswp_header_border_style();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Tabs(
 		$wp_customize,
 		'sticky-main-header-menu-color-options',
@@ -526,7 +534,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'sticky-bottom-header-options-styling-msg',
@@ -547,7 +555,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new WP_Customize_Color_Control(
 		$wp_customize,
 		'sticky-bottom-header-text-color',
@@ -570,7 +578,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new WP_Customize_Color_Control(
 		$wp_customize,
 		'sticky-bottom-header-link-color',
@@ -593,7 +601,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new WP_Customize_Color_Control(
 		$wp_customize,
 		'sticky-bottom-header-link-hover-color',
@@ -616,7 +624,7 @@ $wp_customize->add_setting(
 	)
 );
 $border_style_choices = cosmoswp_header_border_style();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Tabs(
 		$wp_customize,
 		'sticky-bottom-header-menu-color-options',

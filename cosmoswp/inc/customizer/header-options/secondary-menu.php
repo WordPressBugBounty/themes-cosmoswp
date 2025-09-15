@@ -1,7 +1,16 @@
 <?php
+/**
+ * Secondary Menu Options
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+global $cosmoswp_customize_control;
 
 /*Adding sections for secondary menu options*/
 $wp_customize->add_section(
@@ -25,7 +34,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'secondary-menu-custom-menu',
 	array(
 		'label'    => esc_html__( 'Select Secondary Menu', 'cosmoswp' ),
@@ -45,7 +54,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'secondary-menu-disable-sub-menu',
 	array(
 		'label'    => esc_html__( 'Disable Sub Menu Item', 'cosmoswp' ),
@@ -62,12 +71,12 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'secondary-menu-margin-padding-msg',
 		array(
-			'label'   => esc_html__( 'Margin & Padding', 'cosmoswp' ),
+			'label'   => esc_html__( 'Margin and Padding', 'cosmoswp' ),
 			'section' => $this->secondary_menu,
 		)
 	)
@@ -82,12 +91,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'secondary-menu-margin',
 		array(
-			'label'    => esc_html__( 'Margin', 'cosmoswp' ),
+			'label'    => esc_html__( 'Margin (px)', 'cosmoswp' ),
 			'section'  => $this->secondary_menu,
 			'settings' => 'secondary-menu-margin',
 		),
@@ -105,12 +114,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'secondary-menu-padding',
 		array(
-			'label'    => esc_html__( 'Padding', 'cosmoswp' ),
+			'label'    => esc_html__( 'Padding (px)', 'cosmoswp' ),
 			'section'  => $this->secondary_menu,
 			'settings' => 'secondary-menu-padding',
 		),
@@ -126,7 +135,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'secondary-menu-layout-msg',
@@ -147,7 +156,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_flex_align();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Buttonset(
 		$wp_customize,
 		'secondary-menu-align',
@@ -169,12 +178,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'secondary-menu-item-margin',
 		array(
-			'label'    => esc_html__( 'Margin', 'cosmoswp' ),
+			'label'    => esc_html__( 'Margin (px)', 'cosmoswp' ),
 			'section'  => $this->secondary_menu,
 			'settings' => 'secondary-menu-item-margin',
 		),
@@ -192,12 +201,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'secondary-menu-item-padding',
 		array(
-			'label'    => esc_html__( 'Padding', 'cosmoswp' ),
+			'label'    => esc_html__( 'Padding (px)', 'cosmoswp' ),
 			'section'  => $this->secondary_menu,
 			'settings' => 'secondary-menu-item-padding',
 		),
@@ -213,7 +222,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'secondary-menu-styling-msg',
@@ -234,7 +243,7 @@ $wp_customize->add_setting(
 	)
 );
 $border_style_choices = cosmoswp_header_border_style();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Tabs(
 		$wp_customize,
 		'secondary-menu-styling',
@@ -275,7 +284,7 @@ $wp_customize->add_control(
 				),
 				'normal-border-width'  => array(
 					'type'  => 'cssbox',
-					'label' => esc_html__( 'Border Width(px)', 'cosmoswp' ),
+					'label' => esc_html__( 'Border Width (px)', 'cosmoswp' ),
 					'class' => 'cwp-element-show',
 					'tab'   => 'secondary-menu-normal',
 					'attr'  => array(
@@ -298,7 +307,7 @@ $wp_customize->add_control(
 				),
 				'normal-border-radius' => array(
 					'type'  => 'cssbox',
-					'label' => esc_html__( 'Border Radius(px)', 'cosmoswp' ),
+					'label' => esc_html__( 'Border Radius (px)', 'cosmoswp' ),
 					'class' => 'cwp-element-show',
 					'tab'   => 'secondary-menu-normal',
 					'attr'  => array(
@@ -332,7 +341,7 @@ $wp_customize->add_control(
 				),
 				'hover-border-width'   => array(
 					'type'  => 'cssbox',
-					'label' => esc_html__( 'Border Width(px)', 'cosmoswp' ),
+					'label' => esc_html__( 'Border Width (px)', 'cosmoswp' ),
 					'class' => 'cwp-element-show',
 					'tab'   => 'secondary-menu-hover',
 					'attr'  => array(
@@ -355,7 +364,7 @@ $wp_customize->add_control(
 				),
 				'hover-border-radius'  => array(
 					'type'  => 'cssbox',
-					'label' => esc_html__( 'Border Radius(px)', 'cosmoswp' ),
+					'label' => esc_html__( 'Border Radius (px)', 'cosmoswp' ),
 					'class' => 'cwp-element-show',
 					'tab'   => 'secondary-menu-hover',
 					'attr'  => array(
@@ -389,7 +398,7 @@ $wp_customize->add_control(
 				),
 				'active-border-width'  => array(
 					'type'  => 'cssbox',
-					'label' => esc_html__( 'Border Width(px)', 'cosmoswp' ),
+					'label' => esc_html__( 'Border Width (px)', 'cosmoswp' ),
 					'class' => 'cwp-element-show',
 					'tab'   => 'secondary-menu-active',
 					'attr'  => array(
@@ -412,7 +421,7 @@ $wp_customize->add_control(
 				),
 				'active-border-radius' => array(
 					'type'  => 'cssbox',
-					'label' => esc_html__( 'Border Radius(px)', 'cosmoswp' ),
+					'label' => esc_html__( 'Border Radius (px)', 'cosmoswp' ),
 					'class' => 'cwp-element-show',
 					'tab'   => 'secondary-menu-active',
 					'attr'  => array(
@@ -443,7 +452,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'secondary-menu-typography-options',
 	array(
 		'label'    => esc_html__( 'Typography Options', 'cosmoswp' ),
@@ -463,7 +472,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'secondary-menu-typography',
@@ -485,7 +494,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'secondary-menu-sub-menu-layout-msg',
@@ -505,12 +514,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'secondary-menu-sub-menu-item-margin',
 		array(
-			'label'    => esc_html__( 'Margin', 'cosmoswp' ),
+			'label'    => esc_html__( 'Margin (px)', 'cosmoswp' ),
 			'section'  => $this->secondary_menu,
 			'settings' => 'secondary-menu-sub-menu-item-margin',
 		),
@@ -528,12 +537,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'secondary-menu-sub-menu-item-padding',
 		array(
-			'label'    => esc_html__( 'Padding', 'cosmoswp' ),
+			'label'    => esc_html__( 'Padding (px)', 'cosmoswp' ),
 			'section'  => $this->secondary_menu,
 			'settings' => 'secondary-menu-sub-menu-item-padding',
 		),
@@ -549,7 +558,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'secondary-menu-submenu-styling-msg',
@@ -570,7 +579,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_submenu_display_options();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Buttonset(
 		$wp_customize,
 		'secondary-menu-submenu-display-options',
@@ -592,7 +601,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Customize_Icons_Control(
 		$wp_customize,
 		'secondary-menu-submenu-icon-indicator',
@@ -614,7 +623,7 @@ $wp_customize->add_setting(
 	)
 );
 
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Color(
 		$wp_customize,
 		'secondary-menu-submenu-bg-color',
@@ -636,7 +645,7 @@ $wp_customize->add_setting(
 	)
 );
 $border_style_choices = cosmoswp_header_border_style();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Tabs(
 		$wp_customize,
 		'secondary-menu-submenu-styling',
@@ -677,7 +686,7 @@ $wp_customize->add_control(
 				),
 				'normal-border-width'  => array(
 					'type'  => 'cssbox',
-					'label' => esc_html__( 'Border Width(px)', 'cosmoswp' ),
+					'label' => esc_html__( 'Border Width (px)', 'cosmoswp' ),
 					'class' => 'cwp-element-show',
 					'tab'   => 'secondary-menu-normal',
 					'attr'  => array(
@@ -700,7 +709,7 @@ $wp_customize->add_control(
 				),
 				'normal-border-radius' => array(
 					'type'  => 'cssbox',
-					'label' => esc_html__( 'Border Radius(px)', 'cosmoswp' ),
+					'label' => esc_html__( 'Border Radius (px)', 'cosmoswp' ),
 					'class' => 'cwp-element-show',
 					'tab'   => 'secondary-menu-normal',
 					'attr'  => array(
@@ -734,7 +743,7 @@ $wp_customize->add_control(
 				),
 				'hover-border-width'   => array(
 					'type'  => 'cssbox',
-					'label' => esc_html__( 'Border Width(px)', 'cosmoswp' ),
+					'label' => esc_html__( 'Border Width (px)', 'cosmoswp' ),
 					'class' => 'cwp-element-show',
 					'tab'   => 'secondary-menu-hover',
 					'attr'  => array(
@@ -757,7 +766,7 @@ $wp_customize->add_control(
 				),
 				'hover-border-radius'  => array(
 					'type'  => 'cssbox',
-					'label' => esc_html__( 'Border Radius(px)', 'cosmoswp' ),
+					'label' => esc_html__( 'Border Radius (px)', 'cosmoswp' ),
 					'class' => 'cwp-element-show',
 					'tab'   => 'secondary-menu-hover',
 					'attr'  => array(
@@ -791,7 +800,7 @@ $wp_customize->add_control(
 				),
 				'active-border-width'  => array(
 					'type'  => 'cssbox',
-					'label' => esc_html__( 'Border Width(px)', 'cosmoswp' ),
+					'label' => esc_html__( 'Border Width (px)', 'cosmoswp' ),
 					'class' => 'cwp-element-show',
 					'tab'   => 'secondary-menu-active',
 					'attr'  => array(
@@ -814,7 +823,7 @@ $wp_customize->add_control(
 				),
 				'active-border-radius' => array(
 					'type'  => 'cssbox',
-					'label' => esc_html__( 'Border Radius(px)', 'cosmoswp' ),
+					'label' => esc_html__( 'Border Radius (px)', 'cosmoswp' ),
 					'class' => 'cwp-element-show',
 					'tab'   => 'secondary-menu-active',
 					'attr'  => array(
@@ -845,7 +854,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'secondary-menu-submenu-typography-options',
 	array(
 		'label'    => esc_html__( 'Typography Options', 'cosmoswp' ),
@@ -865,7 +874,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'secondary-menu-submenu-typography',

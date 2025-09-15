@@ -1,4 +1,15 @@
 <?php
+/**
+ * Title and Tagline
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $si_sorting_element      = cosmoswp_get_theme_options( 'site-identity-sorting' );
 $si_sorting_enable_class = ( ! empty( $si_sorting_element ) ) ? 'cwp-site-identity-sorting' : '';
 
@@ -21,7 +32,10 @@ $si_logo_position_mobile = $si_logo_position_mobile != 'cwp-default-mobile' ? $s
 
 
 if ( empty( $si_sorting_element ) ) {
-	$si_logo_position_desktop = $si_logo_position_tablet = $si_logo_position_mobile = $si_sorting_enable_class = '';
+	$si_logo_position_desktop = '';
+	$si_logo_position_tablet  = '';
+	$si_logo_position_mobile  = '';
+	$si_sorting_enable_class  = '';
 }
 
 
@@ -31,16 +45,15 @@ $si_align = json_decode( $si_align, true );
 
 // desktop align.
 $si_align_desktop = cosmoswp_responsive_button_value( $si_align, 'desktop' );
-$si_align_desktop = $si_align_desktop != 'cwp-default-desktop' ? $si_align_desktop : '';
-
+$si_align_desktop = ( 'cwp-default-desktop' !== $si_align_desktop ) ? $si_align_desktop : '';
 
 // tablet align.
 $si_align_tablet = cosmoswp_responsive_button_value( $si_align, 'tablet' );
-$si_align_tablet = $si_align_tablet != 'cwp-default-tablet' ? $si_align_tablet : '';
+$si_align_tablet = ( 'cwp-default-tablet' !== $si_align_tablet ) ? $si_align_tablet : '';
 
 // mobile align.
 $si_align_mobile = cosmoswp_responsive_button_value( $si_align, 'mobile' );
-$si_align_mobile = $si_align_mobile != 'cwp-default-tablet' ? $si_align_mobile : '';
+$si_align_mobile = ( 'cwp-default-tablet' !== $si_align_mobile ) ? $si_align_mobile : '';
 
 ?>
 <!-- Start of .logo -->
@@ -52,7 +65,7 @@ $si_align_mobile = $si_align_mobile != 'cwp-default-tablet' ? $si_align_mobile :
 	}
 	echo '<span>';
 	foreach ( $si_sorting_element as $key => $element ) {
-		if ( 'site-title' == $element ) {
+		if ( 'site-title' === $element ) {
 
 			if ( is_front_page() && is_home() ) :
 				?>
@@ -66,7 +79,7 @@ $si_align_mobile = $si_align_mobile != 'cwp-default-tablet' ? $si_align_mobile :
 			<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
 			<?php
 		endif;
-		} elseif ( 'site-tagline' == $element ) {
+		} elseif ( 'site-tagline' === $element ) {
 			?>
 			<p class="site-description"><?php bloginfo( 'description' ); ?></p>
 			<?php

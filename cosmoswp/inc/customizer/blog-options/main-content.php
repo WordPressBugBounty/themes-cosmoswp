@@ -1,7 +1,16 @@
 <?php
+/**
+ * Blog Options
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+global $cosmoswp_customize_control;
 
 /* Blog main title */
 $wp_customize->add_setting(
@@ -12,7 +21,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'blog-main-title',
 	array(
 		'label'    => esc_html__( 'Main Title', 'cosmoswp' ),
@@ -28,6 +37,7 @@ $wp_customize->selective_refresh->add_partial(
 		'selector'            => '#cwp-blog-entry-header',
 		'render_callback'     => array( $this, 'cosmoswp_customize_partial_blog_header_content' ),
 		'container_inclusive' => true,
+		'fallback_refresh'    => false,
 	)
 );
 
@@ -39,7 +49,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'blog-post-view-layout',
 	array(
 		'choices'  => array(
@@ -53,14 +63,6 @@ $wp_customize->add_control(
 		'type'     => 'select',
 	)
 );
-$wp_customize->selective_refresh->add_partial(
-	'blog-post-view-layout',
-	array(
-		'selector'            => '#cwp-blog-main-content-wrapper',
-		'render_callback'     => array( $this, 'cosmoswp_customize_partial_blog_main_content' ),
-		'container_inclusive' => true,
-	)
-);
 
 /*Post column*/
 $wp_customize->add_setting(
@@ -71,7 +73,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'blog-column-number',
 	array(
 		'label'           => esc_html__( 'Column Number', 'cosmoswp' ),
@@ -91,13 +93,7 @@ $wp_customize->add_control(
 	)
 );
 
-$wp_customize->selective_refresh->add_partial(
-	'blog-column-number',
-	array(
-		'selector'        => '#cwp-blog-main-content-wrapper',
-		'render_callback' => array( $this, 'cosmoswp_customize_partial_blog_main_content' ),
-	)
-);
+
 
 /*Blog Sidebar*/
 $wp_customize->add_setting(
@@ -106,7 +102,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'blog-sidebar-msg',
@@ -124,7 +120,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'cosmoswp_sanitize_select',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'blog-sidebar',
 	array(
 		'label'    => esc_html__( 'Content/Sidebar', 'cosmoswp' ),
@@ -136,7 +132,6 @@ $wp_customize->add_control(
 	)
 );
 
-
 /*Blog Styling*/
 $wp_customize->add_setting(
 	'blog-elements-sorting-msg',
@@ -144,15 +139,19 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$blog_element_sorting_msg_controls_data = array(
+	'label'    => esc_html__( 'Blog Elements Sorting', 'cosmoswp' ),
+	'section'  => cosmoswp_blog_builder()->section,
+	'priority' => 40,
+);
+if ( function_exists( 'run_cosmoswp_pro' ) ) {
+	$blog_element_sorting_msg_controls_data['active_callback'] = 'cosmoswp_disable_blog_element_sorting';
+}
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'blog-elements-sorting-msg',
-		array(
-			'label'    => esc_html__( 'Blog Elements Sorting', 'cosmoswp' ),
-			'section'  => cosmoswp_blog_builder()->section,
-			'priority' => 40,
-		)
+		$blog_element_sorting_msg_controls_data
 	)
 );
 
@@ -166,25 +165,24 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_posttype_elements_sorting();
-$wp_customize->add_control(
+
+$blog_element_sorting_controls_data = array(
+	'choices'  => $choices,
+	'section'  => cosmoswp_blog_builder()->section,
+	'settings' => 'blog-elements-sorting',
+	'priority' => 50,
+);
+if ( function_exists( 'run_cosmoswp_pro' ) ) {
+	$blog_element_sorting_controls_data['active_callback'] = 'cosmoswp_disable_blog_element_sorting';
+}
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Sortable(
 		$wp_customize,
 		'blog-elements-sorting',
-		array(
-			'choices'  => $choices,
-			'section'  => cosmoswp_blog_builder()->section,
-			'settings' => 'blog-elements-sorting',
-			'priority' => 50,
-		)
+		$blog_element_sorting_controls_data
 	)
 );
-$wp_customize->selective_refresh->add_partial(
-	'blog-elements-sorting',
-	array(
-		'selector'        => '#cwp-blog-main-content-wrapper',
-		'render_callback' => array( $this, 'cosmoswp_customize_partial_blog_main_content' ),
-	)
-);
+
 
 /*Blog Primary Meta Sorting Msg*/
 $wp_customize->add_setting(
@@ -193,15 +191,20 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+
+$blog_primary_meta_sorting_msg_controls_data = array(
+	'label'    => esc_html__( 'Primary Meta Sorting', 'cosmoswp' ),
+	'section'  => cosmoswp_blog_builder()->section,
+	'priority' => 60,
+);
+if ( function_exists( 'run_cosmoswp_pro' ) ) {
+	$blog_primary_meta_sorting_msg_controls_data['active_callback'] = 'cosmoswp_disable_blog_element_sorting';
+}
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'blog-primary-meta-sorting-msg',
-		array(
-			'label'    => esc_html__( 'Primary Meta Sorting', 'cosmoswp' ),
-			'section'  => cosmoswp_blog_builder()->section,
-			'priority' => 60,
-		)
+		$blog_primary_meta_sorting_msg_controls_data
 	)
 );
 
@@ -215,26 +218,24 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_meta_elements_sorting();
-$wp_customize->add_control(
+
+$blog_primary_meta_sorting_controls_data = array(
+	'choices'  => $choices,
+	'section'  => cosmoswp_blog_builder()->section,
+	'settings' => 'blog-primary-meta-sorting',
+	'priority' => 60,
+);
+if ( function_exists( 'run_cosmoswp_pro' ) ) {
+	$blog_primary_meta_sorting_controls_data['active_callback'] = 'cosmoswp_disable_blog_element_sorting';
+}
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Sortable(
 		$wp_customize,
 		'blog-primary-meta-sorting',
-		array(
-			'choices'  => $choices,
-			'section'  => cosmoswp_blog_builder()->section,
-			'settings' => 'blog-primary-meta-sorting',
-			'priority' => 60,
+		$blog_primary_meta_sorting_controls_data
+	)
+);
 
-		)
-	)
-);
-$wp_customize->selective_refresh->add_partial(
-	'blog-primary-meta-sorting',
-	array(
-		'selector'        => '#cwp-blog-main-content-wrapper',
-		'render_callback' => array( $this, 'cosmoswp_customize_partial_blog_main_content' ),
-	)
-);
 
 /*Blog Secondary Meta Sorting Msg*/
 $wp_customize->add_setting(
@@ -243,15 +244,19 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$blog_secondary_meta_sorting_msg_controls_data = array(
+	'label'    => esc_html__( 'Secondary Meta Sorting', 'cosmoswp' ),
+	'section'  => cosmoswp_blog_builder()->section,
+	'priority' => 70,
+);
+if ( function_exists( 'run_cosmoswp_pro' ) ) {
+	$blog_secondary_meta_sorting_msg_controls_data['active_callback'] = 'cosmoswp_disable_blog_element_sorting';
+}
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'blog-secondary-meta-sorting-msg',
-		array(
-			'label'    => esc_html__( 'Secondary Meta Sorting', 'cosmoswp' ),
-			'section'  => cosmoswp_blog_builder()->section,
-			'priority' => 70,
-		)
+		$blog_secondary_meta_sorting_msg_controls_data
 	)
 );
 
@@ -264,26 +269,24 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$choices = cosmoswp_meta_elements_sorting();
-$wp_customize->add_control(
+$choices                                   = cosmoswp_meta_elements_sorting();
+$blog_secondary_meta_sorting_controls_data = array(
+	'choices'  => $choices,
+	'section'  => cosmoswp_blog_builder()->section,
+	'settings' => 'blog-secondary-meta-sorting',
+	'priority' => 80,
+);
+if ( function_exists( 'run_cosmoswp_pro' ) ) {
+	$blog_secondary_meta_sorting_controls_data['active_callback'] = 'cosmoswp_disable_blog_element_sorting';
+}
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Sortable(
 		$wp_customize,
 		'blog-secondary-meta-sorting',
-		array(
-			'choices'  => $choices,
-			'section'  => cosmoswp_blog_builder()->section,
-			'settings' => 'blog-secondary-meta-sorting',
-			'priority' => 80,
-		)
+		$blog_secondary_meta_sorting_controls_data
 	)
 );
-$wp_customize->selective_refresh->add_partial(
-	'blog-secondary-meta-sorting',
-	array(
-		'selector'        => '#cwp-blog-main-content-wrapper',
-		'render_callback' => array( $this, 'cosmoswp_customize_partial_blog_main_content' ),
-	)
-);
+
 
 /*Blog Content Setting Msg*/
 $wp_customize->add_setting(
@@ -292,7 +295,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'blog-excerpt-setting-msg',
@@ -313,7 +316,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'blog-excerpt-length',
 	array(
 		'label'       => esc_html__( 'Excerpt length (count words)', 'cosmoswp' ),
@@ -324,13 +327,7 @@ $wp_customize->add_control(
 		'type'        => 'number',
 	)
 );
-$wp_customize->selective_refresh->add_partial(
-	'blog-excerpt-length',
-	array(
-		'selector'        => '#cwp-blog-main-content-wrapper',
-		'render_callback' => array( $this, 'cosmoswp_customize_partial_blog_main_content' ),
-	)
-);
+
 
 /*Blog Read More Text*/
 $wp_customize->add_setting(
@@ -341,7 +338,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'blog-read-more-text',
 	array(
 		'label'    => esc_html__( 'Read More Text', 'cosmoswp' ),
@@ -349,13 +346,6 @@ $wp_customize->add_control(
 		'settings' => 'blog-read-more-text',
 		'priority' => 110,
 		'type'     => 'text',
-	)
-);
-$wp_customize->selective_refresh->add_partial(
-	'blog-read-more-text',
-	array(
-		'selector'        => '#cwp-blog-main-content-wrapper',
-		'render_callback' => array( $this, 'cosmoswp_customize_partial_blog_main_content' ),
 	)
 );
 
@@ -368,7 +358,7 @@ $wp_customize->add_setting(
 );
 
 $description = esc_html__( 'Note: Excerpt Options only works when excerpts is enable in "BLOG ELEMENTS".', 'cosmoswp' );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Message(
 		$wp_customize,
 		'blog-excerpt-note',
@@ -387,7 +377,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'featured-image-setting-msg',
@@ -409,7 +399,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_feature_section_layout();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'blog-feature-section-layout',
 	array(
 		'choices'  => $choices,
@@ -420,13 +410,7 @@ $wp_customize->add_control(
 		'type'     => 'select',
 	)
 );
-$wp_customize->selective_refresh->add_partial(
-	'blog-feature-section-layout',
-	array(
-		'selector'        => '#cwp-blog-main-content-wrapper',
-		'render_callback' => array( $this, 'cosmoswp_customize_partial_blog_main_content' ),
-	)
-);
+
 
 /*Blog Featured Image Size*/
 $wp_customize->add_setting(
@@ -438,7 +422,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_get_image_sizes_options();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'blog-img-size',
 	array(
 		'choices'  => $choices,
@@ -449,13 +433,7 @@ $wp_customize->add_control(
 		'type'     => 'select',
 	)
 );
-$wp_customize->selective_refresh->add_partial(
-	'blog-img-size',
-	array(
-		'selector'        => '#cwp-blog-main-content-wrapper',
-		'render_callback' => array( $this, 'cosmoswp_customize_partial_blog_main_content' ),
-	)
-);
+
 
 /*Blog Pagination Setting*/
 $wp_customize->add_setting(
@@ -464,7 +442,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'blog-pagination-setting-msg',
@@ -486,7 +464,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_pagination_options();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'blog-navigation-options',
 	array(
 		'choices'     => $choices,
@@ -498,13 +476,7 @@ $wp_customize->add_control(
 		'type'        => 'select',
 	)
 );
-$wp_customize->selective_refresh->add_partial(
-	'blog-navigation-options',
-	array(
-		'selector'        => '#cwp-blog-main-content-wrapper',
-		'render_callback' => array( $this, 'cosmoswp_customize_partial_blog_main_content' ),
-	)
-);
+
 
 /*pagination align*/
 $wp_customize->add_setting(
@@ -516,7 +488,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_flex_align();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Buttonset(
 		$wp_customize,
 		'blog-navigation-align',
@@ -530,16 +502,10 @@ $wp_customize->add_control(
 		)
 	)
 );
-$wp_customize->selective_refresh->add_partial(
-	'blog-navigation-align',
-	array(
-		'selector'        => '#cwp-blog-main-content-wrapper',
-		'render_callback' => array( $this, 'cosmoswp_customize_partial_blog_main_content' ),
-	)
-);
 
 
-/*Blog Pagination Border & Box*/
+
+/*Blog Pagination Border and Box*/
 $wp_customize->add_setting(
 	'blog-navigation-styling',
 	array(
@@ -548,16 +514,16 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'blog-navigation-styling',
 		array(
-			'label'           => esc_html__( 'Border & Box', 'cosmoswp' ),
+			'label'           => esc_html__( 'Border and Box', 'cosmoswp' ),
 			'section'         => cosmoswp_blog_builder()->section,
 			'settings'        => 'blog-navigation-styling',
 			'priority'        => 180,
-			'active_callback' => 'cosmoswp_blog_numeric_pagination_activecallback',
+			'active_callback' => 'cosmoswp_blog_numeric_pagination_active_callback',
 		),
 		array(
 			'border-style'     => array(
@@ -567,7 +533,7 @@ $wp_customize->add_control(
 			),
 			'border-width'     => array(
 				'type'       => 'cssbox',
-				'label'      => esc_html__( 'Border Width', 'cosmoswp' ),
+				'label'      => esc_html__( 'Border Width (px)', 'cosmoswp' ),
 				'class'      => 'cwp-element-show',
 				'box_fields' => array(
 					'top'    => true,
@@ -621,6 +587,7 @@ $wp_customize->add_control(
 			),
 			'box-shadow-css'   => array(
 				'type'       => 'cssbox',
+				'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 				'class'      => 'cwp-element-show',
 				'box_fields' => array(
 					'x'      => true,
@@ -656,7 +623,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'blog-pagination-color-options',
@@ -665,7 +632,7 @@ $wp_customize->add_control(
 			'section'         => cosmoswp_blog_builder()->section,
 			'settings'        => 'blog-pagination-color-options',
 			'priority'        => 190,
-			'active_callback' => 'cosmoswp_blog_numeric_pagination_activecallback',
+			'active_callback' => 'cosmoswp_blog_numeric_pagination_active_callback',
 
 		),
 		array(
@@ -699,7 +666,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'blog-default-pagination-color-options',
@@ -708,8 +675,7 @@ $wp_customize->add_control(
 			'section'         => cosmoswp_blog_builder()->section,
 			'settings'        => 'blog-default-pagination-color-options',
 			'priority'        => 200,
-			'active_callback' => 'cosmoswp_blog_default_pagination_activecallback',
-
+			'active_callback' => 'cosmoswp_blog_default_pagination_active_callback',
 		),
 		array(
 			'text-color'       => array(
@@ -731,7 +697,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'blog-additional-setting-msg',
@@ -753,7 +719,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Customize_Multicheck_Control(
 		$wp_customize,
 		'blog-post-exclude-categories',
@@ -767,14 +733,26 @@ $wp_customize->add_control(
 		)
 	)
 );
-$wp_customize->selective_refresh->add_partial(
+
+
+$partial_controls = array(
+	'blog-post-view-layout',
+	'blog-column-number',
+	'blog-elements-sorting',
+	'blog-primary-meta-sorting',
+	'blog-secondary-meta-sorting',
+	'blog-excerpt-length',
+	'blog-read-more-text',
+	'blog-feature-section-layout',
+	'blog-img-size',
+	'blog-navigation-options',
+	'blog-navigation-align',
 	'blog-post-exclude-categories',
-	array(
-		'selector'        => '#cwp-blog-main-content-wrapper',
-		'render_callback' => array( $this, 'cosmoswp_customize_partial_blog_main_content' ),
-	)
 );
 
+foreach ( $partial_controls as $control_id ) {
+	$this->add_selective_refresh( $wp_customize, $control_id );
+}
 
 /*Blog General Styling*/
 $wp_customize->add_setting(
@@ -783,7 +761,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'blog-main-content-styling-msg',
@@ -803,12 +781,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'blog-main-content-margin',
 		array(
-			'label'    => esc_html__( 'Margin', 'cosmoswp' ),
+			'label'    => esc_html__( 'Margin (px)', 'cosmoswp' ),
 			'section'  => cosmoswp_blog_builder()->section,
 			'settings' => 'blog-main-content-margin',
 			'priority' => 240,
@@ -826,12 +804,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'blog-main-content-padding',
 		array(
-			'label'    => esc_html__( 'Padding', 'cosmoswp' ),
+			'label'    => esc_html__( 'Padding (px)', 'cosmoswp' ),
 			'section'  => cosmoswp_blog_builder()->section,
 			'settings' => 'blog-main-content-padding',
 			'priority' => 240,

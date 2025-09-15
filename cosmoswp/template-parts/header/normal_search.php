@@ -1,4 +1,15 @@
 <?php
+/**
+ * Normal Search
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $normal_search_placeholder = cosmoswp_get_theme_options( 'normal-search-placeholder' );
 $normal_search_placeholder = ( $normal_search_placeholder ) ? $normal_search_placeholder : 'search';
 ?>

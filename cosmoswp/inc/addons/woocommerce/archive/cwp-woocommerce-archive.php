@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore WordPress.NamingConventions.ValidClassName.Prefix -- Class filename does not follow standard, but this is intentional.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -11,6 +11,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'CosmosWP_WooCommerce_Archive' ) ) :
 
+	/**
+	 * WooCommerce Archive Customizer Options
+	 *
+	 * @package CosmosWP
+	 */
 	class CosmosWP_WooCommerce_Archive {
 
 		/**
@@ -44,15 +49,12 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Archive' ) ) :
 		 */
 		public static function instance() {
 
-			// Store the instance locally to avoid private static replication
 			static $instance = null;
 
-			// Only run these methods if they haven't been ran previously
 			if ( null === $instance ) {
 				$instance = new CosmosWP_WooCommerce_Archive();
 			}
 
-			// Always return the instance
 			return $instance;
 		}
 
@@ -70,6 +72,8 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Archive' ) ) :
 			add_action( 'customize_register', array( $this, 'customize_register' ), 100 );
 
 			add_action( 'cosmoswp_action_woocommerce_archive', array( $this, 'display_woo_archive' ), 110 );
+
+			add_filter( 'cosmoswp_customize_css_refresher', array( $this, 'add_css_refresher' ) );
 		}
 
 		/**
@@ -79,7 +83,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Archive' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param array $default_options
+		 * @param array $default_options Default options.
 		 * @return array
 		 */
 		public function defaults( $default_options = array() ) {
@@ -126,7 +130,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Archive' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param WP_Customize_Manager $wp_customize
+		 * @param WP_Customize_Manager $wp_customize WordPress Customizer object.
 		 * @return void
 		 */
 		public function customize_register( $wp_customize ) {
@@ -135,9 +139,9 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Archive' ) ) :
 
 			/*Woo Archive Elements Starts from here*/
 			$wp_customize->add_section(
-				new CosmosWP_WP_Customize_Section_H3(
+				new CosmosWP_WP_Customize_Section(
 					$wp_customize,
-					'cosmoswp_woo_panel_elements_seperator',
+					'cosmoswp_woo_panel_elements_separator',
 					array(
 						'title'    => esc_html__( 'WooCommerce Option', 'cosmoswp' ),
 						'priority' => 110,
@@ -185,7 +189,7 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Archive' ) ) :
 			$sidebar = cosmoswp_get_theme_options( 'cwp-woo-archive-sidebar' );
 			?>
 			<!-- Start of .blog-content-->
-			<div class="cwp-page cwp-content-wrapper <?php echo esc_attr( 'cwp-' . $sidebar ); ?> <?php cosmoswp_blog_main_wrap_classes(); ?>" id="cwp-blog-main-content-wrapper">
+			<div class="cwp-page cwp-content-wrapper <?php echo esc_attr( 'cwp-' . $sidebar ); ?> <?php cosmoswp_blog_main_wrap_classes(); ?>" id="cwp-woo-main-content-wrapper">
 				<?php
 				echo '<div class="grid-container"><div class="grid-row">';
 				cosmoswp_sidebar_template( $sidebar, 'cwp-woo-archive' );
@@ -195,6 +199,66 @@ if ( ! class_exists( 'CosmosWP_WooCommerce_Archive' ) ) :
 			</div>
 			<!-- End of .blog-content -->
 			<?php
+		}
+
+		/**
+		 * Partial refreshment.
+		 *
+		 * @since    1.0.0
+		 * @access   public
+		 *
+		 * @return String
+		 */
+		public function partial_content() {
+			ob_start();
+			$this->display_woo_archive();
+			$value = ob_get_clean();
+			return $value;
+		}
+
+		/**
+		 * Add selective refresh for the blog main content.
+		 *
+		 * @param WP_Customize_Manager $wp_customize The customizer manager.
+		 * @param string               $control_id The control ID.
+		 * @param array                $args Additional arguments.
+		 */
+		public function add_selective_refresh( $wp_customize, $control_id, $args = array() ) {
+			$defaults = array(
+				'selector'            => '#cwp-woo-main-content-wrapper',
+				'render_callback'     => array( $this, 'partial_content' ),
+				'container_inclusive' => false,
+				'fallback_refresh'    => false,
+			);
+
+			$args = wp_parse_args( $args, $defaults );
+
+			$wp_customize->selective_refresh->add_partial(
+				$control_id,
+				array(
+					'selector'            => $args['selector'],
+					'render_callback'     => $args['render_callback'],
+					'container_inclusive' => $args['container_inclusive'],
+					'fallback_refresh'    => $args['fallback_refresh'],
+				)
+			);
+		}
+
+		/**
+		 * Callback functions for cosmoswp_customize_css_refresher,
+		 * Add CSS refresher settings
+		 *
+		 * @since    1.0.0
+		 * @access   public
+		 *
+		 * @param array $css_refresher CSS refresher.
+		 * @return array
+		 */
+		public function add_css_refresher( $css_refresher ) {
+			$all_settings = array_keys( $this->defaults() );
+
+			$css_settings = cosmoswp_get_settings_by_type( $all_settings, 'css' );
+			return array_unique( array_merge( $css_refresher, $css_settings ) );
 		}
 	}
 endif;
@@ -210,8 +274,7 @@ endif;
  */
 if ( ! function_exists( 'cosmoswp_woocommerce_archive' ) ) {
 
-	function cosmoswp_woocommerce_archive() {
-
+	function cosmoswp_woocommerce_archive() {//phpcs:ignore
 		return CosmosWP_WooCommerce_Archive::instance();
 	}
 

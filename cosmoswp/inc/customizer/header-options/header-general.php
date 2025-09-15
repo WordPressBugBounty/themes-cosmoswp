@@ -1,7 +1,16 @@
 <?php
+/**
+ * General settings.
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+global $cosmoswp_customize_control;
 
 /*General Header*/
 $wp_customize->add_section(
@@ -23,7 +32,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_header_layout_options();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'header-position-options',
 	array(
 		'choices'  => $choices,
@@ -45,7 +54,7 @@ $wp_customize->add_setting(
 	)
 );
 
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'header-general-width',
 	array(
 		'label'           => esc_html__( 'Header General Width', 'cosmoswp' ),
@@ -68,7 +77,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_vertical_header_position();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Buttonset(
 		$wp_customize,
 		'vertical-header-position',
@@ -91,20 +100,20 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
-    'vertical-header-width',
-    array(
-        'label'           => esc_html__( 'Vertical Header Width (px)', 'cosmoswp' ),
-        'section'         => 'cosmoswp-header-general',
-        'settings'        => 'vertical-header-width',
-        'type'    => 'number',
-        'input_attrs'     => array(
-            'min'  => 280,
-            'max'  => 560,
-            'step' => 1,
-        ),
-        'active_callback' => 'cosmoswp_header_layout_if_vertical',
-    )
+$cosmoswp_customize_control->add(
+	'vertical-header-width',
+	array(
+		'label'           => esc_html__( 'Vertical Header Width (px)', 'cosmoswp' ),
+		'section'         => 'cosmoswp-header-general',
+		'settings'        => 'vertical-header-width',
+		'type'            => 'number',
+		'input_attrs'     => array(
+			'min'  => 280,
+			'max'  => 560,
+			'step' => 1,
+		),
+		'active_callback' => 'cosmoswp_header_layout_if_vertical',
+	)
 );
 
 /*Top Header Styling*/
@@ -114,12 +123,12 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'header-general-styling-msg',
 		array(
-			'label'   => esc_html__( 'Margin & Padding', 'cosmoswp' ),
+			'label'   => esc_html__( 'Margin and Padding', 'cosmoswp' ),
 			'section' => 'cosmoswp-header-general',
 		)
 	)
@@ -134,12 +143,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'header-general-margin',
 		array(
-			'label'    => esc_html__( 'Margin', 'cosmoswp' ),
+			'label'    => esc_html__( 'Margin (px)', 'cosmoswp' ),
 			'section'  => 'cosmoswp-header-general',
 			'settings' => 'header-general-margin',
 		),
@@ -158,12 +167,12 @@ $wp_customize->add_setting(
 
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'header-general-padding',
 		array(
-			'label'    => esc_html__( 'Padding', 'cosmoswp' ),
+			'label'    => esc_html__( 'Padding (px)', 'cosmoswp' ),
 			'section'  => 'cosmoswp-header-general',
 			'settings' => 'header-general-padding',
 		),
@@ -179,7 +188,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'header-general-bg-styling-msg',
@@ -203,7 +212,7 @@ $background_image_size_options       = cosmoswp_background_image_size_options();
 $background_image_position_options   = cosmoswp_background_image_position_options();
 $background_image_repeat_options     = cosmoswp_background_image_repeat_options();
 $background_image_attachment_options = cosmoswp_background_image_attachment_options();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'header-general-background-options',
@@ -266,18 +275,18 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'header-general-border-styling-msg',
 		array(
-			'label'   => esc_html__( 'Border & Box Shadow Options', 'cosmoswp' ),
+			'label'   => esc_html__( 'Border and Box Shadow Options', 'cosmoswp' ),
 			'section' => 'cosmoswp-header-general',
 		)
 	)
 );
 
-/*Border & Box Shadow*/
+/*Border and Box Shadow*/
 $wp_customize->add_setting(
 	'header-general-border-styling',
 	array(
@@ -286,12 +295,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'header-general-border-styling',
 		array(
-			'label'    => esc_html__( 'Border & Box Shadow', 'cosmoswp' ),
+			'label'    => esc_html__( 'Border and Box Shadow', 'cosmoswp' ),
 			'section'  => 'cosmoswp-header-general',
 			'settings' => 'header-general-border-styling',
 		),
@@ -303,7 +312,7 @@ $wp_customize->add_control(
 			),
 			'border-width'     => array(
 				'type'       => 'cssbox',
-				'label'      => esc_html__( 'Border Width', 'cosmoswp' ),
+				'label'      => esc_html__( 'Border Width (px)', 'cosmoswp' ),
 				'class'      => 'cwp-element-show',
 				'box_fields' => array(
 					'top'    => true,
@@ -331,7 +340,7 @@ $wp_customize->add_control(
 			'border-radius'    => array(
 				'type'       => 'cssbox',
 				'class'      => 'cwp-element-show',
-				'label'      => esc_html__( 'Border Radius', 'cosmoswp' ),
+				'label'      => esc_html__( 'Border Radius (px)', 'cosmoswp' ),
 				'box_fields' => array(
 					'top'    => true,
 					'right'  => true,
@@ -357,6 +366,7 @@ $wp_customize->add_control(
 			),
 			'box-shadow-css'   => array(
 				'type'       => 'cssbox',
+				'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 				'class'      => 'cwp-element-show',
 				'box_fields' => array(
 					'x'      => true,
@@ -384,9 +394,9 @@ $wp_customize->add_control(
 
 /*Header Elements Starts from here*/
 $wp_customize->add_section(
-	new CosmosWP_WP_Customize_Section_H3(
+	new CosmosWP_WP_Customize_Section(
 		$wp_customize,
-		'cosmoswp_header_rows_seperator',
+		'cosmoswp_header_rows_separator',
 		array(
 			'title'    => esc_html__( 'Header Rows', 'cosmoswp' ),
 			'panel'    => $this->panel,

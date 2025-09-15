@@ -6,6 +6,12 @@
  *
  * @package cosmoswp
  */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $global_widget_title_align   = cosmoswp_get_theme_options( 'global-widget-title-align' );
 $global_widget_content_align = cosmoswp_get_theme_options( 'global-widget-content-align' );
 do_action( 'cosmoswp_action_before_sidebar' );

@@ -1,4 +1,12 @@
 <?php
+/**
+ * Footer Defaults
+ *
+ * @since    1.0.0
+ * @access   public
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -35,56 +43,8 @@ $footer_defaults = array(
 	),
 	'footer-general-layout'                           => 'inherit',
 	'footer-display-style'                            => 'cwp-normal-footer',
-	'footer-general-padding'                          => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'footer-general-margin'                           => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'footer-general-padding'                          => '',
+	'footer-general-margin'                           => '',
 	'footer-general-background-options'               => wp_json_encode(
 		array(
 			'background-color'         => '#444',
@@ -103,33 +63,9 @@ $footer_defaults = array(
 			'border-style'     => 'none',
 			'border-color'     => '',
 			'box-shadow-color' => '',
-			'border-width'     => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'box-shadow-css'   => array(
-				'desktop' => array(
-					'x'           => '',
-					'Y'           => '',
-					'BLUR'        => '',
-					'SPREAD'      => '',
-					'cssbox_link' => true,
-				),
-			),
-			'border-radius'    => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
+			'border-width'     => array(),
+			'box-shadow-css'   => array(),
+			'border-radius'    => array(),
 		)
 	),
 	'footer-general-typography'                       => '',
@@ -142,53 +78,15 @@ $footer_defaults = array(
 	'footer-top-padding'                              => wp_json_encode(
 		array(
 			'desktop' => array(
-				'top'         => '25',
-				'right'       => '0',
-				'bottom'      => '25',
-				'left'        => '0',
-				'cssbox_link' => true,
+				'top'    => '25',
+				'right'  => '0',
+				'bottom' => '25',
+				'left'   => '0',
 			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
+
 		)
 	),
-	'footer-top-margin'                               => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'footer-top-margin'                               => '',
 	'footer-top-bg-options'                           => 'none',
 	'footer-top-background-options'                   => wp_json_encode(
 		array(
@@ -207,100 +105,20 @@ $footer_defaults = array(
 			'border-style'     => 'none',
 			'border-color'     => '',
 			'box-shadow-color' => '',
-			'border-width'     => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'box-shadow-css'   => array(
-				'desktop' => array(
-					'x'           => '',
-					'Y'           => '',
-					'BLUR'        => '',
-					'SPREAD'      => '',
-					'cssbox_link' => true,
-				),
-			),
-			'border-radius'    => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
+			'border-width'     => array(),
+			'box-shadow-css'   => array(),
+			'border-radius'    => array(),
 		)
 	),
 	'footer-top-widget-title-align'                   => 'cwp-text-left',
 	'footer-top-widget-title-color'                   => '#fff',
-	'footer-top-widget-title-margin'                  => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'footer-top-widget-title-padding'                 => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'footer-top-widget-title-margin'                  => '',
+	'footer-top-widget-title-padding'                 => '',
 	'footer-top-widget-title-border-styling'          => wp_json_encode(
 		array(
 			'border-style' => 'none',
 			'border-color' => '',
-			'border-width' => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
+			'border-width' => array(),
 		)
 	),
 	'footer-top-widget-title-typography-options'      => 'inherit',
@@ -308,27 +126,21 @@ $footer_defaults = array(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
-			'google-font'     => 'Lato',
+			'google-font'     => 'Open Sans',
 			'custom-font'     => '',
 			'font-weight'     => '400',
 			'font-style'      => 'normal',
 			'text-decoration' => 'none',
 			'text-transform'  => 'none',
 			'font-size'       => array(
-				'desktop' => '14',
-				'tablet'  => '14',
-				'mobile'  => '14',
+
+				'mobile' => '14',
 			),
 			'line-height'     => array(
-				'desktop' => '24',
-				'tablet'  => '24',
-				'mobile'  => '24',
+
+				'mobile' => '24',
 			),
-			'letter-spacing'  => array(
-				'desktop' => '',
-				'tablet'  => '',
-				'mobile'  => '',
-			),
+			'letter-spacing'  => array(),
 		)
 	),
 	'footer-top-widget-content-align'                 => 'cwp-text-left',
@@ -336,15 +148,7 @@ $footer_defaults = array(
 		array(
 			'border-style' => 'none',
 			'border-color' => '',
-			'border-width' => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
+			'border-width' => array(),
 		)
 	),
 	'footer-top-widget-content-typography-options'    => 'inherit',
@@ -352,27 +156,21 @@ $footer_defaults = array(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
-			'google-font'     => 'Lato',
+			'google-font'     => 'Open Sans',
 			'custom-font'     => '',
 			'font-weight'     => '400',
 			'font-style'      => 'normal',
 			'text-decoration' => 'none',
 			'text-transform'  => 'none',
 			'font-size'       => array(
-				'desktop' => '14',
-				'tablet'  => '14',
-				'mobile'  => '14',
+
+				'mobile' => '14',
 			),
 			'line-height'     => array(
-				'desktop' => '24',
-				'tablet'  => '24',
-				'mobile'  => '24',
+
+				'mobile' => '24',
 			),
-			'letter-spacing'  => array(
-				'desktop' => '',
-				'tablet'  => '',
-				'mobile'  => '',
-			),
+			'letter-spacing'  => array(),
 		)
 	),
 	'footer-top-widget-content-color-options'         => wp_json_encode(
@@ -406,53 +204,15 @@ $footer_defaults = array(
 	'footer-main-padding'                             => wp_json_encode(
 		array(
 			'desktop' => array(
-				'top'         => '25',
-				'right'       => '0',
-				'bottom'      => '25',
-				'left'        => '0',
-				'cssbox_link' => true,
+				'top'    => '25',
+				'right'  => '0',
+				'bottom' => '25',
+				'left'   => '0',
 			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
+
 		)
 	),
-	'footer-main-margin'                              => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'footer-main-margin'                              => '',
 	'footer-main-bg-options'                          => 'none',
 	'footer-main-background-options'                  => wp_json_encode(
 		array(
@@ -471,100 +231,20 @@ $footer_defaults = array(
 			'border-style'     => 'none',
 			'border-color'     => '',
 			'box-shadow-color' => '',
-			'border-width'     => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'box-shadow-css'   => array(
-				'desktop' => array(
-					'x'           => '',
-					'Y'           => '',
-					'BLUR'        => '',
-					'SPREAD'      => '',
-					'cssbox_link' => true,
-				),
-			),
-			'border-radius'    => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
+			'border-width'     => array(),
+			'box-shadow-css'   => array(),
+			'border-radius'    => array(),
 		)
 	),
 	'footer-main-widget-title-align'                  => 'cwp-text-left',
 	'footer-main-widget-title-color'                  => '#fff',
-	'footer-main-widget-title-margin'                 => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'footer-main-widget-title-padding'                => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'footer-main-widget-title-margin'                 => '',
+	'footer-main-widget-title-padding'                => '',
 	'footer-main-widget-title-border-styling'         => wp_json_encode(
 		array(
 			'border-style' => 'none',
 			'border-color' => '',
-			'border-width' => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
+			'border-width' => array(),
 		)
 	),
 	'footer-main-widget-title-typography-options'     => 'inherit',
@@ -572,27 +252,21 @@ $footer_defaults = array(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
-			'google-font'     => 'Lato',
+			'google-font'     => 'Open Sans',
 			'custom-font'     => '',
 			'font-weight'     => '400',
 			'font-style'      => 'normal',
 			'text-decoration' => 'none',
 			'text-transform'  => 'none',
 			'font-size'       => array(
-				'desktop' => '14',
-				'tablet'  => '14',
-				'mobile'  => '14',
+
+				'mobile' => '14',
 			),
 			'line-height'     => array(
-				'desktop' => '24',
-				'tablet'  => '24',
-				'mobile'  => '24',
+
+				'mobile' => '24',
 			),
-			'letter-spacing'  => array(
-				'desktop' => '',
-				'tablet'  => '',
-				'mobile'  => '',
-			),
+			'letter-spacing'  => array(),
 		)
 	),
 	'footer-main-widget-content-align'                => 'cwp-text-left',
@@ -600,15 +274,7 @@ $footer_defaults = array(
 		array(
 			'border-style' => 'none',
 			'border-color' => '',
-			'border-width' => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
+			'border-width' => array(),
 		)
 	),
 	'footer-main-widget-content-typography-options'   => 'inherit',
@@ -616,27 +282,21 @@ $footer_defaults = array(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
-			'google-font'     => 'Lato',
+			'google-font'     => 'Open Sans',
 			'custom-font'     => '',
 			'font-weight'     => '400',
 			'font-style'      => 'normal',
 			'text-decoration' => 'none',
 			'text-transform'  => 'none',
 			'font-size'       => array(
-				'desktop' => '14',
-				'tablet'  => '14',
-				'mobile'  => '14',
+
+				'mobile' => '14',
 			),
 			'line-height'     => array(
-				'desktop' => '24',
-				'tablet'  => '24',
-				'mobile'  => '24',
+
+				'mobile' => '24',
 			),
-			'letter-spacing'  => array(
-				'desktop' => '',
-				'tablet'  => '',
-				'mobile'  => '',
-			),
+			'letter-spacing'  => array(),
 		)
 	),
 	/*footer Bottom*/
@@ -644,54 +304,16 @@ $footer_defaults = array(
 	'footer-bottom-height'                            => '',
 	'footer-bottom-padding'                           => wp_json_encode(
 		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '20',
-				'right'       => '0',
-				'bottom'      => '20',
-				'left'        => '0',
-				'cssbox_link' => true,
+
+			'mobile' => array(
+				'top'    => '20',
+				'right'  => '0',
+				'bottom' => '20',
+				'left'   => '0',
 			),
 		)
 	),
-	'footer-bottom-margin'                            => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'footer-bottom-margin'                            => '',
 	'footer-bottom-bg-options'                        => 'none',
 	'footer-bottom-background-options'                => wp_json_encode(
 		array(
@@ -710,100 +332,20 @@ $footer_defaults = array(
 			'border-style'     => 'none',
 			'border-color'     => '',
 			'box-shadow-color' => '',
-			'border-width'     => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'box-shadow-css'   => array(
-				'desktop' => array(
-					'x'           => '',
-					'Y'           => '',
-					'BLUR'        => '',
-					'SPREAD'      => '',
-					'cssbox_link' => true,
-				),
-			),
-			'border-radius'    => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
+			'border-width'     => array(),
+			'box-shadow-css'   => array(),
+			'border-radius'    => array(),
 		)
 	),
 	'footer-bottom-widget-title-align'                => 'cwp-text-left',
 	'footer-bottom-widget-title-color'                => '#fff',
-	'footer-bottom-widget-title-margin'               => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'footer-bottom-widget-title-padding'              => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'footer-bottom-widget-title-margin'               => '',
+	'footer-bottom-widget-title-padding'              => '',
 	'footer-bottom-widget-title-border-styling'       => wp_json_encode(
 		array(
 			'border-style' => 'none',
 			'border-color' => '',
-			'border-width' => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
+			'border-width' => array(),
 		)
 	),
 	'footer-bottom-widget-title-typography-options'   => 'inherit',
@@ -811,27 +353,21 @@ $footer_defaults = array(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
-			'google-font'     => 'Lato',
+			'google-font'     => 'Open Sans',
 			'custom-font'     => '',
 			'font-weight'     => '400',
 			'font-style'      => 'normal',
 			'text-decoration' => 'none',
 			'text-transform'  => 'none',
 			'font-size'       => array(
-				'desktop' => '14',
-				'tablet'  => '14',
-				'mobile'  => '14',
+
+				'mobile' => '14',
 			),
 			'line-height'     => array(
-				'desktop' => '24',
-				'tablet'  => '24',
-				'mobile'  => '24',
+
+				'mobile' => '24',
 			),
-			'letter-spacing'  => array(
-				'desktop' => '',
-				'tablet'  => '',
-				'mobile'  => '',
-			),
+			'letter-spacing'  => array(),
 		)
 	),
 	'footer-bottom-widget-content-align'              => 'cwp-text-left',
@@ -839,15 +375,7 @@ $footer_defaults = array(
 		array(
 			'border-style' => 'none',
 			'border-color' => '',
-			'border-width' => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
+			'border-width' => array(),
 		)
 	),
 	'footer-bottom-widget-content-typography-options' => 'inherit',
@@ -855,27 +383,21 @@ $footer_defaults = array(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
-			'google-font'     => 'Lato',
+			'google-font'     => 'Open Sans',
 			'custom-font'     => '',
 			'font-weight'     => '400',
 			'font-style'      => 'normal',
 			'text-decoration' => 'none',
 			'text-transform'  => 'none',
 			'font-size'       => array(
-				'desktop' => '14',
-				'tablet'  => '14',
-				'mobile'  => '14',
+
+				'mobile' => '14',
 			),
 			'line-height'     => array(
-				'desktop' => '24',
-				'tablet'  => '24',
-				'mobile'  => '24',
+
+				'mobile' => '24',
 			),
-			'letter-spacing'  => array(
-				'desktop' => '',
-				'tablet'  => '',
-				'mobile'  => '',
-			),
+			'letter-spacing'  => array(),
 		)
 	),
 
@@ -883,56 +405,8 @@ $footer_defaults = array(
 	'footer-menu-title'                               => 'Menu Title',
 	'footer-menu-custom-menu'                         => '',
 	'footer-menu-display-position'                    => '',
-	'footer-menu-padding'                             => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'footer-menu-margin'                              => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'footer-menu-padding'                             => '',
+	'footer-menu-margin'                              => '',
 	'footer-menu-title-align'                         => wp_json_encode(
 		array(
 			'desktop' => '',
@@ -941,69 +415,13 @@ $footer_defaults = array(
 		)
 	),
 	'footer-menu-title-color'                         => '#fff',
-	'footer-menu-title-margin'                        => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'footer-menu-title-padding'                       => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'footer-menu-title-margin'                        => '',
+	'footer-menu-title-padding'                       => '',
 	'footer-menu-title-border-styling'                => wp_json_encode(
 		array(
 			'border-style' => 'none',
 			'border-color' => '',
-			'border-width' => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
+			'border-width' => array(),
 		)
 	),
 	'footer-menu-title-typography-options'            => 'inherit',
@@ -1011,27 +429,21 @@ $footer_defaults = array(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
-			'google-font'     => 'Lato',
+			'google-font'     => 'Open Sans',
 			'custom-font'     => '',
 			'font-weight'     => '400',
 			'font-style'      => 'normal',
 			'text-decoration' => 'none',
 			'text-transform'  => 'none',
 			'font-size'       => array(
-				'desktop' => '14',
-				'tablet'  => '14',
-				'mobile'  => '14',
+
+				'mobile' => '14',
 			),
 			'line-height'     => array(
-				'desktop' => '24',
-				'tablet'  => '24',
-				'mobile'  => '24',
+
+				'mobile' => '24',
 			),
-			'letter-spacing'  => array(
-				'desktop' => '',
-				'tablet'  => '',
-				'mobile'  => '',
-			),
+			'letter-spacing'  => array(),
 		)
 	),
 	'footer-menu-align'                               => wp_json_encode(
@@ -1044,121 +456,35 @@ $footer_defaults = array(
 	'footer-menu-item-padding'                        => wp_json_encode(
 		array(
 			'desktop' => array(
-				'top'         => '0',
-				'right'       => '5',
-				'bottom'      => '0',
-				'left'        => '5',
-				'cssbox_link' => true,
+				'top'    => '0',
+				'right'  => '5',
+				'bottom' => '0',
+				'left'   => '5',
 			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
+
 		)
 	),
-	'footer-menu-item-margin'                         => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'footer-menu-item-margin'                         => '',
 	'footer-menu-styling'                             => wp_json_encode(
 		array(
 			'normal-text-color'    => '#fff',
 			'normal-bg-color'      => '',
-			'normal-border-style'  => '',
+			'normal-border-style'  => 'none',
 			'normal-border-color'  => '',
-			'hover-text-color'     => '#81d742',
+			'hover-text-color'     => '#275cf6',
 			'hover-bg-color'       => '',
-			'hover-border-style'   => '',
+			'hover-border-style'   => 'none',
 			'hover-border-color'   => '',
-			'active-text-color'    => '#81d742',
+			'active-text-color'    => '#275cf6',
 			'active-bg-color'      => '',
-			'active-border-style'  => '',
+			'active-border-style'  => 'none',
 			'active-border-color'  => '',
-			'normal-border-width'  => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'normal-border-radius' => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-border-width'   => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-border-radius'  => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'active-border-width'  => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'active-border-radius' => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
+			'normal-border-width'  => array(),
+			'normal-border-radius' => array(),
+			'hover-border-width'   => array(),
+			'hover-border-radius'  => array(),
+			'active-border-width'  => array(),
+			'active-border-radius' => array(),
 		)
 	),
 	'footer-menu-typography-options'                  => 'inherit',
@@ -1166,64 +492,56 @@ $footer_defaults = array(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
-			'google-font'     => 'Lato',
+			'google-font'     => 'Open Sans',
 			'custom-font'     => '',
 			'font-weight'     => '400',
 			'font-style'      => 'normal',
 			'text-decoration' => 'none',
 			'text-transform'  => 'none',
 			'font-size'       => array(
-				'desktop' => '14',
-				'tablet'  => '14',
-				'mobile'  => '14',
+
+				'mobile' => '14',
 			),
 			'line-height'     => array(
-				'desktop' => '24',
-				'tablet'  => '24',
-				'mobile'  => '24',
+
+				'mobile' => '24',
 			),
-			'letter-spacing'  => array(
-				'desktop' => '',
-				'tablet'  => '',
-				'mobile'  => '',
-			),
+			'letter-spacing'  => array(),
 		)
 	),
 
-	/*
-	footer social
-	Icon fixed on get*/
+	// footer social.
 	'footer_social'                                   => wp_json_encode(
 		array(
 			array(
 				'enabled'          => '1',
 				'icon'             => 'fab fa-facebook-f',
-				'link'             => 'www.facebook.com',
+				'link'             => esc_url( 'https://www.facebook.com/' ),
 				'checkbox'         => true,
-				'icon-color'       => '#1e73be',
+				'icon-color'       => '#ffffff',
 				'icon-hover-color' => '#ffffff',
-				'bg-color'         => '#ffffff',
-				'bg-hover-color'   => '#1e73be',
+				'bg-color'         => '#3b5998',
+				'bg-hover-color'   => '#4b69a8',
 			),
 			array(
 				'enabled'          => '1',
 				'icon'             => 'fab fa-twitter',
-				'link'             => 'www.twitter.com',
+				'link'             => esc_url( 'https://www.twitter.com/' ),
 				'checkbox'         => true,
-				'icon-color'       => '#75CCFF',
+				'icon-color'       => '#ffffff',
 				'icon-hover-color' => '#ffffff',
-				'bg-color'         => '#ffffff',
+				'bg-color'         => '#55ACEE',
 				'bg-hover-color'   => '#75CCFF',
 			),
 			array(
 				'enabled'          => '1',
 				'icon'             => 'fab fa-linkedin-in',
-				'link'             => 'www.linkedin.com',
+				'link'             => esc_url( 'https://www.linkedin.com/' ),
 				'checkbox'         => true,
-				'icon-color'       => '#0077B5',
+				'icon-color'       => '#ffffff',
 				'icon-hover-color' => '#ffffff',
-				'bg-color'         => '#ffffff',
-				'bg-hover-color'   => '#0077B5',
+				'bg-color'         => '#0077B5',
+				'bg-hover-color'   => '#1087C5',
 			),
 		)
 	),
@@ -1236,287 +554,78 @@ $footer_defaults = array(
 	),
 	'footer-social-icon-size'                         => wp_json_encode(
 		array(
-			'desktop' => '',
-			'tablet'  => '',
-			'mobile'  => '14',
+
+			'mobile' => '14',
 		)
 	),
-	'footer-social-icon-radius'                       => wp_json_encode(
-		array(
-			'desktop' => '',
-			'tablet'  => '',
-			'mobile'  => '50',
-		)
-	),
+	'footer-social-icon-radius'                       => '',
 	'footer-social-icon-width'                        => wp_json_encode(
 		array(
-			'desktop' => '',
-			'tablet'  => '',
-			'mobile'  => '30',
+
+			'mobile' => '30',
 		)
 	),
 	'footer-social-icon-height'                       => wp_json_encode(
 		array(
-			'desktop' => '',
-			'tablet'  => '',
-			'mobile'  => '30',
+
+			'mobile' => '30',
 		)
 	),
 	'footer-social-icon-line-height'                  => wp_json_encode(
 		array(
-			'desktop' => '',
-			'tablet'  => '',
-			'mobile'  => '30',
+
+			'mobile' => '30',
 		)
 	),
-	'individual-footer-social-icon-padding'           => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'individual-footer-social-icon-margin'            => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'footer-social-icon-section-padding'              => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'footer-social-icon-section-margin'               => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'individual-footer-social-icon-padding'           => '',
+	'individual-footer-social-icon-margin'            => '',
+	'footer-social-icon-section-padding'              => '',
+	'footer-social-icon-section-margin'               => '',
 
 	/*copyright*/
 	'footer-copyright-text-color'                     => '#fff',
 	'footer-copyright-align'                          => wp_json_encode(
 		array(
-			'desktop' => '',
-			'tablet'  => '',
-			'mobile'  => 'cwp-text-left',
+
+			'mobile' => 'cwp-text-left',
 		)
 	),
 	'footer_copyright'                                => esc_html__( 'Copyright &copy; {current_year} {site_title} - Powered by {theme_author}', 'cosmoswp' ),
-	'footer-copyright-padding'                        => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'footer-copyright-margin'                         => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'footer-copyright-padding'                        => '',
+	'footer-copyright-margin'                         => '',
 	'footer-copyright-typography-options'             => 'inherit',
 	'footer-copyright-typography'                     => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
-			'google-font'     => 'Lato',
+			'google-font'     => 'Open Sans',
 			'custom-font'     => '',
 			'font-weight'     => '400',
 			'font-style'      => 'normal',
 			'text-decoration' => 'none',
 			'text-transform'  => 'none',
 			'font-size'       => array(
-				'desktop' => '14',
-				'tablet'  => '14',
-				'mobile'  => '14',
+
+				'mobile' => '14',
 			),
 			'line-height'     => array(
-				'desktop' => '24',
-				'tablet'  => '24',
-				'mobile'  => '24',
+
+				'mobile' => '24',
 			),
-			'letter-spacing'  => array(
-				'desktop' => '',
-				'tablet'  => '',
-				'mobile'  => '',
-			),
+			'letter-spacing'  => array(),
 		)
 	),
 	/*HTML*/
 	'footer-html-container'                           => '',
-	'footer-html-padding'                             => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'footer-html-margin'                              => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'footer-html-padding'                             => '',
+	'footer-html-margin'                              => '',
 	'footer-html-text-color'                          => '#fff',
 	'footer-html-typography-options'                  => 'inherit',
 	'footer-html-typography'                          => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
-			'google-font'     => 'Lato',
+			'google-font'     => 'Open Sans',
 			'custom-font'     => '',
 			'font-style'      => 'normal',
 			'text-decoration' => 'none',
@@ -1532,411 +641,27 @@ $footer_defaults = array(
 	'footer-sidebar-7-widget-setting-option'          => 'inherit',
 	'footer-sidebar-8-widget-setting-option'          => 'inherit',
 	'footer-sidebar-1-content-align'                  => 'cwp-text-left',
-	'footer-sidebar-1-margin'                         => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'footer-sidebar-1-padding'                        => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'footer-sidebar-1-margin'                         => '',
+	'footer-sidebar-1-padding'                        => '',
 	'footer-sidebar-2-content-align'                  => 'cwp-text-left',
-	'footer-sidebar-2-margin'                         => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'footer-sidebar-2-padding'                        => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'footer-sidebar-2-margin'                         => '',
+	'footer-sidebar-2-padding'                        => '',
 	'footer-sidebar-3-content-align'                  => 'cwp-text-left',
-	'footer-sidebar-3-margin'                         => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'footer-sidebar-3-padding'                        => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'footer-sidebar-3-margin'                         => '',
+	'footer-sidebar-3-padding'                        => '',
 	'footer-sidebar-4-content-align'                  => 'cwp-text-left',
-	'footer-sidebar-4-margin'                         => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'footer-sidebar-4-padding'                        => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'footer-sidebar-4-margin'                         => '',
+	'footer-sidebar-4-padding'                        => '',
 	'footer-sidebar-5-content-align'                  => 'cwp-text-left',
-	'footer-sidebar-5-margin'                         => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'footer-sidebar-5-padding'                        => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'footer-sidebar-5-margin'                         => '',
+	'footer-sidebar-5-padding'                        => '',
 	'footer-sidebar-6-content-align'                  => 'cwp-text-left',
-	'footer-sidebar-6-margin'                         => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'footer-sidebar-6-padding'                        => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'footer-sidebar-6-margin'                         => '',
+	'footer-sidebar-6-padding'                        => '',
 	'footer-sidebar-7-content-align'                  => 'cwp-text-left',
-	'footer-sidebar-7-margin'                         => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'footer-sidebar-7-padding'                        => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'footer-sidebar-7-margin'                         => '',
+	'footer-sidebar-7-padding'                        => '',
 	'footer-sidebar-8-content-align'                  => 'cwp-text-left',
-	'footer-sidebar-8-margin'                         => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'footer-sidebar-8-padding'                        => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'footer-sidebar-8-margin'                         => '',
+	'footer-sidebar-8-padding'                        => '',
 );

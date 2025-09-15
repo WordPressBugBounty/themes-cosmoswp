@@ -1,7 +1,16 @@
 <?php
+/**
+ * EDD main content options.
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+global $cosmoswp_customize_control;
 
 /*Edd Single Sidebar*/
 $wp_customize->add_setting(
@@ -9,15 +18,37 @@ $wp_customize->add_setting(
 	array(
 		'default'           => $defaults['cwp-edd-single-sidebar'],
 		'sanitize_callback' => 'cosmoswp_sanitize_select',
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'cwp-edd-single-sidebar',
 	array(
 		'label'    => esc_html__( 'Content/Sidebar', 'cosmoswp' ),
 		'choices'  => cosmoswp_sidebar_options(),
 		'section'  => $this->section,
 		'settings' => 'cwp-edd-single-sidebar',
+		'type'     => 'select',
+	)
+);
+
+/*Image Size*/
+$wp_customize->add_setting(
+	'edd-img-size',
+	array(
+		'default'           => $defaults['edd-img-size'],
+		'sanitize_callback' => 'cosmoswp_sanitize_select',
+		'transport'         => 'postMessage',
+	)
+);
+$choices = cosmoswp_get_image_sizes_options( true );
+$cosmoswp_customize_control->add(
+	'edd-img-size',
+	array(
+		'choices'  => $choices,
+		'label'    => esc_html__( 'Feature Image Size', 'cosmoswp' ),
+		'section'  => $this->section,
+		'settings' => 'edd-img-size',
 		'type'     => 'select',
 	)
 );
@@ -29,7 +60,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'edd-single-elements-msg',
@@ -46,10 +77,11 @@ $wp_customize->add_setting(
 	array(
 		'default'           => $defaults['edd-single-elements'],
 		'sanitize_callback' => 'cosmoswp_sanitize_multi_choices',
+		'transport'         => 'postMessage',
 	)
 );
 $choices = cosmoswp_edd_single_elements();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Sortable(
 		$wp_customize,
 		'edd-single-elements',
@@ -68,7 +100,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'edd-single-side-elements-msg',
@@ -85,10 +117,11 @@ $wp_customize->add_setting(
 	array(
 		'default'           => $defaults['edd-single-side-elements'],
 		'sanitize_callback' => 'cosmoswp_sanitize_multi_choices',
+		'transport'         => 'postMessage',
 	)
 );
 $choices = cosmoswp_edd_single_elements();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Sortable(
 		$wp_customize,
 		'edd-single-side-elements',
@@ -106,9 +139,10 @@ $wp_customize->add_setting(
 	array(
 		'default'           => $defaults['edd-single-content-length'],
 		'sanitize_callback' => 'esc_attr',
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'edd-single-content-length',
 	array(
 		'label'       => esc_html__( 'Excerpt length (count words)', 'cosmoswp' ),
@@ -125,9 +159,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_slider_field',
 		'default'           => $defaults['edd-single-content-width'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Slider(
 		$wp_customize,
 		'edd-single-content-width',
@@ -151,7 +186,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'edd-single-product-related-msg',
@@ -168,9 +203,10 @@ $wp_customize->add_setting(
 	array(
 		'default'           => $defaults['edd-related-item-from'],
 		'sanitize_callback' => 'cosmoswp_sanitize_select',
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'edd-related-item-from',
 	array(
 		'choices'  => array(
@@ -190,9 +226,10 @@ $wp_customize->add_setting(
 	array(
 		'default'           => $defaults['edd-single-related-number'],
 		'sanitize_callback' => 'cosmoswp_sanitize_number',
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'edd-single-related-number',
 	array(
 		'label'       => esc_html__( 'Number of Item', 'cosmoswp' ),
@@ -213,9 +250,10 @@ $wp_customize->add_setting(
 	array(
 		'default'           => $defaults['edd-single-related-col'],
 		'sanitize_callback' => 'cosmoswp_sanitize_number',
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'edd-single-related-col',
 	array(
 		'label'       => esc_html__( 'Related Column', 'cosmoswp' ),
@@ -229,3 +267,18 @@ $wp_customize->add_control(
 		),
 	)
 );
+$partial_controls = array(
+	'cwp-edd-single-sidebar',
+	'edd-img-size',
+	'edd-single-elements',
+	'edd-single-side-elements',
+	'edd-single-content-length',
+	'edd-single-content-width',
+	'edd-related-item-from',
+	'edd-single-related-number',
+	'edd-single-related-col',
+);
+
+foreach ( $partial_controls as $control_id ) {
+	$this->add_selective_refresh( $wp_customize, $control_id );
+}

@@ -1,7 +1,15 @@
 <?php
+/**
+ * Dynamic CSS.
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
 /**
  * General Setting Dynamic CSS
  */
@@ -96,8 +104,6 @@ if ( $body_font_family ) {
 		$general_setting_body_desktop_css .= 'letter-spacing:' . $body_desktop_letter_spacing . 'px;';
 	}
 }
-
-
 
 /* Adding mobile body css in dynamic css hook */
 if ( ! empty( $general_setting_body_css ) ) {
@@ -292,6 +298,7 @@ if ( $h2_font_family ) {
 	}
 	$general_setting_desktop_css .= 'h2, h2 a{' . $h2_desktop_css . '}';
 }
+
 $h3_font_family = cosmoswp_font_family( $general_typography_h3 );
 if ( $h3_font_family ) {
 	$font_weight = cosmoswp_font_weight( $general_typography_h3 );
@@ -444,6 +451,7 @@ if ( $h5_font_family ) {
 	}
 	$general_setting_desktop_css .= 'h5, h5 a{' . $h5_desktop_css . '}';
 }
+
 $h6_font_family = cosmoswp_font_family( $general_typography_h6 );
 if ( $h6_font_family ) {
 	$font_weight = cosmoswp_font_weight( $general_typography_h6 );

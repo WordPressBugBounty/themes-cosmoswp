@@ -5,8 +5,12 @@
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
  * @package CosmosWP
- * @subpackage CosmosWP
  */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /* blog element with sorting */
 $blog_sorting_element = cosmoswp_get_theme_options( 'blog-elements-sorting' );
@@ -32,9 +36,9 @@ if ( ! is_array( $blog_sorting_element ) || empty( $blog_sorting_element ) ) {
 	return;
 }
 foreach ( $blog_sorting_element as $element ) {
-	if ( 'title' == $element ) {
+	if ( 'title' === $element ) {
 		the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-	} elseif ( 'primary-meta' == $element ) {
+	} elseif ( 'primary-meta' === $element ) {
 		if ( is_array( $primary_meta_element ) && ! empty( $primary_meta_element ) ) { ?>
 
 			<div class="entry-meta primary-meta">
@@ -44,11 +48,11 @@ foreach ( $blog_sorting_element as $element ) {
 			</div><!-- .entry-meta -->
 			<?php
 		}
-	} elseif ( 'featured-section' == $element ) {
-		if ( has_post_thumbnail() && 'hide-image' != $featured_image_layout ) {
+	} elseif ( 'featured-section' === $element ) {
+		if ( has_post_thumbnail() && 'hide-image' !== $featured_image_layout ) {
 			cosmoswp_post_thumbnail( $thumbnail_size );
 		}
-	} elseif ( 'content' == $element ) {
+	} elseif ( 'content' === $element ) {
 		?>
 		<div class="entry-content clearfix">
 			<?php
@@ -62,14 +66,14 @@ foreach ( $blog_sorting_element as $element ) {
 			?>
 		</div><!-- .entry-content -->
 		<?php
-	} elseif ( 'excerpt' == $element ) {
-		$excerpt_length = cosmoswp_get_theme_options( 'blog-excerpt-length' );
-		if ( $excerpt_length != 0 ) {
+	} elseif ( 'excerpt' === $element ) {
+		$excerpt_length = absint( cosmoswp_get_theme_options( 'blog-excerpt-length' ) );
+		if ( $excerpt_length ) {
 			?>
 			<div class="entry-content clearfix">
 				<?php
 				if ( $excerpt_length ) {
-					echo wp_trim_words( strip_shortcodes( get_the_excerpt() ), $excerpt_length );
+					echo wp_kses_post( wp_trim_words( strip_shortcodes( get_the_excerpt() ), $excerpt_length ) );
 				} else {
 					the_excerpt();
 				}
@@ -77,7 +81,7 @@ foreach ( $blog_sorting_element as $element ) {
 			</div><!-- .entry-content -->
 			<?php
 		}
-	} elseif ( 'secondary-meta' == $element ) {
+	} elseif ( 'secondary-meta' === $element ) {
 
 		if ( is_array( $secondary_meta_element ) && ! empty( $secondary_meta_element ) ) {
 			?>
@@ -90,4 +94,3 @@ foreach ( $blog_sorting_element as $element ) {
 		}
 	}
 }
-

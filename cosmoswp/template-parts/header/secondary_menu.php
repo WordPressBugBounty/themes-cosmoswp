@@ -1,4 +1,15 @@
 <?php
+/**
+ * Secondary Menu
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $menu_align             = cosmoswp_get_theme_options( 'secondary-menu-align' );
 $submenu_display_option = cosmoswp_get_theme_options( 'secondary-menu-submenu-display-options' );
 $secondary_menu         = cosmoswp_get_theme_options( 'secondary-menu-custom-menu' );

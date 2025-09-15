@@ -1,7 +1,15 @@
 <?php
+/**
+ * Site Identity Options
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+global $cosmoswp_customize_control;
 
 /*Site Identity Sorting*/
 $wp_title_tagline = $wp_customize->get_section( 'title_tagline' );
@@ -17,7 +25,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'site-logo-msg',
@@ -29,6 +37,7 @@ $wp_customize->add_control(
 );
 
 /*Site Logo*/
+
 /*Site Logo Max width*/
 $wp_customize->add_setting(
 	'site-logo-max-width',
@@ -37,7 +46,7 @@ $wp_customize->add_setting(
 		'default'           => $header_defaults['site-logo-max-width'],
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Slider(
 		$wp_customize,
 		'site-logo-max-width',
@@ -62,12 +71,12 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'site-identity-sorting-msg',
 		array(
-			'label'   => esc_html__( 'Site Identity & Position', 'cosmoswp' ),
+			'label'   => esc_html__( 'Site Identity and Position', 'cosmoswp' ),
 			'section' => 'title_tagline',
 		)
 	)
@@ -84,7 +93,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_site_identity_sorting();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Sortable(
 		$wp_customize,
 		'site-identity-sorting',
@@ -106,15 +115,15 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_site_identity_logo_options();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Responsive_Buttonset(
 		$wp_customize,
 		'site-logo-position',
 		array(
-			'choices'  => $choices,
-			'label'    => esc_html__( 'Logo Position', 'cosmoswp' ),
-			'section'  => 'title_tagline',
-			'settings' => 'site-logo-position',
+			'choices'         => $choices,
+			'label'           => esc_html__( 'Logo Position', 'cosmoswp' ),
+			'section'         => 'title_tagline',
+			'settings'        => 'site-logo-position',
 			'active_callback' => 'cosmoswp_site_identity_with_logo_only',
 		)
 	)
@@ -127,7 +136,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'site-identity-align-msg',
@@ -148,7 +157,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_site_identity_text_align();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Responsive_Buttonset(
 		$wp_customize,
 		'site-identity-align',
@@ -169,12 +178,12 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'site-identity-margin-padding-msg',
 		array(
-			'label'   => esc_html__( 'Margin & Padding', 'cosmoswp' ),
+			'label'   => esc_html__( 'Margin and Padding', 'cosmoswp' ),
 			'section' => 'title_tagline',
 		)
 	)
@@ -189,12 +198,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'site-identity-margin',
 		array(
-			'label'    => esc_html__( 'Margin', 'cosmoswp' ),
+			'label'    => esc_html__( 'Margin (px)', 'cosmoswp' ),
 			'section'  => 'title_tagline',
 			'settings' => 'site-identity-margin',
 		),
@@ -213,12 +222,12 @@ $wp_customize->add_setting(
 
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'site-identity-padding',
 		array(
-			'label'    => esc_html__( 'Padding', 'cosmoswp' ),
+			'label'    => esc_html__( 'Padding (px)', 'cosmoswp' ),
 			'section'  => 'title_tagline',
 			'settings' => 'site-identity-padding',
 		),
@@ -234,12 +243,12 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'site-identity-styling-msg',
 		array(
-			'label'   => esc_html__( 'Site Title & Tagline Styling', 'cosmoswp' ),
+			'label'   => esc_html__( 'Site Title and Tagline Styling', 'cosmoswp' ),
 			'section' => 'title_tagline',
 		)
 	)
@@ -254,7 +263,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Tabs(
 		$wp_customize,
 		'site-identity-styling',
@@ -305,7 +314,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'site-identity-typography-msg',
@@ -327,7 +336,7 @@ $wp_customize->add_setting(
 	)
 );
 
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'site-identity-typography-options',
 	array(
 		'label'    => esc_html__( 'Typography Options', 'cosmoswp' ),
@@ -349,7 +358,7 @@ $wp_customize->add_setting(
 	)
 );
 
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'site-title-typography',
@@ -373,7 +382,7 @@ $wp_customize->add_setting(
 	)
 );
 
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'site-tagline-typography',

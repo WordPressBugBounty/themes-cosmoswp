@@ -8,10 +8,15 @@
  * different template.
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
- * @version 3.4.0
+ * @version 8.6.0
  *
  * @package CosmosWP
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $breadcrumb_before_content = cosmoswp_get_theme_options( 'breadcrumb-before-content' );
 get_header();
 do_action( 'cosmoswp_action_before_woocommerce_archive' );

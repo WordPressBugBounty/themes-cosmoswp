@@ -1,7 +1,16 @@
 <?php
+/**
+ * Comment Options.
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+global $cosmoswp_customize_control;
 
 /* Comment section */
 $wp_customize->add_section(
@@ -19,12 +28,17 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Message(
 		$wp_customize,
 		'cosmoswp-comment-setting-msg',
 		array(
-			'description' => sprintf( esc_html__( '%1$s More setting%2$s also while editing post/page', 'cosmoswp' ), "<a href='" . admin_url( 'options-discussion.php' ) . "' target='_blank'>", '</a>' ),
+			'description' => sprintf(
+				// translators: %1$s and %2$s are the opening and closing anchor tags linking to the Discussion Settings page.
+				esc_html__( '%1$s More setting%2$s also while editing post/page', 'cosmoswp' ),
+				"<a href='" . admin_url( 'options-discussion.php' ) . "' target='_blank'>",
+				'</a>'
+			),
 			'section'     => 'cosmoswp-comment-setting',
 		)
 	)
@@ -38,7 +52,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'cosmoswp_sanitize_checkbox',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'cosmoswp-hide-comment',
 	array(
 		'label'    => esc_html__( 'Hide Comment', 'cosmoswp' ),
@@ -56,7 +70,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'sanitize_text_field',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'cosmoswp-comment-title',
 	array(
 		'label'    => esc_html__( 'Comment Title', 'cosmoswp' ),
@@ -74,7 +88,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'sanitize_text_field',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'cosmoswp-comment-button-text',
 	array(
 		'label'    => esc_html__( 'Comment Button Text', 'cosmoswp' ),
@@ -92,7 +106,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'sanitize_text_field',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'cosmoswp-comment-notes-after',
 	array(
 		'label'    => esc_html__( 'Comment Note After', 'cosmoswp' ),

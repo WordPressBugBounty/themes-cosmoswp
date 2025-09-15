@@ -1,7 +1,16 @@
 <?php
+/**
+ * WooCommerce Options.
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+global $cosmoswp_customize_control;
 
 /*WooCommerce Default panel*/
 $woocommerce = $wp_customize->get_panel( 'woocommerce' );
@@ -31,7 +40,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'cwc-general-styling-msg',
@@ -48,9 +57,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_background',
 		'default'           => $styling_defaults['cwc-general-color-options'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'cwc-general-color-options',
@@ -91,7 +101,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'wc-product-styling-msg',
@@ -108,9 +118,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_background',
 		'default'           => $styling_defaults['cwc-product-toolbar'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'cwc-product-toolbar',
@@ -142,9 +153,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_background',
 		'default'           => $styling_defaults['cwc-product-box'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'cwc-product-box',
@@ -213,7 +225,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'cwc-product-button-styling-msg',
@@ -230,10 +242,11 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_tabs',
 		'default'           => $styling_defaults['cwc-product-button-styling'],
+		'transport'         => 'postMessage',
 	)
 );
 $border_style_choices = cosmoswp_header_border_style();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Tabs(
 		$wp_customize,
 		'cwc-product-button-styling',
@@ -314,6 +327,7 @@ $wp_customize->add_control(
 				),
 				'normal-box-shadow-css'   => array(
 					'type'       => 'cssbox',
+					'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 					'tab'        => 'button-one-normal',
 					'box_fields' => array(
 						'x'      => true,
@@ -397,6 +411,7 @@ $wp_customize->add_control(
 				),
 				'hover-box-shadow-css'    => array(
 					'type'       => 'cssbox',
+					'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 					'tab'        => 'button-one-hover',
 					'box_fields' => array(
 						'x'      => true,
@@ -429,10 +444,11 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_tabs',
 		'default'           => $styling_defaults['cwc-checkout-button-styling'],
+		'transport'         => 'postMessage',
 	)
 );
 $border_style_choices = cosmoswp_header_border_style();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Tabs(
 		$wp_customize,
 		'cwc-checkout-button-styling',
@@ -513,6 +529,7 @@ $wp_customize->add_control(
 				),
 				'normal-box-shadow-css'   => array(
 					'type'       => 'cssbox',
+					'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 					'tab'        => 'button-one-normal',
 					'box_fields' => array(
 						'x'      => true,
@@ -596,6 +613,7 @@ $wp_customize->add_control(
 				),
 				'hover-box-shadow-css'    => array(
 					'type'       => 'cssbox',
+					'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 					'tab'        => 'button-one-hover',
 					'box_fields' => array(
 						'x'      => true,
@@ -629,7 +647,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'cwc-product-navigation-styling-msg',
@@ -640,20 +658,21 @@ $wp_customize->add_control(
 	)
 );
 
-/*Border & Box data*/
+/*Border and Box data*/
 $wp_customize->add_setting(
 	'cwc-product-navigation-styling',
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_border',
 		'default'           => $styling_defaults['cwc-product-navigation-styling'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'cwc-product-navigation-styling',
 		array(
-			'label'    => esc_html__( 'Border & Box', 'cosmoswp' ),
+			'label'    => esc_html__( 'Border and Box Shadow', 'cosmoswp' ),
 			'section'  => 'cwc-color-section',
 			'settings' => 'cwc-product-navigation-styling',
 		),
@@ -717,6 +736,7 @@ $wp_customize->add_control(
 			),
 			'box-shadow-css'   => array(
 				'type'       => 'cssbox',
+				'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 				'box_fields' => array(
 					'x'      => true,
 					'Y'      => true,
@@ -748,9 +768,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_background',
 		'default'           => $styling_defaults['cwc-product-pagination-color-options'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'cwc-product-pagination-color-options',
@@ -787,7 +808,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'cwc-single-wc-product-styling-msg',
@@ -804,9 +825,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_background',
 		'default'           => $styling_defaults['cwc-single-product-tab-bg-color-options'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'cwc-single-product-tab-bg-color-options',
@@ -834,9 +856,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_background',
 		'default'           => $styling_defaults['cwc-single-product-tab-text-color-options'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'cwc-single-product-tab-text-color-options',
@@ -864,9 +887,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_background',
 		'default'           => $styling_defaults['cwc-single-product-tab-border-color-options'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'cwc-single-product-tab-border-color-options',
@@ -892,7 +916,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'cwc-cart-styling-msg',
@@ -908,9 +932,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_background',
 		'default'           => $styling_defaults['cwc-cart-table-bg-color'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'cwc-cart-table-bg-color',
@@ -938,9 +963,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_background',
 		'default'           => $styling_defaults['cwc-cart-table-bg-color'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'cwc-cart-table-border-color',
@@ -963,9 +989,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_background',
 		'default'           => $styling_defaults['cwc-cart-table-header-color-options'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'cwc-cart-table-header-color-options',
@@ -993,9 +1020,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_background',
 		'default'           => $styling_defaults['cwc-cart-remove-button-color-options'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'cwc-cart-remove-button-color-options',
@@ -1032,7 +1060,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'cwc-notice-error-styling-msg',
@@ -1048,9 +1076,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_background',
 		'default'           => $styling_defaults['cwc-notice-error-color-options'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'cwc-notice-error-color-options',
@@ -1081,14 +1110,15 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_border',
 		'default'           => $styling_defaults['cwc-notice-error-border-box'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'cwc-notice-error-border-box',
 		array(
-			'label'    => esc_html__( 'Border & Box', 'cosmoswp' ),
+			'label'    => esc_html__( 'Border and Box Shadow', 'cosmoswp' ),
 			'section'  => 'cwc-color-section',
 			'settings' => 'cwc-notice-error-border-box',
 		),
@@ -1152,6 +1182,7 @@ $wp_customize->add_control(
 			),
 			'box-shadow-css'   => array(
 				'type'       => 'cssbox',
+				'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 				'box_fields' => array(
 					'x'      => true,
 					'Y'      => true,
@@ -1184,7 +1215,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'cwc-notice-info-styling-msg',
@@ -1200,9 +1231,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_background',
 		'default'           => $styling_defaults['cwc-notice-info-color-options'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'cwc-notice-info-color-options',
@@ -1233,14 +1265,15 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_border',
 		'default'           => $styling_defaults['cwc-notice-info-border-box'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'cwc-notice-info-border-box',
 		array(
-			'label'    => esc_html__( 'Border & Box', 'cosmoswp' ),
+			'label'    => esc_html__( 'Border and Box Shadow', 'cosmoswp' ),
 			'section'  => 'cwc-color-section',
 			'settings' => 'cwc-notice-info-border-box',
 		),
@@ -1304,6 +1337,7 @@ $wp_customize->add_control(
 			),
 			'box-shadow-css'   => array(
 				'type'       => 'cssbox',
+				'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 				'box_fields' => array(
 					'x'      => true,
 					'Y'      => true,
@@ -1336,7 +1370,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'cwc-notice-success-styling-msg',
@@ -1352,9 +1386,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_background',
 		'default'           => $styling_defaults['cwc-notice-success-color-options'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'cwc-notice-success-color-options',
@@ -1385,14 +1420,15 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_border',
 		'default'           => $styling_defaults['cwc-notice-success-border-box'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'cwc-notice-success-border-box',
 		array(
-			'label'    => esc_html__( 'Border & Box', 'cosmoswp' ),
+			'label'    => esc_html__( 'Border and Box Shadow', 'cosmoswp' ),
 			'section'  => 'cwc-color-section',
 			'settings' => 'cwc-notice-success-border-box',
 		),
@@ -1456,6 +1492,7 @@ $wp_customize->add_control(
 			),
 			'box-shadow-css'   => array(
 				'type'       => 'cssbox',
+				'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 				'box_fields' => array(
 					'x'      => true,
 					'Y'      => true,

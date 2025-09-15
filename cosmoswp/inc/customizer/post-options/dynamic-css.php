@@ -1,16 +1,20 @@
 <?php
+/**
+ * Dynamic CSS for Post Options
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-/*
- *Dynamic Css For post Options
- *
- */
+
 $post_dynamic_css['all']     = '';
 $post_dynamic_css['tablet']  = '';
 $post_dynamic_css['desktop'] = '';
 
-// post pagination color
+// post pagination color.
 $post_pagination_css       = '';
 $post_pagination_hover_css = '';
 $post_pagination_color     = cosmoswp_get_theme_options( 'post-pagination-color-options' );
@@ -20,7 +24,8 @@ $pagination_text_color = cosmoswp_ifset( $post_pagination_color['text-color'] );
 if ( $pagination_text_color ) {
 	$post_pagination_css .= 'color:' . $pagination_text_color . ';';
 }
-//concated post navigation css in all css
+
+// concated post navigation css in all css.
 if ( ! empty( $post_pagination_css ) ) {
 	$post_pagination_dynamic_css = '
     .single-post .post-navigation .nav-links .post-title{
@@ -33,7 +38,7 @@ $pagination_text_hover_color = cosmoswp_ifset( $post_pagination_color['text-hove
 if ( $pagination_text_hover_color ) {
 	$post_pagination_hover_css .= 'color:' . $pagination_text_hover_color . ';';
 }
-//concated post navigation css in all css
+// concated post navigation css in all .
 if ( ! empty( $post_pagination_hover_css ) ) {
 	$post_pagination_dynamic_hover_css = '
     .single-post .post-navigation .nav-links .post-title:hover {
@@ -57,8 +62,6 @@ if ( $pagination_controls_hover_color ) {
     }';
 }
 
-
-
 /*post Css*/
 $post_main_content_css         = '';
 $post_main_content_tablet_css  = '';
@@ -67,17 +70,17 @@ $post_main_content_desktop_css = '';
 /* margin */
 $main_content_margin = cosmoswp_get_theme_options( 'post-main-content-margin' );
 $main_content_margin = json_decode( $main_content_margin, true );
-// desktop margin
+// desktop margin.
 $main_content_margin_desktop = cosmoswp_cssbox_values_inline( $main_content_margin, 'desktop' );
 if ( strpos( $main_content_margin_desktop, 'px' ) !== false ) {
 	$post_main_content_desktop_css .= 'margin:' . $main_content_margin_desktop . ';';
 }
-// tablet marign
+// tablet margin.
 $main_content_margin_tablet = cosmoswp_cssbox_values_inline( $main_content_margin, 'tablet' );
 if ( strpos( $main_content_margin_tablet, 'px' ) !== false ) {
 	$post_main_content_tablet_css .= 'margin:' . $main_content_margin_tablet . ';';
 }
-// mobile margin
+// mobile margin.
 $main_content_margin_mobile = cosmoswp_cssbox_values_inline( $main_content_margin, 'mobile' );
 if ( strpos( $main_content_margin_mobile, 'px' ) !== false ) {
 	$post_main_content_css .= 'margin:' . $main_content_margin_mobile . ';';
@@ -87,18 +90,18 @@ if ( strpos( $main_content_margin_mobile, 'px' ) !== false ) {
 $main_content_padding = cosmoswp_get_theme_options( 'post-main-content-padding' );
 $main_content_padding = json_decode( $main_content_padding, true );
 
-// desktop padding
+// desktop padding.
 $main_content_padding_desktop = cosmoswp_cssbox_values_inline( $main_content_padding, 'desktop' );
 if ( strpos( $main_content_padding_desktop, 'px' ) !== false ) {
 	$post_main_content_desktop_css .= 'padding:' . $main_content_padding_desktop . ';';
 }
-//tablet padding
+// tablet padding.
 $main_content_padding_tablet = cosmoswp_cssbox_values_inline( $main_content_padding, 'tablet' );
 if ( strpos( $main_content_padding_tablet, 'px' ) !== false ) {
 	$post_main_content_tablet_css .= 'padding:' . $main_content_padding_tablet . ';';
 }
 
-//mobile padding
+// mobile padding.
 $main_content_padding_mobile = cosmoswp_cssbox_values_inline( $main_content_padding, 'mobile' );
 if ( strpos( $main_content_padding_mobile, 'px' ) !== false ) {
 	$post_main_content_css .= 'padding:' . $main_content_padding_mobile . ';';

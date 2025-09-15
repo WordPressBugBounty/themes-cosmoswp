@@ -1,16 +1,16 @@
 <?php
 /**
- * The template for displaying all pages
+ * The template for displaying all single posts
  *
- * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages
- * and that other 'pages' on your WordPress site may use a
- * different template.
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
  *
- * @link https://codex.wordpress.org/Template_Hierarchy
- *
- * @package CosmosWP
+ * @package cosmoswp
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $breadcrumb_before_content = cosmoswp_get_theme_options( 'breadcrumb-before-content' );
 get_header();
 do_action( 'cosmoswp_action_before_edd_archive' );

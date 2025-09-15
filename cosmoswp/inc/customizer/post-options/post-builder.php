@@ -1,15 +1,20 @@
-<?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
+<?php // phpcs:ignore WordPress.NamingConventions.ValidClassName.Prefix -- Class filename does not follow standard, but this is intentional.
 /**
  * Post Builder and Customizer Options
  *
  * @package CosmosWP
  */
-if ( ! class_exists( 'CosmosWP_Post_Builder' ) ) :
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+if ( ! class_exists( 'CosmosWP_Post_Builder' ) ) :
+	/**
+	 * Post Builder and Customizer Options
+	 *
+	 * @package CosmosWP
+	 */
 	class CosmosWP_Post_Builder {
 
 		/**
@@ -44,15 +49,12 @@ if ( ! class_exists( 'CosmosWP_Post_Builder' ) ) :
 		 */
 		public static function instance() {
 
-			// Store the instance locally to avoid private static replication
 			static $instance = null;
 
-			// Only run these methods if they haven't been ran previously
 			if ( null === $instance ) {
 				$instance = new CosmosWP_Post_Builder();
 			}
 
-			// Always return the instance
 			return $instance;
 		}
 
@@ -82,7 +84,7 @@ if ( ! class_exists( 'CosmosWP_Post_Builder' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param array $default_options
+		 * @param array $default_options Default options.
 		 * @return array
 		 */
 		public function post_defaults( $default_options = array() ) {
@@ -115,53 +117,26 @@ if ( ! class_exists( 'CosmosWP_Post_Builder' ) ) :
 						'text-hover-color'      => '#1949d4',
 					)
 				),
-				'post-main-content-margin'            => wp_json_encode(
-					array(
-						'desktop' => array(
-							'top'         => '',
-							'right'       => '',
-							'bottom'      => '',
-							'left'        => '',
-							'cssbox_link' => true,
-						),
-						'tablet'  => array(
-							'top'         => '',
-							'right'       => '',
-							'bottom'      => '',
-							'left'        => '',
-							'cssbox_link' => true,
-						),
-						'mobile'  => array(
-							'top'         => '',
-							'right'       => '',
-							'bottom'      => '',
-							'left'        => '',
-							'cssbox_link' => true,
-						),
-					)
-				),
+				'post-main-content-margin'            => '',
 				'post-main-content-padding'           => wp_json_encode(
 					array(
 						'desktop' => array(
-							'top'         => '80',
-							'right'       => '0',
-							'bottom'      => '80',
-							'left'        => '0',
-							'cssbox_link' => true,
+							'top'    => '80',
+							'right'  => '0',
+							'bottom' => '80',
+							'left'   => '0',
 						),
 						'tablet'  => array(
-							'top'         => '40',
-							'right'       => '0',
-							'bottom'      => '60',
-							'left'        => '0',
-							'cssbox_link' => true,
+							'top'    => '40',
+							'right'  => '0',
+							'bottom' => '60',
+							'left'   => '0',
 						),
 						'mobile'  => array(
-							'top'         => '20',
-							'right'       => '0',
-							'bottom'      => '40',
-							'left'        => '0',
-							'cssbox_link' => true,
+							'top'    => '20',
+							'right'  => '0',
+							'bottom' => '40',
+							'left'   => '0',
 						),
 					)
 				),
@@ -177,7 +152,7 @@ if ( ! class_exists( 'CosmosWP_Post_Builder' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param object $wp_customize
+		 * @param object $wp_customize WordPress Customizer object.
 		 * @return void
 		 */
 		public function customize_register( $wp_customize ) {
@@ -218,9 +193,13 @@ if ( ! class_exists( 'CosmosWP_Post_Builder' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @return
+		 * @param integer $post_id Post ID.
+		 * @return void.
 		 */
-		public function display_post( $post_id ) {
+		public function display_post( $post_id = 0 ) {
+			if ( ! $post_id ) {
+				$post_id = get_the_ID();
+			}
 			$sidebar = cosmoswp_get_theme_options( 'post-sidebar' );
 			?>
 			<!-- Start of .blog-content-->
@@ -243,7 +222,7 @@ if ( ! class_exists( 'CosmosWP_Post_Builder' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param $classes
+		 * @param array $classes Body classes.
 		 * @return array
 		 */
 		public function add_body_class( $classes ) {
@@ -251,7 +230,7 @@ if ( ! class_exists( 'CosmosWP_Post_Builder' ) ) :
 				return $classes;
 			}
 			$sidebar = cosmoswp_get_theme_options( 'post-sidebar' );
-			if ( 'ful-ct' === $sidebar || 'middle-ct' == $sidebar ) {
+			if ( 'ful-ct' === $sidebar || 'middle-ct' === $sidebar ) {
 				$classes[] = 'cwp-main-content-only';
 			}
 
@@ -265,7 +244,7 @@ if ( ! class_exists( 'CosmosWP_Post_Builder' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param array $dynamic_css
+		 * @param array $dynamic_css Dynamic CSS.
 		 * @return array
 		 */
 		public function dynamic_css( $dynamic_css ) {
@@ -286,7 +265,6 @@ if ( ! class_exists( 'CosmosWP_Post_Builder' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param null
 		 * @return void
 		 */
 		public function single_post_loop_item() {
@@ -294,12 +272,11 @@ if ( ! class_exists( 'CosmosWP_Post_Builder' ) ) :
 		}
 
 		/**
-		 * cosmoswp_customize_partial_post_main_content,
+		 * Partial for post main content
 		 *
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param null
 		 * @return String
 		 */
 		public function cosmoswp_customize_partial_post_main_content() {
@@ -307,6 +284,34 @@ if ( ! class_exists( 'CosmosWP_Post_Builder' ) ) :
 			$this->display_post();
 			$value = ob_get_clean();
 			return $value;
+		}
+
+		/**
+		 * Add selective refresh for the blog main content.
+		 *
+		 * @param WP_Customize_Manager $wp_customize The customizer manager.
+		 * @param string               $control_id The control ID.
+		 * @param array                $args Additional arguments.
+		 */
+		public function add_selective_refresh( $wp_customize, $control_id, $args = array() ) {
+			$defaults = array(
+				'selector'            => '#cwp-post-main-content-wrapper',
+				'render_callback'     => array( $this, 'cosmoswp_customize_partial_post_main_content' ),
+				'container_inclusive' => false,
+				'fallback_refresh'    => false,
+			);
+
+			$args = wp_parse_args( $args, $defaults );
+
+			$wp_customize->selective_refresh->add_partial(
+				$control_id,
+				array(
+					'selector'            => $args['selector'],
+					'render_callback'     => $args['render_callback'],
+					'container_inclusive' => $args['container_inclusive'],
+					'fallback_refresh'    => $args['fallback_refresh'],
+				)
+			);
 		}
 	}
 endif;
@@ -322,8 +327,7 @@ endif;
  */
 if ( ! function_exists( 'cosmoswp_post_builder' ) ) {
 
-	function cosmoswp_post_builder() {
-
+	function cosmoswp_post_builder() {//phpcs:ignore
 		return CosmosWP_Post_Builder::instance();
 	}
 

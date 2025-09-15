@@ -1,8 +1,22 @@
-<?php
+<?php // phpcs:ignore WordPress.NamingConventions.ValidClassName.Prefix -- Class filename does not follow standard, but this is intentional.
+/**
+ * Class CosmosWP_Typography_Fonts
+ *
+ * @package CosmosWP
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Class CosmosWP_Typography_Fonts
+ *
+ * @package CosmosWP
+ */
 class CosmosWP_Typography_Fonts {
 
 
-	private $version = '1.1';
 	/**
 	 * Main Instance
 	 *
@@ -16,20 +30,17 @@ class CosmosWP_Typography_Fonts {
 	 */
 	public static function instance() {
 
-		// Store the instance locally to avoid private static replication
 		static $instance = null;
 
-		// Only run these methods if they haven't been ran previously
 		if ( null === $instance ) {
 			$instance = new CosmosWP_Typography_Fonts();
 		}
 
-		// Always return the instance
 		return $instance;
 	}
 
 	/**
-	 *  Run functionality with hooks
+	 * Run functionality with hooks
 	 *
 	 * @since    1.0.0
 	 * @access   public
@@ -46,8 +57,16 @@ class CosmosWP_Typography_Fonts {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_google_fonts' ), 1 );
 	}
 
-	function google_fonts() {
-		$transient    = 'cosmoswp_google_fonts_' . $this->version;
+	/**
+	 * Google font ajax callback
+	 *
+	 * @since    1.0.0
+	 * @access   public
+	 *
+	 * @return void
+	 */
+	public function google_fonts() {
+		$transient    = 'cosmoswp_google_fonts_' . COSMOSWP_VERSION;
 		$google_fonts = get_transient( $transient );
 		/*Get/Fetch google fonts*/
 		if ( empty( $google_fonts ) ) {
@@ -69,10 +88,18 @@ class CosmosWP_Typography_Fonts {
 		wp_send_json_success( apply_filters( 'cosmoswp_google_fonts', $google_fonts ) );
 	}
 
-	function get_google_font_url( $is_fresh = false ) {
+	/**
+	 * Get google font url
+	 *
+	 * @since    1.0.0
+	 * @access   public
+	 *
+	 * @return bool|string
+	 */
+	public function get_google_font_url( $is_fresh = false ) {
 		$previous_version = false;
 		if ( ! $is_fresh ) {
-			$cwp_dynamic_css = get_theme_mod( 'cwp_dynamic_fonts' );
+			$cwp_dynamic_css = cosmoswp_get_theme_options( 'cwp_dynamic_fonts' );
 			if ( ! empty( $cwp_dynamic_css ) ) {
 				return $cwp_dynamic_css;
 			}
@@ -135,22 +162,31 @@ class CosmosWP_Typography_Fonts {
 	 */
 	public function save_dynamic_fonts() {
 		$fonts_url = $this->get_google_font_url( true );
+
 		if ( $fonts_url ) {
 			set_theme_mod( 'cwp_dynamic_fonts', $fonts_url );
 		}
 	}
 
-	function enqueue_google_fonts() {
-		if ( cosmoswp_typography_fonts()->get_google_font_url() ) {
-			wp_enqueue_style( 'cosmoswp-google-fonts', $this->get_google_font_url(), array(), false );
+	/**
+	 * Enqueue google fonts
+	 *
+	 * @since    1.0.0
+	 * @access   public
+	 *
+	 * @return void
+	 */
+	public function enqueue_google_fonts() {
+		$fonts_url = $this->get_google_font_url();
+		if ( $fonts_url ) {
+			wp_enqueue_style( 'cosmoswp-google-fonts', $fonts_url, array(), false );
 		}
 	}
 }
 
 if ( ! function_exists( 'cosmoswp_typography_fonts' ) ) {
 
-	function cosmoswp_typography_fonts() {
-
+	function cosmoswp_typography_fonts() {//phpcs:ignore
 		return CosmosWP_Typography_Fonts::instance();
 	}
 	cosmoswp_typography_fonts()->run();

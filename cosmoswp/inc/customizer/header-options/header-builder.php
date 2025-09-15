@@ -1,16 +1,21 @@
-<?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
+<?php // phpcs:ignore WordPress.NamingConventions.ValidClassName.Prefix -- Class filename does not follow standard, but this is intentional.
 /**
  * Header Builder and Customizer Options
  *
  * @package CosmosWP
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 
+	/**
+	 * Header Builder and Customizer Options
+	 *
+	 * @package CosmosWP
+	 */
 	class CosmosWP_Header_Builder {
 
 		/**
@@ -135,7 +140,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		public $button_one = 'button_one';
 
 		/**
-		 * contact_information Section/Setting/Control ID
+		 * Contact information Section/Setting/Control ID
 		 *
 		 * @var string
 		 * @access public
@@ -144,7 +149,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		public $contact_information = 'contact_information';
 
 		/**
-		 * advertisement Section/Setting/Control ID
+		 * Advertisement Section/Setting/Control ID
 		 *
 		 * @var string
 		 * @access public
@@ -153,7 +158,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		public $advertisement = 'advertisement';
 
 		/**
-		 * login Section/Setting/Control ID
+		 * Login Section/Setting/Control ID
 		 *
 		 * @var string
 		 * @access public
@@ -162,7 +167,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		public $login = 'login';
 
 		/**
-		 * register Section/Setting/Control ID
+		 * Register Section/Setting/Control ID
 		 *
 		 * @var string
 		 * @access public
@@ -171,7 +176,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		public $register = 'register';
 
 		/**
-		 * html Section/Setting/Control ID
+		 * HTML Section/Setting/Control ID.
 		 *
 		 * @var string
 		 * @access public
@@ -192,15 +197,12 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 */
 		public static function instance() {
 
-			// Store the instance locally to avoid private static replication
 			static $instance = null;
 
-			// Only run these methods if they haven't been ran previously
 			if ( null === $instance ) {
 				$instance = new CosmosWP_Header_Builder();
 			}
 
-			// Always return the instance
 			return $instance;
 		}
 
@@ -232,7 +234,6 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @since    1.1.0
 		 * @access   public
 		 *
-		 * @param null
 		 * @return void
 		 */
 		public function set_customizer() {
@@ -249,8 +250,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @since    1.1.0
 		 * @access   public
 		 *
-		 * @param null
-		 * @return void
+		 * @return array.
 		 */
 		public function get_builder() {
 			$builder = cosmoswp_get_theme_options( cosmoswp_header_builder()->builder_section_controller );
@@ -267,7 +267,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param array $default_options
+		 * @param array $default_options Default options.
 		 * @return array
 		 */
 		public function header_defaults( $default_options = array() ) {
@@ -283,7 +283,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param array $builder builder fields
+		 * @param array $builder builder fields.
 		 * @return array
 		 */
 		public function header_builder( $builder ) {
@@ -409,7 +409,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param object $wp_customize
+		 * @param object $wp_customize WordPress Customizer object.
 		 * @return void
 		 */
 		public function customize_register( $wp_customize ) {
@@ -450,8 +450,9 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 					'transport'         => 'postMessage',
 				)
 			);
+			global $cosmoswp_customize_control;
 
-			$wp_customize->add_control(
+			$cosmoswp_customize_control->add(
 				cosmoswp_header_builder()->builder_section_controller,
 				array(
 					'label'    => esc_html__( 'Header Builder', 'cosmoswp' ),
@@ -488,7 +489,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param array $items
+		 * @param array $items Items.
 		 * @return array
 		 */
 		public function sort_items( $items = array() ) {
@@ -509,7 +510,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param $column_elements
+		 * @param array $column_elements Columns elements.
 		 */
 		public function column_elements( $column_elements ) {
 			echo '<div class="grid-container"><div class="grid-row">';
@@ -529,18 +530,18 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 				if ( $prev_width < $x ) {
 					$diff      = $x - $prev_width;
 					$diff_grid = 'grid-' . $diff;
-					echo '<div class="' . $diff_grid . '"></div>';
+					echo '<div class="' . esc_attr( $diff_grid ) . '"></div>';
 				}
-				echo '<div class="cwp-grid-column ' . $grid . '">';
+				echo '<div class="cwp-grid-column ' . esc_attr( $grid ) . '">';
 				$slug = 'template-parts/header/' . $id;
 				cosmoswp_get_template_part( $id, $slug );
 				echo '</div>';
 
 				$prev_width = $x + $width;
-				if ( $i == $total_elements && $prev_width < $max_col ) {
+				if ( $i === $total_elements && $prev_width < $max_col ) {
 					$diff      = $max_col - $prev_width;
 					$diff_grid = 'grid-' . $diff;
-					echo '<div class="' . $diff_grid . '"></div>';
+					echo '<div class="' . esc_attr( $diff_grid ) . '"></div>';
 				}
 				++$i;
 			}
@@ -556,7 +557,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @return
+		 * @return void.
 		 */
 		public function display_header() {
 			if ( cosmoswp_is_active_header() ) {
@@ -564,6 +565,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 				<header id="cwp-header-wrap" <?php cosmoswp_header_wrap_classes(); ?>>
 					<?php
 					$builder = cosmoswp_header_builder()->get_builder();
+
 					if ( isset( $builder['desktop'] ) && ! empty( $builder['desktop'] ) ) {
 						$desktop_builder = $builder['desktop'];
 						foreach ( $desktop_builder as $key => $single_row ) {
@@ -610,24 +612,27 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 				$menu_icon_align    = ( $menu_icon_align ) ? $menu_icon_align : '';
 
 				$icon_type      = cosmoswp_get_theme_options( 'menu-icon-close-icon-options' );
-				$icon_structure = $icon_spacer = '';
-				if ( $icon_type == 'text' ) {
+				$icon_structure = '';
+				$icon_spacer    = '';
+				if ( 'text' === $icon_type ) {
 					$close_text     = cosmoswp_get_theme_options( 'menu-close-text' );
 					$icon_structure = cosmoswp_get_icon_structure( $icon_type, $close_text, 0, 0 );
-				} elseif ( $icon_type == 'icon' ) {
+				} elseif ( 'icon' === $icon_type ) {
 					$close_icon     = cosmoswp_get_theme_options( 'menu-close-icon' );
 					$icon_structure = cosmoswp_get_icon_structure( $icon_type, 0, $close_icon, 0 );
-				} elseif ( $icon_type == 'both' ) {
+				} elseif ( 'both' === $icon_type ) {
 					$close_text     = cosmoswp_get_theme_options( 'menu-close-text' );
 					$close_icon     = cosmoswp_get_theme_options( 'menu-close-icon' );
 					$icon_position  = cosmoswp_get_theme_options( 'menu-icon-close-icon-position' );
-					$icon_spacer    = cosmoswp_get_icon_postion_class( $icon_position );
+					$icon_spacer    = cosmoswp_get_icon_position_class( $icon_position );
 					$icon_structure = cosmoswp_get_icon_structure( $icon_type, $close_text, $close_icon, $icon_position );
 				}
 				?>
 				<div id="cwp-header-menu-sidebar" class="cwp-header-menu-sidebar <?php echo esc_attr( cosmoswp_string_concator( $menu_display_style, $icon_spacer, $menu_icon_align ) ); ?>">
 					<div class="cwp-close-btn-box">
-						<a class="cwp-close-btn" href="#"><?php echo $icon_structure; ?></a>
+						<a class="cwp-close-btn" href="#">
+                            <?php echo $icon_structure; //phpcs:ignore ?>
+						</a>
 					</div>
 					<?php
 					$builder = cosmoswp_header_builder()->get_builder();
@@ -657,10 +662,10 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @return array
+		 * @param array $desktop_builder Desktop builder fields.
+		 * @return void
 		 */
 		public function desktop_header( $desktop_builder ) {
-
 			?>
 			<div class="cwp-desktop-header cwp-hide-on-mobile">
 				<?php
@@ -712,7 +717,8 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @return array
+		 * @param array $mobile_builder Mobile builder fields.
+		 * @return void
 		 */
 		public function mobile_header( $mobile_builder ) {
 			?>
@@ -767,7 +773,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param array $dynamic_css
+		 * @param array $dynamic_css Dynamic css.
 		 * @return array
 		 */
 		public function dynamic_css( $dynamic_css ) {
@@ -788,7 +794,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param $google_font_family_array
+		 * @param array $google_font_family_array Font family array.
 		 * @return array
 		 */
 		public function enqueue_google_fonts( $google_font_family_array ) {
@@ -802,7 +808,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 			$site_tagline_typography  = cosmoswp_get_theme_options( 'site-tagline-typography' );
 			$site_tagline_typography  = json_decode( $site_tagline_typography, true );
 			$site_tagline_font_family = cosmoswp_font_family( $site_tagline_typography );
-			if ( 'custom' == $site_identity_typography_options ) {
+			if ( 'custom' === $site_identity_typography_options ) {
 				if ( cosmoswp_is_font_type_google( $site_title_typography ) ) {
 					$local_google_fonts[] = array(
 						'family'      => $site_title_font_family,
@@ -821,7 +827,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 			$dds_typography         = cosmoswp_get_theme_options( 'dd-search-typography' );
 			$dds_typography         = json_decode( $dds_typography, true );
 			$dds_font_family        = cosmoswp_font_family( $dds_typography );
-			if ( 'custom' == $dds_typography_options && cosmoswp_is_font_type_google( $dds_typography ) ) {
+			if ( 'custom' === $dds_typography_options && cosmoswp_is_font_type_google( $dds_typography ) ) {
 				$local_google_fonts[] = array(
 					'family'      => $dds_font_family,
 					'font-weight' => $dds_typography['font-weight'],
@@ -832,7 +838,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 			$ns_typography         = cosmoswp_get_theme_options( 'normal-search-typography' );
 			$ns_typography         = json_decode( $ns_typography, true );
 			$ns_font_family        = cosmoswp_font_family( $ns_typography );
-			if ( 'custom' == $ns_typography_options && cosmoswp_is_font_type_google( $ns_typography ) ) {
+			if ( 'custom' === $ns_typography_options && cosmoswp_is_font_type_google( $ns_typography ) ) {
 				$local_google_fonts[] = array(
 					'family'      => $ns_font_family,
 					'font-weight' => $ns_typography['font-weight'],
@@ -843,7 +849,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 			$button_one_typography         = cosmoswp_get_theme_options( 'button-one-typography' );
 			$button_one_typography         = json_decode( $button_one_typography, true );
 			$button_one_font_family        = cosmoswp_font_family( $button_one_typography );
-			if ( 'custom' == $button_one_typography_options && cosmoswp_is_font_type_google( $button_one_typography ) ) {
+			if ( 'custom' === $button_one_typography_options && cosmoswp_is_font_type_google( $button_one_typography ) ) {
 				$local_google_fonts[] = array(
 					'family'      => $button_one_font_family,
 					'font-weight' => $button_one_typography['font-weight'],
@@ -854,7 +860,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 			$secondary_menu_typography         = cosmoswp_get_theme_options( 'secondary-menu-typography' );
 			$secondary_menu_typography         = json_decode( $secondary_menu_typography, true );
 			$secondary_menu_font_family        = cosmoswp_font_family( $secondary_menu_typography );
-			if ( 'custom' == $secondary_menu_typography_options && cosmoswp_is_font_type_google( $secondary_menu_typography ) ) {
+			if ( 'custom' === $secondary_menu_typography_options && cosmoswp_is_font_type_google( $secondary_menu_typography ) ) {
 				$local_google_fonts[] = array(
 					'family'      => $secondary_menu_font_family,
 					'font-weight' => $secondary_menu_typography['font-weight'],
@@ -865,7 +871,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 			$sm_submenu_typography         = cosmoswp_get_theme_options( 'secondary-menu-submenu-typography' );
 			$sm_submenu_typography         = json_decode( $sm_submenu_typography, true );
 			$sm_submenu_font_family        = cosmoswp_font_family( $sm_submenu_typography );
-			if ( 'custom' == $sm_submenu_typography_options && cosmoswp_is_font_type_google( $sm_submenu_typography ) ) {
+			if ( 'custom' === $sm_submenu_typography_options && cosmoswp_is_font_type_google( $sm_submenu_typography ) ) {
 				$local_google_fonts[] = array(
 					'family'      => $sm_submenu_font_family,
 					'font-weight' => $sm_submenu_typography['font-weight'],
@@ -876,7 +882,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 			$primary_menu_typography         = cosmoswp_get_theme_options( 'primary-menu-typography' );
 			$primary_menu_typography         = json_decode( $primary_menu_typography, true );
 			$primary_menu_font_family        = cosmoswp_font_family( $primary_menu_typography );
-			if ( 'custom' == $primary_menu_typography_options && cosmoswp_is_font_type_google( $primary_menu_typography ) ) {
+			if ( 'custom' === $primary_menu_typography_options && cosmoswp_is_font_type_google( $primary_menu_typography ) ) {
 				$local_google_fonts[] = array(
 					'family'      => $primary_menu_font_family,
 					'font-weight' => $primary_menu_typography['font-weight'],
@@ -887,7 +893,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 			$pm_submenu_typography         = cosmoswp_get_theme_options( 'primary-menu-submenu-typography' );
 			$pm_submenu_typography         = json_decode( $pm_submenu_typography, true );
 			$pm_submenu_font_family        = cosmoswp_font_family( $pm_submenu_typography );
-			if ( 'custom' == $pm_submenu_typography_options && cosmoswp_is_font_type_google( $pm_submenu_typography ) ) {
+			if ( 'custom' === $pm_submenu_typography_options && cosmoswp_is_font_type_google( $pm_submenu_typography ) ) {
 				$local_google_fonts[] = array(
 					'family'      => $pm_submenu_font_family,
 					'font-weight' => $pm_submenu_typography['font-weight'],
@@ -898,7 +904,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 			$menu_icon_typography         = cosmoswp_get_theme_options( 'menu-open-icon-typography' );
 			$menu_icon_typography         = json_decode( $menu_icon_typography, true );
 			$menu_icon_font_family        = cosmoswp_font_family( $menu_icon_typography );
-			if ( 'custom' == $menu_icon_typography_options && cosmoswp_is_font_type_google( $menu_icon_typography ) ) {
+			if ( 'custom' === $menu_icon_typography_options && cosmoswp_is_font_type_google( $menu_icon_typography ) ) {
 				$local_google_fonts[] = array(
 					'family'      => $menu_icon_font_family,
 					'font-weight' => $menu_icon_typography['font-weight'],
@@ -909,7 +915,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 			$menu_close_icon_typography         = cosmoswp_get_theme_options( 'menu-icon-close-text-typography' );
 			$menu_close_icon_typography         = json_decode( $menu_close_icon_typography, true );
 			$menu_close_icon_font_family        = cosmoswp_font_family( $menu_close_icon_typography );
-			if ( 'custom' == $menu_close_icon_typography_options && cosmoswp_is_font_type_google( $menu_close_icon_typography ) ) {
+			if ( 'custom' === $menu_close_icon_typography_options && cosmoswp_is_font_type_google( $menu_close_icon_typography ) ) {
 				$local_google_fonts[] = array(
 					'family'      => $menu_close_icon_font_family,
 					'font-weight' => $menu_close_icon_typography['font-weight'],
@@ -920,7 +926,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 			$contact_title_typography         = cosmoswp_get_theme_options( 'contact-info-title-typography' );
 			$contact_title_typography         = json_decode( $contact_title_typography, true );
 			$contact_title_font_family        = cosmoswp_font_family( $contact_title_typography );
-			if ( 'custom' == $contact_title_typography_options && cosmoswp_is_font_type_google( $contact_title_typography ) ) {
+			if ( 'custom' === $contact_title_typography_options && cosmoswp_is_font_type_google( $contact_title_typography ) ) {
 				$local_google_fonts[] = array(
 					'family'      => $contact_title_font_family,
 					'font-weight' => $contact_title_typography['font-weight'],
@@ -931,7 +937,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 			$contact_subtitle_typography         = cosmoswp_get_theme_options( 'contact-info-subtitle-typography' );
 			$contact_subtitle_typography         = json_decode( $contact_subtitle_typography, true );
 			$contact_subtitle_font_family        = cosmoswp_font_family( $contact_subtitle_typography );
-			if ( 'custom' == $contact_subtitle_typography_options && cosmoswp_is_font_type_google( $contact_subtitle_typography ) ) {
+			if ( 'custom' === $contact_subtitle_typography_options && cosmoswp_is_font_type_google( $contact_subtitle_typography ) ) {
 				$local_google_fonts[] = array(
 					'family'      => $contact_subtitle_font_family,
 					'font-weight' => $contact_subtitle_typography['font-weight'],
@@ -955,8 +961,7 @@ endif;
  */
 if ( ! function_exists( 'cosmoswp_header_builder' ) ) {
 
-	function cosmoswp_header_builder() {
-
+	function cosmoswp_header_builder() {//phpcs:ignore
 		return CosmosWP_Header_Builder::instance();
 	}
 

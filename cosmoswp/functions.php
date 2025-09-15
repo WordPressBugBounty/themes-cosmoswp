@@ -5,11 +5,14 @@
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
  * @package CosmosWP
- * @subpackage CosmosWP
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /*Define Constants for this theme*/
-define( 'COSMOSWP_VERSION', '1.4.2' );
+define( 'COSMOSWP_VERSION', '2.0.0' );
 define( 'COSMOSWP_THEME_NAME', 'cosmoswp' );
 define( 'COSMOSWP_PATH', get_template_directory() );
 define( 'COSMOSWP_URL', get_template_directory_uri() );

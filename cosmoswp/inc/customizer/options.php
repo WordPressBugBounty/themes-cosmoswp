@@ -1,4 +1,11 @@
 <?php
+/**
+ * Customizer options.
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -11,9 +18,7 @@ if ( ! function_exists( 'cosmoswp_dynamic_css_option' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_dynamic_css_option
-	 *
 	 */
 	function cosmoswp_dynamic_css_option() {
 		$cosmoswp_dynamic_css_option = array(
@@ -31,9 +36,7 @@ if ( ! function_exists( 'cosmoswp_header_top_height_option' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_header_top_height_option
-	 *
 	 */
 	function cosmoswp_header_top_height_option() {
 		$cosmoswp_header_top_height_option = array(
@@ -51,9 +54,7 @@ if ( ! function_exists( 'cosmoswp_footer_height_option' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_footer_height_option
-	 *
 	 */
 	function cosmoswp_footer_height_option() {
 		$cosmoswp_footer_height_option = array(
@@ -69,12 +70,9 @@ if ( ! function_exists( 'cosmoswp_site_main_general_layout_option' ) ) :
 	/**
 	 * General Setting->General Layout
 	 *
-	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_site_main_general_layout_option
-	 *
 	 */
 	function cosmoswp_site_main_general_layout_option() {
 		$cosmoswp_site_main_general_layout_option = array(
@@ -94,9 +92,8 @@ if ( ! function_exists( 'cosmoswp_site_general_layout_option' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
+	 * @param boolean $not_dependent Optional. If true, it will not add inherit option. Default is false.
 	 * @return array $cosmoswp_site_general_layout_option
-	 *
 	 */
 	function cosmoswp_site_general_layout_option( $not_dependent = false ) {
 		$cosmoswp_site_general_layout_option = array(
@@ -120,9 +117,8 @@ if ( ! function_exists( 'cosmoswp_site_footer_layout_option' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
+	 * @param boolean $not_dependent Optional. If true, it will not add inherit option. Default is false.
 	 * @return array $cosmoswp_site_footer_layout_option
-	 *
 	 */
 	function cosmoswp_site_footer_layout_option( $not_dependent = false ) {
 		$cosmoswp_site_footer_layout_option = array(
@@ -146,9 +142,7 @@ if ( ! function_exists( 'cosmoswp_site_footer_display_style_option' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_site_footer_display_style_option
-	 *
 	 */
 	function cosmoswp_site_footer_display_style_option() {
 		$cosmoswp_site_footer_display_style_option = array(
@@ -167,9 +161,7 @@ if ( ! function_exists( 'cosmoswp_inherit_options' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_inherit_options
-	 *
 	 */
 	function cosmoswp_inherit_options() {
 		$cosmoswp_inherit_options = array(
@@ -187,9 +179,7 @@ if ( ! function_exists( 'cosmoswp_header_bg_options' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_header_bg_options
-	 *
 	 */
 	function cosmoswp_header_bg_options() {
 		$cosmoswp_header_bg_options = array(
@@ -207,9 +197,7 @@ if ( ! function_exists( 'cosmoswp_footer_bg_options' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_footer_bg_options
-	 *
 	 */
 	function cosmoswp_footer_bg_options() {
 		$cosmoswp_footer_bg_options = array(
@@ -228,9 +216,7 @@ if ( ! function_exists( 'cosmoswp_site_content_layout_option' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_site_content_layout_option
-	 *
 	 */
 	function cosmoswp_site_content_layout_option() {
 		$cosmoswp_site_content_layout_option = array(
@@ -252,9 +238,7 @@ if ( ! function_exists( 'cosmoswp_header_layout_options' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_header_layout_options
-	 *
 	 */
 	function cosmoswp_header_layout_options() {
 		$cosmoswp_header_layout_options = array(
@@ -270,13 +254,11 @@ endif;
 if ( ! function_exists( 'cosmoswp_login_register_options' ) ) :
 
 	/**
-	 * login/Register options
+	 * Login/Register options
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_login_register_options
-	 *
 	 */
 	function cosmoswp_login_register_options() {
 		$cosmoswp_login_register_options = array(
@@ -294,15 +276,13 @@ if ( ! function_exists( 'cosmoswp_menu_indicator_options' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_menu_indicator_options
-	 *
 	 */
 	function cosmoswp_menu_indicator_options() {
 		$cosmoswp_menu_indicator_options = array(
 			'text' => esc_html__( 'Text', 'cosmoswp' ),
 			'icon' => esc_html__( 'Icon', 'cosmoswp' ),
-			'both' => esc_html__( 'Icon & Text', 'cosmoswp' ),
+			'both' => esc_html__( 'Icon and Text', 'cosmoswp' ),
 		);
 		return apply_filters( 'cosmoswp_menu_indicator_options', $cosmoswp_menu_indicator_options );
 	}
@@ -315,9 +295,7 @@ if ( ! function_exists( 'cosmoswp_search_template_options' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_menu_indicator_options
-	 *
 	 */
 	function cosmoswp_search_template_options() {
 		$cosmoswp_search_template_options = array(
@@ -336,9 +314,7 @@ if ( ! function_exists( 'cosmoswp_menu_display_options' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_menu_display_options
-	 *
 	 */
 	function cosmoswp_menu_display_options() {
 		$cosmoswp_menu_display_options = array(
@@ -358,9 +334,7 @@ if ( ! function_exists( 'cosmoswp_position_options' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_menu_display_options
-	 *
 	 */
 	function cosmoswp_position_options() {
 		$cosmoswp_position_options = array(
@@ -379,9 +353,7 @@ if ( ! function_exists( 'cosmoswp_header_border_style' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_header_border_style
-	 *
 	 */
 	function cosmoswp_header_border_style() {
 		$cosmoswp_header_border_style = array(
@@ -401,13 +373,11 @@ endif;
 if ( ! function_exists( 'cosmoswp_vertical_header_position' ) ) :
 
 	/**
-	 * vertical Header Position
+	 * Vertical Header Position
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_vertical_header_position
-	 *
 	 */
 	function cosmoswp_vertical_header_position() {
 		$cosmoswp_vertical_header_position = array(
@@ -426,12 +396,10 @@ if ( ! function_exists( 'cosmoswp_typography_group_fields' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_typography_group_fields
-	 *
 	 */
 	function cosmoswp_typography_group_fields() {
-		$text_tranformation_options       = array(
+		$text_transformation_options      = array(
 			'none'       => esc_html__( 'None', 'cosmoswp' ),
 			'capitalize' => esc_html__( 'Capitalize', 'cosmoswp' ),
 			'uppercase'  => esc_html__( 'Uppercase', 'cosmoswp' ),
@@ -505,7 +473,7 @@ if ( ! function_exists( 'cosmoswp_typography_group_fields' ) ) :
 			'text-transform'  => array(
 				'type'    => 'select',
 				'label'   => esc_html__( 'Text Transform', 'cosmoswp' ),
-				'options' => $text_tranformation_options,
+				'options' => $text_transformation_options,
 			),
 			'font-size'       => array(
 				'type'  => 'responsive_number',
@@ -532,12 +500,10 @@ if ( ! function_exists( 'cosmoswp_sub_typography_group_fields' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_sub_typography_group_fields
-	 *
 	 */
 	function cosmoswp_sub_typography_group_fields() {
-		$text_tranformation_options           = array(
+		$text_transformation_options          = array(
 			'none'       => esc_html__( 'None', 'cosmoswp' ),
 			'capitalize' => esc_html__( 'Capitalize', 'cosmoswp' ),
 			'uppercase'  => esc_html__( 'Uppercase', 'cosmoswp' ),
@@ -571,7 +537,7 @@ if ( ! function_exists( 'cosmoswp_sub_typography_group_fields' ) ) :
 			'text-transform'  => array(
 				'type'    => 'select',
 				'label'   => esc_html__( 'Text Transform', 'cosmoswp' ),
-				'options' => $text_tranformation_options,
+				'options' => $text_transformation_options,
 			),
 		);
 		return apply_filters( 'cosmoswp_sub_typography_group_fields', $cosmoswp_sub_typography_group_fields );
@@ -585,9 +551,7 @@ if ( ! function_exists( 'cosmoswp_header_image_display' ) ) :
 	 *
 	 * @since CosmosWP 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_header_image_display
-	 *
 	 */
 	function cosmoswp_header_image_display() {
 		$cosmoswp_header_image_display = array(
@@ -608,9 +572,7 @@ if ( ! function_exists( 'cosmoswp_off_canvas_sidebar_direction' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_off_canvas_sidebar_direction
-	 *
 	 */
 	function cosmoswp_off_canvas_sidebar_direction() {
 		$cosmoswp_off_canvas_sidebar_direction = array(
@@ -628,9 +590,7 @@ if ( ! function_exists( 'cosmoswp_flex_align' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_align
-	 *
 	 */
 	function cosmoswp_flex_align() {
 		$cosmoswp_flex_align = array(
@@ -649,9 +609,7 @@ if ( ! function_exists( 'cosmoswp_dd_search_form_align' ) ) :
 	 *
 	 * @since cosmoswp 1.1.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_align
-	 *
 	 */
 	function cosmoswp_dd_search_form_align() {
 		$cosmoswp_dd_align = array(
@@ -670,9 +628,7 @@ if ( ! function_exists( 'cosmoswp_submenu_display_options' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_align
-	 *
 	 */
 	function cosmoswp_submenu_display_options() {
 		$cosmoswp_submenu_display_options = array(
@@ -690,9 +646,7 @@ if ( ! function_exists( 'cosmoswp_text_align' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_align
-	 *
 	 */
 	function cosmoswp_text_align() {
 		$cosmoswp_text_align = array(
@@ -711,14 +665,11 @@ if ( ! function_exists( 'cosmoswp_site_identity_text_align' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_align
-	 *
 	 */
-	
 	function cosmoswp_site_identity_text_align() {
 		$cosmoswp_text_align = array(
-			'cwp-default'   => esc_html__( 'Default', 'cosmoswp' ),
+			'cwp-default'     => esc_html__( 'Default', 'cosmoswp' ),
 			'cwp-text-left'   => esc_html__( 'Left', 'cosmoswp' ),
 			'cwp-text-center' => esc_html__( 'Center', 'cosmoswp' ),
 			'cwp-text-right'  => esc_html__( 'Right', 'cosmoswp' ),
@@ -734,9 +685,7 @@ if ( ! function_exists( 'cosmoswp_banner_content_position' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
-	 * @return array $
-	 *
+	 * @return array $cosmoswp_banner_content_position
 	 */
 	function cosmoswp_banner_content_position() {
 		$cosmoswp_banner_content_position = array(
@@ -755,9 +704,7 @@ if ( ! function_exists( 'cosmoswp_single_banner_title_type' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
-	 * @return array $
-	 *
+	 * @return array $cosmoswp_single_banner_title_type
 	 */
 	function cosmoswp_single_banner_title_type() {
 		$cosmoswp_single_banner_title_type = array(
@@ -776,9 +723,7 @@ if ( ! function_exists( 'cosmoswp_single_banner_title_tag' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $
-	 *
 	 */
 	function cosmoswp_single_banner_title_tag() {
 		$cosmoswp_single_banner_title_tag = array(
@@ -800,9 +745,7 @@ if ( ! function_exists( 'cosmoswp_singular_post_page_banner_option' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $
-	 *
 	 */
 	function cosmoswp_singular_post_page_banner_option() {
 		$cosmoswp_singular_post_page_banner_option = array(
@@ -816,13 +759,11 @@ endif;
 if ( ! function_exists( 'cosmoswp_sticky_footer_icon_position' ) ) :
 
 	/**
-	 *Stciky Footer  Icon Position
+	 * Sticky Footer  Icon Position
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_sticky_footer_icon_position
-	 *
 	 */
 	function cosmoswp_sticky_footer_icon_position() {
 		$cosmoswp_sticky_footer_icon_position = array(
@@ -840,9 +781,7 @@ if ( ! function_exists( 'cosmoswp_icon_position' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_icon_position
-	 *
 	 */
 	function cosmoswp_icon_position() {
 		$cosmoswp_icon_position = array(
@@ -860,9 +799,7 @@ if ( ! function_exists( 'cosmoswp_icon_four_position' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_icon_four_position
-	 *
 	 */
 	function cosmoswp_icon_four_position() {
 		$cosmoswp_icon_four_position = array(
@@ -882,9 +819,7 @@ if ( ! function_exists( 'cosmoswp_responsive_menu_off_canvas_options' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_responsive_menu_off_canvas_options
-	 *
 	 */
 	function cosmoswp_responsive_menu_off_canvas_options() {
 		$cosmoswp_responsive_menu_off_canvas_options = array(
@@ -902,17 +837,15 @@ if ( ! function_exists( 'cosmoswp_site_identity_logo_options' ) ) :
 	 *
 	 * @since CosmosWP 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_site_identity_logo_options
-	 *
 	 */
 	function cosmoswp_site_identity_logo_options() {
 		$cosmoswp_site_identity_logo_options = array(
-			'cwp-default'    => esc_html__( 'Default', 'cosmoswp' ),
-			'cwp-top'    => esc_html__( 'Top', 'cosmoswp' ),
-			'cwp-right'  => esc_html__( 'Right', 'cosmoswp' ),
-			'cwp-bottom' => esc_html__( 'Bottom', 'cosmoswp' ),
-			'cwp-left'   => esc_html__( 'Left', 'cosmoswp' ),
+			'cwp-default' => esc_html__( 'Default', 'cosmoswp' ),
+			'cwp-top'     => esc_html__( 'Top', 'cosmoswp' ),
+			'cwp-right'   => esc_html__( 'Right', 'cosmoswp' ),
+			'cwp-bottom'  => esc_html__( 'Bottom', 'cosmoswp' ),
+			'cwp-left'    => esc_html__( 'Left', 'cosmoswp' ),
 		);
 		return apply_filters( 'cosmoswp_site_identity_logo_options', $cosmoswp_site_identity_logo_options );
 	}
@@ -925,9 +858,7 @@ if ( ! function_exists( 'cosmoswp_site_identity_sorting' ) ) :
 	 *
 	 * @since CosmosWP 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_posttype_elements_sorting
-	 *
 	 */
 	function cosmoswp_site_identity_sorting() {
 		$cosmoswp_site_identity_sorting = array(
@@ -945,9 +876,7 @@ if ( ! function_exists( 'cosmoswp_sticky_header_options' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_sticky_header_options
-	 *
 	 */
 	function cosmoswp_sticky_header_options() {
 		$cosmoswp_sticky_header_options = array(
@@ -967,9 +896,7 @@ if ( ! function_exists( 'cosmoswp_sticky_header_animation_options' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_sticky_header_animation_options
-	 *
 	 */
 	function cosmoswp_sticky_header_animation_options() {
 		$cosmoswp_sticky_header_animation_options = array(
@@ -989,9 +916,7 @@ if ( ! function_exists( 'cosmoswp_feature_section_layout' ) ) :
 	 *
 	 * @since CosmosWP 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_feature_section_layout
-	 *
 	 */
 	function cosmoswp_feature_section_layout() {
 		$cosmoswp_feature_section_layout = array(
@@ -1010,9 +935,7 @@ if ( ! function_exists( 'cosmoswp_sidebar_options' ) ) :
 	 *
 	 * @since CosmosWP 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_sidebar_options
-	 *
 	 */
 	function cosmoswp_sidebar_options() {
 		$cosmoswp_sidebar_options = array(
@@ -1044,9 +967,7 @@ if ( ! function_exists( 'cosmoswp_posttype_elements_sorting' ) ) :
 	 *
 	 * @since CosmosWP 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_posttype_elements_sorting
-	 *
 	 */
 	function cosmoswp_posttype_elements_sorting() {
 		$cosmoswp_posttype_elements_sorting = array(
@@ -1068,9 +989,7 @@ if ( ! function_exists( 'cosmoswp_meta_elements_sorting' ) ) :
 	 *
 	 * @since CosmosWP 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_meta_elements_sorting
-	 *
 	 */
 	function cosmoswp_meta_elements_sorting( $posttype = 'all' ) {
 		$cosmoswp_meta_elements_sorting = array(
@@ -1081,7 +1000,7 @@ if ( ! function_exists( 'cosmoswp_meta_elements_sorting' ) ) :
 			'tags'           => esc_html__( 'Tags', 'cosmoswp' ),
 			'comments'       => esc_html__( 'Comments', 'cosmoswp' ),
 		);
-		if ( $posttype == 'page' ) {
+		if ( 'page' === $posttype ) {
 			unset( $cosmoswp_meta_elements_sorting['categories'] );
 			unset( $cosmoswp_meta_elements_sorting['tags'] );
 		}
@@ -1096,9 +1015,7 @@ if ( ! function_exists( 'cosmoswp_single_navigation_options' ) ) :
 	 *
 	 * @since CosmosWP 1.0.0
 	 *
-	 * @param null
-	 * @return array
-	 *
+	 * @return array $cosmoswp_single_navigation_options
 	 */
 	function cosmoswp_single_navigation_options() {
 		$cosmoswp_single_navigation_options = array(
@@ -1117,15 +1034,13 @@ if ( ! function_exists( 'cosmoswp_get_image_sizes_options' ) ) :
 	 * Image Size Option
 	 *
 	 * @since CosmosWP 1.0.0
-	 *
-	 * @param null
+	 * @param boolean $add_disable Add disable.
 	 * @return array $cosmoswp_get_image_sizes_options
-	 *
 	 */
 	function cosmoswp_get_image_sizes_options( $add_disable = false ) {
 		global $_wp_additional_image_sizes;
 		$choices = array();
-		if ( true == $add_disable ) {
+		if ( $add_disable ) {
 			$choices['disable'] = esc_html__( 'No Image', 'cosmoswp' );
 		}
 		foreach ( array( 'thumbnail', 'medium', 'large' ) as $key => $_size ) {
@@ -1149,9 +1064,7 @@ if ( ! function_exists( 'cosmoswp_breadcrumb_options' ) ) :
 	 *
 	 * @since CosmosWP 1.0.0
 	 *
-	 * @param null
 	 * @return array cosmoswp_breadcrumb_options
-	 *
 	 */
 	function cosmoswp_breadcrumb_options() {
 		$cosmoswp_breadcrumb_options = array(
@@ -1180,9 +1093,7 @@ if ( ! function_exists( 'cosmoswp_pagination_options' ) ) :
 	 *
 	 * @since CosmosWP 1.0.0
 	 *
-	 * @param null
 	 * @return array cosmoswp_pagination_options
-	 *
 	 */
 	function cosmoswp_pagination_options() {
 		$cosmoswp_pagination_options = array(
@@ -1201,9 +1112,7 @@ if ( ! function_exists( 'cosmoswp_single_pagination_options' ) ) :
 	 *
 	 * @since CosmosWP 1.0.0
 	 *
-	 * @param null
 	 * @return array cosmoswp_single_pagination_options
-	 *
 	 */
 	function cosmoswp_single_pagination_options() {
 		$cosmoswp_single_pagination_options = array(
@@ -1221,9 +1130,7 @@ if ( ! function_exists( 'cosmoswp_get_categories' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_get_categories
-	 *
 	 */
 	function cosmoswp_get_categories() {
 		$cosmoswp_get_categories = array();
@@ -1250,9 +1157,7 @@ if ( ! function_exists( 'cosmoswp_menu_display_positions' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $footer_menu_display_positions
-	 *
 	 */
 	function cosmoswp_menu_display_positions() {
 		$footer_menu_display_positions = array(
@@ -1271,11 +1176,9 @@ if ( ! function_exists( 'cosmoswp_get_nav_menus' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $nav_menus
-	 *
 	 */
-	function cosmoswp_get_nav_menus( $options = array() ) {
+	function cosmoswp_get_nav_menus() {
 		$cosmoswp_get_nav_menus = array();
 		$nav_menus              = wp_get_nav_menus();
 		foreach ( $nav_menus as $menu ) {
@@ -1292,9 +1195,7 @@ if ( ! function_exists( 'cosmoswp_background_image_size_options' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_background_image_size_options
-	 *
 	 */
 	function cosmoswp_background_image_size_options() {
 
@@ -1314,9 +1215,7 @@ if ( ! function_exists( 'cosmoswp_background_image_position_options' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_background_image_position_options
-	 *
 	 */
 	function cosmoswp_background_image_position_options() {
 
@@ -1342,9 +1241,7 @@ if ( ! function_exists( 'cosmoswp_background_image_repeat_options' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_background_image_repeat_options
-	 *
 	 */
 	function cosmoswp_background_image_repeat_options() {
 
@@ -1365,9 +1262,7 @@ if ( ! function_exists( 'cosmoswp_background_image_attachment_options' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_background_image_attachment_options
-	 *
 	 */
 	function cosmoswp_background_image_attachment_options() {
 
@@ -1386,9 +1281,7 @@ if ( ! function_exists( 'cosmoswp_contact_link_type' ) ) :
 	 *
 	 * @since cosmoswp 1.0.0
 	 *
-	 * @param null
 	 * @return array $cosmoswp_contact_link_type
-	 *
 	 */
 	function cosmoswp_contact_link_type() {
 
@@ -1396,10 +1289,8 @@ if ( ! function_exists( 'cosmoswp_contact_link_type' ) ) :
 			'normal-link' => esc_html__( 'Normal Link', 'cosmoswp' ),
 			'tel'         => esc_html__( 'Tel', 'cosmoswp' ),
 			'email'       => esc_html__( 'Email', 'cosmoswp' ),
-			'disable'       => esc_html__( 'Disable', 'cosmoswp' ),
+			'disable'     => esc_html__( 'Disable', 'cosmoswp' ),
 		);
 		return apply_filters( 'cosmoswp_contact_link_type', $cosmoswp_contact_link_type );
 	}
 endif;
-
-

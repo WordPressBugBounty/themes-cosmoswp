@@ -6,6 +6,12 @@
  *
  * @package CosmosWP
  */
+
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $blog_sorting_element = cosmoswp_get_theme_options( 'blog-elements-sorting' );
 if ( $blog_sorting_element ) {
 	?>
@@ -26,7 +32,7 @@ if ( $blog_sorting_element ) {
 			echo '</div>';
 
 			/**
-			 * cosmoswp_action_posts_navigation hook
+			 * Hook cosmoswp_action_posts_navigation
 			 *
 			 * @since CosmosWP 1.0.0
 			 *

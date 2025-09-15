@@ -1,12 +1,15 @@
 <?php
+/**
+ * Header Options Defaults
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/*
- * Header Options Defaults
- *
- */
 $header_defaults = array(
 
 	$this->builder_section_controller           => array(
@@ -67,88 +70,16 @@ $header_defaults = array(
 	'header-general-width'                      => 'inherit',
 	'vertical-header-position'                  => 'cwp-vertical-header-left',
 	'vertical-header-width'                     => '280',
-	'header-general-padding'                    => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'header-general-margin'                     => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'header-general-padding'                    => '',
+	'header-general-margin'                     => '',
 	'header-general-border-styling'             => wp_json_encode(
 		array(
 			'border-style'     => 'none',
 			'border-color'     => '',
 			'box-shadow-color' => '',
-			'border-width'     => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'box-shadow-css'   => array(
-				'desktop' => array(
-					'x'           => '',
-					'Y'           => '',
-					'BLUR'        => '',
-					'SPREAD'      => '',
-					'cssbox_link' => true,
-				),
-			),
-			'border-radius'    => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
+			'border-width'     => array(),
+			'box-shadow-css'   => array(),
+			'border-radius'    => array(),
 		)
 	),
 	'header-general-background-options'         => wp_json_encode(
@@ -167,90 +98,33 @@ $header_defaults = array(
 	'top-header-padding'                        => wp_json_encode(
 		array(
 			'desktop' => array(
-				'top'         => '10',
-				'right'       => '0',
-				'bottom'      => '10',
-				'left'        => '0',
-				'cssbox_link' => true,
+				'top'    => '10',
+				'right'  => '0',
+				'bottom' => '10',
+				'left'   => '0',
+
 			),
 			'tablet'  => array(
-				'top'         => '10',
-				'right'       => '0',
-				'bottom'      => '10',
-				'left'        => '0',
-				'cssbox_link' => true,
+				'top'    => '10',
+				'right'  => '0',
+				'bottom' => '10',
+				'left'   => '0',
+
 			),
 			'mobile'  => array(
-				'top'         => '10',
-				'right'       => '0',
-				'bottom'      => '10',
-				'left'        => '0',
-				'cssbox_link' => true,
+				'top'    => '10',
+				'right'  => '0',
+				'bottom' => '10',
+				'left'   => '0',
+
 			),
 		)
 	),
-	'top-header-margin'                         => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'top-header-margin'                         => '',
 
 	'header-top-height-option'                  => 'auto',
 	'top-header-height'                         => '0',
-	'header-top-border-styling'                 => wp_json_encode(
-		array(
-			'border-style'     => 'none',
-			'border-color'     => '',
-			'box-shadow-color' => '',
-			'border-width'     => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'box-shadow-css'   => array(
-				'desktop' => array(
-					'x'           => '',
-					'Y'           => '',
-					'BLUR'        => '',
-					'SPREAD'      => '',
-					'cssbox_link' => true,
-				),
-			),
-			'border-radius'    => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-		)
-	),
+	'header-top-border-styling'                 => '',
 	'header-top-background-options'             => wp_json_encode(
 		array(
 			'background-color'      => '#444',
@@ -269,54 +143,17 @@ $header_defaults = array(
 	'header-main-height'                        => '0',
 	'header-main-padding'                       => wp_json_encode(
 		array(
-			'desktop' => array(
-				'top'         => '10',
-				'right'       => '0',
-				'bottom'      => '10',
-				'left'        => '0',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '10',
-				'right'       => '0',
-				'bottom'      => '10',
-				'left'        => '0',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '10',
-				'right'       => '0',
-				'bottom'      => '10',
-				'left'        => '0',
-				'cssbox_link' => true,
+
+			'mobile' => array(
+				'top'    => '15',
+				'right'  => '0',
+				'bottom' => '15',
+				'left'   => '0',
+
 			),
 		)
 	),
-	'header-main-margin'                        => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'header-main-margin'                        => '',
 	'header-main-bg-options'                    => 'none',
 	'header-main-background-options'            => wp_json_encode(
 		array(
@@ -328,128 +165,24 @@ $header_defaults = array(
 			'background-attachment' => 'scroll',
 		)
 	),
-	'header-main-border-styling'                => wp_json_encode(
-		array(
-			'border-style'     => 'none',
-			'border-color'     => '',
-			'box-shadow-color' => '',
-			'border-width'     => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'box-shadow-css'   => array(
-				'desktop' => array(
-					'x'           => '',
-					'Y'           => '',
-					'BLUR'        => '',
-					'SPREAD'      => '',
-					'cssbox_link' => true,
-				),
-			),
-			'border-radius'    => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-		)
-	),
+	'header-main-border-styling'                => '',
 
 	/*Header bottom*/
-	'header-bottom-margin'                      => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'header-bottom-margin'                      => '',
 	'header-bottom-padding'                     => wp_json_encode(
 		array(
 			'desktop' => array(
-				'top'         => '10',
-				'right'       => '0',
-				'bottom'      => '10',
-				'left'        => '0',
-				'cssbox_link' => true,
+				'top'    => '10',
+				'right'  => '0',
+				'bottom' => '10',
+				'left'   => '0',
 			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
+
 		)
 	),
 	'header-bottom-height-option'               => 'auto',
 	'header-bottom-height'                      => '0',
-	'header-bottom-border-styling'              => wp_json_encode(
-		array(
-			'border-style'     => 'none',
-			'border-color'     => '',
-			'box-shadow-color' => '#1e73be',
-			'border-width'     => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'box-shadow-css'   => array(
-				'desktop' => array(
-					'x'           => '',
-					'Y'           => '',
-					'BLUR'        => '',
-					'SPREAD'      => '',
-					'cssbox_link' => true,
-				),
-			),
-			'border-radius'    => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-		)
-	),
+	'header-bottom-border-styling'              => '',
 	'header-bottom-bg-options'                  => 'none',
 	'header-bottom-background-options'          => wp_json_encode(
 		array(
@@ -462,9 +195,7 @@ $header_defaults = array(
 		)
 	),
 
-	/*
-	Header social icon
-	Icon fixed on get*/
+	/* Header social icon Icon fixed on get*/
 	'header-social-icon-data'                   => wp_json_encode(
 		array(
 			array(
@@ -506,199 +237,45 @@ $header_defaults = array(
 			'mobile'  => 'cwp-text-right',
 		)
 	),
-	'single-header-social-icon-padding'         => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'single-header-social-icon-margin'          => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'header-social-icon-padding'                => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'header-social-icon-margin'                 => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'header-social-icon-radius'                 => wp_json_encode(
-		array(
-			'desktop' => '',
-			'tablet'  => '',
-			'mobile'  => '',
-		)
-	),
+	'single-header-social-icon-padding'         => '',
+	'single-header-social-icon-margin'          => '',
+	'header-social-icon-padding'                => '',
+	'header-social-icon-margin'                 => '',
+	'header-social-icon-radius'                 => '',
 	'header-social-icon-width'                  => wp_json_encode(
 		array(
-			'desktop' => '30',
-			'tablet'  => '30',
-			'mobile'  => '30',
+
+			'mobile' => '30',
 		)
 	),
 	'header-social-icon-height'                 => wp_json_encode(
 		array(
-			'desktop' => '30',
-			'tablet'  => '30',
-			'mobile'  => '30',
+
+			'mobile' => '30',
 		)
 	),
 	'header-social-icon-line-height'            => wp_json_encode(
 		array(
-			'desktop' => '30',
-			'tablet'  => '30',
-			'mobile'  => '30',
+
+			'mobile' => '30',
 		)
 	),
 	'header-social-icon-size'                   => wp_json_encode(
 		array(
-			'desktop' => '14',
-			'tablet'  => '14',
-			'mobile'  => '14',
+
+			'mobile' => '14',
 		)
 	),
 
-	/*
-	search*/
-	// drop down
+	/*search*/
+
+	// drop down.
 	'dd-search-placeholder'                     => esc_html__( 'Search', 'cosmoswp' ),
 	'dd-search-icon-align'                      => 'cwp-flex-align-right',
 	'dd-search-form-align'                      => 'cwp-search-align-left',
 	'drop-down-search-input-height'             => '45',
-	'drop-down-search-padding'                  => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'drop-down-search-margin'                   => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'drop-down-search-padding'                  => '',
+	'drop-down-search-margin'                   => '',
 	'dropdown-search-icon-size'                 => '18',
 	'dropdown-search-icon-styling'              => wp_json_encode(
 		array(
@@ -712,60 +289,12 @@ $header_defaults = array(
 			'hover-border-style'      => 'none',
 			'hover-border-color'      => '',
 			'hover-box-shadow-color'  => '',
-			'normal-border-width'     => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'normal-box-shadow-css'   => array(
-				'desktop' => array(
-					'x'           => '',
-					'Y'           => '',
-					'BLUR'        => '',
-					'SPREAD'      => '',
-					'cssbox_link' => true,
-				),
-			),
-			'normal-border-radius'    => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-border-width'      => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-box-shadow-css'    => array(
-				'desktop' => array(
-					'x'           => '',
-					'Y'           => '',
-					'BLUR'        => '',
-					'SPREAD'      => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-border-radius'     => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
+			'normal-border-width'     => array(),
+			'normal-box-shadow-css'   => array(),
+			'normal-border-radius'    => array(),
+			'hover-border-width'      => array(),
+			'hover-box-shadow-css'    => array(),
+			'hover-border-radius'     => array(),
 		)
 	),
 	'dropdown-search-form-styling'              => wp_json_encode(
@@ -789,51 +318,11 @@ $header_defaults = array(
 					'cssbox_link' => true,
 				),
 			),
-			'normal-box-shadow-css'   => array(
-				'desktop' => array(
-					'x'           => '',
-					'Y'           => '',
-					'BLUR'        => '',
-					'SPREAD'      => '',
-					'cssbox_link' => true,
-				),
-			),
-			'normal-border-radius'    => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-border-width'      => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-box-shadow-css'    => array(
-				'desktop' => array(
-					'x'           => '',
-					'Y'           => '',
-					'BLUR'        => '',
-					'SPREAD'      => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-border-radius'     => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
+			'normal-box-shadow-css'   => array(),
+			'normal-border-radius'    => array(),
+			'hover-border-width'      => array(),
+			'hover-box-shadow-css'    => array(),
+			'hover-border-radius'     => array(),
 		)
 	),
 	'dd-search-typography-options'              => 'inherit',
@@ -841,81 +330,27 @@ $header_defaults = array(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
-			'google-font'     => 'Lato',
+			'google-font'     => 'Open Sans',
 			'custom-font'     => '',
 			'font-weight'     => '400',
 			'font-style'      => 'normal',
 			'text-decoration' => 'none',
 			'text-transform'  => 'none',
 			'font-size'       => array(
-				'desktop' => '14',
-				'tablet'  => '14',
-				'mobile'  => '14',
+
+				'mobile' => '14',
 			),
 			'line-height'     => array(
-				'desktop' => '24',
-				'tablet'  => '24',
-				'mobile'  => '24',
+
+				'mobile' => '24',
 			),
-			'letter-spacing'  => array(
-				'desktop' => '',
-				'tablet'  => '',
-				'mobile'  => '',
-			),
+			'letter-spacing'  => array(),
 		)
 	),
 
 	'normal-search-placeholder'                 => esc_html__( 'Search', 'cosmoswp' ),
-	'normal-search-padding'                     => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'normal-search-margin'                      => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'normal-search-padding'                     => '',
+	'normal-search-margin'                      => '',
 	'normal-search-icon-size'                   => '18',
 	'normal-search-icon-styling'                => wp_json_encode(
 		array(
@@ -929,60 +364,12 @@ $header_defaults = array(
 			'hover-border-style'      => 'none',
 			'hover-border-color'      => '',
 			'hover-box-shadow-color'  => '',
-			'normal-border-width'     => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'normal-box-shadow-css'   => array(
-				'desktop' => array(
-					'x'           => '',
-					'Y'           => '',
-					'BLUR'        => '',
-					'SPREAD'      => '',
-					'cssbox_link' => true,
-				),
-			),
-			'normal-border-radius'    => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-border-width'      => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-box-shadow-css'    => array(
-				'desktop' => array(
-					'x'           => '',
-					'Y'           => '',
-					'BLUR'        => '',
-					'SPREAD'      => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-border-radius'     => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
+			'normal-border-width'     => array(),
+			'normal-box-shadow-css'   => array(),
+			'normal-border-radius'    => array(),
+			'hover-border-width'      => array(),
+			'hover-box-shadow-css'    => array(),
+			'hover-border-radius'     => array(),
 		)
 	),
 	'normal-search-input-height'                => '45',
@@ -1008,51 +395,11 @@ $header_defaults = array(
 					'cssbox_link' => true,
 				),
 			),
-			'normal-box-shadow-css'   => array(
-				'desktop' => array(
-					'x'           => '',
-					'Y'           => '',
-					'BLUR'        => '',
-					'SPREAD'      => '',
-					'cssbox_link' => true,
-				),
-			),
-			'normal-border-radius'    => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-border-width'      => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-box-shadow-css'    => array(
-				'desktop' => array(
-					'x'           => '',
-					'Y'           => '',
-					'BLUR'        => '',
-					'SPREAD'      => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-border-radius'     => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
+			'normal-box-shadow-css'   => array(),
+			'normal-border-radius'    => array(),
+			'hover-border-width'      => array(),
+			'hover-box-shadow-css'    => array(),
+			'hover-border-radius'     => array(),
 		)
 	),
 	'normal-search-typography-options'          => 'inherit',
@@ -1060,27 +407,21 @@ $header_defaults = array(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
-			'google-font'     => 'Lato',
+			'google-font'     => 'Open Sans',
 			'custom-font'     => '',
 			'font-weight'     => '400',
 			'font-style'      => 'normal',
 			'text-decoration' => 'none',
 			'text-transform'  => 'none',
 			'font-size'       => array(
-				'desktop' => '14',
-				'tablet'  => '14',
-				'mobile'  => '14',
+
+				'mobile' => '14',
 			),
 			'line-height'     => array(
-				'desktop' => '24',
-				'tablet'  => '24',
-				'mobile'  => '24',
+
+				'mobile' => '24',
 			),
-			'letter-spacing'  => array(
-				'desktop' => '',
-				'tablet'  => '',
-				'mobile'  => '',
-			),
+			'letter-spacing'  => array(),
 		)
 	),
 
@@ -1141,7 +482,7 @@ $header_defaults = array(
 		array(
 			'desktop' => '',
 			'tablet'  => '',
-			'mobile'  => 'cwp-top',
+			'mobile'  => 'cwp-left',
 		)
 	),
 	'site-identity-align'                       => wp_json_encode(
@@ -1151,59 +492,11 @@ $header_defaults = array(
 			'mobile'  => 'cwp-text-left',
 		)
 	),
-	'site-identity-padding'                     => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'site-identity-margin'                      => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'site-identity-padding'                     => '',
+	'site-identity-margin'                      => '',
 	'site-identity-styling'                     => wp_json_encode(
 		array(
-			'site-title-color'         => '#275cf6',
+			'site-title-color'         => '#202020',
 			'site-tagline-color'       => '#333',
 			'hover-site-title-color'   => '#275cf6',
 			'hover-site-tagline-color' => '#333',
@@ -1214,127 +507,52 @@ $header_defaults = array(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
-			'google-font'     => 'Montserrat',
+			'google-font'     => 'Open Sans',
 			'custom-font'     => '',
 			'font-weight'     => '700',
 			'font-style'      => 'normal',
 			'text-decoration' => 'none',
 			'text-transform'  => 'uppercase',
 			'font-size'       => array(
-				'desktop' => '20',
-				'tablet'  => '20',
-				'mobile'  => '20',
+
+				'mobile' => '20',
 			),
 			'line-height'     => array(
-				'desktop' => '24',
-				'tablet'  => '24',
-				'mobile'  => '24',
+
+				'mobile' => '24',
 			),
-			'letter-spacing'  => array(
-				'desktop' => '',
-				'tablet'  => '',
-				'mobile'  => '',
-			),
+			'letter-spacing'  => array(),
 		)
 	),
 	'site-tagline-typography'                   => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
-			'google-font'     => 'Lato',
+			'google-font'     => 'Open Sans',
 			'custom-font'     => '',
 			'font-weight'     => '400',
 			'font-style'      => 'normal',
 			'text-decoration' => 'none',
 			'text-transform'  => 'none',
 			'font-size'       => array(
-				'desktop' => '13',
-				'tablet'  => '13',
-				'mobile'  => '13',
+
+				'mobile' => '13',
 			),
-			'line-height'     => array(
-				'desktop' => '',
-				'tablet'  => '',
-				'mobile'  => '',
-			),
-			'letter-spacing'  => array(
-				'desktop' => '',
-				'tablet'  => '',
-				'mobile'  => '',
-			),
+			'line-height'     => array(),
+			'letter-spacing'  => array(),
 		)
 	),
 
 	/*primary menu*/
 	'primary-menu-custom-menu'                  => '',
 	'primary-menu-disable-sub-menu'             => false,
-	'primary-menu-padding'                      => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'primary-menu-margin'                       => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'primary-menu-padding'                      => '',
+	'primary-menu-margin'                       => '',
 	'primary-menu-align'                        => 'cwp-flex-align-right',
 	'primary-menu-item-padding'                 => wp_json_encode(
 		array(
-			'desktop' => array(
-				'top'         => '10',
-				'right'       => '10',
-				'bottom'      => '10',
-				'left'        => '10',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
+			'desktop' => array(),
+			'tablet'  => array(),
 			'mobile'  => array(
 				'top'         => '10',
 				'right'       => '10',
@@ -1347,26 +565,14 @@ $header_defaults = array(
 	'primary-menu-item-margin'                  => wp_json_encode(
 		array(
 			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
+				'top'    => '',
+				'right'  => '5',
+				'bottom' => '',
+				'left'   => '5',
+
 			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
+			'tablet'  => array(),
+			'mobile'  => array(),
 		)
 	),
 	'primary-menu-styling'                      => wp_json_encode(
@@ -1383,210 +589,63 @@ $header_defaults = array(
 			'active-bg-color'      => '',
 			'active-border-style'  => 'none',
 			'active-border-color'  => '',
-			'normal-border-width'  => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'normal-border-radius' => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-border-width'   => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-border-radius'  => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'active-border-width'  => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'active-border-radius' => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
+			'normal-border-width'  => array(),
+			'normal-border-radius' => array(),
+			'hover-border-width'   => array(),
+			'hover-border-radius'  => array(),
+			'active-border-width'  => array(),
+			'active-border-radius' => array(),
 		)
 	),
-	'primary-menu-typography-options'           => 'inherit',
+	'primary-menu-typography-options'           => 'custom',
 	'primary-menu-typography'                   => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
-			'google-font'     => 'Lato',
+			'google-font'     => 'Open Sans',
 			'custom-font'     => '',
-			'font-weight'     => '400',
+			'font-weight'     => '600',
 			'font-style'      => 'normal',
 			'text-decoration' => 'none',
-			'text-transform'  => 'none',
+			'text-transform'  => 'uppercase',
 			'font-size'       => array(
-				'desktop' => '14',
-				'tablet'  => '14',
-				'mobile'  => '14',
+
+				'mobile' => '13',
 			),
 			'line-height'     => array(
-				'desktop' => '24',
-				'tablet'  => '24',
-				'mobile'  => '24',
+
+				'mobile' => '24',
 			),
 			'letter-spacing'  => array(
-				'desktop' => '',
-				'tablet'  => '',
-				'mobile'  => '',
+
+				'mobile' => '1',
 			),
 		)
 	),
-	'primary-menu-sub-menu-item-padding'        => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'primary-menu-sub-menu-item-margin'         => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'primary-menu-sub-menu-item-padding'        => '',
+	'primary-menu-sub-menu-item-margin'         => '',
 	'primary-menu-submenu-display-options'      => 'cwp-submenu-onhover',
 	'primary-menu-submenu-bg-color'             => '#fff',
 	'primary-menu-submenu-styling'              => wp_json_encode(
 		array(
 			'normal-text-color'    => '#333',
 			'normal-bg-color'      => '',
-			'normal-border-style'  => '',
+			'normal-border-style'  => 'none',
 			'normal-border-color'  => '',
 			'hover-text-color'     => '#275cf6',
 			'hover-bg-color'       => '',
-			'hover-border-style'   => '',
+			'hover-border-style'   => 'none',
 			'hover-border-color'   => '',
 			'active-text-color'    => '#275cf6',
 			'active-bg-color'      => '',
-			'active-border-style'  => '',
+			'active-border-style'  => 'none',
 			'active-border-color'  => '',
-			'normal-border-width'  => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'normal-border-radius' => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-border-width'   => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-border-radius'  => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'active-border-width'  => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'active-border-radius' => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
+			'normal-border-width'  => array(),
+			'normal-border-radius' => array(),
+			'hover-border-width'   => array(),
+			'hover-border-radius'  => array(),
+			'active-border-width'  => array(),
+			'active-border-radius' => array(),
 		)
 	),
 	'primary-menu-submenu-icon-indicator'       => 'fas fa-angle-down', /*fixed on fronted*/
@@ -1595,83 +654,29 @@ $header_defaults = array(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
-			'google-font'     => 'Lato',
+			'google-font'     => 'Open Sans',
 			'custom-font'     => '',
 			'font-weight'     => '400',
 			'font-style'      => 'normal',
 			'text-decoration' => 'none',
 			'text-transform'  => 'none',
 			'font-size'       => array(
-				'desktop' => '14',
-				'tablet'  => '14',
-				'mobile'  => '14',
+
+				'mobile' => '14',
 			),
 			'line-height'     => array(
-				'desktop' => '24',
-				'tablet'  => '24',
-				'mobile'  => '24',
+
+				'mobile' => '24',
 			),
-			'letter-spacing'  => array(
-				'desktop' => '',
-				'tablet'  => '',
-				'mobile'  => '',
-			),
+			'letter-spacing'  => array(),
 		)
 	),
 
 	/*secondary menu*/
 	'secondary-menu-custom-menu'                => '',
 	'secondary-menu-disable-sub-menu'           => true,
-	'secondary-menu-padding'                    => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'secondary-menu-margin'                     => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'secondary-menu-padding'                    => '',
+	'secondary-menu-margin'                     => '',
 	'secondary-menu-align'                      => 'cwp-flex-align-left',
 	'secondary-menu-item-padding'               => wp_json_encode(
 		array(
@@ -1682,47 +687,10 @@ $header_defaults = array(
 				'left'        => '10',
 				'cssbox_link' => true,
 			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
+
 		)
 	),
-	'secondary-menu-item-margin'                => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'secondary-menu-item-margin'                => '',
 	'secondary-menu-styling'                    => wp_json_encode(
 		array(
 			'normal-text-color'    => '#333',
@@ -1737,60 +705,12 @@ $header_defaults = array(
 			'active-bg-color'      => '',
 			'active-border-style'  => 'none',
 			'active-border-color'  => '',
-			'normal-border-width'  => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'normal-border-radius' => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-border-width'   => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-border-radius'  => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'active-border-width'  => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'active-border-radius' => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
+			'normal-border-width'  => array(),
+			'normal-border-radius' => array(),
+			'hover-border-width'   => array(),
+			'hover-border-radius'  => array(),
+			'active-border-width'  => array(),
+			'active-border-radius' => array(),
 		)
 	),
 	'secondary-menu-typography-options'         => 'inherit',
@@ -1798,79 +718,25 @@ $header_defaults = array(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
-			'google-font'     => 'Lato',
+			'google-font'     => 'Open Sans',
 			'custom-font'     => '',
 			'font-weight'     => '400',
 			'font-style'      => 'normal',
 			'text-decoration' => 'none',
 			'text-transform'  => 'none',
 			'font-size'       => array(
-				'desktop' => '14',
-				'tablet'  => '14',
-				'mobile'  => '14',
+
+				'mobile' => '14',
 			),
 			'line-height'     => array(
-				'desktop' => '24',
-				'tablet'  => '24',
-				'mobile'  => '24',
+
+				'mobile' => '24',
 			),
-			'letter-spacing'  => array(
-				'desktop' => '',
-				'tablet'  => '',
-				'mobile'  => '',
-			),
+			'letter-spacing'  => array(),
 		)
 	),
-	'secondary-menu-sub-menu-item-padding'      => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'secondary-menu-sub-menu-item-margin'       => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'secondary-menu-sub-menu-item-padding'      => '',
+	'secondary-menu-sub-menu-item-margin'       => '',
 	'secondary-menu-submenu-display-options'    => 'cwp-submenu-onhover',
 	'secondary-menu-submenu-icon-indicator'     => 'fas fa-angle-down', /*done in frontend*/
 	'secondary-menu-submenu-bg-color'           => '#000',
@@ -1878,70 +744,22 @@ $header_defaults = array(
 		array(
 			'normal-text-color'    => '#fff',
 			'normal-bg-color'      => '',
-			'normal-border-style'  => '',
+			'normal-border-style'  => 'none',
 			'normal-border-color'  => '',
 			'hover-text-color'     => '#275cf6',
 			'hover-bg-color'       => '',
-			'hover-border-style'   => '',
+			'hover-border-style'   => 'none',
 			'hover-border-color'   => '',
 			'active-text-color'    => '#275cf6',
 			'active-bg-color'      => '',
-			'active-border-style'  => '',
+			'active-border-style'  => 'none',
 			'active-border-color'  => '',
-			'normal-border-width'  => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'normal-border-radius' => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-border-width'   => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-border-radius'  => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'active-border-width'  => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'active-border-radius' => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
+			'normal-border-width'  => array(),
+			'normal-border-radius' => array(),
+			'hover-border-width'   => array(),
+			'hover-border-radius'  => array(),
+			'active-border-width'  => array(),
+			'active-border-radius' => array(),
 		)
 	),
 	'secondary-menu-submenu-typography-options' => 'inherit',
@@ -1949,89 +767,27 @@ $header_defaults = array(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
-			'google-font'     => 'Lato',
+			'google-font'     => 'Open Sans',
 			'custom-font'     => '',
 			'font-weight'     => '400',
 			'font-style'      => 'normal',
 			'text-decoration' => 'none',
 			'text-transform'  => 'none',
 			'font-size'       => array(
-				'desktop' => '14',
-				'tablet'  => '14',
-				'mobile'  => '14',
+				'mobile' => '14',
 			),
 			'line-height'     => array(
-				'desktop' => '24',
-				'tablet'  => '24',
-				'mobile'  => '24',
+				'mobile' => '24',
 			),
-			'letter-spacing'  => array(
-				'desktop' => '',
-				'tablet'  => '',
-				'mobile'  => '',
-			),
+			'letter-spacing'  => array(),
 		)
 	),
 
 	/*Menu Icon*/
-	'menu-icon-sidebar-margin'                  => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'menu-icon-sidebar-padding'                 => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'menu-icon-sidebar-margin'                  => '',
+	'menu-icon-sidebar-padding'                 => '',
 	'menu-icon-display-menu'                    => 'cwp-left-menu-push',
-	'menu-icon-sidebar-width'                   => wp_json_encode(
-		array(
-			'desktop' => '',
-			'tablet'  => '',
-			'mobile'  => '',
-		)
-	),
+	'menu-icon-sidebar-width'                   => '',
 	'menu-icon-sidebar-color-options'           => wp_json_encode(
 		array(
 			'background-color' => '#444',
@@ -2051,35 +807,20 @@ $header_defaults = array(
 	'menu-close-icon'                           => 'fas fa-times', /*done in frontend*/
 	'menu-open-icon-size-responsive'            => wp_json_encode(
 		array(
-			'desktop' => '18',
-			'tablet'  => '18',
-			'mobile'  => '18',
+
+			'mobile' => '18',
 		)
 	),
 	'menu-icon-close-icon-size-responsive'      => wp_json_encode(
 		array(
-			'desktop' => '18',
-			'tablet'  => '18',
-			'mobile'  => '18',
+
+			'mobile' => '18',
 		)
 	),
 	'menu-open-icon-padding'                    => wp_json_encode(
 		array(
-			'desktop' => array(
-				'top'         => '10',
-				'right'       => '10',
-				'bottom'      => '10',
-				'left'        => '10',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '10',
-				'right'       => '10',
-				'bottom'      => '10',
-				'left'        => '10',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
+
+			'mobile' => array(
 				'top'         => '10',
 				'right'       => '10',
 				'bottom'      => '10',
@@ -2090,21 +831,8 @@ $header_defaults = array(
 	),
 	'menu-icon-close-padding'                   => wp_json_encode(
 		array(
-			'desktop' => array(
-				'top'         => '10',
-				'right'       => '10',
-				'bottom'      => '10',
-				'left'        => '10',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '10',
-				'right'       => '10',
-				'bottom'      => '10',
-				'left'        => '10',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
+
+			'mobile' => array(
 				'top'         => '10',
 				'right'       => '10',
 				'bottom'      => '10',
@@ -2113,56 +841,8 @@ $header_defaults = array(
 			),
 		)
 	),
-	'menu-open-icon-margin'                     => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'menu-icon-close-margin'                    => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'menu-open-icon-margin'                     => '',
+	'menu-icon-close-margin'                    => '',
 	'menu-open-icon-align'                      => 'cwp-flex-align-right',
 	'menu-icon-close-icon-align'                => 'cwp-flex-align-right',
 	'menu-open-icon-typography-options'         => 'inherit',
@@ -2171,47 +851,41 @@ $header_defaults = array(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
-			'google-font'     => 'Lato',
+			'google-font'     => 'Open Sans',
 			'custom-font'     => '',
 			'font-weight'     => '500',
 			'font-style'      => 'normal',
 			'text-decoration' => 'none',
 			'text-transform'  => 'none',
 			'font-size'       => array(
-				'desktop' => '14',
-				'tablet'  => '14',
-				'mobile'  => '14',
+
+				'mobile' => '14',
 			),
 			'line-height'     => array(
-				'desktop' => '24',
-				'tablet'  => '24',
-				'mobile'  => '24',
+
+				'mobile' => '24',
 			),
-			'letter-spacing'  => array(
-				'desktop' => '',
-				'tablet'  => '',
-				'mobile'  => '',
-			),
+			'letter-spacing'  => array(),
 		)
 	),
 	'menu-icon-close-text-typography'           => wp_json_encode(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
-			'google-font'     => 'Lato',
+			'google-font'     => 'Open Sans',
 			'custom-font'     => '',
 			'font-weight'     => '500',
 			'font-style'      => 'normal',
 			'text-decoration' => 'none',
 			'text-transform'  => 'none',
 			'font-size'       => array(
-				'desktop' => '14',
-				'tablet'  => '14',
+				'desktop' => '',
+				'tablet'  => '',
 				'mobile'  => '14',
 			),
 			'line-height'     => array(
-				'desktop' => '24',
-				'tablet'  => '24',
+				'desktop' => '',
+				'tablet'  => '',
 				'mobile'  => '24',
 			),
 			'letter-spacing'  => array(
@@ -2225,12 +899,12 @@ $header_defaults = array(
 		array(
 			'normal-text-color'       => '#333',
 			'normal-bg-color'         => '',
-			'normal-border-style'     => '',
+			'normal-border-style'     => 'none',
 			'normal-border-color'     => '',
 			'normal-box-shadow-color' => '',
 			'hover-text-color'        => '#275cf6',
 			'hover-bg-color'          => '',
-			'hover-border-style'      => '',
+			'hover-border-style'      => 'none',
 			'hover-border-color'      => '',
 			'hover-box-shadow-color'  => '',
 			'normal-border-width'     => array(
@@ -2242,63 +916,23 @@ $header_defaults = array(
 					'cssbox_link' => true,
 				),
 			),
-			'normal-box-shadow-css'   => array(
-				'desktop' => array(
-					'x'           => '',
-					'Y'           => '',
-					'BLUR'        => '',
-					'SPREAD'      => '',
-					'cssbox_link' => true,
-				),
-			),
-			'normal-border-radius'    => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-border-width'      => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-box-shadow-css'    => array(
-				'desktop' => array(
-					'x'           => '',
-					'Y'           => '',
-					'BLUR'        => '',
-					'SPREAD'      => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-border-radius'     => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
+			'normal-box-shadow-css'   => array(),
+			'normal-border-radius'    => array(),
+			'hover-border-width'      => array(),
+			'hover-box-shadow-css'    => array(),
+			'hover-border-radius'     => array(),
 		)
 	),
 	'menu-icon-close-icon-styling'              => wp_json_encode(
 		array(
 			'normal-text-color'       => '#333',
 			'normal-bg-color'         => '',
-			'normal-border-style'     => '',
+			'normal-border-style'     => 'none',
 			'normal-border-color'     => '',
 			'normal-box-shadow-color' => '',
 			'hover-text-color'        => '#275cf6',
 			'hover-bg-color'          => '',
-			'hover-border-style'      => '',
+			'hover-border-style'      => 'none',
 			'hover-border-color'      => '',
 			'hover-box-shadow-color'  => '',
 			'normal-border-width'     => array(
@@ -2310,51 +944,11 @@ $header_defaults = array(
 					'cssbox_link' => true,
 				),
 			),
-			'normal-box-shadow-css'   => array(
-				'desktop' => array(
-					'x'           => '',
-					'Y'           => '',
-					'BLUR'        => '',
-					'SPREAD'      => '',
-					'cssbox_link' => true,
-				),
-			),
-			'normal-border-radius'    => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-border-width'      => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-box-shadow-css'    => array(
-				'desktop' => array(
-					'x'           => '',
-					'Y'           => '',
-					'BLUR'        => '',
-					'SPREAD'      => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-border-radius'     => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
+			'normal-border-radius'    => array(),
+			'normal-box-shadow-css'   => array(),
+			'hover-border-width'      => array(),
+			'hover-border-radius'     => array(),
+			'hover-box-shadow-css'    => array(),
 		)
 	),
 	'menu-icon-sidebar-submenu-bg-color'        => 'rgba(0,0,0,0.2)',
@@ -2362,70 +956,22 @@ $header_defaults = array(
 		array(
 			'normal-text-color'    => '#fff',
 			'normal-bg-color'      => '',
-			'normal-border-style'  => '',
+			'normal-border-style'  => 'none',
 			'normal-border-color'  => '',
 			'hover-text-color'     => '#275cf6',
 			'hover-bg-color'       => '',
-			'hover-border-style'   => '',
+			'hover-border-style'   => 'none',
 			'hover-border-color'   => '',
 			'active-text-color'    => '#275cf6',
 			'active-bg-color'      => '',
-			'active-border-style'  => '',
+			'active-border-style'  => 'none',
 			'active-border-color'  => '',
-			'normal-border-width'  => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'normal-border-radius' => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-border-width'   => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-border-radius'  => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'active-border-width'  => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'active-border-radius' => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
+			'normal-border-width'  => array(),
+			'normal-border-radius' => array(),
+			'hover-border-width'   => array(),
+			'hover-border-radius'  => array(),
+			'active-border-width'  => array(),
+			'active-border-radius' => array(),
 		)
 	),
 
@@ -2447,54 +993,16 @@ $header_defaults = array(
 	'button-one-open-link-new-tab'              => '1',
 	'button-one-padding'                        => wp_json_encode(
 		array(
-			'desktop' => array(
-				'top'         => '6',
-				'right'       => '12',
-				'bottom'      => '6',
-				'left'        => '12',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '6',
-				'right'       => '12',
-				'bottom'      => '6',
-				'left'        => '12',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '6',
-				'right'       => '12',
-				'bottom'      => '6',
-				'left'        => '12',
-				'cssbox_link' => true,
+
+			'mobile' => array(
+				'top'    => '6',
+				'right'  => '12',
+				'bottom' => '6',
+				'left'   => '12',
 			),
 		)
 	),
-	'button-one-margin'                         => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'button-one-margin'                         => '',
 	'button-one-styling'                        => wp_json_encode(
 		array(
 			'normal-text-color'       => '#333',
@@ -2519,16 +1027,8 @@ $header_defaults = array(
 					'cssbox_link' => true,
 				),
 			),
-			'normal-box-shadow-color' => '#333',
-			'normal-box-shadow-css'   => array(
-				'desktop' => array(
-					'x'           => '',
-					'Y'           => '',
-					'BLUR'        => '',
-					'SPREAD'      => '',
-					'cssbox_link' => true,
-				),
-			),
+			'normal-box-shadow-color' => '',
+			'normal-box-shadow-css'   => array(),
 			'hover-text-color'        => '#fff',
 			'hover-bg-color'          => '#275cf6',
 			'hover-border-style'      => 'solid',
@@ -2542,25 +1042,9 @@ $header_defaults = array(
 					'cssbox_link' => true,
 				),
 			),
-			'hover-border-radius'     => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
-			'hover-box-shadow-color'  => '#275cf6',
-			'hover-box-shadow-css'    => array(
-				'desktop' => array(
-					'x'           => '',
-					'Y'           => '',
-					'BLUR'        => '',
-					'SPREAD'      => '',
-					'cssbox_link' => true,
-				),
-			),
+			'hover-border-radius'     => array(),
+			'hover-box-shadow-color'  => '',
+			'hover-box-shadow-css'    => array(),
 		)
 	),
 	'button-one-typography-options'             => 'inherit',
@@ -2568,33 +1052,25 @@ $header_defaults = array(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
-			'google-font'     => 'Lato',
+			'google-font'     => 'Open Sans',
 			'custom-font'     => '',
 			'font-weight'     => '400',
 			'font-style'      => 'normal',
 			'text-decoration' => 'none',
 			'text-transform'  => 'none',
 			'font-size'       => array(
-				'desktop' => '14',
-				'tablet'  => '14',
-				'mobile'  => '14',
+
+				'mobile' => '14',
 			),
 			'line-height'     => array(
-				'desktop' => '24',
-				'tablet'  => '24',
-				'mobile'  => '24',
+
+				'mobile' => '24',
 			),
-			'letter-spacing'  => array(
-				'desktop' => '',
-				'tablet'  => '',
-				'mobile'  => '',
-			),
+			'letter-spacing'  => array(),
 		)
 	),
 
-	/*
-	contact Information
-	Fixed icon on frontend*/
+	// contact Information Fixed icon on frontend.
 	'contact-information-data'                  => wp_json_encode(
 		array(
 			array(
@@ -2619,66 +1095,16 @@ $header_defaults = array(
 	),
 	'contact-information-align'                 => wp_json_encode(
 		array(
-			'desktop' => '',
-			'tablet'  => '',
-			'mobile'  => 'cwp-flex-align-left',
+
+			'mobile' => 'cwp-flex-align-left',
 		)
 	),
-	'contact-info-padding'                      => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'contact-info-margin'                       => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'contact-info-padding'                      => '',
+	'contact-info-margin'                       => '',
 	'contact-info-icon-size'                    => wp_json_encode(
 		array(
-			'desktop' => '14',
-			'tablet'  => '14',
-			'mobile'  => '14',
+
+			'mobile' => '14',
 		)
 	),
 	'contact-info-icon-color'                   => '#275cf6',
@@ -2689,7 +1115,7 @@ $header_defaults = array(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
-			'google-font'     => 'Lora',
+			'google-font'     => 'Open Sans',
 			'custom-font'     => '',
 			'font-weight'     => '400',
 			'font-style'      => 'normal',
@@ -2701,14 +1127,12 @@ $header_defaults = array(
 				'mobile'  => '14',
 			),
 			'line-height'     => array(
-				'desktop' => '24',
-				'tablet'  => '24',
-				'mobile'  => '24',
+
+				'mobile' => '24',
 			),
 			'letter-spacing'  => array(
-				'desktop' => '1',
-				'tablet'  => '1',
-				'mobile'  => '1',
+
+				'mobile' => '1',
 			),
 		)
 	),
@@ -2718,76 +1142,41 @@ $header_defaults = array(
 		array(
 			'font-type'       => 'google',
 			'system-font'     => 'verdana',
-			'google-font'     => 'Montserrat',
+			'google-font'     => 'Open Sans',
 			'custom-font'     => '',
 			'font-weight'     => '400',
 			'font-style'      => 'normal',
 			'text-decoration' => 'none',
 			'text-transform'  => 'none',
 			'font-size'       => array(
-				'desktop' => '14',
-				'tablet'  => '14',
-				'mobile'  => '14',
+
+				'mobile' => '14',
 			),
 			'line-height'     => array(
-				'desktop' => '12',
-				'tablet'  => '12',
-				'mobile'  => '12',
+
+				'mobile' => '12',
 			),
-			'letter-spacing'  => array(
-				'desktop' => '',
-				'tablet'  => '',
-				'mobile'  => '',
-			),
+			'letter-spacing'  => array(),
 		)
 	),
 	'contact-info-item-padding'                 => wp_json_encode(
 		array(
 			'desktop' => array(
-				'top'         => '0',
-				'right'       => '25',
-				'bottom'      => '0',
-				'left'        => '0',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
+				'top'    => '0',
+				'right'  => '25',
+				'bottom' => '0',
+				'left'   => '0',
+
 			),
 		)
 	),
 	'contact-info-item-margin'                  => wp_json_encode(
 		array(
 			'desktop' => array(
-				'top'         => '0',
-				'right'       => '25',
-				'bottom'      => '0',
-				'left'        => '0',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
+				'top'    => '0',
+				'right'  => '25',
+				'bottom' => '0',
+				'left'   => '0',
 			),
 		)
 	),
@@ -2795,71 +1184,15 @@ $header_defaults = array(
 		array(
 			'border-style' => 'none',
 			'border-color' => '',
-			'border-width' => array(
-				'desktop' => array(
-					'top'         => '',
-					'right'       => '',
-					'bottom'      => '',
-					'left'        => '',
-					'cssbox_link' => true,
-				),
-			),
+			'border-width' => array(),
 		)
 	),
 
 	/*HTML*/
 	'html-container'                            => '',
 	'header-html-text-color'                    => '#fff',
-	'html-padding'                              => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
-	'html-margin'                               => wp_json_encode(
-		array(
-			'desktop' => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'tablet'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-			'mobile'  => array(
-				'top'         => '',
-				'right'       => '',
-				'bottom'      => '',
-				'left'        => '',
-				'cssbox_link' => true,
-			),
-		)
-	),
+	'html-padding'                              => '',
+	'html-margin'                               => '',
 	'html-typography-options'                   => 'inherit',
 	'html-typography'                           => wp_json_encode(
 		array(

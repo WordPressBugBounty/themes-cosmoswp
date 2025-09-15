@@ -1,7 +1,16 @@
 <?php
+/**
+ * Footer Bottom
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+global $cosmoswp_customize_control;
 
 /*Footer Row Section and Setting*/
 $wp_customize->add_section(
@@ -20,7 +29,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'footer-bottom-styling-msg',
@@ -41,7 +50,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_footer_height_option();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'footer-bottom-height-option',
 	array(
 		'label'    => esc_html__( 'Height Option', 'cosmoswp' ),
@@ -61,7 +70,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Slider(
 		$wp_customize,
 		'footer-bottom-height',
@@ -79,19 +88,19 @@ $wp_customize->add_control(
 	)
 );
 
-/*Margin & Padding Msg*/
+/*Margin and Padding Msg*/
 $wp_customize->add_setting(
 	'footer-bottom-padding-margin-msg',
 	array(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'footer-bottom-padding-margin-msg',
 		array(
-			'label'   => esc_html__( 'Margin & Padding', 'cosmoswp' ),
+			'label'   => esc_html__( 'Margin and Padding', 'cosmoswp' ),
 			'section' => $this->footer_bottom,
 		)
 	)
@@ -106,12 +115,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'footer-bottom-margin',
 		array(
-			'label'    => esc_html__( 'Margin', 'cosmoswp' ),
+			'label'    => esc_html__( 'Margin (px)', 'cosmoswp' ),
 			'section'  => $this->footer_bottom,
 			'settings' => 'footer-bottom-margin',
 		),
@@ -129,12 +138,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'footer-bottom-padding',
 		array(
-			'label'    => esc_html__( 'Padding', 'cosmoswp' ),
+			'label'    => esc_html__( 'Padding (px)', 'cosmoswp' ),
 			'section'  => $this->footer_bottom,
 			'settings' => 'footer-bottom-padding',
 		),
@@ -150,7 +159,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'footer-bottom-bg-styling-msg',
@@ -171,7 +180,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_header_bg_options();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'footer-bottom-bg-options',
 	array(
 		'label'    => esc_html__( 'Background Options', 'cosmoswp' ),
@@ -195,7 +204,7 @@ $background_image_size_options       = cosmoswp_background_image_size_options();
 $background_image_position_options   = cosmoswp_background_image_position_options();
 $background_image_repeat_options     = cosmoswp_background_image_repeat_options();
 $background_image_attachment_options = cosmoswp_background_image_attachment_options();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'footer-bottom-background-options',
@@ -259,12 +268,12 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'footer-bottom-border-styling-msg',
 		array(
-			'label'   => esc_html__( 'Border Options', 'cosmoswp' ),
+			'label'   => esc_html__( 'Border and Box Shadow Options', 'cosmoswp' ),
 			'section' => $this->footer_bottom,
 		)
 	)
@@ -279,12 +288,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'footer-bottom-border-styling',
 		array(
-			'label'    => esc_html__( 'Border', 'cosmoswp' ),
+			'label'    => esc_html__( 'Border and Box Shadow', 'cosmoswp' ),
 			'section'  => $this->footer_bottom,
 			'settings' => 'footer-bottom-border-styling',
 		),
@@ -296,7 +305,7 @@ $wp_customize->add_control(
 			),
 			'border-width'     => array(
 				'type'       => 'cssbox',
-				'label'      => esc_html__( 'Border Width', 'cosmoswp' ),
+				'label'      => esc_html__( 'Border Width (px)', 'cosmoswp' ),
 				'class'      => 'cwp-element-show',
 				'box_fields' => array(
 					'top'    => true,
@@ -323,7 +332,7 @@ $wp_customize->add_control(
 			),
 			'border-radius'    => array(
 				'type'       => 'cssbox',
-				'label'      => esc_html__( 'Border Radius', 'cosmoswp' ),
+				'label'      => esc_html__( 'Border Radius (px)', 'cosmoswp' ),
 				'class'      => 'cwp-element-show',
 				'box_fields' => array(
 					'top'    => true,
@@ -332,16 +341,16 @@ $wp_customize->add_control(
 					'left'   => true,
 				),
 				'attr'       => array(
-					'min'         => 0,
-					'max'         => 1000,
-					'step'        => 1,
-					'link'        => 1,
-					'devices'     => array(
+					'min'       => 0,
+					'max'       => 1000,
+					'step'      => 1,
+					'link'      => 1,
+					'devices'   => array(
 						'desktop' => array(
 							'icon' => 'dashicons-laptop',
 						),
 					),
-					'link_text'   => esc_html__( 'Link', 'cosmoswp' ),
+					'link_text' => esc_html__( 'Link', 'cosmoswp' ),
 				),
 			),
 			'box-shadow-color' => array(
@@ -350,6 +359,7 @@ $wp_customize->add_control(
 			),
 			'box-shadow-css'   => array(
 				'type'       => 'cssbox',
+				'label'      => esc_html__( 'Box Shadow', 'cosmoswp' ),
 				'class'      => 'cwp-element-show',
 				'box_fields' => array(
 					'x'      => true,
@@ -382,7 +392,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'footer-bottom-widget-title-setting-msg',
@@ -403,7 +413,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_text_align();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Buttonset(
 		$wp_customize,
 		'footer-bottom-widget-title-align',
@@ -425,7 +435,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new WP_Customize_Color_Control(
 		$wp_customize,
 		'footer-bottom-widget-title-color',
@@ -447,12 +457,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'footer-bottom-widget-title-margin',
 		array(
-			'label'    => esc_html__( 'Margin', 'cosmoswp' ),
+			'label'    => esc_html__( 'Margin (px)', 'cosmoswp' ),
 			'section'  => $this->footer_bottom,
 			'settings' => 'footer-bottom-widget-title-margin',
 		),
@@ -470,12 +480,12 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Cssbox(
 		$wp_customize,
 		'footer-bottom-widget-title-padding',
 		array(
-			'label'    => esc_html__( 'Padding', 'cosmoswp' ),
+			'label'    => esc_html__( 'Padding (px)', 'cosmoswp' ),
 			'section'  => $this->footer_bottom,
 			'settings' => 'footer-bottom-widget-title-padding',
 		),
@@ -493,7 +503,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'footer-bottom-widget-title-border-styling',
@@ -510,7 +520,7 @@ $wp_customize->add_control(
 			),
 			'border-width' => array(
 				'type'       => 'cssbox',
-				'label'      => esc_html__( 'Border Width', 'cosmoswp' ),
+				'label'      => esc_html__( 'Border Width (px)', 'cosmoswp' ),
 				'class'      => 'cwp-element-show',
 				'box_fields' => array(
 					'top'    => true,
@@ -550,7 +560,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_inherit_options();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'footer-bottom-widget-title-typography-options',
 	array(
 		'label'    => esc_html__( 'Typography Options', 'cosmoswp' ),
@@ -570,7 +580,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'footer-bottom-widget-title-typography',
@@ -584,8 +594,6 @@ $wp_customize->add_control(
 	)
 );
 
-
-
 /*Background Styling*/
 $wp_customize->add_setting(
 	'footer-bottom-widget-content-setting-msg',
@@ -593,7 +601,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'footer-bottom-widget-content-setting-msg',
@@ -614,7 +622,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_text_align();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Buttonset(
 		$wp_customize,
 		'footer-bottom-widget-content-align',
@@ -627,7 +635,6 @@ $wp_customize->add_control(
 	)
 );
 
-
 /*Color Options*/
 $wp_customize->add_setting(
 	'footer-bottom-widget-content-color-options',
@@ -637,7 +644,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'footer-bottom-widget-content-color-options',
@@ -672,7 +679,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'footer-bottom-widget-content-border-styling',
@@ -689,7 +696,7 @@ $wp_customize->add_control(
 			),
 			'border-width' => array(
 				'type'       => 'cssbox',
-				'label'      => esc_html__( 'Border Width', 'cosmoswp' ),
+				'label'      => esc_html__( 'Border Width (px)', 'cosmoswp' ),
 				'class'      => 'cwp-element-show',
 				'box_fields' => array(
 					'top'    => true,
@@ -721,9 +728,9 @@ $wp_customize->add_control(
 
 /*Footer Elements Starts from here*/
 $wp_customize->add_section(
-	new CosmosWP_WP_Customize_Section_H3(
+	new CosmosWP_WP_Customize_Section(
 		$wp_customize,
-		'cosmoswp_footer_elements_seperator',
+		'cosmoswp_footer_elements_separator',
 		array(
 			'title'    => esc_html__( 'Footer Elements', 'cosmoswp' ),
 			'panel'    => $this->panel,
@@ -742,7 +749,7 @@ $wp_customize->add_setting(
 	)
 );
 $choices = cosmoswp_inherit_options();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'footer-bottom-widget-content-typography-options',
 	array(
 		'label'    => esc_html__( 'Typography Options', 'cosmoswp' ),
@@ -762,7 +769,7 @@ $wp_customize->add_setting(
 		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Group(
 		$wp_customize,
 		'footer-bottom-widget-content-typography',
@@ -775,4 +782,3 @@ $wp_customize->add_control(
 		cosmoswp_typography_group_fields()
 	)
 );
-

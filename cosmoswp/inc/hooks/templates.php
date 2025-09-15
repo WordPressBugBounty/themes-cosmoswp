@@ -18,12 +18,13 @@ if ( ! function_exists( 'cosmoswp_filter_get_search_form' ) ) :
 	 *
 	 * @since 1.0.0
 	 *
+	 * @param string $form The search form HTML output.
 	 * @return string The search form HTML output.
 	 */
 	function cosmoswp_filter_get_search_form( $form ) {
 
 		$template = cosmoswp_get_theme_options( 'search-template-options' );
-		if ( $template == 'cwp-search-2' ) {
+		if ( 'cwp-search-2' === $template ) {
 				$form = '<form role="search" method="get" class="search-form" action="' . esc_url( home_url( '/' ) ) . '">
             <label>
                 <span class="screen-reader-text">' . _x( 'Search for:', 'label', 'cosmoswp' ) . '</span>
@@ -33,7 +34,6 @@ if ( ! function_exists( 'cosmoswp_filter_get_search_form' ) ) :
 		}
 
 		return $form;
-
 	}
 	add_filter( 'get_search_form', 'cosmoswp_filter_get_search_form', 15 );
 endif;
@@ -56,7 +56,6 @@ if ( ! function_exists( 'cosmoswp_filter_excerpt_length' ) ) :
 			$excerpt_length = $length;
 		}
 		return apply_filters( 'cosmoswp_filter_excerpt_length', absint( $excerpt_length ) );
-
 	}
 
 endif;
@@ -84,7 +83,6 @@ if ( ! function_exists( 'cosmoswp_filter_excerpt_more' ) ) :
 			$output = apply_filters( 'cosmoswp_filter_read_more_link', $output );
 		}
 		return $output;
-
 	}
 
 endif;
@@ -115,7 +113,6 @@ if ( ! function_exists( 'cosmoswp_filter_the_content_more_link' ) ) :
 
 		}
 		return $more_link;
-
 	}
 
 endif;
@@ -135,13 +132,12 @@ if ( ! function_exists( 'cosmoswp_featured_image_instruction' ) ) :
 
 		$allowed = array( 'page' );
 
-		if ( in_array( get_post_type( $post_id ), $allowed ) ) {
+		if ( in_array( get_post_type( $post_id ), $allowed, true ) ) {
 			$content .= '<strong>' . __( 'Recommended Image Sizes', 'cosmoswp' ) . ':</strong><br/>';
 			$content .= __( 'Slider Image', 'cosmoswp' ) . ' : 1920px X 800px';
 		}
 
 		return $content;
-
 	}
 
 	add_filter( 'admin_post_thumbnail_html', 'cosmoswp_featured_image_instruction', 10, 2 );
@@ -174,7 +170,7 @@ if ( ! function_exists( 'cosmoswp_exclude_category_in_blog_page' ) ) :
 	 *
 	 * @since CosmosWP 1.0.0
 	 *
-	 * @param $query
+	 * @param object $query WP_Query object.
 	 * @return int
 	 */
 	function cosmoswp_exclude_category_in_blog_page( $query ) {
@@ -184,7 +180,7 @@ if ( ! function_exists( 'cosmoswp_exclude_category_in_blog_page' ) ) :
 			if ( ! empty( $exclude_categories ) && is_array( $exclude_categories ) ) {
 				$exculde_cats = array_map(
 					function ( $val ) {
-						 return -$val;
+						return -$val;
 					},
 					$exclude_categories
 				);
@@ -215,16 +211,16 @@ if ( ! function_exists( 'cosmoswp_posts_navigation' ) ) :
 		}
 
 		$blog_navigation_options = cosmoswp_get_theme_options( 'blog-navigation-options' );
-		if ( 'disable' == $blog_navigation_options ) {
+		if ( 'disable' === $blog_navigation_options ) {
 			return;
 		}
 		$blog_navigation_align = cosmoswp_get_theme_options( 'blog-navigation-align' );
-		$blog_navigation_align = ( $blog_navigation_options != 'default' ) ? $blog_navigation_align : '';
+		$blog_navigation_align = ( 'default' !== $blog_navigation_options ) ? $blog_navigation_align : '';
 
 		echo "<div class='grid-row'>";
 		echo "<div class='grid-12'>";
-		echo "<div class='cwp-blog-pagination " . $blog_navigation_align . "' id='cwp-blog-pagination'>";
-		if ( 'default' == $blog_navigation_options ) {
+		echo "<div class='cwp-blog-pagination " . esc_attr( $blog_navigation_align ) . "' id='cwp-blog-pagination'>";
+		if ( 'default' === $blog_navigation_options ) {
 			// Previous/next page navigation.
 			the_posts_navigation();
 		} else {
@@ -257,7 +253,7 @@ if ( ! function_exists( 'cosmoswp_post_navigation' ) ) :
 	function cosmoswp_post_navigation() {
 
 		$blog_navigation_options = cosmoswp_get_theme_options( 'post-navigation-options' );
-		if ( 'default' == $blog_navigation_options ) {
+		if ( 'default' === $blog_navigation_options ) {
 			// Previous/next page navigation.
 			$args = array(
 				'prev_text' => '<span class="title"><i class="' . esc_attr( cosmoswp_get_correct_fa_font( 'fas fa-arrow-left' ) ) . '"></i>' . esc_html__( 'Previous Post', 'cosmoswp' ) . '</span><span class="post-title">%title</span>',
@@ -277,7 +273,7 @@ if ( ! function_exists( 'cosmoswp_alter_comment_form' ) ) :
 	 *
 	 * @since CosmosWP 1.0.0
 	 *
-	 * @param array $form
+	 * @param array $form Comment form array.
 	 * @return array $form
 	 */
 	function cosmoswp_alter_comment_form( $form ) {
@@ -310,11 +306,12 @@ endif;
 
 if ( ! function_exists( 'cosmoswp_move_comment_field_to_bottom' ) ) {
 
-	/*
+	/**
+	 * Re-order comment form e.g move comment to bottom
 	 *
-	 *  re-order comment form e.g move comment to bottom
-	 *  @since CosmosWP 1.0.0
-	 *  @param array $fields
+	 * @since CosmosWP 1.0.0
+	 * @param array $fields Comment form fields.
+	 * @return array $fields reordered fields
 	 */
 	function cosmoswp_move_comment_field_to_bottom( $fields ) {
 		$comment_field = $fields['comment'];

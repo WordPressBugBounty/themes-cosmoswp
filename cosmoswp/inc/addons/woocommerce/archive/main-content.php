@@ -1,17 +1,51 @@
 <?php
+/**
+ * WooCommerce Archive Options.
+ *
+ * @package CosmosWP
+ */
+
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/*Woo Single Sidebar*/
+global $cosmoswp_customize_control;
+
+/*Message*/
+$wp_customize->add_setting(
+	'woo-archive-url-msg',
+	array(
+		'sanitize_callback' => 'wp_kses_post',
+	)
+);
+$description = sprintf(
+/* translators: %1$s represents the opening anchor tag, %2$s represents the closing anchor tag.*/
+	esc_html__( 'The options will work on %1$sWooCommerce Archive %2$s page', 'cosmoswp' ),
+	"<a href='" . esc_url( get_post_type_archive_link( 'product' ) ) . "' target='_blank'>",
+	'</a>'
+);
+$cosmoswp_customize_control->add(
+	new CosmosWP_Custom_Control_Message(
+		$wp_customize,
+		'woo-archive-url-msg',
+		array(
+			'description' => $description,
+			'section'     => $this->section,
+		)
+	)
+);
+
+/*Woo Archive Sidebar*/
 $wp_customize->add_setting(
 	'cwp-woo-archive-sidebar',
 	array(
 		'default'           => $defaults['cwp-woo-archive-sidebar'],
 		'sanitize_callback' => 'cosmoswp_sanitize_select',
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'cwp-woo-archive-sidebar',
 	array(
 		'label'    => esc_html__( 'Content/Sidebar', 'cosmoswp' ),
@@ -27,9 +61,10 @@ $wp_customize->add_setting(
 	array(
 		'default'           => $defaults['cwc-archive-default-view'],
 		'sanitize_callback' => 'cosmoswp_sanitize_select',
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'cwc-archive-default-view',
 	array(
 		'choices'  => array(
@@ -43,15 +78,16 @@ $wp_customize->add_control(
 	)
 );
 
-/*Woo Single Sidebar Responsive Icon*/
+/*Woo Archive Sidebar Responsive Icon*/
 $wp_customize->add_setting(
 	'cwc-archive-psp-sm',
 	array(
 		'default'           => $defaults['cwc-archive-psp-sm'],
 		'sanitize_callback' => 'cosmoswp_sanitize_checkbox',
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'cwc-archive-psp-sm',
 	array(
 		'label'    => esc_html__( 'Popup primary sidebar on Small Device', 'cosmoswp' ),
@@ -65,16 +101,21 @@ $wp_customize->add_setting(
 	array(
 		'default'           => $defaults['cwc-archive-psp-sm-open-text'],
 		'sanitize_callback' => 'cosmoswp_sanitize_allowed_html',
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'cwc-archive-psp-sm-open-text',
 	array(
-		'label'           => esc_html__( 'Popup open text/html', 'cosmoswp' ),
-		'section'         => $this->section,
-		'settings'        => 'cwc-archive-psp-sm-open-text',
-		'type'            => 'text',
-		'active_callback' => 'cosmoswp_is_wc_archive_psp_sm',
+		'label'              => esc_html__( 'Popup open text/html', 'cosmoswp' ),
+		'section'            => $this->section,
+		'settings'           => 'cwc-archive-psp-sm-open-text',
+		'type'               => 'text',
+		'active_callback_js' => array(
+			'setting' => 'cwc-archive-psp-sm',
+			'value'   => true,
+			'compare' => '==',
+		),
 	)
 );
 $wp_customize->add_setting(
@@ -82,16 +123,21 @@ $wp_customize->add_setting(
 	array(
 		'default'           => $defaults['cwc-archive-psp-sm-close-text'],
 		'sanitize_callback' => 'cosmoswp_sanitize_allowed_html',
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'cwc-archive-psp-sm-close-text',
 	array(
-		'label'           => esc_html__( 'Popup close text/html', 'cosmoswp' ),
-		'section'         => $this->section,
-		'settings'        => 'cwc-archive-psp-sm-close-text',
-		'type'            => 'text',
-		'active_callback' => 'cosmoswp_is_wc_archive_psp_sm',
+		'label'              => esc_html__( 'Popup close text/html', 'cosmoswp' ),
+		'section'            => $this->section,
+		'settings'           => 'cwc-archive-psp-sm-close-text',
+		'type'               => 'text',
+		'active_callback_js' => array(
+			'setting' => 'cwc-archive-psp-sm',
+			'value'   => true,
+			'compare' => '==',
+		),
 	)
 );
 /*Top Toolbar*/
@@ -101,7 +147,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'cwc-archive-general-setting-msg',
@@ -118,9 +164,10 @@ $wp_customize->add_setting(
 	array(
 		'default'           => $defaults['cwc-archive-show-grid-list'],
 		'sanitize_callback' => 'cosmoswp_sanitize_checkbox',
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'cwc-archive-show-grid-list',
 	array(
 		'label'    => esc_html__( 'Show Grid List', 'cosmoswp' ),
@@ -136,9 +183,10 @@ $wp_customize->add_setting(
 	array(
 		'default'           => $defaults['cwc-archive-show-result-number'],
 		'sanitize_callback' => 'cosmoswp_sanitize_checkbox',
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'cwc-archive-show-result-number',
 	array(
 		'label'    => esc_html__( 'Show Result Number', 'cosmoswp' ),
@@ -154,9 +202,10 @@ $wp_customize->add_setting(
 	array(
 		'default'           => $defaults['cwc-archive-show-sort-bar'],
 		'sanitize_callback' => 'cosmoswp_sanitize_checkbox',
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'cwc-archive-show-sort-bar',
 	array(
 		'label'    => esc_html__( 'Show Sort Bar', 'cosmoswp' ),
@@ -173,7 +222,7 @@ $wp_customize->add_setting(
 		'sanitize_callback' => 'wp_kses_post',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Heading(
 		$wp_customize,
 		'cwc-archive-elements-msg',
@@ -190,10 +239,11 @@ $wp_customize->add_setting(
 	array(
 		'default'           => $defaults['cwc-archive-elements'],
 		'sanitize_callback' => 'cosmoswp_sanitize_multi_choices',
+		'transport'         => 'postMessage',
 	)
 );
 $choices = cosmoswp_woo_archive_elements_sorting();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Sortable(
 		$wp_customize,
 		'cwc-archive-elements',
@@ -211,10 +261,11 @@ $wp_customize->add_setting(
 	array(
 		'default'           => $defaults['cwc-archive-elements-align'],
 		'sanitize_callback' => 'cosmoswp_sanitize_select',
+		'transport'         => 'postMessage',
 	)
 );
 $choices = cosmoswp_text_align();
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Buttonset(
 		$wp_customize,
 		'cwc-archive-elements-align',
@@ -233,9 +284,10 @@ $wp_customize->add_setting(
 	array(
 		'default'           => $defaults['cwc-archive-excerpt-length'],
 		'sanitize_callback' => 'esc_attr',
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	'cwc-archive-excerpt-length',
 	array(
 		'label'       => esc_html__( 'Excerpt length (count words)', 'cosmoswp' ),
@@ -252,9 +304,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_slider_field',
 		'default'           => $defaults['cwc-archive-list-media-width'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Slider(
 		$wp_customize,
 		'cwc-archive-list-media-width',
@@ -277,9 +330,10 @@ $wp_customize->add_setting(
 	array(
 		'sanitize_callback' => 'cosmoswp_sanitize_field_tabs',
 		'default'           => $defaults['cwc-archive-responsive-col'],
+		'transport'         => 'postMessage',
 	)
 );
-$wp_customize->add_control(
+$cosmoswp_customize_control->add(
 	new CosmosWP_Custom_Control_Tabs(
 		$wp_customize,
 		'cwc-archive-responsive-col',
@@ -329,3 +383,22 @@ $wp_customize->add_control(
 		)
 	)
 );
+$partial_controls = array(
+	'cwp-woo-archive-sidebar',
+	'cwc-archive-default-view',
+	'cwc-archive-psp-sm',
+	'cwc-archive-psp-sm-open-text',
+	'cwc-archive-psp-sm-close-text',
+	'cwc-archive-show-grid-list',
+	'cwc-archive-show-result-number',
+	'cwc-archive-show-sort-bar',
+	'cwc-archive-elements',
+	'cwc-archive-elements-align',
+	'cwc-archive-excerpt-length',
+	'cwc-archive-list-media-width',
+	'cwc-archive-responsive-col',
+);
+
+foreach ( $partial_controls as $control_id ) {
+	$this->add_selective_refresh( $wp_customize, $control_id );
+}

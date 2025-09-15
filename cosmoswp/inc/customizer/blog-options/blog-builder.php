@@ -1,15 +1,19 @@
-<?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
+<?php // phpcs:ignore WordPress.NamingConventions.ValidClassName.Prefix -- Class filename does not follow standard, but this is intentional.
 /**
  * Blog Builder and Customizer Options
  *
  * @package CosmosWP
  */
-if ( ! class_exists( 'CosmosWP_Blog_Builder' ) ) :
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
+if ( ! class_exists( 'CosmosWP_Blog_Builder' ) ) :
+	/**
+	 * Blog Builder and Customizer Options
+	 *
+	 * @package CosmosWP
+	 */
 	class CosmosWP_Blog_Builder {
 
 		/**
@@ -30,7 +34,6 @@ if ( ! class_exists( 'CosmosWP_Blog_Builder' ) ) :
 		 */
 		public $section = 'cosmoswp-blog';
 
-
 		/**
 		 * Main Instance
 		 *
@@ -44,15 +47,12 @@ if ( ! class_exists( 'CosmosWP_Blog_Builder' ) ) :
 		 */
 		public static function instance() {
 
-			// Store the instance locally to avoid private static replication
 			static $instance = null;
 
-			// Only run these methods if they haven't been ran previously
 			if ( null === $instance ) {
 				$instance = new CosmosWP_Blog_Builder();
 			}
 
-			// Always return the instance
 			return $instance;
 		}
 
@@ -81,7 +81,7 @@ if ( ! class_exists( 'CosmosWP_Blog_Builder' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param array $default_options
+		 * @param array $default_options Default Options.
 		 * @return array
 		 */
 		public function blog_defaults( $default_options = array() ) {
@@ -108,7 +108,7 @@ if ( ! class_exists( 'CosmosWP_Blog_Builder' ) ) :
 				'blog-feature-section-layout'           => 'full-image',
 				'blog-img-size'                         => 'full',
 
-				/*Blog naviation*/
+				/*Blog navigation*/
 				'blog-navigation-options'               => 'default',
 				'blog-navigation-align'                 => 'cwp-flex-align-center',
 				'blog-navigation-styling'               => wp_json_encode(
@@ -116,33 +116,9 @@ if ( ! class_exists( 'CosmosWP_Blog_Builder' ) ) :
 						'border-style'     => 'none',
 						'border-color'     => '',
 						'box-shadow-color' => '',
-						'border-width'     => array(
-							'desktop' => array(
-								'top'         => '',
-								'right'       => '',
-								'bottom'      => '',
-								'left'        => '',
-								'cssbox_link' => true,
-							),
-						),
-						'box-shadow-css'   => array(
-							'desktop' => array(
-								'x'           => '',
-								'Y'           => '',
-								'BLUR'        => '',
-								'SPREAD'      => '',
-								'cssbox_link' => true,
-							),
-						),
-						'border-radius'    => array(
-							'desktop' => array(
-								'top'         => '',
-								'right'       => '',
-								'bottom'      => '',
-								'left'        => '',
-								'cssbox_link' => true,
-							),
-						),
+						'border-width'     => array(),
+						'border-radius'    => array(),
+						'box-shadow-css'   => array(),
 					)
 				),
 				'blog-pagination-color-options'         => wp_json_encode(
@@ -161,53 +137,26 @@ if ( ! class_exists( 'CosmosWP_Blog_Builder' ) ) :
 				),
 
 				/*margin and padding*/
-				'blog-main-content-margin'              => wp_json_encode(
-					array(
-						'desktop' => array(
-							'top'         => '',
-							'right'       => '',
-							'bottom'      => '',
-							'left'        => '',
-							'cssbox_link' => true,
-						),
-						'tablet'  => array(
-							'top'         => '',
-							'right'       => '',
-							'bottom'      => '',
-							'left'        => '',
-							'cssbox_link' => true,
-						),
-						'mobile'  => array(
-							'top'         => '',
-							'right'       => '',
-							'bottom'      => '',
-							'left'        => '',
-							'cssbox_link' => true,
-						),
-					)
-				),
+				'blog-main-content-margin'              => '',
 				'blog-main-content-padding'             => wp_json_encode(
 					array(
 						'desktop' => array(
-							'top'         => '80',
-							'right'       => '0',
-							'bottom'      => '80',
-							'left'        => '0',
-							'cssbox_link' => true,
+							'top'    => '80',
+							'right'  => '0',
+							'bottom' => '80',
+							'left'   => '0',
 						),
 						'tablet'  => array(
-							'top'         => '40',
-							'right'       => '0',
-							'bottom'      => '60',
-							'left'        => '0',
-							'cssbox_link' => true,
+							'top'    => '40',
+							'right'  => '0',
+							'bottom' => '60',
+							'left'   => '0',
 						),
 						'mobile'  => array(
-							'top'         => '20',
-							'right'       => '0',
-							'bottom'      => '40',
-							'left'        => '0',
-							'cssbox_link' => true,
+							'top'    => '20',
+							'right'  => '0',
+							'bottom' => '40',
+							'left'   => '0',
 						),
 					)
 				),
@@ -224,7 +173,7 @@ if ( ! class_exists( 'CosmosWP_Blog_Builder' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param object $wp_customize
+		 * @param object $wp_customize WordPress Customizer Object.
 		 * @return void
 		 */
 		public function customize_register( $wp_customize ) {
@@ -265,7 +214,7 @@ if ( ! class_exists( 'CosmosWP_Blog_Builder' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @return
+		 * @return void.
 		 */
 		public function display_blog() {
 
@@ -301,41 +250,41 @@ if ( ! class_exists( 'CosmosWP_Blog_Builder' ) ) :
 			/* blog navigation */
 			$blog_navigation_css       = '';
 			$blog_navigation_hover_css = '';
-			// border options
+			// border options.
 			$blog_navigation_border = cosmoswp_get_theme_options( 'blog-navigation-styling' );
 			$blog_navigation_border = json_decode( $blog_navigation_border, true );
-			// box shadow
-			$blog_navigationbx_shadow_css = cosmoswp_boxshadow_values_inline( cosmoswp_ifset( $blog_navigation_border['box-shadow-css'] ), 'desktop' );
-			if ( strpos( $blog_navigationbx_shadow_css, 'px' ) !== false ) {
-				$blog_navigation_bxshadow_color = cosmoswp_ifset( $blog_navigation_border['box-shadow-color'] );
-				$blog_navigationbx_shadow       = $blog_navigationbx_shadow_css . ' ' . $blog_navigation_bxshadow_color;
-				$blog_navigation_css           .= '-webkit-box-shadow:' . $blog_navigationbx_shadow . ';';
-				$blog_navigation_css           .= '-moz-box-shadow:' . $blog_navigationbx_shadow . ';';
-				$blog_navigation_css           .= 'box-shadow:' . $blog_navigationbx_shadow . ';';
+			// box shadow.
+			$blog_navigation_bx_shadow_css = cosmoswp_boxshadow_values_inline( cosmoswp_ifset( $blog_navigation_border['box-shadow-css'] ), 'desktop' );
+			if ( strpos( $blog_navigation_bx_shadow_css, 'px' ) !== false ) {
+				$blog_navigation_bx_shadow_color = cosmoswp_ifset( $blog_navigation_border['box-shadow-color'] );
+				$blog_navigation_bx_shadow       = $blog_navigation_bx_shadow_css . ' ' . $blog_navigation_bx_shadow_color;
+				$blog_navigation_css            .= '-webkit-box-shadow:' . $blog_navigation_bx_shadow . ';';
+				$blog_navigation_css            .= '-moz-box-shadow:' . $blog_navigation_bx_shadow . ';';
+				$blog_navigation_css            .= 'box-shadow:' . $blog_navigation_bx_shadow . ';';
 			}
-			// border style
+			// border style.
 			$blog_navigation_border_style = cosmoswp_ifset( $blog_navigation_border['border-style'] );
 			if ( 'none' !== $blog_navigation_border_style ) {
 
 				$blog_navigation_css .= 'border-style:' . $blog_navigation_border_style . ';';
-				// border width
+				// border width.
 				$blog_navigation_border_width = cosmoswp_cssbox_values_inline( cosmoswp_ifset( $blog_navigation_border['border-width'] ), 'desktop' );
 				if ( strpos( $blog_navigation_border_width, 'px' ) !== false ) {
 					$blog_navigation_css .= 'border-width:' . $blog_navigation_border_width . ';';
 				}
-				// border color
+				// border color.
 				$blog_navigation_border_color = cosmoswp_ifset( $blog_navigation_border['border-color'] );
 				if ( $blog_navigation_border_color ) {
 					$blog_navigation_css .= 'border-color:' . $blog_navigation_border_color . ';';
 				}
 			}
-			// border radius
+			// border radius.
 			$blog_navigation_border_radius = cosmoswp_cssbox_values_inline( cosmoswp_ifset( $blog_navigation_border['border-radius'] ), 'desktop' );
 			if ( strpos( $blog_navigation_border_radius, 'px' ) !== false ) {
 				$blog_navigation_css .= 'border-radius:' . $blog_navigation_border_radius . ';';
 			}
 
-			// Numeric pagination color
+			// Numeric pagination color.
 			$blog_pagination_color = cosmoswp_get_theme_options( 'blog-pagination-color-options' );
 			$blog_pagination_color = json_decode( $blog_pagination_color, true );
 
@@ -347,7 +296,7 @@ if ( ! class_exists( 'CosmosWP_Blog_Builder' ) ) :
 			if ( $pagination_text_color ) {
 				$blog_navigation_css .= 'color:' . $pagination_text_color . ';';
 			}
-			// concated blog navigation css in all css
+			// concated blog navigation css in all css.
 			if ( ! empty( $blog_navigation_css ) ) {
 				$blog_navigation_dynamic_css = '
     .cwp-blog-pagination .pagination .nav-links .page-numbers{
@@ -369,7 +318,7 @@ if ( ! class_exists( 'CosmosWP_Blog_Builder' ) ) :
 			if ( $pagination_text_hover_color ) {
 				$blog_navigation_hover_css .= 'color:' . $pagination_text_hover_color . ';';
 			}
-			// concated blog navigation css in all css
+			// concated blog navigation css in all css.
 			if ( ! empty( $blog_navigation_hover_css ) ) {
 				$blog_navigation_dynamic_hover_css = '
     .cwp-blog-pagination .pagination .nav-links .page-numbers.current,
@@ -389,7 +338,7 @@ if ( ! class_exists( 'CosmosWP_Blog_Builder' ) ) :
 			if ( $default_pagination_text_color ) {
 				$blog_default_navigation_css .= 'color:' . $default_pagination_text_color . ';';
 			}
-			// concated blog navigation css in all css
+			// concated blog navigation css in all css.
 			if ( ! empty( $blog_default_navigation_css ) ) {
 				$blog_default_navigation_dynamic_css = '
     .cwp-blog-pagination .posts-navigation .nav-links .nav-previous a,
@@ -402,7 +351,7 @@ if ( ! class_exists( 'CosmosWP_Blog_Builder' ) ) :
 			if ( $default_pagination_text_hover_color ) {
 				$blog_default_navigation_hover_css .= 'color:' . $default_pagination_text_hover_color . ';';
 			}
-			// concated blog navigation css in all css
+			// concated blog navigation css in all .
 			if ( ! empty( $blog_default_navigation_hover_css ) ) {
 				$blog_default_navigation_dynamic_hover_css = '
     .cwp-blog-pagination .posts-navigation .nav-links .nav-previous:hover a,
@@ -420,17 +369,17 @@ if ( ! class_exists( 'CosmosWP_Blog_Builder' ) ) :
 			/* margin */
 			$main_content_margin = cosmoswp_get_theme_options( 'blog-main-content-margin' );
 			$main_content_margin = json_decode( $main_content_margin, true );
-			// desktop margin
+			// desktop margin.
 			$main_content_margin_desktop = cosmoswp_cssbox_values_inline( $main_content_margin, 'desktop' );
 			if ( strpos( $main_content_margin_desktop, 'px' ) !== false ) {
 				$blog_main_content_desktop_css .= 'margin:' . $main_content_margin_desktop . ';';
 			}
-			// tablet marign
+			// tablet margin.
 			$main_content_margin_tablet = cosmoswp_cssbox_values_inline( $main_content_margin, 'tablet' );
 			if ( strpos( $main_content_margin_tablet, 'px' ) !== false ) {
 				$blog_main_content_tablet_css .= 'margin:' . $main_content_margin_tablet . ';';
 			}
-			// mobile margin
+			// mobile margin.
 			$main_content_margin_mobile = cosmoswp_cssbox_values_inline( $main_content_margin, 'mobile' );
 			if ( strpos( $main_content_margin_mobile, 'px' ) !== false ) {
 				$blog_main_content_css .= 'margin:' . $main_content_margin_mobile . ';';
@@ -440,18 +389,18 @@ if ( ! class_exists( 'CosmosWP_Blog_Builder' ) ) :
 			$main_content_padding = cosmoswp_get_theme_options( 'blog-main-content-padding' );
 			$main_content_padding = json_decode( $main_content_padding, true );
 
-			// desktop padding
+			// desktop padding.
 			$main_content_padding_desktop = cosmoswp_cssbox_values_inline( $main_content_padding, 'desktop' );
 			if ( strpos( $main_content_padding_desktop, 'px' ) !== false ) {
 				$blog_main_content_desktop_css .= 'padding:' . $main_content_padding_desktop . ';';
 			}
-			// tablet padding
+			// tablet padding.
 			$main_content_padding_tablet = cosmoswp_cssbox_values_inline( $main_content_padding, 'tablet' );
 			if ( strpos( $main_content_padding_tablet, 'px' ) !== false ) {
 				$blog_main_content_tablet_css .= 'padding:' . $main_content_padding_tablet . ';';
 			}
 
-			// mobile padding
+			// mobile padding.
 			$main_content_padding_mobile = cosmoswp_cssbox_values_inline( $main_content_padding, 'mobile' );
 			if ( strpos( $main_content_padding_mobile, 'px' ) !== false ) {
 				$blog_main_content_css .= 'padding:' . $main_content_padding_mobile . ';';
@@ -476,6 +425,7 @@ if ( ! class_exists( 'CosmosWP_Blog_Builder' ) ) :
 			}
 			return $blog_dynamic_css;
 		}
+
 		/**
 		 * Callback functions for cosmoswp_dynamic_css,
 		 * Add Dynamic Css
@@ -483,7 +433,7 @@ if ( ! class_exists( 'CosmosWP_Blog_Builder' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param array $dynamic_css
+		 * @param array $dynamic_css Dynamic CSS.
 		 * @return array
 		 */
 		public function dynamic_css( $dynamic_css ) {
@@ -504,7 +454,6 @@ if ( ! class_exists( 'CosmosWP_Blog_Builder' ) ) :
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param null
 		 * @return void
 		 */
 		public function blog_loop_item() {
@@ -512,13 +461,11 @@ if ( ! class_exists( 'CosmosWP_Blog_Builder' ) ) :
 		}
 
 		/**
-		 * cosmoswp_customize_partial_blog_header_content,
 		 * Add Blog Item
 		 *
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param null
 		 * @return String
 		 */
 		public function cosmoswp_customize_partial_blog_header_content() {
@@ -529,12 +476,11 @@ if ( ! class_exists( 'CosmosWP_Blog_Builder' ) ) :
 		}
 
 		/**
-		 * cosmoswp_customize_partial_blog_main_content,
+		 * Partial refreshment.
 		 *
 		 * @since    1.0.0
 		 * @access   public
 		 *
-		 * @param null
 		 * @return String
 		 */
 		public function cosmoswp_customize_partial_blog_main_content() {
@@ -542,6 +488,34 @@ if ( ! class_exists( 'CosmosWP_Blog_Builder' ) ) :
 			$this->display_blog();
 			$value = ob_get_clean();
 			return $value;
+		}
+
+		/**
+		 * Add selective refresh for the blog main content.
+		 *
+		 * @param WP_Customize_Manager $wp_customize The customizer manager.
+		 * @param string               $control_id The control ID.
+		 * @param array                $args Additional arguments.
+		 */
+		public function add_selective_refresh( $wp_customize, $control_id, $args = array() ) {
+			$defaults = array(
+				'selector'            => '#cwp-blog-main-content-wrapper',
+				'render_callback'     => array( $this, 'cosmoswp_customize_partial_blog_main_content' ),
+				'container_inclusive' => false,
+				'fallback_refresh'    => false,
+			);
+
+			$args = wp_parse_args( $args, $defaults );
+
+			$wp_customize->selective_refresh->add_partial(
+				$control_id,
+				array(
+					'selector'            => $args['selector'],
+					'render_callback'     => $args['render_callback'],
+					'container_inclusive' => $args['container_inclusive'],
+					'fallback_refresh'    => $args['fallback_refresh'],
+				)
+			);
 		}
 	}
 
@@ -558,8 +532,7 @@ endif;
  */
 if ( ! function_exists( 'cosmoswp_blog_builder' ) ) {
 
-	function cosmoswp_blog_builder() {
-
+	function cosmoswp_blog_builder() { //phpcs:ignore
 		return CosmosWP_Blog_Builder::instance();
 	}
 
