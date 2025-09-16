@@ -70,18 +70,17 @@ $si_align_mobile = ( 'cwp-default-tablet' !== $si_align_mobile ) ? $si_align_mob
 			if ( is_front_page() && is_home() ) :
 				?>
 			<h1 class="site-title">
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="logo-title">
 					<?php bloginfo( 'name' ); ?>
-						
 				</a>
 			</h1>
 		<?php else : ?>
-			<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+			<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="logo-title"><?php bloginfo( 'name' ); ?></a></p>
 			<?php
 		endif;
 		} elseif ( 'site-tagline' === $element ) {
 			?>
-			<p class="site-description"><?php bloginfo( 'description' ); ?></p>
+			<p class="site-description logo-tagline"><?php bloginfo( 'description' ); ?></p>
 			<?php
 		}
 	}

@@ -741,7 +741,7 @@ if ( ! function_exists( 'cosmoswp_not_empty' ) ) {
 	 */
 	function cosmoswp_not_empty( $input ) {
 		// Check if the trimmed variable is empty.
-		if ( '' === trim( $input ) ) {
+		if ( is_string( $input ) && '' === trim( $input ) ) {
 			return false;
 		}
 		return true;

@@ -56,7 +56,7 @@ $cosmoswp_customize_control->add(
 			'settings'    => 'site-logo-max-width',
 			'input_attrs' => array(
 				'min'  => 10,
-				'max'  => 100,
+				'max'  => 1000,
 				'step' => 1,
 			),
 		)

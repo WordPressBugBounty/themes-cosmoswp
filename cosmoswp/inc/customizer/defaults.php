@@ -57,55 +57,6 @@ if ( ! function_exists( 'cosmoswp_fresh_get_theme_options' ) ) :
 	}
 endif;
 
-if ( ! function_exists( 'cosmoswp_is_wp_org_preview' ) ) :
-	/**
-	 * Check if the theme is loaded on the WordPress.org preview site.
-	 *
-	 * @since CosmosWP 2.0.2
-	 *
-	 * @return bool True if on WP.org preview, false otherwise.
-	 */
-	function cosmoswp_is_wp_org_preview() {
-		// Check if the HTTP_HOST contains 'wp-themes.com'.
-		if ( isset( $_SERVER['HTTP_HOST'] ) && false !== strpos( $_SERVER['HTTP_HOST'], 'wp-themes.com' ) ) {
-			return true;
-		}
-
-		return false;
-	}
-endif;
-
-if ( ! function_exists( 'cosmoswp_wp_org_fix_theme_options' ) ) :
-	/**
-	 * Fix theme options on wp-themes.com (WP.org preview site).
-	 *
-	 * @since CosmosWP 2.0.2
-	 *
-	 * @return void
-	 */
-	function cosmoswp_wp_org_fix_theme_options() {
-
-		$theme_slug = get_option( 'stylesheet' );
-		$mods       = get_option( "theme_mods_$theme_slug" );
-
-		// If no mods exist, initialize from defaults.
-		if ( false === $mods || empty( $mods ) ) {
-			$defaults = cosmoswp_get_default_theme_options();
-			update_option( "theme_mods_$theme_slug", $defaults );
-			return;
-		}
-
-		// If mods exist, but theme version changed, update cache.
-		$current_version = wp_get_theme()->get( 'Version' );
-		$saved_version   = isset( $mods['_theme_version'] ) ? $mods['_theme_version'] : null;
-
-		if ( $saved_version !== $current_version ) {
-			$mods['_theme_version'] = $current_version;
-			update_option( "theme_mods_$theme_slug", $mods );
-		}
-	}
-endif;
-
 if ( ! function_exists( 'cosmoswp_get_theme_options' ) ) :
 	/**
 	 * Get cached theme option or fresh during Customizer preview.
@@ -124,11 +75,6 @@ if ( ! function_exists( 'cosmoswp_get_theme_options' ) ) :
 		// Always use fresh values during Customizer preview.
 		if ( is_customize_preview() ) {
 			return cosmoswp_fresh_get_theme_options( $key );
-		}
-
-		// Always use fresh values during Customizer preview.
-		if ( cosmoswp_is_wp_org_preview() ) {
-			cosmoswp_wp_org_fix_theme_options();
 		}
 
 		// Load all theme mods once and cache.

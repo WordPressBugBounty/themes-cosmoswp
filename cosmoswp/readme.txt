@@ -5,7 +5,7 @@ Tags: blog, e-commerce, portfolio, grid-layout, one-column, two-columns, three-c
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 5.6
-Stable tag: 2.0.2
+Stable tag: 2.0.3
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -95,7 +95,10 @@ Source: https://github.com/FortAwesome/Font-Awesome
 
 == Changelog ==
 
-= 2.0.1 - 2025-09-15 =
+= 2.0.3 - 2025-09-16 =
+* Fixed : Site identify
+
+= 2.0.2 - 2025-09-15 =
 * Updated: Try to fix Starter content on wp-themes.com.
 
 = 2.0.1 - 2025-09-15 =
