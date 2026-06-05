@@ -3,9 +3,9 @@
 Contributors: cosmoswp
 Tags: blog, e-commerce, portfolio, grid-layout, one-column, two-columns, three-columns, four-columns, left-sidebar, right-sidebar, custom-background, custom-colors, custom-header, custom-logo, custom-menu, editor-style, featured-images, flexible-header, footer-widgets, full-width-template, microformats, post-formats, rtl-language-support, sticky-post, theme-options, threaded-comments, translation-ready, block-styles, wide-blocks
 Requires at least: 6.0
-Tested up to: 6.8
-Requires PHP: 5.6
-Stable tag: 2.0.3
+Tested up to: 7.0
+Requires PHP: 7.0
+Stable tag: 3.0.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -94,6 +94,26 @@ Source: https://github.com/FortAwesome/Font-Awesome
 
 
 == Changelog ==
+
+= 3.0.0 - 2026-06-05 =
+* Fixed: Parse error on PHP 7.0-7.2 — removed trailing comma in wp_json_encode() function call in starter-content/index.php.
+* Fixed: $current_user used without wp_get_current_user() in 2 locations — replaced with get_current_user_id().
+* Fixed: $wp_filesystem null dereference in 3 locations — added null checks after WP_Filesystem() calls.
+* Fixed: Footer sidebar customizer sections incorrectly forced active due to strpos() falsy return on IDs starting with 'footer-sidebar-'.
+* Fixed: Mobile site identity alignment never resetting to default due to copy-paste error comparing against 'cwp-default-tablet' instead of 'cwp-default-mobile'.
+* Added: Nonce verification and capability checks for notice dismissal.
+* Added: Sanitization for all $_GET and $_POST superglobal access.
+* Added: Output escaping in templates (get_the_title, option values, class attributes).
+* Added: Alt attributes to all pattern images.
+* Added: Screen-reader labels to search forms.
+* Fixed: Trailing space in EDD orderby query parameter.
+* Fixed: Trailing semicolons in theme.json spacing values.
+* Fixed: Loose comparisons throughout.
+* Fixed: Escape submenu icon classes.
+* Updated: Requires PHP from 5.6 to 7.0 in style.css and readme.txt.
+* Updated: Tested up to: 7.0.
+* Updated: Standardized Font Awesome version string to 5.12.0 across all enqueue calls.
+* Removed: Viewport zoom restriction for WCAG 1.4.4 compliance.
 
 = 2.0.3 - 2025-09-16 =
 * Fixed : Site identify

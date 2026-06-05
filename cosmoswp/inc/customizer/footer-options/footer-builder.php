@@ -445,6 +445,9 @@ if ( ! class_exists( 'CosmosWP_Footer_Builder' ) ) :
 		 * @param $column_elements array of column elements.
 		 */
 		public function column_elements( $column_elements ) {
+			if ( ! is_array( $column_elements ) || empty( $column_elements ) ) {
+				return;
+			}
 			echo '<div class="grid-container"><div class="grid-row">';
 
 			$added_elements_ids = array();
@@ -475,7 +478,7 @@ if ( ! class_exists( 'CosmosWP_Footer_Builder' ) ) :
 				echo '</div>';
 
 				$prev_width = $x + $width;
-				if ( $i == $total_elements && $prev_width < $max_col ) {
+				if ( $i === $total_elements && $prev_width < $max_col ) {
 					$diff      = $max_col - $prev_width;
 					$diff_grid = 'grid-' . $diff;
 					echo '<div class="' . esc_attr( $diff_grid ) . '"></div>';

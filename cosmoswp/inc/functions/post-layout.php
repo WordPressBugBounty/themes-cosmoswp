@@ -102,7 +102,7 @@ if ( ! function_exists( 'cosmoswp_heading_title' ) ) {
 			if ( ! empty( $banner_title ) ) {
 				?>
 				<div class="entry-header">
-					<?php echo '<' . esc_attr( $tag ) . ' class="page-title">' . $banner_title . '</' . esc_attr( $tag ) . '>'; ?>
+					<?php echo '<' . esc_attr( $tag ) . ' class="page-title">' . esc_html( $banner_title ) . '</' . esc_attr( $tag ) . '>'; ?>
 				</div>
 				<?php
 			}
@@ -121,7 +121,7 @@ if ( ! function_exists( 'cosmoswp_heading_title' ) ) {
 			?>
 			<div class="entry-header">
 				<h1 class="page-title">
-					<?php echo get_the_title(); //phpcs:ignore?>
+					<?php echo esc_html( get_the_title() ); ?>
 				</h1>
 			</div>
 			<?php

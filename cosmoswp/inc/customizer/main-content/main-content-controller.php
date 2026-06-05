@@ -902,11 +902,16 @@ if ( ! class_exists( 'CosmosWP_Main_Content_Controller' ) ) :
 			$banner_height_access = array( 'color', 'bg-image', 'video' );
 			if ( in_array( $banner_display_option, $banner_height_access ) ) {
 				/*banner height*/
-				$cwp_banner_height            = cosmoswp_get_theme_options( 'cosmoswp-banner-height' );
-				$cwp_banner_height            = json_decode( $cwp_banner_height, true );
-				$cosmoswp_banner_desktop_css .= 'height:' . $cwp_banner_height['desktop'] . 'px;';
-				$cosmoswp_banner_tablet_css  .= 'height:' . $cwp_banner_height['tablet'] . 'px;';
-				$cosmoswp_banner_css         .= 'height:' . $cwp_banner_height['mobile'] . 'px;';
+				$cwp_banner_height = cosmoswp_get_theme_options( 'cosmoswp-banner-height' );
+				$cwp_banner_height = json_decode( $cwp_banner_height, true );
+				if ( is_array( $cwp_banner_height ) ) {
+					$desktop              = isset( $cwp_banner_height['desktop'] ) ? $cwp_banner_height['desktop'] : '';
+					$tablet               = isset( $cwp_banner_height['tablet'] ) ? $cwp_banner_height['tablet'] : '';
+					$mobile               = isset( $cwp_banner_height['mobile'] ) ? $cwp_banner_height['mobile'] : '';
+					$cosmoswp_banner_desktop_css .= 'height:' . $desktop . 'px;';
+					$cosmoswp_banner_tablet_css  .= 'height:' . $tablet . 'px;';
+					$cosmoswp_banner_css         .= 'height:' . $mobile . 'px;';
+				}
 			}
 
 			/* banner mobile css */

@@ -67,7 +67,7 @@ $contact_information_data = apply_filters( 'cosmoswp_contact_information_data', 
 							?>
 							<span class="cwp-contact-info-text">
 								<?php
-								if ( $contact_link_type == 'disable' ) {
+								if ( $contact_link_type === 'disable' ) {
 									echo esc_html( $contact_text );
 								} else {
 									?>

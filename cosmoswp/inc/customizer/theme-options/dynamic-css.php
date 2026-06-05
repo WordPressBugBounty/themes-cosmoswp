@@ -81,7 +81,7 @@ if ( strpos( $site_shadow_css, 'px' ) !== false ) {
 
 // typography.
 $site_button_typography_options = cosmoswp_get_theme_options( 'site-button-typography-options' );
-if ( 'custom' == $site_button_typography_options ) {
+if ( 'custom' === $site_button_typography_options ) {
 	$site_button_typography = cosmoswp_get_theme_options( 'site-button-typography' );
 	$site_button_typography = json_decode( $site_button_typography, true );
 
@@ -392,7 +392,7 @@ $cosmoswp_sidebar_widget_css         = '';
 $cosmoswp_sidebar_widget_tablet_css  = '';
 $cosmoswp_sidebar_widget_desktop_css = '';
 $widget_content_typography_options   = cosmoswp_get_theme_options( 'global-widget-content-typography-options' );
-if ( 'custom' == $widget_content_typography_options ) {
+if ( 'custom' === $widget_content_typography_options ) {
 
 	$widget_content_typography = cosmoswp_get_theme_options( 'global-widget-content-typography' );
 	$widget_content_typography = json_decode( $widget_content_typography, true );
@@ -552,7 +552,7 @@ if ( strpos( $cosmoswp_widget_title_padding_mobile, 'px' ) !== false ) {
 }
 
 $widget_title_typography_options = cosmoswp_get_theme_options( 'global-widget-title-typography-options' );
-if ( 'custom' == $widget_title_typography_options ) {
+if ( 'custom' === $widget_title_typography_options ) {
 
 	$widget_title_typography = cosmoswp_get_theme_options( 'global-widget-title-typography' );
 	$widget_title_typography = json_decode( $widget_title_typography, true );
@@ -903,7 +903,7 @@ if ( strpos( $scroll_top_icon_padding_mobile, 'px' ) !== false ) {
 
 // typography.
 $scroll_top_icon_typography_options = cosmoswp_get_theme_options( 'scroll-top-icon-typography-options' );
-if ( 'custom' === $scroll_top_icon_typography_options && ( 'text' == $scroll_top_icon_options || 'both' === $scroll_top_icon_options ) ) {
+if ( 'custom' === $scroll_top_icon_typography_options && ( 'text' === $scroll_top_icon_options || 'both' === $scroll_top_icon_options ) ) {
 	$scroll_top_icon_typography = cosmoswp_get_theme_options( 'scroll-top-icon-typography' );
 	$scroll_top_icon_typography = json_decode( $scroll_top_icon_typography, true );
 

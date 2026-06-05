@@ -165,7 +165,7 @@ if ( ! function_exists( 'cosmoswp_schema_markup' ) ) {
 	function cosmoswp_schema_markup( $location ) {
 
 		// Echo the schema markup based on the location.
-		echo cosmoswp_get_schema_markup( $location );//phpcs:ignore
+		echo wp_kses_post( cosmoswp_get_schema_markup( $location ) );
 	}
 }
 

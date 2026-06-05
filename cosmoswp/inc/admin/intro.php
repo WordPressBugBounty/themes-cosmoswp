@@ -271,7 +271,7 @@ class CosmosWP_Intro {
 								<?php
 								if ( ! function_exists( 'run_cosmoswp_pro' ) ) {
 									$upgrade = '<a href="https://www.cosmoswp.com/pricing/" target="_blank" rel="noopener" class="cwp-btn cwp-btn-sucess">' . esc_html__( 'Get CosmosWP Pro', 'cosmoswp' ) . '</a>';
-									echo apply_filters( 'cosmoswp_intro_upgrade_msg', $upgrade );//phpcs:ignore
+									echo wp_kses_post( apply_filters( 'cosmoswp_intro_upgrade_msg', $upgrade ) );
 								}
 								?>
 							</div>
@@ -563,10 +563,14 @@ class CosmosWP_Intro {
 											/*Check if the changelog file exists and is readable.*/
 											if ( $changelog_file && is_readable( $changelog_file ) ) {
 												WP_Filesystem();
-												$changelog      = $wp_filesystem->get_contents( $changelog_file );
-												$changelog_list = $this->parse_changelog( $changelog );
+												if ( ! $wp_filesystem ) {
+													echo wp_kses_post( __( 'Unable to connect to filesystem.', 'cosmoswp' ) );
+												} else {
+													$changelog      = $wp_filesystem->get_contents( $changelog_file );
+													$changelog_list = $this->parse_changelog( $changelog );
 
-												echo wp_kses_post( $changelog_list );
+													echo wp_kses_post( $changelog_list );
+												}
 											}
 											?>
 										</div>

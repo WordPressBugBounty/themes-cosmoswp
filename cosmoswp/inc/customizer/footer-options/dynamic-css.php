@@ -244,7 +244,7 @@ $footer_top_css           = '';
 $footer_top_tablet_css    = '';
 $footer_top_desktop_css   = '';
 $footer_top_height_option = cosmoswp_get_theme_options( 'footer-top-height-option' );
-if ( 'custom' == $footer_top_height_option ) {
+if ( 'custom' === $footer_top_height_option ) {
 	$footer_top_height = cosmoswp_get_theme_options( 'footer-top-height' );
 	$footer_top_height = json_decode( $footer_top_height, true );
 	if ( ! empty( $footer_top_height['desktop'] ) ) {
@@ -567,7 +567,7 @@ $widget_content_css                = '';
 $widget_content_tablet_css         = '';
 $widget_content_desktop_css        = '';
 $widget_content_typography_options = cosmoswp_get_theme_options( 'footer-top-widget-content-typography-options' );
-if ( 'custom' == $widget_content_typography_options ) {
+if ( 'custom' === $widget_content_typography_options ) {
 
 	$widget_content_typography = cosmoswp_get_theme_options( 'footer-top-widget-content-typography' );
 	$widget_content_typography = json_decode( $widget_content_typography, true );
@@ -704,7 +704,7 @@ $footer_main_tablet_css  = '';
 $footer_main_desktop_css = '';
 // height.
 $footer_main_height_option = cosmoswp_get_theme_options( 'footer-main-height-option' );
-if ( 'custom' == $footer_main_height_option ) {
+if ( 'custom' === $footer_main_height_option ) {
 	$footer_main_height = cosmoswp_get_theme_options( 'footer-main-height' );
 	$footer_main_height = json_decode( $footer_main_height, true );
 	if ( ! empty( $footer_main_height['desktop'] ) ) {
@@ -753,7 +753,7 @@ if ( strpos( $footer_main_padding_mobile, 'px' ) !== false ) {
 
 // background options.
 $footer_main_bg_options = cosmoswp_get_theme_options( 'footer-main-bg-options' );
-if ( 'custom' == $footer_main_bg_options ) {
+if ( 'custom' === $footer_main_bg_options ) {
 
 	// background.
 	$footer_main_bg          = cosmoswp_get_theme_options( 'footer-main-background-options' );
@@ -1026,7 +1026,7 @@ $widget_content_css                = '';
 $fm_widget_content_tablet_css      = '';
 $fm_widget_content_desktop_css     = '';
 $widget_content_typography_options = cosmoswp_get_theme_options( 'footer-main-widget-content-typography-options' );
-if ( 'custom' == $widget_content_typography_options ) {
+if ( 'custom' === $widget_content_typography_options ) {
 
 	$widget_content_typography = cosmoswp_get_theme_options( 'footer-main-widget-content-typography' );
 	$widget_content_typography = json_decode( $widget_content_typography, true );
@@ -1168,7 +1168,7 @@ $footer_bottom_tablet_css  = '';
 $footer_bottom_desktop_css = '';
 // height.
 $footer_bottom_height_option = cosmoswp_get_theme_options( 'footer-bottom-height-option' );
-if ( 'custom' == $footer_bottom_height_option ) {
+if ( 'custom' === $footer_bottom_height_option ) {
 	$footer_bottom_height = cosmoswp_get_theme_options( 'footer-bottom-height' );
 	$footer_bottom_height = json_decode( $footer_bottom_height, true );
 	if ( ! empty( $footer_bottom_height['desktop'] ) ) {
@@ -1217,7 +1217,7 @@ if ( strpos( $footer_bottom_padding_mobile, 'px' ) !== false ) {
 }
 // background options.
 $footer_bottom_bg_options = cosmoswp_get_theme_options( 'footer-bottom-bg-options' );
-if ( 'custom' == $footer_bottom_bg_options ) {
+if ( 'custom' === $footer_bottom_bg_options ) {
 
 	// background.
 	$footer_bottom_bg          = cosmoswp_get_theme_options( 'footer-bottom-background-options' );
@@ -1670,7 +1670,7 @@ if ( strpos( $footer_copyright_padding_mobile, 'px' ) !== false ) {
 
 // typography.
 $copyright_typography_options = cosmoswp_get_theme_options( 'footer-copyright-typography-options' );
-if ( 'custom' == $copyright_typography_options ) {
+if ( 'custom' === $copyright_typography_options ) {
 	$copyright_typography = cosmoswp_get_theme_options( 'footer-copyright-typography' );
 	$copyright_typography = json_decode( $copyright_typography, true );
 
@@ -2160,7 +2160,7 @@ if ( strpos( $footer_menu_border_radius, 'px' ) !== false ) {
 }
 // typography.
 $footer_menu_typography_options = cosmoswp_get_theme_options( 'footer-menu-typography-options' );
-if ( 'custom' == $footer_menu_typography_options ) {
+if ( 'custom' === $footer_menu_typography_options ) {
 	$footer_menu_typography = cosmoswp_get_theme_options( 'footer-menu-typography' );
 	$footer_menu_typography = json_decode( $footer_menu_typography, true );
 
@@ -2424,7 +2424,7 @@ if ( $footer_menu_title_color ) {
 }
 
 $footer_menu_title_typography_options = cosmoswp_get_theme_options( 'footer-menu-title-typography-options' );
-if ( 'custom' == $footer_menu_title_typography_options ) {
+if ( 'custom' === $footer_menu_title_typography_options ) {
 
 	$footer_menu_title_typography = cosmoswp_get_theme_options( 'footer-menu-title-typography' );
 	$footer_menu_title_typography = json_decode( $footer_menu_title_typography, true );
@@ -2602,7 +2602,7 @@ if ( ! empty( $footer_html_desktop_css ) ) {
 // typography.
 $footer_html_typography_css = '';
 $html_typography_options    = cosmoswp_get_theme_options( 'footer-html-typography-options' );
-if ( 'custom' == $html_typography_options ) {
+if ( 'custom' === $html_typography_options ) {
 	$html_typography = cosmoswp_get_theme_options( 'footer-html-typography' );
 	$html_typography = json_decode( $html_typography, true );
 

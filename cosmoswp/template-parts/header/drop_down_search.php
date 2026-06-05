@@ -25,7 +25,8 @@ $dd_search_placeholder = ( $dd_search_placeholder ) ? $dd_search_placeholder : '
 
 	<div class="cwp-search-form-wrapper <?php echo esc_attr( $dd_search_form_align ); ?>" id="cwp-dropdown-search-form-wrapper">
 		<form action="<?php echo esc_url( home_url( '/' ) ); ?>" class="search-form">
-			<input type="search" class="search-field" name='s'
+			<label for="cwp-dropdown-search-field" class="screen-reader-text"><?php esc_html_e( 'Search', 'cosmoswp' ); ?></label>
+			<input type="search" class="search-field" name='s' id="cwp-dropdown-search-field"
 				placeholder="<?php echo esc_attr( $dd_search_placeholder ); ?>"
 				value="<?php echo get_search_query(); ?>">
 			<button class="search-submit" type="submit">

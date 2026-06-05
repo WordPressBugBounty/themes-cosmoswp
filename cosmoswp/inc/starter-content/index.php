@@ -198,7 +198,7 @@ class CosmosWP_Starter_Content {
 				'header-general-background-options' => wp_json_encode(
 					array(
 						'background-color' => 'transparent',
-					),
+					)
 				),
 				/* Header social icon Icon fixed on get*/
 				'header-social-icon-data'           => wp_json_encode(

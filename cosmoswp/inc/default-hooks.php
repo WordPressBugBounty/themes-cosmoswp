@@ -295,19 +295,19 @@ if ( ! function_exists( 'cosmoswp_scripts' ) ) {
 				'fontawesome', // Handle.
 				GUTENTOR_URL . '/assets/library/fontawesome/css/all' . GUTENTOR_SCRIPT_PREFIX . '.css',
 				array(),
-				'5'
+				'5.12.0'
 			);
 		} else {
 			/*Font-Awesome-master*/
-			wp_enqueue_style( 'fontawesome', COSMOSWP_URL . '/assets/library/Font-Awesome/css/all' . COSMOSWP_SCRIPT_PREFIX . '.css', array(), COSMOSWP_VERSION );
+			wp_enqueue_style( 'fontawesome', COSMOSWP_URL . '/assets/library/Font-Awesome/css/all' . COSMOSWP_SCRIPT_PREFIX . '.css', array(), '5.12.0' );
 		}
 		wp_style_add_data( 'fontawesome', 'rtl', 'replace' );
 
 		/*jquery-scrollbar*/
 		if ( cosmoswp_is_scrollbar_js() ) {
-			wp_enqueue_style( 'jquery-scrollbar', COSMOSWP_URL . '/assets/library/jquery.scrollbar-gh-pages/jquery.scrollbar' . COSMOSWP_SCRIPT_PREFIX . '.css', array(), '1.0.0' );
+			wp_enqueue_style( 'jquery-scrollbar', COSMOSWP_URL . '/assets/library/jquery.scrollbar-gh-pages/jquery.scrollbar' . COSMOSWP_SCRIPT_PREFIX . '.css', array(), '0.2.10' );
 			wp_style_add_data( 'jquery-scrollbar', 'rtl', 'replace' );
-			wp_enqueue_script( 'jquery-scrollbar', COSMOSWP_URL . '/assets/library/jquery.scrollbar-gh-pages/jquery.scrollbar' . COSMOSWP_SCRIPT_PREFIX . '.js', array(), '1.0.0', true );
+			wp_enqueue_script( 'jquery-scrollbar', COSMOSWP_URL . '/assets/library/jquery.scrollbar-gh-pages/jquery.scrollbar' . COSMOSWP_SCRIPT_PREFIX . '.js', array(), '0.2.10', true );
 		}
 
 		/*Custom Grid*/
@@ -367,20 +367,17 @@ if ( ! function_exists( 'cosmoswp_admin_scripts' ) ) {
 					'fontawesome', // Handle.
 					GUTENTOR_URL . '/assets/library/fontawesome/css/all' . GUTENTOR_SCRIPT_PREFIX . '.css',
 					array(),
-					'5'
+					'5.12.0'
 				);
 			} else {
 				/*Font-Awesome-master*/
-				wp_enqueue_style( 'fontawesome', COSMOSWP_URL . '/assets/library/Font-Awesome/css/all' . COSMOSWP_SCRIPT_PREFIX . '.css', array(), COSMOSWP_VERSION );
+				wp_enqueue_style( 'fontawesome', COSMOSWP_URL . '/assets/library/Font-Awesome/css/all' . COSMOSWP_SCRIPT_PREFIX . '.css', array(), '5.12.0' );
 			}
 			wp_style_add_data( 'fontawesome', 'rtl', 'replace' );
 
 			wp_enqueue_script( 'wp-color-picker' );
 			wp_enqueue_style( 'wp-color-picker' );
 			wp_enqueue_script( 'cosmoswp-admin', COSMOSWP_URL . '/build/editor/index.js', '', COSMOSWP_VERSION, true );
-		}
-		if ( cosmoswp_is_edit_page() ) {
-			wp_enqueue_style( 'cosmoswp-meta-box-css', COSMOSWP_URL . '/inc/metabox/meta-box.css', array(), COSMOSWP_VERSION );
 		}
 	}
 	add_action( 'admin_enqueue_scripts', 'cosmoswp_admin_scripts' );
@@ -561,7 +558,7 @@ if ( ! function_exists( 'cosmoswp_header_wrapper_class' ) ) {
 		}
 		$sticky_header_options   = cosmoswp_get_theme_options( 'sticky-header-options' );
 		$header_position_options = cosmoswp_get_theme_options( 'header-position-options' );
-		if ( ! empty( $header_position_options ) && ( $header_position_options != 'cwp-vertical-header' ) ) {
+		if ( ! empty( $header_position_options ) && ( $header_position_options !== 'cwp-vertical-header' ) ) {
 			$classes[] = 'cwp-horizontal-header';
 		}
 		$remove_sticky = array( 'cwp-vertical-header', 'cwp-overlay-transparent' );
@@ -570,7 +567,7 @@ if ( ! function_exists( 'cosmoswp_header_wrapper_class' ) ) {
 				$classes[] = 'cwp-header-sticky';
 			}
 			$sticky_header_animation = cosmoswp_get_theme_options( 'sticky-header-animation-options' );
-			if ( ! empty( $sticky_header_animation ) && ( 'none' != $sticky_header_animation ) ) {
+			if ( ! empty( $sticky_header_animation ) && ( 'none' !== $sticky_header_animation ) ) {
 				$classes[] = $sticky_header_animation;
 			}
 		}
@@ -815,15 +812,15 @@ if ( ! function_exists( 'cosmoswp_add_submenu_icon' ) ) {
 
 			if ( 'header-primary-menu' === $args->theme_location && ! cosmoswp_get_theme_options( 'primary-menu-disable-sub-menu' ) ) {
 				$submenu_indicator = cosmoswp_get_correct_fa_font( cosmoswp_get_theme_options( 'primary-menu-submenu-icon-indicator' ) );
-				return "<i class='submenu-icon {$submenu_indicator}'></i>" . $title;
+				return '<i class="submenu-icon ' . esc_attr( $submenu_indicator ) . '"></i>' . $title;
 
 			} elseif ( 'header-secondary-menu' === $args->theme_location && ! cosmoswp_get_theme_options( 'secondary-menu-disable-sub-menu' ) ) {
 				$submenu_indicator = cosmoswp_get_correct_fa_font( cosmoswp_get_theme_options( 'secondary-menu-submenu-icon-indicator' ) );
-				return "<i class='submenu-icon {$submenu_indicator}'></i>" . $title;
+				return '<i class="submenu-icon ' . esc_attr( $submenu_indicator ) . '"></i>' . $title;
 
 			} elseif ( 'dropdown-menu' === $args->theme_location && ! cosmoswp_get_theme_options( 'dropdown-menu-disable-sub-menu' ) ) {
 				$submenu_indicator = cosmoswp_get_correct_fa_font( cosmoswp_get_theme_options( 'dropdown-menu-submenu-icon-indicator' ) );
-				return "<i class='submenu-icon {$submenu_indicator}'></i>" . $title;
+				return '<i class="submenu-icon ' . esc_attr( $submenu_indicator ) . '"></i>' . $title;
 			}
 		}
 

@@ -524,7 +524,7 @@ $header_top_tablet_css  = '';
 $header_top_desktop_css = '';
 
 $header_top_height_option = cosmoswp_get_theme_options( 'header-top-height-option' );
-if ( 'custom' == $header_top_height_option ) {
+if ( 'custom' === $header_top_height_option ) {
 	$header_top_height = cosmoswp_get_theme_options( 'top-header-height' );
 	$header_top_height = json_decode( $header_top_height, true );
 	if ( isset( $header_top_height['desktop'] ) ) {
@@ -582,7 +582,7 @@ if ( strpos( $header_top_padding_mobile, 'px' ) !== false ) {
 }
 // background options.
 $header_top_bg_options = cosmoswp_get_theme_options( 'header-top-bg-options' );
-if ( 'custom' == $header_top_bg_options ) {
+if ( 'custom' === $header_top_bg_options ) {
 
 	$header_top_bg          = cosmoswp_get_theme_options( 'header-top-background-options' );
 	$header_top_bg          = json_decode( $header_top_bg, true );
@@ -699,7 +699,7 @@ $header_main_tablet_css  = '';
 $header_main_desktop_css = '';
 // height.
 $header_main_height_option = cosmoswp_get_theme_options( 'header-main-height-option' );
-if ( 'custom' == $header_main_height_option ) {
+if ( 'custom' === $header_main_height_option ) {
 	$header_main_height = cosmoswp_get_theme_options( 'header-main-height' );
 	$header_main_height = json_decode( $header_main_height, true );
 	if ( isset( $header_main_height['desktop'] ) ) {
@@ -759,7 +759,7 @@ if ( strpos( $header_main_padding_mobile, 'px' ) !== false ) {
 }
 // background options.
 $header_main_bg_options = cosmoswp_get_theme_options( 'header-main-bg-options' );
-if ( 'custom' == $header_main_bg_options ) {
+if ( 'custom' === $header_main_bg_options ) {
 
 	// background.
 	$header_main_bg          = cosmoswp_get_theme_options( 'header-main-background-options' );
@@ -878,7 +878,7 @@ $header_bottom_tablet_css  = '';
 $header_bottom_desktop_css = '';
 // height.
 $header_bottom_height_option = cosmoswp_get_theme_options( 'header-bottom-height-option' );
-if ( 'custom' == $header_bottom_height_option ) {
+if ( 'custom' === $header_bottom_height_option ) {
 	$header_bottom_height = cosmoswp_get_theme_options( 'header-bottom-height' );
 	$header_bottom_height = json_decode( $header_bottom_height, true );
 
@@ -940,7 +940,7 @@ if ( strpos( $header_bottom_padding_mobile, 'px' ) !== false ) {
 
 // background options.
 $header_bottom_bg_options = cosmoswp_get_theme_options( 'header-bottom-bg-options' );
-if ( 'custom' == $header_bottom_bg_options ) {
+if ( 'custom' === $header_bottom_bg_options ) {
 
 	// background.
 	$header_bottom_bg          = cosmoswp_get_theme_options( 'header-bottom-background-options' );
@@ -1169,7 +1169,7 @@ $site_tagline_css                 = '';
 $site_tagline_tablet_css          = '';
 $site_tagline_desktop_css         = '';
 $site_identity_typography_options = cosmoswp_get_theme_options( 'site-identity-typography-options' );
-if ( 'custom' == $site_identity_typography_options ) {
+if ( 'custom' === $site_identity_typography_options ) {
 
 	$site_title_typography = cosmoswp_get_theme_options( 'site-title-typography' );
 	$site_title_typography = json_decode( $site_title_typography, true );
@@ -1731,7 +1731,7 @@ if ( strpos( $dds_shadow_css, 'px' ) !== false ) {
 }
 // typography.
 $dds_typography_options = cosmoswp_get_theme_options( 'dd-search-typography-options' );
-if ( 'custom' == $dds_typography_options ) {
+if ( 'custom' === $dds_typography_options ) {
 	$dds_typography = cosmoswp_get_theme_options( 'dd-search-typography' );
 	$dds_typography = json_decode( $dds_typography, true );
 
@@ -2110,7 +2110,7 @@ if ( strpos( $ns_shadow_css, 'px' ) !== false ) {
 }
 // typography.
 $ns_typography_options = cosmoswp_get_theme_options( 'normal-search-typography-options' );
-if ( 'custom' == $ns_typography_options ) {
+if ( 'custom' === $ns_typography_options ) {
 	$ns_typography  = cosmoswp_get_theme_options( 'normal-search-typography' );
 	$ns_typography  = json_decode( $ns_typography, true );
 	$ns_font_family = cosmoswp_font_family( $ns_typography );
@@ -2485,7 +2485,7 @@ if ( strpos( $button_one_shadow_css, 'px' ) !== false ) {
 }
 // typography.
 $button_one_typography_options = cosmoswp_get_theme_options( 'button-one-typography-options' );
-if ( 'custom' == $button_one_typography_options ) {
+if ( 'custom' === $button_one_typography_options ) {
 	$button_one_typography = cosmoswp_get_theme_options( 'button-one-typography' );
 	$button_one_typography = json_decode( $button_one_typography, true );
 
@@ -2776,7 +2776,7 @@ if ( strpos( $secondary_menu_border_radius, 'px' ) !== false ) {
 }
 // typography.
 $secondary_menu_typography_options = cosmoswp_get_theme_options( 'secondary-menu-typography-options' );
-if ( 'custom' == $secondary_menu_typography_options ) {
+if ( 'custom' === $secondary_menu_typography_options ) {
 	$secondary_menu_typography = cosmoswp_get_theme_options( 'secondary-menu-typography' );
 	$secondary_menu_typography = json_decode( $secondary_menu_typography, true );
 
@@ -3032,7 +3032,7 @@ if ( strpos( $sm_submenu_border_radius, 'px' ) !== false ) {
 }
 // typography.
 $sm_submenu_typography_options = cosmoswp_get_theme_options( 'secondary-menu-submenu-typography-options' );
-if ( 'custom' == $sm_submenu_typography_options ) {
+if ( 'custom' === $sm_submenu_typography_options ) {
 	$sm_submenu_typography = cosmoswp_get_theme_options( 'secondary-menu-submenu-typography' );
 	$sm_submenu_typography = json_decode( $sm_submenu_typography, true );
 
@@ -3368,7 +3368,7 @@ if ( strpos( $primary_menu_border_radius, 'px' ) !== false ) {
 }
 // typography.
 $primary_menu_typography_options = cosmoswp_get_theme_options( 'primary-menu-typography-options' );
-if ( 'custom' == $primary_menu_typography_options ) {
+if ( 'custom' === $primary_menu_typography_options ) {
 	$primary_menu_typography = cosmoswp_get_theme_options( 'primary-menu-typography' );
 	$primary_menu_typography = json_decode( $primary_menu_typography, true );
 
@@ -3625,7 +3625,7 @@ if ( array_key_exists( 'normal-border-radius', $pm_submenu_styling ) ) {
 
 // typography.
 $pm_submenu_typography_options = cosmoswp_get_theme_options( 'primary-menu-submenu-typography-options' );
-if ( 'custom' == $pm_submenu_typography_options ) {
+if ( 'custom' === $pm_submenu_typography_options ) {
 	$pm_submenu_typography = cosmoswp_get_theme_options( 'primary-menu-submenu-typography' );
 	$pm_submenu_typography = json_decode( $pm_submenu_typography, true );
 
@@ -3912,12 +3912,10 @@ if ( strpos( $menu_icon_padding_mobile, 'px' ) !== false ) {
 /* menu icon width */
 $menu_icon_sidebar_width = cosmoswp_get_theme_options( 'menu-icon-sidebar-width' );
 $menu_icon_sidebar_width = json_decode( $menu_icon_sidebar_width, true );
-if ( isset( $menu_icon_sidebar_width['desktop'] ) ) {
+	if ( isset( $menu_icon_sidebar_width['desktop'] ) ) {
 	$menu_icon_sidebar_width_d_val = '';
 	if ( ! empty( $menu_icon_sidebar_width['desktop'] ) ) {
 		$menu_icon_sidebar_width_d_val = $menu_icon_sidebar_width['desktop'] . 'px;';
-	} elseif ( $menu_icon_sidebar_width['desktop'] === 0 ) {
-		$menu_icon_sidebar_width_d_val = '0px;';
 	}
 	if ( ! empty( $menu_icon_sidebar_width_d_val ) ) {
 		$menu_icon_sidebar_desktop_css .= 'width:' . $menu_icon_sidebar_width_d_val;
@@ -3941,13 +3939,11 @@ if ( isset( $menu_icon_sidebar_width['desktop'] ) ) {
         }';
 	}
 }
-if ( isset( $menu_icon_sidebar_width['tablet'] ) ) {
+	if ( isset( $menu_icon_sidebar_width['tablet'] ) ) {
 
 	$menu_icon_sidebar_width_t_val = '';
 	if ( ! empty( $menu_icon_sidebar_width['tablet'] ) ) {
 		$menu_icon_sidebar_width_t_val = $menu_icon_sidebar_width['tablet'] . 'px;';
-	} elseif ( $menu_icon_sidebar_width['tablet'] === 0 ) {
-		$menu_icon_sidebar_width_t_val = '0px;';
 	}
 	if ( ! empty( $menu_icon_sidebar_width_t_val ) ) {
 		$menu_icon_sidebar_tablet_css .= 'width:' . $menu_icon_sidebar_width_t_val;
@@ -3971,13 +3967,11 @@ if ( isset( $menu_icon_sidebar_width['tablet'] ) ) {
         }';
 	}
 }
-if ( isset( $menu_icon_sidebar_width['mobile'] ) ) {
+	if ( isset( $menu_icon_sidebar_width['mobile'] ) ) {
 
 	$menu_icon_sidebar_width_m_val = '';
 	if ( ! empty( $menu_icon_sidebar_width['mobile'] ) ) {
 		$menu_icon_sidebar_width_m_val = $menu_icon_sidebar_width['mobile'] . 'px;';
-	} elseif ( $menu_icon_sidebar_width['mobile'] === 0 ) {
-		$menu_icon_sidebar_width_m_val = '0px;';
 	}
 	if ( ! empty( $menu_icon_sidebar_width_m_val ) ) {
 		$menu_icon_sidebar_css    .= 'width:' . $menu_icon_sidebar_width_m_val;
@@ -4198,7 +4192,7 @@ if ( strpos( $menu_icon_padding_mobile, 'px' ) !== false ) {
 
 // typography.
 $menu_icon_typography_options = cosmoswp_get_theme_options( 'menu-open-icon-typography-options' );
-if ( 'custom' == $menu_icon_typography_options ) {
+if ( 'custom' === $menu_icon_typography_options ) {
 	$menu_icon_typography = cosmoswp_get_theme_options( 'menu-open-icon-typography' );
 	$menu_icon_typography = json_decode( $menu_icon_typography, true );
 
@@ -4620,7 +4614,7 @@ if ( strpos( $menu_icon_padding_mobile, 'px' ) !== false ) {
 
 // typography.
 $menu_icon_typography_options = cosmoswp_get_theme_options( 'menu-icon-close-text-typography-options' );
-if ( 'custom' == $menu_icon_typography_options ) {
+if ( 'custom' === $menu_icon_typography_options ) {
 	$menu_icon_typography = cosmoswp_get_theme_options( 'menu-icon-close-text-typography' );
 	$menu_icon_typography = json_decode( $menu_icon_typography, true );
 
@@ -4989,7 +4983,7 @@ if ( ! empty( $contact_info_title_color ) ) {
 }
 // typography.
 $contact_title_typography_options = cosmoswp_get_theme_options( 'contact-info-title-typography-options' );
-if ( 'custom' == $contact_title_typography_options ) {
+if ( 'custom' === $contact_title_typography_options ) {
 	$contact_title_typography = cosmoswp_get_theme_options( 'contact-info-title-typography' );
 	$contact_title_typography = json_decode( $contact_title_typography, true );
 
@@ -5090,7 +5084,7 @@ if ( ! empty( $contact_info_subtitle_color ) ) {
 }
 // typography.
 $contact_subtitle_typography_options = cosmoswp_get_theme_options( 'contact-info-subtitle-typography-options' );
-if ( 'custom' == $contact_subtitle_typography_options ) {
+if ( 'custom' === $contact_subtitle_typography_options ) {
 	$contact_subtitle_typography = cosmoswp_get_theme_options( 'contact-info-subtitle-typography' );
 	$contact_subtitle_typography = json_decode( $contact_subtitle_typography, true );
 

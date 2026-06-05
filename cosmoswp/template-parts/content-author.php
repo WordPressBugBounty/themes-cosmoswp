@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<div class="authorbox <?php echo ( 1 != get_option( 'show_avatars' ) ) ? 'no-author-avatar' : ''; ?>">
+<div class="authorbox <?php echo ( 1 !== get_option( 'show_avatars' ) ) ? 'no-author-avatar' : ''; ?>">
 	<?php if ( get_option( 'show_avatars' ) ) : ?>
 		<div class="author-avatar">
 			<?php echo get_avatar( get_the_author_meta( 'user_email' ), '80', '' ); ?>

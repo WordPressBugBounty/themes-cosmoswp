@@ -68,5 +68,7 @@ if ( ! function_exists( 'cosmoswp_before_content_breadcrumb_structure' ) ) :
 		}
 	}
 
-	add_action( 'gutentor_template_before_loop', 'cosmoswp_before_content_breadcrumb_structure' );
+	if ( defined( 'GUTENTOR_URL' ) ) {
+		add_action( 'gutentor_template_before_loop', 'cosmoswp_before_content_breadcrumb_structure' );
+	}
 endif;

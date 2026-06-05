@@ -62,13 +62,11 @@ require cosmoswp_file_directory( 'inc/functions/custom-functions.php' );/*checke
 
 /*
 * file for dynamic css
- * TODO removing $previous_version
 */
 require cosmoswp_file_directory( 'inc/hooks/dynamic-css.php' );
 
 /*
 * file for library
- * TODO removing $previous_version
 */
 require cosmoswp_file_directory( 'inc/library/typography-fonts/typography-fonts.php' );/*checked*/
 

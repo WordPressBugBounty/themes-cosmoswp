@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <html <?php cosmoswp_html_class(); ?> <?php language_attributes(); ?><?php cosmoswp_schema_markup( 'html' ); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php wp_head(); ?>
 </head>
 

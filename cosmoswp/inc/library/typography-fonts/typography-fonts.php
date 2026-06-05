@@ -77,7 +77,7 @@ class CosmosWP_Typography_Fonts {
 				WP_Filesystem();
 			}
 			$file = get_template_directory() . '/inc/library/typography-fonts/webfonts.json';
-			if ( file_exists( $file ) ) {
+			if ( file_exists( $file ) && $wp_filesystem ) {
 				$google_fonts = $wp_filesystem->get_contents( $file );
 				$google_fonts = json_decode( $google_fonts, true );
 

@@ -86,7 +86,7 @@ if ( ! function_exists( 'cosmoswp_add_icons_array' ) ) {
 	 * return array
 	 */
 	function cosmoswp_add_icons_array( $fa_icon_list_array ) {
-		if ( ! defined( 'GUTENTOR_URL' ) ) {
+		if ( ! defined( 'GUTENTOR_URL' ) || ! function_exists( 'gutentor_get_options' ) ) {
 			return $fa_icon_list_array;
 		}
 		if ( 4 !== absint( gutentor_get_options( 'gutentor_font_awesome_version' ) ) ) {
@@ -1862,7 +1862,7 @@ if ( ! function_exists( 'cosmoswp_get_correct_fa_font' ) ) {
 			if ( isset( $fa_icon_array[ $fa_icon ] ) ) {
 				$fa_icon = $fa_icon_array[ $fa_icon ];
 			}
-		} elseif ( 4 === absint( gutentor_get_options( 'gutentor_font_awesome_version' ) ) ) {
+		} elseif ( function_exists( 'gutentor_get_options' ) && 4 === absint( gutentor_get_options( 'gutentor_font_awesome_version' ) ) ) {
 			/*it fix all cases on the theme*/
 			return str_replace( 'fas', 'fa', $fa_icon );
 		}

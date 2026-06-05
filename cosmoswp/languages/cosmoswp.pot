@@ -1,15 +1,15 @@
-# Copyright (C) 2025 cosmoswp
+# Copyright (C) 2026 cosmoswp
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: CosmosWP 2.0.3\n"
+"Project-Id-Version: CosmosWP 3.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/cosmoswp\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-09-16T06:09:22+00:00\n"
+"POT-Creation-Date: 2026-06-05T06:19:05+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: cosmoswp\n"
@@ -2264,7 +2264,11 @@ msgstr ""
 msgid " Change Log"
 msgstr ""
 
-#: inc/admin/intro.php:582
+#: inc/admin/intro.php:567
+msgid "Unable to connect to filesystem."
+msgstr ""
+
+#: inc/admin/intro.php:586
 msgid "  Frequently Asked Questions"
 msgstr ""
 
@@ -2304,24 +2308,24 @@ msgid "Unable to connect to the filesystem. Please confirm your credentials."
 msgstr ""
 
 #. Translators: %1$s current user display name.
-#: inc/admin/notice.php:346
+#: inc/admin/notice.php:345
 #, php-format
 msgid "Howdy, %1$s! It seems that you have been using this theme for more than 15 days. We hope you are happy with everything that the theme has to offer. If you can spare a minute, please help us by leaving a 5-star review on WordPress.org.  By spreading the love, we can continue to develop new amazing features in the future, for free!"
 msgstr ""
 
-#: inc/admin/notice.php:358
+#: inc/admin/notice.php:357
 msgid "Sure"
 msgstr ""
 
-#: inc/admin/notice.php:363
+#: inc/admin/notice.php:362
 msgid "Maybe later"
 msgstr ""
 
-#: inc/admin/notice.php:368
+#: inc/admin/notice.php:367
 msgid "I already did"
 msgstr ""
 
-#: inc/admin/notice.php:373
+#: inc/admin/notice.php:372
 msgid "Got theme support question?"
 msgstr ""
 
@@ -2331,13 +2335,13 @@ msgid "Site Banner"
 msgstr ""
 
 #: inc/customizer/advance-banner/advanced-banner-controller.php:111
-#: inc/customizer/advance-banner/advanced-banner-controller.php:239
-#: inc/customizer/advance-banner/advanced-banner-controller.php:259
+#: inc/customizer/advance-banner/advanced-banner-controller.php:240
+#: inc/customizer/advance-banner/advanced-banner-controller.php:260
 msgid "Banner Options"
 msgstr ""
 
-#: inc/customizer/advance-banner/advanced-banner-controller.php:211
-#: inc/customizer/advance-banner/advanced-banner-controller.php:221
+#: inc/customizer/advance-banner/advanced-banner-controller.php:212
+#: inc/customizer/advance-banner/advanced-banner-controller.php:222
 msgid "Banner Setting"
 msgstr ""
 
@@ -2883,8 +2887,8 @@ msgstr ""
 msgid "Footer Builder/Options"
 msgstr ""
 
-#: inc/customizer/footer-options/footer-builder.php:472
-#: inc/customizer/footer-options/footer-builder.php:613
+#: inc/customizer/footer-options/footer-builder.php:475
+#: inc/customizer/footer-options/footer-builder.php:616
 msgid "Create New File "
 msgstr ""
 
@@ -3396,6 +3400,8 @@ msgstr ""
 #: inc/customizer/header-options/header-defaults.php:273
 #: inc/customizer/header-options/header-defaults.php:351
 #: inc/customizer/theme-options/theme-option-controller.php:452
+#: template-parts/header/drop_down_search.php:28
+#: template-parts/header/normal_search.php:20
 msgid "Search"
 msgstr ""
 

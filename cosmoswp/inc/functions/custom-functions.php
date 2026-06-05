@@ -846,7 +846,7 @@ if ( ! function_exists( 'cosmoswp_get_non_empty_categories' ) ) :
 		$cat_list = array();
 
 		// Check if categories were found.
-		if ( ! empty( $categories_list ) ) {
+		if ( ! empty( $categories_list ) && ! is_wp_error( $categories_list ) ) {
 			foreach ( $categories_list as $key ) {
 				$cat_list[ $key->term_id ] = esc_html( ucwords( $key->name ) );
 			}

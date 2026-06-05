@@ -119,7 +119,7 @@ class CosmosWP_Theme_Notice {
 			update_option( 'cosmoswp_admin_notice_' . $notice_type, 1 );
 
 			/*Update to Hide.*/
-			if ( cosmoswp_theme_notice()->notice_type === $_GET['cosmoswp-gsm-hide-notice'] ) {
+			if ( cosmoswp_theme_notice()->notice_type === $notice_type ) {
 				update_option( 'cosmoswp_admin_notice_' . $notice_type, 1 );
 			} else { // Show.
 				delete_option( 'cosmoswp_admin_notice_' . $notice_type );
@@ -322,8 +322,7 @@ class CosmosWP_Theme_Notice {
 	 */
 	public function display_review_notice() {
 
-		global $current_user;
-		$user_id                  = $current_user->ID;
+		$user_id                  = get_current_user_id();
 		$ignored_notice           = get_user_meta( $user_id, 'remove_theme_review_notice', true );
 		$ignored_notice_partially = get_user_meta( $user_id, 'nag_remove_theme_review_notice_partially', true );
 
@@ -347,7 +346,7 @@ class CosmosWP_Theme_Notice {
 						'Howdy, %1$s! It seems that you have been using this theme for more than 15 days. We hope you are happy with everything that the theme has to offer. If you can spare a minute, please help us by leaving a 5-star review on WordPress.org.  By spreading the love, we can continue to develop new amazing features in the future, for free!',
 						'cosmoswp'
 					),
-					'<strong>' . esc_html( $current_user->display_name ) . '</strong>'
+					'<strong>' . esc_html( get_userdata( $user_id )->display_name ) . '</strong>'
 				);
 				?>
 			</p>
@@ -358,12 +357,12 @@ class CosmosWP_Theme_Notice {
 					<span><?php esc_html_e( 'Sure', 'cosmoswp' ); ?></span>
 				</a>
 
-				<a href="?nag_remove_theme_review_notice_partially=0" class="btn cosmoswp-danger-btn">
+				<a href="?nag_remove_theme_review_notice_partially=0&cosmoswp_review_nonce=<?php echo esc_attr( wp_create_nonce( 'cosmoswp_review_notice_nonce' ) ); ?>" class="btn cosmoswp-danger-btn">
 					<span class="dashicons dashicons-calendar"></span>
 					<span><?php esc_html_e( 'Maybe later', 'cosmoswp' ); ?></span>
 				</a>
 
-				<a href="?nag_remove_theme_review_notice=0" class="btn cosmoswp-success-btn">
+				<a href="?nag_remove_theme_review_notice=0&cosmoswp_review_nonce=<?php echo esc_attr( wp_create_nonce( 'cosmoswp_review_notice_nonce' ) ); ?>" class="btn cosmoswp-success-btn">
 					<span class="dashicons dashicons-smiley"></span>
 					<span><?php esc_html_e( 'I already did', 'cosmoswp' ); ?></span>
 				</a>
@@ -374,7 +373,7 @@ class CosmosWP_Theme_Notice {
 				</a>
 			</div>
 
-			<a class="notice-dismiss" style="text-decoration:none;" href="?nag_remove_theme_review_notice_partially=0"></a>
+			<a class="notice-dismiss" style="text-decoration:none;" href="?nag_remove_theme_review_notice_partially=0&cosmoswp_review_nonce=<?php echo esc_attr( wp_create_nonce( 'cosmoswp_review_notice_nonce' ) ); ?>"></a>
 		</div>
 		<?php
 	}
@@ -387,11 +386,18 @@ class CosmosWP_Theme_Notice {
 	 */
 	public function remove_theme_review_notice() {
 
-		global $current_user;
-		$user_id = $current_user->ID;
+		if ( ! isset( $_GET['cosmoswp_review_nonce'] ) || ! wp_verify_nonce( wp_unslash( $_GET['cosmoswp_review_nonce'] ), 'cosmoswp_review_notice_nonce' ) ) {
+			return;
+		}
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		$user_id = get_current_user_id();
 
 		/* If user clicks to ignore the notice, add info to user meta */
-		if ( isset( $_GET['nag_remove_theme_review_notice'] ) && '0' == $_GET['nag_remove_theme_review_notice'] ) {
+		if ( isset( $_GET['nag_remove_theme_review_notice'] ) && '0' === sanitize_text_field( wp_unslash( $_GET['nag_remove_theme_review_notice'] ) ) ) {
 			add_user_meta( $user_id, 'remove_theme_review_notice', 'true', true );
 		}
 	}
@@ -404,11 +410,18 @@ class CosmosWP_Theme_Notice {
 	 */
 	public function remove_theme_review_notice_partially() {
 
-		global $current_user;
-		$user_id = $current_user->ID;
+		if ( ! isset( $_GET['cosmoswp_review_nonce'] ) || ! wp_verify_nonce( wp_unslash( $_GET['cosmoswp_review_nonce'] ), 'cosmoswp_review_notice_nonce' ) ) {
+			return;
+		}
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		$user_id = get_current_user_id();
 
 		/* If user clicks to ignore the notice, add that to their user meta */
-		if ( isset( $_GET['nag_remove_theme_review_notice_partially'] ) && '0' == $_GET['nag_remove_theme_review_notice_partially'] ) {
+		if ( isset( $_GET['nag_remove_theme_review_notice_partially'] ) && '0' === sanitize_text_field( wp_unslash( $_GET['nag_remove_theme_review_notice_partially'] ) ) ) {
 			update_user_meta( $user_id, 'nag_remove_theme_review_notice_partially', time() );
 		}
 	}
@@ -421,8 +434,7 @@ class CosmosWP_Theme_Notice {
 	 */
 	public function remove_review_notice() {
 
-		global $current_user;
-		$user_id                  = $current_user->ID;
+		$user_id                  = get_current_user_id();
 		$theme_installed_time     = get_option( 'cosmoswp_theme_installed_time' );
 		$ignored_notice           = get_user_meta( $user_id, 'remove_theme_review_notice', true );
 		$ignored_notice_partially = get_user_meta( $user_id, 'nag_remove_theme_review_notice_partially', true );
@@ -449,7 +461,7 @@ class CosmosWP_Theme_Notice {
 	 * Enqueue the required CSS file for theme review notice on admin page.
 	 */
 	public function review_notice_enqueue() {
-		wp_enqueue_style( 'cosmoswp-review-notice', COSMOSWP_URL . '/inc/admin/notice.css', array(), COSMOSWP_VERSION );
+		wp_enqueue_style( 'cosmoswp-review-notice', COSMOSWP_URL . '/build/admin/notice/index.css', array(), COSMOSWP_VERSION );
 	}
 }
 

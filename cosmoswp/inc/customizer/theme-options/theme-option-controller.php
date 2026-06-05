@@ -531,7 +531,7 @@ if ( ! class_exists( 'CosmosWP_Theme_Options_Controller' ) ) :
 				$icon_spacer    = cosmoswp_get_icon_four_position_class( $icon_position );
 			}
 			?>
-			<a href="#" class="cwp-scroll-to-top <?php echo esc_attr( cosmoswp_string_concator( $scroll_top_position, $icon_spacer, $display_scroll_top_mobile ) ); ?>"><span class="cwp-scroll-top-wrap"><?php echo $icon_structure; //phpcs:ignore ?></span></a>
+			<a href="#" class="cwp-scroll-to-top <?php echo esc_attr( cosmoswp_string_concator( $scroll_top_position, $icon_spacer, $display_scroll_top_mobile ) ); ?>"><span class="cwp-scroll-top-wrap"><?php echo $icon_structure; //phpcs:ignore -- Escaped at source in cosmoswp_get_icon_structure(). ?></span></a>
 			<?php
 		}
 

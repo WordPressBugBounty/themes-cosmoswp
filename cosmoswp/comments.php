@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * return early without loading the comments.
  */
 $cosmoswp_hide_comment = cosmoswp_get_theme_options( 'cosmoswp-hide-comment' );
-if ( post_password_required() || 1 == $cosmoswp_hide_comment ) {
+if ( post_password_required() || 1 === $cosmoswp_hide_comment ) {
 	return;
 }
 ?><div id="comments" class="comments-area">
@@ -36,14 +36,14 @@ if ( post_password_required() || 1 == $cosmoswp_hide_comment ) {
 				printf(
 				/* translators: 1: title. */
 					esc_html__( 'One thought on &ldquo;%1$s&rdquo;', 'cosmoswp' ),
-					'<span>' . get_the_title() . '</span>'//phpcs:ignore
+					'<span>' . esc_html( get_the_title() ) . '</span>'
 				);
 			} else {
 				printf( // WPCS: XSS OK.
 				/* translators: 1: comment count number, 2: title. */
 					esc_html( _nx( '%1$s thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', $comment_count, 'comments title', 'cosmoswp' ) ),
 					esc_html( number_format_i18n( $comment_count ) ),
-					'<span>' . get_the_title() . '</span>'//phpcs:ignore
+					'<span>' . esc_html( get_the_title() ) . '</span>'
 				);
 			}
 			?>

@@ -246,7 +246,7 @@ if ( ! class_exists( 'CosmosWP_Custom_Meta_Box' ) ) :
 					<label class="components-base-control__label"><?php echo esc_html__( 'General Site Layout', 'cosmoswp' ); ?></label>
 					<select name="cosmoswp_site_layout" id="cosmoswp_site_layout" class="components-select-control__input">
 						<?php foreach ( $cosmoswp_site_layout_options as $key => $value ) { ?>
-							<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $key, $cosmoswp_site_layout ); ?>><?php echo $value; ?></option>
+							<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $key, $cosmoswp_site_layout ); ?>><?php echo esc_html( $value ); ?></option>
 						<?php } // end foreach ?>
 					</select>   				
 
@@ -255,7 +255,7 @@ if ( ! class_exists( 'CosmosWP_Custom_Meta_Box' ) ) :
 					<label class="components-base-control__label"><?php echo esc_html__( 'Header Layout', 'cosmoswp' ); ?></label>
 					<select name="cosmoswp_header_layout" id="cosmoswp_header_layout" class="components-select-control__input">
 						<?php foreach ( $cosmoswp_header_layout_options as $key => $value ) { ?>
-							<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $key, $cosmoswp_header_layout ); ?>><?php echo $value; ?></option>
+							<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $key, $cosmoswp_header_layout ); ?>><?php echo esc_html( $value ); ?></option>
 						<?php } // end foreach ?>
 					</select>
 					
@@ -264,7 +264,7 @@ if ( ! class_exists( 'CosmosWP_Custom_Meta_Box' ) ) :
 					<label class="components-base-control__label"><?php echo esc_html__( 'Footer Layout', 'cosmoswp' ); ?></label>
 					<select name="cosmoswp_footer_layout" id="cosmoswp_footer_layout" class="components-select-control__input">
 						<?php foreach ( $cosmoswp_footer_layout_options as $key => $value ) { ?>
-							<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $key, $cosmoswp_footer_layout ); ?>><?php echo $value; ?></option>
+							<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $key, $cosmoswp_footer_layout ); ?>><?php echo esc_html( $value ); ?></option>
 						<?php } // end foreach ?>
 					</select>  
 					
@@ -276,7 +276,7 @@ if ( ! class_exists( 'CosmosWP_Custom_Meta_Box' ) ) :
 						<label class="components-base-control__label"><?php echo esc_html__( 'Sidebar', 'cosmoswp' ); ?></label>
 						<select name="cosmoswp_sidebar_options" id="cosmoswp_sidebar_options" class="components-select-control__input">
 							<?php foreach ( $cosmoswp_sidebar_options_options as $key => $value ) { ?>
-								<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $key, $cosmoswp_sidebar_options ); ?>><?php echo $value; ?></option>
+								<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $key, $cosmoswp_sidebar_options ); ?>><?php echo esc_html( $value ); ?></option>
 							<?php } // end foreach ?>
 						</select>
 
@@ -304,14 +304,14 @@ if ( ! class_exists( 'CosmosWP_Custom_Meta_Box' ) ) :
 			 * */
 			if (
 				! isset( $_POST['cosmoswp_meta_nonce'] ) ||
-				! wp_verify_nonce( $_POST['cosmoswp_meta_nonce'], basename( __FILE__ ) ) || /*Protecting against unwanted requests*/
+				! wp_verify_nonce( wp_unslash( $_POST['cosmoswp_meta_nonce'] ), basename( __FILE__ ) ) || /*Protecting against unwanted requests*/
 				( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || /*Dealing with autosaves*/
 				! current_user_can( 'edit_post', $post_id )/*Verifying access rights*/
 			) {
 				return;
 			}
 
-			if ( 'page' === $_POST['post_type'] ) {
+			if ( 'page' === sanitize_text_field( wp_unslash( $_POST['post_type'] ) ) ) {
 				if ( ! current_user_can( 'edit_page', $post_id ) ) {
 					return $post_id;
 				}
@@ -323,10 +323,10 @@ if ( ! class_exists( 'CosmosWP_Custom_Meta_Box' ) ) :
 			// site layout.
 			if ( isset( $_POST['cosmoswp_site_layout'] ) ) {
 				$old = get_post_meta( $post_id, 'cosmoswp_site_layout', true );
-				$new = sanitize_text_field( $_POST['cosmoswp_site_layout'] );
-				if ( $new && $new != $old ) {
+				$new = sanitize_text_field( wp_unslash( $_POST['cosmoswp_site_layout'] ) );
+				if ( $new && $new !== $old ) {
 					update_post_meta( $post_id, 'cosmoswp_site_layout', $new );
-				} elseif ( '' == $new && $old ) {
+				} elseif ( '' === $new && $old ) {
 					delete_post_meta( $post_id, 'cosmoswp_site_layout', $old );
 				}
 			}
@@ -334,10 +334,10 @@ if ( ! class_exists( 'CosmosWP_Custom_Meta_Box' ) ) :
 			// sidebar layout.
 			if ( isset( $_POST['cosmoswp_sidebar_options'] ) ) {
 				$old = get_post_meta( $post_id, 'cosmoswp_sidebar_options', true );
-				$new = sanitize_text_field( $_POST['cosmoswp_sidebar_options'] );
-				if ( $new && $new != $old ) {
+				$new = sanitize_text_field( wp_unslash( $_POST['cosmoswp_sidebar_options'] ) );
+				if ( $new && $new !== $old ) {
 					update_post_meta( $post_id, 'cosmoswp_sidebar_options', $new );
-				} elseif ( '' == $new && $old ) {
+				} elseif ( '' === $new && $old ) {
 					delete_post_meta( $post_id, 'cosmoswp_sidebar_options', $old );
 				}
 			}
@@ -345,10 +345,10 @@ if ( ! class_exists( 'CosmosWP_Custom_Meta_Box' ) ) :
 			// header layout.
 			if ( isset( $_POST['cosmoswp_header_layout'] ) ) {
 				$old = get_post_meta( $post_id, 'cosmoswp_header_layout', true );
-				$new = sanitize_text_field( $_POST['cosmoswp_header_layout'] );
-				if ( $new && $new != $old ) {
+				$new = sanitize_text_field( wp_unslash( $_POST['cosmoswp_header_layout'] ) );
+				if ( $new && $new !== $old ) {
 					update_post_meta( $post_id, 'cosmoswp_header_layout', $new );
-				} elseif ( '' == $new && $old ) {
+				} elseif ( '' === $new && $old ) {
 					delete_post_meta( $post_id, 'cosmoswp_header_layout', $old );
 				}
 			}
@@ -356,10 +356,10 @@ if ( ! class_exists( 'CosmosWP_Custom_Meta_Box' ) ) :
 			// Footer layout.
 			if ( isset( $_POST['cosmoswp_footer_layout'] ) ) {
 				$old = get_post_meta( $post_id, 'cosmoswp_footer_layout', true );
-				$new = sanitize_text_field( $_POST['cosmoswp_footer_layout'] );
-				if ( $new && $new != $old ) {
+				$new = sanitize_text_field( wp_unslash( $_POST['cosmoswp_footer_layout'] ) );
+				if ( $new && $new !== $old ) {
 					update_post_meta( $post_id, 'cosmoswp_footer_layout', $new );
-				} elseif ( '' == $new && $old ) {
+				} elseif ( '' === $new && $old ) {
 					delete_post_meta( $post_id, 'cosmoswp_footer_layout', $old );
 				}
 			}

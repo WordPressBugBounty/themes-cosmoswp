@@ -19,9 +19,9 @@ $breadcrumb_after_banner  = cosmoswp_get_theme_options( 'breadcrumb-after-banner
 $banner_title_align       = cosmoswp_get_theme_options( 'banner-section-title-align' );
 $banner_content_position  = cosmoswp_get_theme_options( 'banner-section-content-position' );
 $banner_display_option    = cosmoswp_get_theme_options( 'banner-section-display' );
-$enable_banner            = 'color' != $banner_display_option && cosmoswp_get_theme_options( 'enable-banner-overlay-color' ) ? 'cwp-enable-overlay' : '';
+$enable_banner            = 'color' !== $banner_display_option && cosmoswp_get_theme_options( 'enable-banner-overlay-color' ) ? 'cwp-enable-overlay' : '';
 $banner_image_url         = apply_filters( 'cosmoswp_banner_image', get_header_image() );
-if ( 'bg-image' == $banner_display_option ) {
+if ( 'bg-image' === $banner_display_option ) {
 	$bg_image = 'style=background-image:url("' . esc_url( $banner_image_url ) . '");';
 }
 ?>
@@ -34,7 +34,7 @@ if ( 'bg-image' == $banner_display_option ) {
 	} elseif ( 'normal-image' === $banner_display_option ) {
 		$banner_type              = 'has-normal-image';
 		$the_custom_header_markup = apply_filters( 'cosmoswp_custom_header_markup', get_custom_header_markup() );
-		echo $the_custom_header_markup;//phpcs:ignore
+		echo $the_custom_header_markup; //phpcs:ignore -- Output of get_custom_header_markup(), escaped by WordPress core.
 	} elseif ( 'bg-image' === $banner_display_option ) {
 		$banner_type = 'has-bg-image';
 	} elseif ( 'color' === $banner_display_option ) {

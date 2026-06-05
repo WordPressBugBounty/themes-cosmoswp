@@ -19,19 +19,19 @@ $si_logo_position = json_decode( $si_logo_position, true );
 
 // desktop position.
 $si_logo_position_desktop = cosmoswp_responsive_button_value( $si_logo_position, 'desktop' );
-$si_logo_position_desktop = $si_logo_position_desktop != 'cwp-default-desktop' ? $si_logo_position_desktop : '';
+$si_logo_position_desktop = $si_logo_position_desktop !== 'cwp-default-desktop' ? $si_logo_position_desktop : '';
 
 // tablet position.
 $si_logo_position_tablet = cosmoswp_responsive_button_value( $si_logo_position, 'tablet' );
-$si_logo_position_tablet = $si_logo_position_tablet != 'cwp-default-tablet' ? $si_logo_position_tablet : '';
+$si_logo_position_tablet = $si_logo_position_tablet !== 'cwp-default-tablet' ? $si_logo_position_tablet : '';
 
 
 // mobile position.
 $si_logo_position_mobile = cosmoswp_responsive_button_value( $si_logo_position, 'mobile' );
-$si_logo_position_mobile = $si_logo_position_mobile != 'cwp-default-mobile' ? $si_logo_position_mobile : '';
+$si_logo_position_mobile = $si_logo_position_mobile !== 'cwp-default-mobile' ? $si_logo_position_mobile : '';
 
 
-if ( empty( $si_sorting_element ) ) {
+if ( empty( $si_sorting_element ) || ! is_array( $si_sorting_element ) ) {
 	$si_logo_position_desktop = '';
 	$si_logo_position_tablet  = '';
 	$si_logo_position_mobile  = '';
@@ -53,7 +53,7 @@ $si_align_tablet = ( 'cwp-default-tablet' !== $si_align_tablet ) ? $si_align_tab
 
 // mobile align.
 $si_align_mobile = cosmoswp_responsive_button_value( $si_align, 'mobile' );
-$si_align_mobile = ( 'cwp-default-tablet' !== $si_align_mobile ) ? $si_align_mobile : '';
+$si_align_mobile = ( 'cwp-default-mobile' !== $si_align_mobile ) ? $si_align_mobile : '';
 
 ?>
 <!-- Start of .logo -->
@@ -64,7 +64,8 @@ $si_align_mobile = ( 'cwp-default-tablet' !== $si_align_mobile ) ? $si_align_mob
 		the_custom_logo();
 	}
 	echo '<span>';
-	foreach ( $si_sorting_element as $key => $element ) {
+	if ( is_array( $si_sorting_element ) ) {
+		foreach ( $si_sorting_element as $key => $element ) {
 		if ( 'site-title' === $element ) {
 
 			if ( is_front_page() && is_home() ) :
@@ -83,6 +84,7 @@ $si_align_mobile = ( 'cwp-default-tablet' !== $si_align_mobile ) ? $si_align_mob
 			<p class="site-description logo-tagline"><?php bloginfo( 'description' ); ?></p>
 			<?php
 		}
+	}
 	}
 	echo '</span>';
 	?>

@@ -233,8 +233,10 @@ if ( ! class_exists( 'CosmosWP_Dynamic_CSS' ) ) :
 			$dir        = trailingslashit( $upload_dir['basedir'] ) . 'cosmoswp' . DIRECTORY_SEPARATOR;
 
 			WP_Filesystem();
-			$wp_filesystem->mkdir( $dir );
-			$wp_filesystem->put_contents( $dir . 'dynamic-style.css', $output, 0644 );
+			if ( $wp_filesystem ) {
+				$wp_filesystem->mkdir( $dir );
+				$wp_filesystem->put_contents( $dir . 'dynamic-style.css', $output, 0644 );
+			}
 			$out = ob_get_clean();
 		}
 

@@ -34,7 +34,7 @@ $copyright_allowed_tags = array(
 <!-- Start of .cwp-copyright -->
 <div class="cwp-footer-copyright <?php echo esc_attr( cosmoswp_string_concator( $copyright_align__align_desktop, $copyright_align__align_tablet, $copyright_align__align_mobile ) ); ?>">
 	<?php
-	echo apply_filters( 'cosmoswp_footer_copyright', wp_kses_post( cosmoswp_str_replace_assoc( $copyright_allowed_tags, $copyright_content ) ) );//phpcs:ignore
+	echo wp_kses_post( apply_filters( 'cosmoswp_footer_copyright', wp_kses_post( cosmoswp_str_replace_assoc( $copyright_allowed_tags, $copyright_content ) ) ) );
 	?>
 </div>
 <!-- End of .cwp-copyright -->

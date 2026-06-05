@@ -541,14 +541,14 @@ if ( ! class_exists( 'CosmosWP_Editor_Style' ) ) :
 
 			if ( is_array( $dynamic_css ) ) {
 				foreach ( $dynamic_css as $screen => $css ) {
-					if ( 'all' == $screen ) {
+					if ( 'all' === $screen ) {
 
 						if ( is_array( $css ) ) {
 							$get_dnc_css .= implode( ' ', $css );
 						} else {
 							$get_dnc_css .= $css;
 						}
-					} elseif ( 'tablet' == $screen ) {
+					} elseif ( 'tablet' === $screen ) {
 
 						$get_dnc_css .= '@media (min-width: 720px) {';
 						if ( is_array( $css ) ) {
@@ -557,7 +557,7 @@ if ( ! class_exists( 'CosmosWP_Editor_Style' ) ) :
 							$get_dnc_css .= $css;
 						}
 						$get_dnc_css .= '}';
-					} elseif ( 'desktop' == $screen ) {
+					} elseif ( 'desktop' === $screen ) {
 
 						$get_dnc_css .= '@media (min-width: 992px) {';
 						if ( is_array( $css ) ) {

@@ -76,7 +76,7 @@ if ( ! function_exists( 'cosmoswp_widget_init' ) ) {
  * @return bool
  */
 function cosmoswp_customizer_footer_sidebar_force_display( $active, $section ) {
-	if ( strpos( $section->id, 'footer-sidebar-' ) ) {
+	if ( false !== strpos( $section->id, 'footer-sidebar-' ) ) {
 		$active = true;
 	}
 	return $active;

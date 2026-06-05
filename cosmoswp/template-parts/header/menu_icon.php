@@ -32,6 +32,6 @@ if ( 'text' === $icon_type ) {
 ?>
 <!-- Start of .menu-push-btn -->
 <span class="cwp-menu-icon-btn cwp-toggle-btn <?php echo esc_attr( cosmoswp_string_concator( $icon_spacer, $menu_icon_align ) ); ?>">
-	<a class="cwp-toggle-btn-text" href="#" id="cwp-menu-icon-btn-text"><?php echo $icon_structure;//phpcs:ignore ?></a>
+	<a class="cwp-toggle-btn-text" href="#" id="cwp-menu-icon-btn-text"><?php echo $icon_structure; //phpcs:ignore -- Escaped at source in cosmoswp_get_icon_structure(). ?></a>
 </span>
 <!-- Start of .menu-push-btn -->

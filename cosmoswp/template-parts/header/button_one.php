@@ -47,12 +47,12 @@ $button_align_tablet = cosmoswp_responsive_button_value( $button_align, 'tablet'
 
 // mobile align.
 $button_align_mobile = cosmoswp_responsive_button_value( $button_align, 'mobile' );
-if ( ! empty( $button_text ) || ( $enable_icon != false ) ) {
+if ( ! empty( $button_text ) || ( $enable_icon !== false ) ) {
 	?>
 	<!-- Start of .cwp-header-button -->
 	<span class="cwp-header-button cwp-button-one <?php echo esc_attr( cosmoswp_string_concator( $button_align_desktop, $button_align_tablet, $button_align_mobile, $icon_spacer, $button_css_class ) ); ?> ">
 		<a href="<?php echo esc_attr( $button_link ); ?>" <?php echo esc_attr( $target_blank ); ?>
-			class="btn btn-primary"><?php echo $button_one_structure;//phpcs:ignore ?></a>
+			class="btn btn-primary"><?php echo $button_one_structure; //phpcs:ignore -- Escaped at source in cosmoswp_get_button_structure(). ?></a>
 	</span>
 	<!-- End of .cwp-header-button -->
 	<?php

@@ -121,7 +121,7 @@ if ( ! function_exists( 'cosmoswp_edd_sorting' ) ) {
 			'price'      => __( 'Sort by price: low to high', 'cosmoswp' ),
 			'price-desc' => __( 'Sort by price: high to low', 'cosmoswp' ),
 		);
-		$selected = isset( $_GET['sortby'] ) ? $_GET['sortby'] : 'date';
+		$selected = isset( $_GET['sortby'] ) ? sanitize_text_field( wp_unslash( $_GET['sortby'] ) ) : 'date';
 
 		$sorting_html
 		= '<div class="sorting-wrap">
@@ -162,21 +162,21 @@ if ( ! function_exists( 'edd_filter_products_by_permalink' ) ) {
 		) {
 
 			if ( isset( $_GET['sortby'] ) && ! empty( $_GET['sortby'] ) ) {
-				$sort = $_GET['sortby'];
+				$sort = sanitize_text_field( wp_unslash( $_GET['sortby'] ) );
 				if ( $sort === 'date' ) {
 					$query->set( 'order', 'DESC' );
-					$query->set( 'orderby ', 'date' );
+					$query->set( 'orderby', 'date' );
 				} elseif ( $sort === 'date-asc' ) {
 					$query->set( 'order', 'ASC' );
-					$query->set( 'orderby ', 'date' );
+					$query->set( 'orderby', 'date' );
 
 				} elseif ( $sort === 'a-z' ) {
 					$query->set( 'order', 'ASC' );
-					$query->set( 'orderby ', 'title' );
+					$query->set( 'orderby', 'title' );
 
 				} elseif ( $sort === 'z-a' ) {
 					$query->set( 'order', 'DESC' );
-					$query->set( 'orderby ', 'title' );
+					$query->set( 'orderby', 'title' );
 
 				} elseif ( $sort === 'price' ) {
 					$query->set( 'order', 'ASC' );

@@ -112,7 +112,7 @@ if ( ! class_exists( 'CosmosWP_Advanced_Banner_Controller' ) ) :
 					<select name="cosmoswp_banner_options_layout" id="cosmoswp_banner_options_layout"
 							class="components-select-control__input">
 						<?php foreach ( $cosmoswp_site_layout_options as $key => $value ) { ?>
-							<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $key, $cosmoswp_site_layout ); ?>><?php echo $value; ?></option>
+							<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $key, $cosmoswp_site_layout ); ?>><?php echo esc_html( $value ); ?></option>
 						<?php } // end foreach ?>
 					</select>
 				</div>
@@ -138,14 +138,14 @@ if ( ! class_exists( 'CosmosWP_Advanced_Banner_Controller' ) ) :
 
 			if (
 				! isset( $_POST['cosmoswp_advanced_banner_meta_nonce'] ) ||
-				! wp_verify_nonce( $_POST['cosmoswp_advanced_banner_meta_nonce'], basename( __FILE__ ) ) || /*Protecting against unwanted requests*/
+				! wp_verify_nonce( wp_unslash( $_POST['cosmoswp_advanced_banner_meta_nonce'] ), basename( __FILE__ ) ) || /*Protecting against unwanted requests*/
 				( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || /*Dealing with autosaves*/
 				! current_user_can( 'edit_post', $post_id )/*Verifying access rights*/
 			) {
 				return;
 			}
 
-			if ( 'page' == $_POST['post_type'] ) {
+			if ( 'page' === sanitize_text_field( wp_unslash( $_POST['post_type'] ) ) ) {
 				if ( ! current_user_can( 'edit_page', $post_id ) ) {
 					return $post_id;
 				}
@@ -157,15 +157,16 @@ if ( ! class_exists( 'CosmosWP_Advanced_Banner_Controller' ) ) :
 			// Banner layout.
 			if ( isset( $_POST['cosmoswp_banner_options_layout'] ) ) {
 				$old = get_post_meta( $post_id, 'cosmoswp_banner_options_layout', true );
-				$new = esc_attr( $_POST['cosmoswp_banner_options_layout'] );
-				if ( $new && $new != $old ) {
+				$new = sanitize_text_field( wp_unslash( $_POST['cosmoswp_banner_options_layout'] ) );
+				if ( $new && $new !== $old ) {
 					update_post_meta( $post_id, 'cosmoswp_banner_options_layout', $new );
-				} elseif ( '' == $new && $old ) {
+				} elseif ( '' === $new && $old ) {
 					delete_post_meta( $post_id, 'cosmoswp_banner_options_layout', $old );
 				}
 			}
 
-			do_action( 'cosmoswp_banner_save_meta_fields', $post_id, $post, $_POST );
+			$filtered_post = array_map( 'sanitize_text_field', wp_unslash( $_POST ) );
+			do_action( 'cosmoswp_banner_save_meta_fields', $post_id, $post, $filtered_post );
 		}
 
 

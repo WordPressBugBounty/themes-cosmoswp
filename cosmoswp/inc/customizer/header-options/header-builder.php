@@ -513,6 +513,9 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 		 * @param array $column_elements Columns elements.
 		 */
 		public function column_elements( $column_elements ) {
+			if ( ! is_array( $column_elements ) || empty( $column_elements ) ) {
+				return;
+			}
 			echo '<div class="grid-container"><div class="grid-row">';
 			$added_elements_ids = array();
 			$max_col            = 12;
@@ -631,7 +634,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 				<div id="cwp-header-menu-sidebar" class="cwp-header-menu-sidebar <?php echo esc_attr( cosmoswp_string_concator( $menu_display_style, $icon_spacer, $menu_icon_align ) ); ?>">
 					<div class="cwp-close-btn-box">
 						<a class="cwp-close-btn" href="#">
-                            <?php echo $icon_structure; //phpcs:ignore ?>
+                            <?php echo $icon_structure; //phpcs:ignore -- Escaped at source in cosmoswp_get_icon_structure(). ?>
 						</a>
 					</div>
 					<?php
@@ -649,7 +652,7 @@ if ( ! class_exists( 'CosmosWP_Header_Builder' ) ) :
 					}
 					?>
 					<div class="screen-reader-text">
-						<a class="cwp-hms-last-focus" href="#"><?php echo $icon_structure; ?></a>
+						<a class="cwp-hms-last-focus" href="#"><?php echo $icon_structure; //phpcs:ignore -- Escaped at source in cosmoswp_get_icon_structure(). ?></a>
 					</div>
 				</div>
 				<?php

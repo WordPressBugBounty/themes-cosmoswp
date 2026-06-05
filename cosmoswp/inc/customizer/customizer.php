@@ -981,7 +981,7 @@ add_action( 'customize_preview_init', 'cosmoswp_customize_preview_js' );
 function cosmoswp_customize_controls_scripts() {
 
 	/* Atomic css */
-	wp_register_style( 'atomic', COSMOSWP_URL . '/assets/library/atomic-css/atomic.min.css', array(), COSMOSWP_VERSION );
+	wp_register_style( 'atomic', COSMOSWP_URL . '/assets/library/atomic-css/atomic.min.css', array(), '1.0.0' );
 
 	/* Atomic CSS */
 	wp_enqueue_style( 'atomic' );
@@ -992,11 +992,11 @@ function cosmoswp_customize_controls_scripts() {
 			'fontawesome', // Handle.
 			GUTENTOR_URL . '/assets/library/fontawesome/css/all' . GUTENTOR_SCRIPT_PREFIX . '.css',
 			array(),
-			'5'
+			'5.12.0'
 		);
 	} else {
 		/*Font-Awesome-master*/
-		wp_enqueue_style( 'fontawesome', COSMOSWP_URL . '/assets/library/Font-Awesome/css/all' . COSMOSWP_SCRIPT_PREFIX . '.css', array(), '5.8.1' );
+		wp_enqueue_style( 'fontawesome', COSMOSWP_URL . '/assets/library/Font-Awesome/css/all' . COSMOSWP_SCRIPT_PREFIX . '.css', array(), '5.12.0' );
 	}
 
 	/*Scripts dependency files*/

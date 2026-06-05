@@ -297,7 +297,7 @@ if ( ! function_exists( 'cosmoswp_sanitize_field_default_css_box' ) ) :
 		if ( ! empty( $input_decoded ) ) {
 			foreach ( $input_decoded as $device_id => $device_details ) {
 				foreach ( $device_details as $key => $value ) {
-					if ( 'cssbox_link' == $key ) {
+					if ( 'cssbox_link' === $key ) {
 						$output[ $device_id ][ $key ] = cosmoswp_sanitize_checkbox( $value );
 					} else {
 						$output[ $device_id ][ $key ] = cosmoswp_not_empty( $value ) ? intval( $value ) : '';
@@ -339,7 +339,7 @@ if ( ! function_exists( 'cosmoswp_sanitize_field_border' ) ) :
 						$devices_values = array();
 						foreach ( $value as $device => $device_details ) {
 							foreach ( $device_details as $device_key => $device_value ) {
-								if ( $device_key == 'cssbox_link' ) {
+								if ( $device_key === 'cssbox_link' ) {
 									$devices_values[ $device ][ $device_key ] = cosmoswp_sanitize_checkbox( $device_value );
 								} elseif ( cosmoswp_not_empty( $device_value ) ) {
 									$devices_values[ $device ][ $device_key ] = absint( $device_value );
@@ -566,7 +566,7 @@ if ( ! function_exists( 'cosmoswp_sanitize_field_tabs' ) ) :
 						$devices_values = array();
 						foreach ( $value as $device => $device_details ) {
 							foreach ( $device_details as $device_key => $device_value ) {
-								if ( $device_key == 'cssbox_link' ) {
+								if ( $device_key === 'cssbox_link' ) {
 									$devices_values[ $device ][ $device_key ] = cosmoswp_sanitize_checkbox( $device_value );
 								} elseif ( cosmoswp_not_empty( $device_value ) ) {
 									$devices_values[ $device ][ $device_key ] = absint( $device_value );
@@ -729,7 +729,12 @@ if ( ! function_exists( 'cosmoswp_sanitize_field_responsive_buttonset' ) ) :
 	 */
 	function cosmoswp_sanitize_field_responsive_buttonset( $input ) {
 
-		$range_value            = json_decode( $input, true );
+		$range_value = json_decode( $input, true );
+
+		if ( ! is_array( $range_value ) ) {
+			return wp_json_encode( array( 'desktop' => '', 'tablet' => '', 'mobile' => '' ) );
+		}
+
 		$range_value['desktop'] = ! empty( $range_value['desktop'] ) ? sanitize_text_field( $range_value['desktop'] ) : '';
 		$range_value['tablet']  = ! empty( $range_value['tablet'] ) ? sanitize_text_field( $range_value['tablet'] ) : '';
 		$range_value['mobile']  = ! empty( $range_value['mobile'] ) ? sanitize_text_field( $range_value['mobile'] ) : '';
