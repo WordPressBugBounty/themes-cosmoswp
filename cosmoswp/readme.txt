@@ -4,8 +4,8 @@ Contributors: cosmoswp
 Tags: blog, e-commerce, portfolio, grid-layout, one-column, two-columns, three-columns, four-columns, left-sidebar, right-sidebar, custom-background, custom-colors, custom-header, custom-logo, custom-menu, editor-style, featured-images, flexible-header, footer-widgets, full-width-template, microformats, post-formats, rtl-language-support, sticky-post, theme-options, threaded-comments, translation-ready, block-styles, wide-blocks
 Requires at least: 6.0
 Tested up to: 7.0
-Requires PHP: 7.0
-Stable tag: 3.0.0
+Requires PHP: 7.4
+Stable tag: 3.0.1
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -94,6 +94,12 @@ Source: https://github.com/FortAwesome/Font-Awesome
 
 
 == Changelog ==
+
+= 3.0.1 - 2026-06-10 =
+* Fixed: Footer widget alignment CSS specificity issue causing layout conflicts.
+* Fixed: Blog sticky post border styling not applying when set via Customizer.
+* Updated: POT file for translation consistency.
+* Updated: Requires PHP from 7.0 to 7.4.
 
 = 3.0.0 - 2026-06-05 =
 * Fixed: Parse error on PHP 7.0-7.2 — removed trailing comma in wp_json_encode() function call in starter-content/index.php.

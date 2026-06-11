@@ -27,7 +27,7 @@ if ( $enable_icon ) {
 	if ( $button_text ) {
 
 		$button_one_structure = cosmoswp_get_button_structure( $button_text, $button_icon, $button_icon_position );
-		$icon_spacer          = cosmoswp_get_icon_postion_class( $button_icon_position );
+		$icon_spacer          = cosmoswp_get_icon_position_class( $button_icon_position );
 	} else {
 		$button_one_structure = wp_kses_post( '<i class="' . esc_attr( cosmoswp_get_correct_fa_font( $button_icon ) ) . '"></i>' );
 	}

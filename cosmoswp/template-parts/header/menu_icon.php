@@ -26,7 +26,7 @@ if ( 'text' === $icon_type ) {
 	$open_icon      = cosmoswp_get_theme_options( 'menu-open-icon' );
 	$icon_position  = cosmoswp_get_theme_options( 'menu-icon-open-icon-position' );
 	$icon_structure = cosmoswp_get_icon_structure( $icon_type, $open_text, $open_icon, $icon_position );
-	$icon_spacer    = cosmoswp_get_icon_postion_class( $icon_position );
+	$icon_spacer    = cosmoswp_get_icon_position_class( $icon_position );
 }
 
 ?>
