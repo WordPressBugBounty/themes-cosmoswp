@@ -5,7 +5,7 @@ Tags: blog, e-commerce, portfolio, grid-layout, one-column, two-columns, three-c
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 3.0.1
+Stable tag: 3.0.2
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -94,6 +94,9 @@ Source: https://github.com/FortAwesome/Font-Awesome
 
 
 == Changelog ==
+
+= 3.0.2 - 2026-07-28 =
+* Fixed: Icon picker not working when icons list is an array.
 
 = 3.0.1 - 2026-06-10 =
 * Fixed: Footer widget alignment CSS specificity issue causing layout conflicts.
