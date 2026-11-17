@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: CosmosWP 3.0.2\n"
+"Project-Id-Version: CosmosWP 3.0.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/cosmoswp\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-27T21:47:27+00:00\n"
+"POT-Creation-Date: 2026-11-16T18:41:08+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: cosmoswp\n"
@@ -284,8 +284,8 @@ msgid "View your wishlist"
 msgstr ""
 
 #: edd/edd-archive-main-content.php:114
-#: edd/edd-single-main-content.php:137
-#: edd/edd-single-main-content.php:251
+#: edd/edd-single-main-content.php:143
+#: edd/edd-single-main-content.php:263
 #: inc/addons/edd/single/cwp-edd-single.php:382
 #: template-parts/loop/blog-default.php:62
 #: woocommerce/content-product.php:131
@@ -293,12 +293,12 @@ msgid "Pages:"
 msgstr ""
 
 #: edd/edd-single-main-content.php:77
-#: edd/edd-single-main-content.php:191
+#: edd/edd-single-main-content.php:197
 msgid "Author:"
 msgstr ""
 
-#: edd/edd-single-main-content.php:85
-#: edd/edd-single-main-content.php:199
+#: edd/edd-single-main-content.php:91
+#: edd/edd-single-main-content.php:211
 msgid "Author since:"
 msgstr ""
 
@@ -2308,24 +2308,24 @@ msgid "Unable to connect to the filesystem. Please confirm your credentials."
 msgstr ""
 
 #. Translators: %1$s current user display name.
-#: inc/admin/notice.php:345
+#: inc/admin/notice.php:349
 #, php-format
 msgid "Howdy, %1$s! It seems that you have been using this theme for more than 15 days. We hope you are happy with everything that the theme has to offer. If you can spare a minute, please help us by leaving a 5-star review on WordPress.org.  By spreading the love, we can continue to develop new amazing features in the future, for free!"
 msgstr ""
 
-#: inc/admin/notice.php:357
+#: inc/admin/notice.php:361
 msgid "Sure"
 msgstr ""
 
-#: inc/admin/notice.php:362
+#: inc/admin/notice.php:366
 msgid "Maybe later"
 msgstr ""
 
-#: inc/admin/notice.php:367
+#: inc/admin/notice.php:371
 msgid "I already did"
 msgstr ""
 
-#: inc/admin/notice.php:372
+#: inc/admin/notice.php:376
 msgid "Got theme support question?"
 msgstr ""
 
